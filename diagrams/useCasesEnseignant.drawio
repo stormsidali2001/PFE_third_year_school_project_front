@@ -1,1 +1,25 @@
-<mxfile host="app.diagrams.net" modified="2022-03-04T15:12:02.456Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" version="16.6.6" etag="wmcOS2P8fghBmdTr1KMt" type="github"><diagram id="6mWhnLM4HhdLklqzZbzq">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-03-04T15:41:36.913Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" etag="Guzd_ztWvY2TuPacJ0Wz" version="16.6.6" type="github">
+  <diagram id="6mWhnLM4HhdLklqzZbzq" name="Page-1">
+    <mxGraphModel dx="1021" dy="529" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="H8sXZKmlOhGTaslM25iI-1" value="PFE" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="40" width="540" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="H8sXZKmlOhGTaslM25iI-2" value="Enseignant" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="220" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="H8sXZKmlOhGTaslM25iI-3" value="consulter les suggestions des etudiants" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="120" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="H8sXZKmlOhGTaslM25iI-5" value="Consulter la liste des themes" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="200" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="H8sXZKmlOhGTaslM25iI-6" value="Proposer encadrement" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="280" width="110" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
