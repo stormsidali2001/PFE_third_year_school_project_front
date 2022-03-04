@@ -1,1 +1,61 @@
-<mxfile host="app.diagrams.net" modified="2022-03-04T20:04:53.040Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" version="16.6.6" etag="hNp2xmd-6KI0odPKdfic" type="github"><diagram id="A067LKS2ry-VZMvpZOUi">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-03-04T20:17:11.645Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" etag="EzqWefyGYdOTQDWJX1x-" version="16.6.6" type="github">
+  <diagram id="A067LKS2ry-VZMvpZOUi" name="Page-1">
+    <mxGraphModel dx="1021" dy="529" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="kKdQHFVWe_23k0Kt-Wqn-1" target="kKdQHFVWe_23k0Kt-Wqn-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-1" value="Chef d&#39;Equipe" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="240" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-2" value="Etudiant&lt;br&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="60" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-8" value="PFE" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" width="600" height="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-9" value="Proposer un theme" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="80" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-10" value="Créer une Equipe&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="359" y="200" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-11" value="Envoyer une invitation de jointure" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="359" y="310" width="126" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-12" value="Organiser des sondages" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="450" width="126" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-13" value="Rendre la fiche de voeux" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="590" width="126" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-14" value="Organider&amp;nbsp; une reunion" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="730" width="126" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-16" value="Reunion urgente" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="790" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-18" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="kKdQHFVWe_23k0Kt-Wqn-14" target="kKdQHFVWe_23k0Kt-Wqn-20">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="540" y="770" as="sourcePoint" />
+            <mxPoint x="570" y="704.9999999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-19" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="kKdQHFVWe_23k0Kt-Wqn-14" target="kKdQHFVWe_23k0Kt-Wqn-16">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="495.99999999999955" y="779.9999999999998" as="sourcePoint" />
+            <mxPoint x="579.9999999999964" y="719.9999999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-20" value="Reunion habituelle" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="680" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="kKdQHFVWe_23k0Kt-Wqn-21" value="Faire un announcement" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="870" width="126" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
