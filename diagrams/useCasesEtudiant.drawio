@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-03-06T09:34:40.542Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" etag="bxyVf4WFYveet6awG2NC" version="16.6.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-06T09:44:25.530Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" etag="Db-q6dEmxcfGlCA9b1QB" version="16.6.6" type="github">
   <diagram id="s4mfNOLRqY41mMV1RwYY" name="Page-1">
     <mxGraphModel dx="700" dy="382" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -62,7 +62,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="ncF-Bivbpp6cTjjEdOAr-19" value="Participer au sondage" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="455" y="300" width="110" height="55" as="geometry" />
+          <mxGeometry x="480" y="300" width="110" height="55" as="geometry" />
         </mxCell>
         <mxCell id="ncF-Bivbpp6cTjjEdOAr-20" value="Echanger&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="485" y="510" width="95" height="30" as="geometry" />
@@ -302,9 +302,6 @@
         <mxCell id="6tH1deuUzwrDHD2pdTrn-3" value="sondage normal" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="570" y="370" width="85" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="6tH1deuUzwrDHD2pdTrn-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0.7;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ncF-Bivbpp6cTjjEdOAr-37" target="ncF-Bivbpp6cTjjEdOAr-37">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="6tH1deuUzwrDHD2pdTrn-11" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;startArrow=none;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="6tH1deuUzwrDHD2pdTrn-12" target="ncF-Bivbpp6cTjjEdOAr-19">
           <mxGeometry x="-0.012" y="1" width="160" relative="1" as="geometry">
             <mxPoint x="605" y="175" as="sourcePoint" />
@@ -314,7 +311,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="6tH1deuUzwrDHD2pdTrn-12" value="sondage decision" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="570" y="260" width="90" height="40" as="geometry" />
+          <mxGeometry x="650" y="260" width="90" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
