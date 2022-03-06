@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-03-06T09:53:36.064Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" etag="i4Plz416WcgaAdQ11rrv" version="16.6.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-06T10:13:48.493Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" etag="5GtkS0oeCh5Xenia4_b9" version="16.6.6" type="github">
   <diagram id="s4mfNOLRqY41mMV1RwYY" name="Page-1">
     <mxGraphModel dx="700" dy="382" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -95,16 +95,6 @@
         </mxCell>
         <mxCell id="ncF-Bivbpp6cTjjEdOAr-31" value="Indiquer la raison" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="650" y="600" width="80" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="ncF-Bivbpp6cTjjEdOAr-32" value="&amp;lt;&amp;lt;extends&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.063;exitY=0.7;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="ncF-Bivbpp6cTjjEdOAr-31" target="ncF-Bivbpp6cTjjEdOAr-27" edge="1">
-          <mxGeometry x="-0.0811" y="-4" width="160" relative="1" as="geometry">
-            <mxPoint x="510" y="425" as="sourcePoint" />
-            <mxPoint x="670" y="425" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="620" y="650" />
-            </Array>
-            <mxPoint as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="ncF-Bivbpp6cTjjEdOAr-33" value="&amp;lt;&amp;lt;extends&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.326;exitY=0.981;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="ncF-Bivbpp6cTjjEdOAr-31" target="ncF-Bivbpp6cTjjEdOAr-30" edge="1">
           <mxGeometry x="-0.0811" y="-4" width="160" relative="1" as="geometry">
