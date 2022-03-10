@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-03-10T21:53:47.685Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36" etag="dBJ43DznjccR9nApTwqr" version="17.0.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-10T21:57:11.613Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36" etag="BCGBAZHXY3pDnDqMvLD1" version="17.0.0" type="github">
   <diagram id="EABdiAbLD4E77ew6xtVF" name="Page-1">
     <mxGraphModel dx="1571" dy="1575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -415,7 +415,7 @@
         </mxCell>
         <mxCell id="cI6p9xVmoozgbFOw9XKC-171" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="cI6p9xVmoozgbFOw9XKC-169">
           <mxGeometry x="0.7773" y="-1" relative="1" as="geometry">
-            <mxPoint x="20" y="2" as="offset" />
+            <mxPoint x="62" y="39" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="cI6p9xVmoozgbFOw9XKC-172" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="cI6p9xVmoozgbFOw9XKC-169">
@@ -625,7 +625,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="cI6p9xVmoozgbFOw9XKC-273" value="chatMessage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+        <mxCell id="cI6p9xVmoozgbFOw9XKC-273" value="TeamChatMessage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
           <mxGeometry x="-280" y="240" width="160" height="112" as="geometry" />
         </mxCell>
         <mxCell id="cI6p9xVmoozgbFOw9XKC-274" value="message:String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="cI6p9xVmoozgbFOw9XKC-273">
@@ -659,6 +659,22 @@
         <mxCell id="cI6p9xVmoozgbFOw9XKC-282" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="cI6p9xVmoozgbFOw9XKC-277">
           <mxGeometry x="-0.8954" y="-2" relative="1" as="geometry">
             <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cI6p9xVmoozgbFOw9XKC-284" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="cI6p9xVmoozgbFOw9XKC-273" target="cI6p9xVmoozgbFOw9XKC-84">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-200.00000000000023" y="218" as="sourcePoint" />
+            <mxPoint x="10" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cI6p9xVmoozgbFOw9XKC-285" value="associated" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="cI6p9xVmoozgbFOw9XKC-284">
+          <mxGeometry x="0.138" y="-1" relative="1" as="geometry">
+            <mxPoint x="14" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cI6p9xVmoozgbFOw9XKC-288" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="cI6p9xVmoozgbFOw9XKC-284">
+          <mxGeometry x="-0.9306" y="1" relative="1" as="geometry">
+            <mxPoint x="7" y="8" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
