@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-03-10T13:52:38.192Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36" etag="6-RW-z2J3MgYP9KvTn8D" version="17.0.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-10T14:11:48.832Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36" etag="64q0fjQTtbNHOujzMGXN" version="17.0.0" type="github">
   <diagram id="s4mfNOLRqY41mMV1RwYY" name="Page-1">
     <mxGraphModel dx="744" dy="393" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -281,28 +281,6 @@
               <mxPoint x="1120" y="830" />
             </Array>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="6tH1deuUzwrDHD2pdTrn-2" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;startArrow=none;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="6tH1deuUzwrDHD2pdTrn-3" target="ncF-Bivbpp6cTjjEdOAr-19" edge="1">
-          <mxGeometry x="-0.012" y="1" width="160" relative="1" as="geometry">
-            <mxPoint x="600" y="330" as="sourcePoint" />
-            <mxPoint x="520" y="330" as="targetPoint" />
-            <Array as="points" />
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="6tH1deuUzwrDHD2pdTrn-3" value="sondage normal" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="570" y="370" width="85" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="6tH1deuUzwrDHD2pdTrn-11" value="" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;startArrow=none;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="6tH1deuUzwrDHD2pdTrn-12" target="ncF-Bivbpp6cTjjEdOAr-19" edge="1">
-          <mxGeometry x="-0.012" y="1" width="160" relative="1" as="geometry">
-            <mxPoint x="605" y="175" as="sourcePoint" />
-            <mxPoint x="515" y="199.9999999999999" as="targetPoint" />
-            <Array as="points" />
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="6tH1deuUzwrDHD2pdTrn-12" value="sondage decision" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="650" y="260" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="6tH1deuUzwrDHD2pdTrn-16" value="Indiquer la raison" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="630" y="720" width="80" height="40" as="geometry" />
