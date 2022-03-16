@@ -1,13 +1,13 @@
-<mxfile host="app.diagrams.net" modified="2022-03-12T12:28:33.288Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36" etag="ROfNm-4SVLhE03zGcv83" version="17.1.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-16T09:45:53.544Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36" etag="Q_nuazl_oC_YboJACe2m" version="17.1.2" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
-    <mxGraphModel dx="1038" dy="521" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1209" dy="662" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="2RqecVdCljDjrjuPHwnQ-671" value="Dashboard" style="shape=umlBoundary;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="250" y="70" width="100" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="2RqecVdCljDjrjuPHwnQ-672" value="Database" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="2RqecVdCljDjrjuPHwnQ-672" value="Suggestion" style="ellipse;shape=umlEntity;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="610" y="60" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="2RqecVdCljDjrjuPHwnQ-673" value="Controleur" style="ellipse;shape=umlControl;whiteSpace=wrap;html=1;" parent="1" vertex="1">
