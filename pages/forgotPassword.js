@@ -1,20 +1,15 @@
 import {useState} from 'react';
+import axios from 'axios';
 const ForgotPassword = props => {
     const [email,setEmail] = useState('');
     const handleSubmit = async(e)=>{
         e.preventDefault();
+
         try{
-            const rowRes = await  fetch('http://localhost:8080/forgotpassword',
-            {
-                method:'POST',
-                headers:{
-                    'content-Type':'application/json',
-                },
-                mode:'no-cors',
-                body:JSON.stringify({email})
-                
-            });
-            const data = await rowRes.json();
+            const data = await axios.post("http://localhost:8080/forgotpassword",{
+                email
+            })
+            
             console.log(data)
 
         }catch(err){
