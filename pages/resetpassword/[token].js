@@ -5,11 +5,11 @@ import { useState } from 'react';
 const ResetPasword = props => {
     const router = useRouter();
     const {token,uid} = router.query;
+    const [password,setPassword] = useState('');
+    const [confirmPassword,setConfirmPassword] = useState('');
     if(!token || !uid){
         return "error";
     }
-    const [password,setPassword] = useState('');
-    const [confirmPassword,setConfirmPassword] = useState('');
     const handleRessetPassword = async(e)=>{
         e.preventDefault();
         if(password!=confirmPassword){
@@ -19,8 +19,10 @@ const ResetPasword = props => {
             alert('please enter a strong password')
         }
         try{
-            const data = await axios.post(`http://localhost:8080/resetpassword/${token}/${uid}`,{
-                password
+            const data = await axios.post(`http://localhost:8080/resetpassword`,{
+                password,
+                token,
+                userId:uid
             })
             
             console.log(data)
@@ -44,13 +46,15 @@ const ResetPasword = props => {
                     <div className="text-[35px]">Nouveau Mot de passe</div>
                     <div className="text-[25px]">Mot de passe :</div>
                     <input 
-                        placeholder="Mot de passe..." type = 'password'  className="h-[60px] lg:w-[360px] w-fit placeholder-[22px] text-[22px] outline-none border border-1 border-zinc-500 rounded-md px-6"
-                        value={confirmPassword} 
-                        onChange={(e)=>setConfirmPassword(e.target.value)} 
+                        placeholder="Mot de passe..." 
+                        type = 'password'  
+                        className="h-[60px] lg:w-[360px] w-fit placeholder-[22px] text-[22px] outline-none border border-1 border-zinc-500 rounded-md px-6"
+                        value={password} 
+                        onChange={(e)=>setPassword(e.target.value)} 
                     />
                     <div className="text-[25px]">Confirmer le mot de passe :</div>
                     <input value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} placeholder="Mot de passe..." type='password' className="h-[60px] lg:w-[360px] w-fit placeholder-[22px] text-[22px] outline-none border border-1 border-zinc-500 rounded-md px-6"/>
-                    <button className="text-[25px] bg-blue-600 rounded-md h-[60px] lg:w-[360px] min-w-[250px]">Confirmer</button>
+                    <button type='submit' className="text-[25px] bg-blue-600 rounded-md h-[60px] lg:w-[360px] min-w-[250px]">Confirmer</button>
                 </form>
             </div>
         </div>
