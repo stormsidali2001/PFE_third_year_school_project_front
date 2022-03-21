@@ -9,6 +9,9 @@ module.exports = {
         'background':'#F4FCFF',
         'textcolor':'#1A2562',
         'boutton':'#5375E2'
+      },
+      fontFamily : {
+        'xyz':'Arvo',
       }
     },
   },
