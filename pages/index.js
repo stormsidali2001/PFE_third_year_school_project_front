@@ -14,12 +14,12 @@ export default function Home() {
   
   const [open , setOpen] = useState(false);
   return (
-    <div className=' h-full bg-background'>
+    <div className=' h-full bg-background scroll-smooth'>
       <Navbar open={open} setOpen={setOpen}/>
-      <Acceuil/>
-      <WhatIs id='why_to_use'/>
+      <Acceuil  id='what'/>
+      <WhatIs id = 'whyuse'/>
       <WhyUse/>
-      <Offer/>
+      <Offer id='service'/>
     </div>
   )
 }

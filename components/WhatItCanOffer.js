@@ -26,7 +26,7 @@ const Offer = props => {
         },
     ]
     return(
-        <div className="h-fit py-12 bg-background w-[100vw] flex flex-col space-y-16 items-center justify-center text-center sm:px-10 " id="services">
+        <div className="h-fit py-12 bg-background w-[100vw] flex flex-col space-y-16 items-center justify-center text-center sm:px-10 " id="service">
                 <div className="flex flex-row space-x-1 text-[32px] font-bold text-textcolor"> Quesque  project101  vous apporterait de plus dans vos projets ?</div>
                 <div className="flex flex-row gap-24 flex-wrap items-center justify-center lg:w-[90vw]">
                     {data.map((el , index)=>{

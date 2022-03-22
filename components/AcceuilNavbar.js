@@ -1,5 +1,6 @@
-import Link from "next/link";
+
 import { useState } from "react";
+import { Link } from "react-scroll/modules";
 import MenuIcon from "../icons/MenuIcon";
 import Login from "../pages/login";
 
@@ -14,7 +15,7 @@ const Navbar = ({open,setOpen}) => {
                     <div className="text-[20px] font-bold text-textcolor">PROJECT101</div>
                 </div>
                 <div className="flex-row flex space-x-6 text-textcolor font-semibold items-center">
-                    <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full">Services</a>
+                   <Link to="service"><a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full">Services</a></Link>
                     <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full">Contact</a>
                     <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full flex-nowrap" href = "../login">Login</a>
                 </div>
@@ -25,9 +26,9 @@ const Navbar = ({open,setOpen}) => {
                     <img src = 'Resetpass.jpg' className='object-contain rounded-full h-[50px] w-[50px]'/>
                     <div className="text-[20px] font-bold text-textcolor">PROJECT101</div>
                     <div className= {`flex-col bg-white/90 h-fit py-6 w-[200px] items-start justify-center backdrop-blur-sm space-y-4 left-0 absolute text-textcolor font-semibold top-[60px] rounded-b-xl shadow-lg pl-2 ${open===true ?'flex':'hidden'}`}>
-                        <a className="hover:bg-blue-100 h-full w-full">Quesque project101</a>
-                        <a className="hover:bg-blue-100 h-full w-full">Pourquoi l'utiliser</a>
-                        <a className="hover:bg-blue-100 h-full w-full">Services</a>
+                        <Link to='what'><a className="hover:bg-blue-100 h-full w-full">Quesque project101</a></Link>
+                        <Link to='whyuse'><a className="hover:bg-blue-100 h-full w-full">Pourquoi l'utiliser</a></Link>
+                        <Link to='service'><a className="hover:bg-blue-100 h-full w-full">Services</a></Link>
                         <a className="hover:bg-blue-100 h-full w-full">Contact</a>
                         <a className="hover:bg-blue-100 h-full w-full" href = "../login">Se connecter</a>
                     </div>
