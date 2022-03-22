@@ -15,9 +15,9 @@ const Navbar = ({open,setOpen}) => {
                     <div className="text-[20px] font-bold text-textcolor">PROJECT101</div>
                 </div>
                 <div className="flex-row flex space-x-6 text-textcolor font-semibold items-center">
-                   <Link to="service"><a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full">Services</a></Link>
-                    <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full">Contact</a>
-                    <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full flex-nowrap" href = "../login">Login</a>
+                   <Link to="service"><a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full cursor-pointer">Services</a></Link>
+                    <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full cursor-pointer">Contact</a>
+                    <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full flex-nowrap cursor-pointer" href="../login">Login</a>
                 </div>
             </div>
             <div className="flex md:hidden w-[90vw] shadow-md bg-white/80 rounded-md backdrop-blur-sm h-[60px] px-6 flex-row space-x-6 items-center relative">
@@ -26,11 +26,11 @@ const Navbar = ({open,setOpen}) => {
                     <img src = 'Resetpass.jpg' className='object-contain rounded-full h-[50px] w-[50px]'/>
                     <div className="text-[20px] font-bold text-textcolor">PROJECT101</div>
                     <div className= {`flex-col bg-white/90 h-fit py-6 w-[200px] items-start justify-center backdrop-blur-sm space-y-4 left-0 absolute text-textcolor font-semibold top-[60px] rounded-b-xl shadow-lg pl-2 ${open===true ?'flex':'hidden'}`}>
-                        <Link to='what'><a className="hover:bg-blue-100 h-full w-full">Quesque project101</a></Link>
-                        <Link to='whyuse'><a className="hover:bg-blue-100 h-full w-full">Pourquoi l'utiliser</a></Link>
-                        <Link to='service'><a className="hover:bg-blue-100 h-full w-full">Services</a></Link>
-                        <a className="hover:bg-blue-100 h-full w-full">Contact</a>
-                        <a className="hover:bg-blue-100 h-full w-full" href = "../login">Se connecter</a>
+                        <Link to='what' spy={true} smooth={true}><a className="hover:bg-blue-100 h-full w-full cursor-pointer">Quesque project101</a></Link>
+                        <Link to='whyuse' spy={true} smooth={true}><a className="hover:bg-blue-100 h-full w-full cursor-pointer">Pourquoi l'utiliser</a></Link>
+                        <Link to='service' spy={true} smooth={true}><a className="hover:bg-blue-100 h-full w-full cursor-pointer">Services</a></Link>
+                        <a className="hover:bg-blue-100 h-full w-full cursor-pointer">Contact</a>
+                       <a className="hover:bg-blue-100 h-full w-full cursor-pointer" href="../login">Se connecter</a>
                     </div>
                 </div>
             </div>

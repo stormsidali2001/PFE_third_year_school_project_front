@@ -16,9 +16,9 @@ export default function Home() {
   return (
     <div className=' h-full bg-background scroll-smooth'>
       <Navbar open={open} setOpen={setOpen}/>
-      <Acceuil  id='what'/>
-      <WhatIs id = 'whyuse'/>
-      <WhyUse/>
+      <Acceuil/>
+      <WhatIs id='what'/>
+      <WhyUse id = 'whyuse'/>
       <Offer id='service'/>
     </div>
   )
