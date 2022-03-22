@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import MenuIcon from "../icons/MenuIcon";
+import Login from "../pages/login";
 
 
 
@@ -12,10 +13,10 @@ const Navbar = ({open,setOpen}) => {
                     <img src = 'Resetpass.jpg' className='object-contain rounded-full h-[50px] w-[50px]'/>
                     <div className="text-[20px] font-bold text-textcolor">PROJECT101</div>
                 </div>
-                <div className="flex-row flex space-x-4 text-textcolor font-semibold items-center">
-                    <div>Services</div>
-                    <div>Contact</div>
-                    <div>Se connecter</div>
+                <div className="flex-row flex space-x-6 text-textcolor font-semibold items-center">
+                    <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full">Services</a>
+                    <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full">Contact</a>
+                    <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full flex-nowrap" href = "../login">Login</a>
                 </div>
             </div>
             <div className="flex md:hidden w-[90vw] shadow-md bg-white/80 rounded-md backdrop-blur-sm h-[60px] px-6 flex-row space-x-6 items-center relative">
@@ -23,12 +24,12 @@ const Navbar = ({open,setOpen}) => {
                 <div className="flex flex-row space-x-4 items-center justify-start">
                     <img src = 'Resetpass.jpg' className='object-contain rounded-full h-[50px] w-[50px]'/>
                     <div className="text-[20px] font-bold text-textcolor">PROJECT101</div>
-                    <div className= {`flex-col bg-white/90 h-fit py-6 w-[200px] items-start justify-center pl-4 backdrop-blur-sm space-y-4 left-0 absolute text-textcolor font-semibold top-[60px] rounded-b-xl shadow-lg ${open===true ?'flex':'hidden'}`}>
-                        <div>Quesque project101</div>
-                        <div>Pourquoi l'utiliser</div>
-                        <div>Services</div>
-                        <div>Contact</div>
-                        <div>Se connecter</div>
+                    <div className= {`flex-col bg-white/90 h-fit py-6 w-[200px] items-start justify-center backdrop-blur-sm space-y-4 left-0 absolute text-textcolor font-semibold top-[60px] rounded-b-xl shadow-lg pl-2 ${open===true ?'flex':'hidden'}`}>
+                        <a className="hover:bg-blue-100 h-full w-full">Quesque project101</a>
+                        <a className="hover:bg-blue-100 h-full w-full">Pourquoi l'utiliser</a>
+                        <a className="hover:bg-blue-100 h-full w-full">Services</a>
+                        <a className="hover:bg-blue-100 h-full w-full">Contact</a>
+                        <a className="hover:bg-blue-100 h-full w-full" href = "../login">Se connecter</a>
                     </div>
                 </div>
             </div>
