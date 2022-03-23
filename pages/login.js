@@ -42,7 +42,7 @@ const Login = ({toastsRef}) => {
         }
     }
     return(
-        <div className="flex h-fit py-12 lg:py-0 lg:h-[100vh] w-[100vw] items-center justify-center">
+        <div className="flex h-fit py-12 lg:py-0 lg:h-[100vh] w-[100vw] items-center justify-center" id="login">
             <div className="w-[80%] flex lg:flex-row flex-col lg:space-x-56 space-y-8 lg:space-y-0 items-center justify-center">
                 <img src='Login.jpg' className="object-contain flex items-center justify-center"/>
                 <form 
