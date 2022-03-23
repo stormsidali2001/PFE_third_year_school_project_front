@@ -2,21 +2,24 @@ import axios from 'axios';
 import {useRouter} from 'next/router'
 import { useState } from 'react';
 
-const ResetPasword = props => {
+const ResetPasword = ({toastsRef}) => {
     const router = useRouter();
     const {token,uid} = router.query;
     const [password,setPassword] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('');
     if(!token || !uid){
-        return "error";
+        
     }
     const handleRessetPassword = async(e)=>{
         e.preventDefault();
         if(password!=confirmPassword){
-            alert('password does not match')
+            toastsRef.current.addMessage({text:"mots de passes non identiques",mode:'Error'})
+            return;
+           
         }
         if(password.length<=6){
-            alert('please enter a strong password')
+            toastsRef.current.addMessage({text:"le minimum de caractere dans um mot de passe doit etre 6",mode:'Error'})
+            return;
         }
         try{
             const data = await axios.post(`http://localhost:8080/resetpassword`,{
@@ -26,9 +29,15 @@ const ResetPasword = props => {
             })
             
             console.log(data)
+            toastsRef.current.addMessage({text:data,mode:'Alert'})
+            setTimeout(()=>{
+                router.push("/login");
+            },3000)
+            
 
         }catch(err){
             console.log(err)
+            toastsRef.current.addMessage({text:"soit le lien est expere ou  erronee",mode:'Error'})
            
             
            

@@ -1,24 +1,41 @@
 import Link from "next/link";
 import {useState} from 'react';
 import axios from 'axios';
+import { useRouter } from "next/router";
 
-const Login = props => {
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
+const Login = ({toastsRef}) => {
+    const router = useRouter();
+    const [email,setEmail] = useState('email');
+    const [password,setPassword] = useState('sadhasf');
+    
+ 
 
     const handleSubmit = async e=>{
         e.preventDefault();
+        const service = email.split('@')[1].split('.')[0];
+        const domain = email.split('@')[1].split('.')[1];
+        
+        if(service!== 'esi-sba' && domain !='dz'){
+            toastsRef.current.addMessage({text:"le mail doit etre un mail scholaire!",mode:'Error'})
+            return;
+        }
         
         try{
             const data = await axios.post("http://localhost:8080/signin",{
                 email,
                 password
             })
-            
+           
             console.log(data)
+            toastsRef.current.addMessage({text:"Bienvenue! redirection...",mode:'Alert'})
+            setTimeout(()=>{
+                router.push("/");
+            },3000)
+            
 
         }catch(err){
             console.log(err)
+            toastsRef.current.addMessage({text:"email ou mot de passe incorrect.",mode:'Error'})
            
             
            
@@ -49,7 +66,7 @@ const Login = props => {
                         onChange={(e)=>setPassword(e.target.value)}
                         />
                    <span className="text-cyan-700 text-[20px] hover:underline hover:underline-offset-1  hover:cursor-pointer    transition-all w-fit ease-in"> <Link href='/forgotpassword'>Mot de passe oublié ?</Link></span>
-                    <button className="text-[25px] bg-blue-600 rounded-md h-[60px] lg:w-[360px] min-w-[250px]">Se connecter</button>
+                    <button type='submit' className="hover:cursor-pointer text-[25px] bg-blue-600 rounded-md h-[60px] lg:w-[360px] min-w-[250px]">Se connecter</button>
                 </form>
             </div>
         </div>

@@ -1,9 +1,19 @@
 import {useState} from 'react';
 import axios from 'axios';
-const ForgotPassword = props => {
+import { useRouter } from 'next/router';
+const ForgotPassword = ({toastsRef}) => {
+    const router = useRouter();
     const [email,setEmail] = useState('');
     const handleSubmit = async(e)=>{
         e.preventDefault();
+        
+        const service = email.split('@')[1].split('.')[0];
+        const domain = email.split('@')[1].split('.')[1];
+        
+        if(service!== 'esi-sba' && domain !='dz'){
+            toastsRef.current.addMessage({text:"le mail doit etre un mail scholaire!",mode:'Error'})
+            return;
+        }
 
         try{
             const data = await axios.post("http://localhost:8080/forgotpassword",{
@@ -11,8 +21,13 @@ const ForgotPassword = props => {
             })
             
             console.log(data)
+            toastsRef.current.addMessage({text:"Email Envoyer avec success...",mode:'Alert'})
+            setTimeout(()=>{
+                router.push("/login");
+            },3000)
 
         }catch(err){
+            toastsRef.current.addMessage({text:"pas de compte associer au mail.",mode:'Error'})
             console.log(err)
            
             
@@ -33,6 +48,7 @@ const ForgotPassword = props => {
                         <div className="text-[25px]">E-mail :</div>
                         <input 
                             placeholder="E-mail" 
+                            type='email'
                             className="text-[22px] placeholder-[22px] h-[60px] lg:w-[360px] w-fit rounded-md outline-none border border-1 border-stone-600 px-6"
                             value = {email}
                             onChange={(e)=>setEmail(e.target.value)}
