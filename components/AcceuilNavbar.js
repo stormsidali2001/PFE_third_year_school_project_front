@@ -17,8 +17,7 @@ const Navbar = ({open,setOpen}) => {
                     <div className="text-[20px] font-bold text-textcolor">PROJECT101</div>
                 </div>
                 <div className="flex-row flex space-x-6 text-textcolor font-semibold items-center">
-                   <scrollLink to="service"><a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full cursor-pointer">Services</a></scrollLink>
-                    <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full cursor-pointer">Contact</a>
+                   <scrollLink to="service" spy={true} smooth={true}><a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full cursor-pointer">Services</a></scrollLink>
                     <a className="hover:bg-blue-100 h-[60%] px-2 w-full flex items-center justify-center rounded-full flex-nowrap cursor-pointer" href="../login">Login</a>
                 </div>
             </div>
@@ -31,7 +30,6 @@ const Navbar = ({open,setOpen}) => {
                         <scrollLink to='what' spy={true} smooth={true}><a className="hover:bg-blue-100 h-full w-full cursor-pointer">Quesque project101</a></scrollLink>
                         <scrollLink to='whyuse' spy={true} smooth={true}><a className="hover:bg-blue-100 h-full w-full cursor-pointer">Pourquoi l'utiliser</a></scrollLink>
                         <scrollLink to='service' spy={true} smooth={true}><a className="hover:bg-blue-100 h-full w-full cursor-pointer">Services</a></scrollLink>
-                        <a className="hover:bg-blue-100 h-full w-full cursor-pointer">Contact</a>
                         <Link className="hover:bg-blue-100 h-full w-full cursor-pointer" href="/login">Se connecter</Link>
                     </div>
                 </div>

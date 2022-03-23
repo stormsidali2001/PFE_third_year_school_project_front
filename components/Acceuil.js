@@ -3,7 +3,7 @@ import Login from "../pages/login";
 
 const Acceuil = props => {
     return(
-        <div className="h-fit pt-32 pb-12 lg:h-screen w-[100vw] bg-background flex flex-col items-center justify-center gap-16 font-xyz">
+        <div className="h-fit pt-32 pb-12 lg:h-screen w-[100vw] bg-background flex flex-col items-center justify-center gap-16 font-xyz" id="home">
             <div className="lg:text-[48px] text-[38px] font-bold tracking-wider text-center text-textcolor">Mieux organiser vos projets</div>
             <div className="flex flex-col-reverse lg:flex-row items-center justify-center h-full gap-12 px-10">
                 <div className="flex flex-col space-y-16 items-center justify-center">
