@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-03-28T22:55:23.591Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36" etag="_E7YR0vu-4G6t7I5N6Ib" version="17.2.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-28T22:56:13.472Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36" etag="S8vob748BsnBqkSv90oC" version="17.2.4" type="github">
   <diagram id="6mWhnLM4HhdLklqzZbzq" name="Page-1">
     <mxGraphModel dx="1108" dy="393" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -40,7 +40,7 @@
         <mxCell id="5gqP__IOoCqP4Ey7bsc8-7" value="Echanger Avec ses Equipes&lt;br&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="330" y="350" width="110" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="5gqP__IOoCqP4Ey7bsc8-8" value="Consulter document Equipe" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="5gqP__IOoCqP4Ey7bsc8-8" value="consulter commits de ses equipes" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="330" y="430" width="110" height="60" as="geometry" />
         </mxCell>
         <mxCell id="5gqP__IOoCqP4Ey7bsc8-9" value="Consulter historique equipe" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
