@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-03-12T14:41:28.416Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36" etag="3mAZp6m-vFF7eD0kGgtu" version="17.1.2" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-28T23:00:10.888Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36" etag="QdHMQSna--o81vXXa1uT" version="17.2.4" type="github">
   <diagram id="u5QXlh5EgsX-1ronWYS8" name="Page-1">
-    <mxGraphModel dx="835" dy="1494" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1108" dy="1562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -22,17 +22,14 @@
         <mxCell id="gxRlvShqVRtDUfxNLpZI-59" value="Consulter Sujets Proposés" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="360" y="590" width="126" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="gxRlvShqVRtDUfxNLpZI-60" value="Envoyer la fiche de voeux" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="360" y="730" width="126" height="80" as="geometry" />
-        </mxCell>
         <mxCell id="gxRlvShqVRtDUfxNLpZI-65" value="Valider les themes Proposés" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="360" y="870" width="126" height="80" as="geometry" />
+          <mxGeometry x="356" y="760" width="126" height="80" as="geometry" />
         </mxCell>
         <mxCell id="gxRlvShqVRtDUfxNLpZI-66" value="Envoyer la fiche de voeux" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="360" y="1010" width="126" height="80" as="geometry" />
+          <mxGeometry x="359" y="940" width="126" height="80" as="geometry" />
         </mxCell>
         <mxCell id="gxRlvShqVRtDUfxNLpZI-67" value="Valider les PFE(projet fait)" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="360" y="1150" width="126" height="80" as="geometry" />
+          <mxGeometry x="346" y="1070" width="126" height="80" as="geometry" />
         </mxCell>
         <mxCell id="gxRlvShqVRtDUfxNLpZI-68" value="Prisiser les jurys" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="352" y="1340" width="126" height="80" as="geometry" />
@@ -65,12 +62,6 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="65" y="600" as="sourcePoint" />
             <mxPoint x="369.9999999999982" y="500" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="gxRlvShqVRtDUfxNLpZI-74" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="gxRlvShqVRtDUfxNLpZI-53" target="gxRlvShqVRtDUfxNLpZI-60" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="65" y="600" as="sourcePoint" />
-            <mxPoint x="369.9999999999982" y="640" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="gxRlvShqVRtDUfxNLpZI-75" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="gxRlvShqVRtDUfxNLpZI-53" target="gxRlvShqVRtDUfxNLpZI-65" edge="1">
@@ -146,16 +137,6 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="gxRlvShqVRtDUfxNLpZI-85" value="Includes" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="gxRlvShqVRtDUfxNLpZI-79" target="gxRlvShqVRtDUfxNLpZI-60" edge="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="910" y="630" as="sourcePoint" />
-            <mxPoint x="495.99999999999955" y="640" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="790" y="710" />
-              <mxPoint x="700" y="720" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="gxRlvShqVRtDUfxNLpZI-87" value="Includes" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" parent="1" source="gxRlvShqVRtDUfxNLpZI-79" target="gxRlvShqVRtDUfxNLpZI-65" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="954.8544793961651" y="644.2255678634572" as="sourcePoint" />
@@ -171,7 +152,7 @@
             <mxPoint x="477.3171860721807" y="891.5701070480347" as="targetPoint" />
             <Array as="points">
               <mxPoint x="800" y="900" />
-              <mxPoint x="600" y="990" />
+              <mxPoint x="590" y="940" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -233,19 +214,19 @@
           <mxGeometry x="510" y="240" width="90" height="60" as="geometry" />
         </mxCell>
         <mxCell id="bBHSDuc5ojmp52KOl2Vf-13" value="S&#39;assurer de l&#39;unicite des theses" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="570" y="890" width="100" height="60" as="geometry" />
+          <mxGeometry x="570" y="810" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="bBHSDuc5ojmp52KOl2Vf-14" value="includes" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="bBHSDuc5ojmp52KOl2Vf-13" target="gxRlvShqVRtDUfxNLpZI-65" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="610" y="880" as="sourcePoint" />
             <mxPoint x="496" y="920" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="510" y="940" />
+              <mxPoint x="500" y="890" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="bBHSDuc5ojmp52KOl2Vf-15" value="passer par controlleur plagia" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="560" y="1109" width="110" height="60" as="geometry" />
+          <mxGeometry x="610" y="1090" width="110" height="60" as="geometry" />
         </mxCell>
         <mxCell id="bBHSDuc5ojmp52KOl2Vf-16" value="Includes" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="bBHSDuc5ojmp52KOl2Vf-15" target="gxRlvShqVRtDUfxNLpZI-67" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
@@ -275,7 +256,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="bBHSDuc5ojmp52KOl2Vf-22" value="Compatibilite de specialite de chaque jurys" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="390" y="1240" width="110" height="60" as="geometry" />
+          <mxGeometry x="420" y="1220" width="110" height="60" as="geometry" />
         </mxCell>
         <mxCell id="bBHSDuc5ojmp52KOl2Vf-23" value="Includes" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" parent="1" source="bBHSDuc5ojmp52KOl2Vf-22" target="gxRlvShqVRtDUfxNLpZI-68" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
