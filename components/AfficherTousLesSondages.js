@@ -1,5 +1,7 @@
+import { useState } from "react";
 
-const AfficherUnSondage = props => {
+const AfficherTousLesSondages = props => {
+
     const sondageData = [
         {
             title : 'sondage1',
@@ -10,7 +12,7 @@ const AfficherUnSondage = props => {
         {
             title : 'sondage2',
             description : 'ceci est le deuxième sondage',
-            tempsRestant : 2,
+            tempsRestant : 0,
             option : ['option1' , 'option2' , 'option3' , 'option4' , 'option5']
         },
         
@@ -18,22 +20,29 @@ const AfficherUnSondage = props => {
             title : 'sondage3',
             description : 'ceci est le troisième sondage',
             tempsRestant : 3,
-            option : ['option1' , 'option2' , 'option3' , 'option4' , 'option5']
+            option : ['option1' , 'option2' , 'option3' , 'option4']
         },
     ];
+
     return(
         <div className="h-fit w-[100vw] flex flex-col space-y-12 items-center justify-center bg-blue-100">
             {sondageData.map((el,index)=>{
                 return(
-                    <div className="bg-white rounded-xl shadow-xl">
+                    <form className="bg-white rounded-xl shadow-xl">
                         <div>{el.title}</div>
                         <div>{el.description}</div>
                         <div>{el.tempsRestant}</div>
-                        <div>{el.option}</div>
-                    </div>
+                        <div>{el.option.map((ele , id)=>{
+                            return(
+                                <div>{ele}</div>
+                            )
+                        })}
+                        </div>
+                        <button type="submit" className="bg-blue-400 rounded-full p-2">Valider</button>
+                    </form>
                 )
             })}
         </div>
     )
 }
-export default AfficherUnSondage;
+export default AfficherTousLesSondages;
