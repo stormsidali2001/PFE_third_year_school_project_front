@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CreerSondage from "./CreerSondage";
-const Sondage = ({title, description , duree , options , n}) => {
+import CreerSondage from "../pages/CreerSondage";
+const Sondage = ({title, description , duree , options}) => {
 
     const [voted , setVoted] = useState(false);
     const [choice , setChoice] = useState(null)

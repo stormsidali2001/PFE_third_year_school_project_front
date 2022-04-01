@@ -1,9 +1,13 @@
 import { useState } from "react"
 
-const CreerSondage = ({toastsRef ,title,setTitle, description ,setDescription, duree, setDuree, options ,setOptions}) => {
+const CreerSondage = ({toastsRef ,title, description , duree, options }) => {
    
     const [click , setClick] = useState(false);
     const [option , setOption] = useState('');
+    const [title,setTitle] = useState('Titre');
+    const [description , setDescription] = useState('Ajoutez une description');
+    const [duree , setDuree] = useState(1);
+    const [options , setOptions] = useState(['option1' , 'option2', 'option1' , 'option2','option1' , 'option2','option1' , 'option2','option1' , 'option2']);
 
     const optionhandler = (e) => {
         e.preventDefault();
