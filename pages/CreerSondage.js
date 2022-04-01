@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const CreerSondage = ({toastsRef ,title, description , duree, options }) => {
+const CreerSondage = ({toastsRef}) => {
    
     const [click , setClick] = useState(false);
     const [option , setOption] = useState('');
