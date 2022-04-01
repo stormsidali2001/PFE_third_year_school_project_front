@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CreerSondage from "../pages/CreerSondage";
-const Sondage = ({title, description , duree , options}) => {
+const Sondage = ({title = 'felfel', description="himes" , duree = "1" , options=['option1','option2']}) => {
 
     const [voted , setVoted] = useState(false);
     const [choice , setChoice] = useState(null)
