@@ -12,6 +12,7 @@ module.exports = {
       },
       fontFamily : {
         'xyz':'Arvo',
+        'roboto':'Roboto'
       }
     },
   },

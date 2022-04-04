@@ -3,7 +3,7 @@ import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 
 const studentDashboard = props => {
     return (
-        <div className="h-[200vh] bg-background">
+        <div className="h-[200vh] bg-background w-screen ">
             <HorisontalNavbar/>
             <StudentVerticalNavbar/>
            

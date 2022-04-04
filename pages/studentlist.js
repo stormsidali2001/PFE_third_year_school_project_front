@@ -1,14 +1,23 @@
 import { useState } from "react";
+import HorisontalNavbar from "../components/HorisontalNavbar";
+import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import Table from "../components/Table";
 
 const StudentList = props=>{
     const [data, setData] = useState([
-        {
-            id:1,
-            firstName:"assoul",
-            lastName:"sidali",
-            dob:"12/12/12",
-        },
+            {
+                id:1,
+                firstName:"assoul",
+                lastName:"sidali",
+                dob:"12/12/12",
+            },
+            {
+                id:2,
+                firstName:"assoul",
+                lastName:"sidali",
+                dob:"12/12/12",
+            }
+      
       
 
 
@@ -19,6 +28,8 @@ const StudentList = props=>{
     )
     return(
         <div  className="bg-background min-h-screen flex justify-center py-8">
+        <HorisontalNavbar/>
+        <StudentVerticalNavbar/>
             <Table
                 data={data}
                 extraColumns = {[{column,name:"invite to team"}]}
