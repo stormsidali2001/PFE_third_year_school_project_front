@@ -1,7 +1,6 @@
 import { forwardRef } from "react";
 import DotedMessageIcon from "../icons/DotedMessageIcon";
 import DotsIcon from "../icons/DotsIcon";
-import ErrorIcon from "../icons/ErrorIcon";
 
 const LastMessages = forwardRef(({open},ref)=>{
   

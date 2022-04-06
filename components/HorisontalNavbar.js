@@ -6,10 +6,12 @@ import NotificationIcon from "../icons/NotificationIcon";
 import Profil from "../icons/Profil";
 import LastMessages from "./LastMessages";
 import Notification from "./Notification";
+import {useStoreState} from '../store/hooks';
 
-const HorisontalNavbar = ({FirstName='Houda' , LastName = 'Debza'}) => {
+const HorisontalNavbar = () => {
     const notificationRef =useRef(null);
     const lastMessagesRef = useRef(null);
+    const {firstName,lastName} = useStoreState(store=>store.user)
     const {open:openNotifications,setOpen:setOpenNotifications} = useOutSideContainer({ref:notificationRef});
     const {open:openlastMessages,setOpen:setOpenLastMessages} = useOutSideContainer({ref:notificationRef});
 
@@ -30,8 +32,8 @@ const HorisontalNavbar = ({FirstName='Houda' , LastName = 'Debza'}) => {
                         
                         <div className="flex flex-row space-x-2">
                                 <Profil/>
-                                <div>{LastName}</div>
-                                <div>{FirstName}</div>
+                                <div>{firstName}</div>
+                                <div>{lastName}</div>
                         </div>
                         <div className="flex flex-row space-x-8">
                             <MessageIcon
