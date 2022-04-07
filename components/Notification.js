@@ -1,8 +1,14 @@
-import { forwardRef } from "react";
+import { forwardRef,useEffect } from "react";
 import DotsIcon from "../icons/DotsIcon";
 import ErrorIcon from "../icons/ErrorIcon";
+import { useStoreActions } from "../store/hooks";
+
 
 const Notification = forwardRef(({open},ref)=>{
+    const {getLastNotificationsThunk} = useStoreActions(store=>store.notifications)
+    useEffect(()=>{
+        getLastNotificationsThunk();
+    },[])
   
     return(
         <div ref={ref} className={`absolute font-roboto bg-white rounded-[10px] w-[400px] h-fit pt-2 pb-2 drop-shadow-[2px_5px_4px_rgba(0,0,0,0.25)] flex flex-col right-0 bottom-0 translate-y-[102%]  items-center space-y-2 ${open?'scale-100':'scale-0'}`}>

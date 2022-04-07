@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef ,useEffect} from "react";
 import { useOutSideContainer } from "../custom hooks/useOutSideContainer";
 import MessageIcon from "../icons/MessageIcon";
 import NotificationIcon from "../icons/NotificationIcon";
@@ -8,7 +8,9 @@ import LastMessages from "./LastMessages";
 import Notification from "./Notification";
 import {useStoreState} from '../store/hooks';
 
+
 const HorisontalNavbar = () => {
+  
     const notificationRef =useRef(null);
     const lastMessagesRef = useRef(null);
     const {firstName,lastName} = useStoreState(store=>store.user)
