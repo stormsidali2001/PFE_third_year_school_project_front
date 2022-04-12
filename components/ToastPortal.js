@@ -5,7 +5,7 @@ import uniqid from 'uniqid';
 import { forwardRef ,useImperativeHandle} from 'react';
 import { useResponsive } from '../custom hooks/useResponsive';
 import ErrorIcon from '../icons/ErrorIcon';
-const ToastPortal = forwardRef((props,ref)=>{
+const ToastPortal = forwardRef(({p},ref)=>{
      const {isSm} = useResponsive({smMaxWidth:760})
     
     const {loaded,portalId} = useToastPortal({isSm});
