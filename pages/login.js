@@ -8,8 +8,8 @@ const Login = ({toastsRef}) => {
     const {setUser} = useStoreActions(actions=>actions.user)
     const {firstName,lastName} = useStoreState(store=>store.user)
     const router = useRouter();
-    const [email,setEmail] = useState('email');
-    const [password,setPassword] = useState('sadhasf');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
     const [loading,setLoading] = useState(false)
     
  
@@ -26,6 +26,8 @@ const Login = ({toastsRef}) => {
         
         if(service!== 'esi-sba' && domain !='dz'){
             toastsRef.current.addMessage({text:"le mail doit etre un mail scholaire!",mode:'Error'})
+            setEmail('')
+            setPassword('')
             return;
         }
         
@@ -80,17 +82,18 @@ const Login = ({toastsRef}) => {
                         <input 
                             placeholder="E-mail..."  
                             className="h-[60px] lg:w-[360px] w-fit placeholder-[22px] text-[22px] outline-none border border-1 border-zinc-500 rounded-md px-6"
-                            value={email}
+                            type='email'
                             onChange={(e)=>setEmail(e.target.value)}
+                            value={email}
                         />
                         <div className="text-[25px]">Mot de passe :</div>
                         <input 
                             placeholder="Mot de passe..." 
                             type='password' 
                             className="h-[60px] lg:w-[360px] w-fit placeholder-[22px] text-[22px] outline-none border border-1 border-zinc-500 rounded-md px-6"
-                            value={password}
                             onChange={(e)=>setPassword(e.target.value)}
-                            />
+                            value={password}
+                        />
                        <span className="text-cyan-700 text-[20px] hover:underline hover:underline-offset-1  hover:cursor-pointer    transition-all w-fit ease-in"> <Link href='/forgotpassword'>Mot de passe oublié ?</Link></span>
                        {
                             loading?(
