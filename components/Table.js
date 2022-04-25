@@ -1,5 +1,6 @@
-const Table = ({data,extraColumns = []})=>{
-    if(data.length===0) return <div>Aucune donnée</div>
+const Table = ({data = [],extraColumns = [],handleClick})=>{
+ 
+    if(data.length === 0) return <div>Aucune donnée</div>
     const columns = [...Object.keys(data[0]).filter(el=>el!=='id'),...extraColumns.map(el=>el.name)];
     return(
         <table className="   bg-[#282873]/10 backdrop-blur-[8px] shadow-lg  leading-normal h-fit p-4   w-[80vw]">
@@ -12,7 +13,9 @@ const Table = ({data,extraColumns = []})=>{
                                 <th className="text-center">{el}</th>
                             )
                         })
+
                     }
+                     
                 </tr>
             </thead>
 
@@ -36,14 +39,24 @@ const Table = ({data,extraColumns = []})=>{
                                     })
                                 }
                                 {
-                                    extraColumns.map(col=>{
+                                    extraColumns.map(el=>{
                                         return(
                                         <td className="text-center  h-[36px] ">
-                                               {col.column}
+                                              
+                                             { 
+                                                handleClick?(<el.Column onClick={(e)=>handleClick(row.id)}/>)
+                                                :(
+                                                    <el.Column {...row}/>
+                                                )
+                                             
+                                             }
                                         </td>
                                         )
                                     })
                                 }
+                                
+                                
+                                
                               
                                 
                             

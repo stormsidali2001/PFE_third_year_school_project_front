@@ -1,18 +1,18 @@
 import Link from "next/link";
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
 import { useRouter } from "next/router";
 import {useStoreActions,useStoreState} from '../store/hooks';
-
 const Login = ({toastsRef}) => {
-    const {setUser} = useStoreActions(actions=>actions.user)
-    const {firstName,lastName} = useStoreState(store=>store.user)
+   
     const router = useRouter();
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [loading,setLoading] = useState(false)
-    
  
+
+    const {loginThunk} = useStoreActions(actions=>actions.user)
+  
 
     const handleSubmit = async e=>{
        
@@ -33,21 +33,11 @@ const Login = ({toastsRef}) => {
         
         try{
             setLoading(true)
-           
-            const data = await axios.post("http://localhost:8080/signin",{
-                email,
-                password
-            })
-           
-            console.log(data)
-            setUser(data.data)
-            setLoading(false)
-            setEmail('')
-            setPassword('')
-            toastsRef.current.addMessage({text:`Bienvenue ${firstName} ${lastName} ! redirection...`,mode:'Alert'})
-            setTimeout(()=>{
-                router.push("/studentDashboard");
-            },3000)
+            const user = await loginThunk({email,password});
+            toastsRef.current.addMessage({text:`Bienvenue ${user.firstName} ${user.lastName}`,mode:'Alert'})
+         
+            router.push('/studentDashboard')
+          
             
 
         }catch(err){

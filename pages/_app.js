@@ -5,10 +5,12 @@ import {StoreProvider} from 'easy-peasy'
 import {store} from '../store'
 function MyApp({ Component, pageProps }) {
   const toastsRef = useRef();
+ 
   return(
     <StoreProvider store={store} >
       <Component {...pageProps} toastsRef={toastsRef} />
       <ToastPortal ref={toastsRef} />
+   
     </StoreProvider>
   ) 
 }

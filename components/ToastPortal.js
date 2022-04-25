@@ -16,12 +16,14 @@ const ToastPortal = forwardRef(({p},ref)=>{
     const [toasts,setToasts] = useState([]);
     const [removing,setRemoving] = useState('');
     const removeTost = id=>setToasts(toasts.filter(tst=>tst.id!= id))
-
+  
     useEffect(()=>{ 
             if(removing && toasts.length >0){
-                const id = toasts[0].id;
+                console.log(removing)
+                const id = removing;
               
                 setToasts(toasts.filter(tst=>tst.id!= id))
+                setRemoving('')
             }
 
     },[removing])
@@ -30,8 +32,6 @@ const ToastPortal = forwardRef(({p},ref)=>{
 
             setTimeout(()=>{
                 setRemoving(toasts[toasts.length-1].id)
-         
-
             },7000)
         }
            

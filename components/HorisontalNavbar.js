@@ -18,7 +18,7 @@ const HorisontalNavbar = () => {
     const {open:openlastMessages,setOpen:setOpenLastMessages} = useOutSideContainer({ref:notificationRef});
 
     return ( 
-        <div className="fixed z-50 w-[80vw] left-[50%] -translate-x-1/2  ">
+        <div className="absolute z-50 w-[80vw] left-[50%] -translate-x-1/2  ">
             <div className="w-[100%] rounded-b-[500px]  relative text-[24px] font-xyz text-textcolor bg-white h-[60px] flex flex-row   justify-between px-8 items-center drop-shadow-[8px_8px_8px_rgba(0,0,0,0.25)] ">
 
           <Notification

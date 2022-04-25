@@ -1,13 +1,19 @@
 import { UserModel, userModel } from "./user.model";
 import { persist } from "easy-peasy";
-import { NotificationsModel, notificationsModel } from "./notifications.model";
+import { NotificationsServiceModel, notificationsServiceModel } from "./notifications.model";
+import { NoTeamStudentListModel, noTeamStudentListModel } from "./noTeamStudentList";
+import { invitationModel, InvitationModel } from "./invitationList";
 export interface Model{
     user:UserModel;
-    notifications:NotificationsModel;
+    notificationService:NotificationsServiceModel;
+    noTeamStudentListModel:NoTeamStudentListModel;
+    invitationModel:InvitationModel;
 }
 
 export const model:Model={
     user:persist(userModel),
-    notifications:persist(notificationsModel)
+    notificationService:persist(notificationsServiceModel),
+    noTeamStudentListModel:persist(noTeamStudentListModel),
+    invitationModel:invitationModel
     
 }

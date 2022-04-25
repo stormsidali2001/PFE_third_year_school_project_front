@@ -10,7 +10,8 @@ export const useToastPortal = ({isSm})=>{
             div.style.cssText = `
             position:fixed;
             transform:translate(-50%,0);
-            top:10px;
+            top:70px;
+            z-index:50;
            
             ${isSm?'left:25vw;':'left:50vw;'} 
            
@@ -26,7 +27,8 @@ export const useToastPortal = ({isSm})=>{
         div.style.cssText = `
         position:fixed;
         transform:translate(-50%,0);
-        top:10px;
+        top:70px;
+        z-index:50;
        
         ${isSm?'left:25vw;':'left:50vw;'} 
        
@@ -35,7 +37,7 @@ export const useToastPortal = ({isSm})=>{
         
         
         const body = document.getElementsByTagName('body')[0];
-        body.prepend(div);
+        body.append(div);
         setLoaded(true);
         return ()=>body.remove(div)
     },[portalId])
