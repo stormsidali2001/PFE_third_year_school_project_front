@@ -46,9 +46,7 @@ export const invitationModel:InvitationModel  = {
         try{
             console.log(getStoreState().user.accesToken,'access token')
                const res = await axios.get('http://localhost:8080/getInvitationList',{
-                   headers:{
-                       'Authorization':'Bearer '+getStoreState().user.accesToken
-                   }
+                withCredentials:true
                })
                actions.setTeamInvitationList(res.data)
 
@@ -58,25 +56,12 @@ export const invitationModel:InvitationModel  = {
    }),
    accepteRefuseInvitation:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
        
-    const decodedJwt = jwt_decode(getStoreState().user.accesToken);
-        const expired = Date.now() >= decodedJwt.exp*1000;
-        if(expired){
-            const res = await axios.get('http://localhost:8080/refrechtoken',{
-            headers:{
-                'Authorization':'Bearer '+getStoreState().user.refrechToken
-            }
-            })
-            const tokens = res.data;
-            console.log('got new tokens!!!',tokens)
-            getStoreActions().user.setUser({...getStoreState().user,...tokens}) 
-        }
+ 
         let response;
          await axios.post('http://localhost:8080/acceptRefuseTeamInvitation',{
             ...payload
          },{
-             headers:{
-                 'Authorization':'Bearer '+getStoreState().user.accesToken
-             },
+            withCredentials:true
              
          },
          )

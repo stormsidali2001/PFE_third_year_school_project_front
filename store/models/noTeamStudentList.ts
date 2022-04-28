@@ -40,9 +40,7 @@ export const noTeamStudentListModel:NoTeamStudentListModel={
     getNoTeamStudentList:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
          try{
             const res = await axios.get('http://localhost:8080/getStudentsWithoutTeam',{
-                headers:{
-                    'Authorization':'Bearer '+getStoreState().user.accesToken
-                }
+               withCredentials:true
             })
 
             actions.setStudentList(res.data);
@@ -51,28 +49,14 @@ export const noTeamStudentListModel:NoTeamStudentListModel={
          }
     }),
     sendTeamInvitation:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
-        const decodedJwt = jwt_decode(getStoreState().user.accesToken);
-        const expired = Date.now() >= decodedJwt.exp*1000;
-        if(expired){
-            const res = await axios.get('http://localhost:8080/refrechtoken',{
-            headers:{
-                'Authorization':'Bearer '+getStoreState().user.refrechToken
-            }
-            })
-            const tokens = res.data;
-            console.log('got new tokens!!!',tokens)
-            getStoreActions().user.setUser({...getStoreState().user,...tokens}) 
-        }
-        console.log(decodedJwt,'***********************')
+    
        
 
             let response;
            let res = await axios.post('http://localhost:8080/sendATeamInvitation',{
                ...payload
             },{
-                headers:{
-                    'Authorization':'Bearer '+getStoreState().user.accesToken
-                },
+               withCredentials:true
                 
             },
             )

@@ -14,7 +14,8 @@ const HorisontalNavbar = () => {
     const notificationRef =useRef(null);
     const lastMessagesRef = useRef(null);
     const {student} = useStoreState(store=>store.user)
-    const {firstName,lastName} = student | {};
+  
+    console.log(student,"//*//*//")
     const {open:openNotifications,setOpen:setOpenNotifications} = useOutSideContainer({ref:notificationRef});
     const {open:openlastMessages,setOpen:setOpenLastMessages} = useOutSideContainer({ref:notificationRef});
 
@@ -36,8 +37,8 @@ const HorisontalNavbar = () => {
                         
                         <div className="flex flex-row space-x-2">
                                 <Profil/>
-                                <div>{firstName}</div>
-                                <div>{lastName}</div>
+                                <div>{student?.firstName}</div>
+                                <div>{student?.lastName}</div>
                         </div>
                         <div className="flex flex-row space-x-8">
                             <MessageIcon

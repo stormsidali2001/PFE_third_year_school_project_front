@@ -18,7 +18,12 @@ const CreerSondage = ({toastsRef}) => {
 
     const optionhandler = (e) => {
         e.preventDefault();
+        if(option.length === 0){
+            toastsRef.current.addMessage({text:"L'option doit etre non vide",mode:'Error'})
+            return;
+        }
         if(options.length < 10){
+
             setOptions([...options, option])
             setOption('')
         }
@@ -62,14 +67,15 @@ const CreerSondage = ({toastsRef}) => {
     }
 
     return(
-        <div className="h-fit lg:h-[100vh] justify-center flex flex-col space-y-6 min-w-[100vw] text-[#1A2562] bg-[#F8FDFF] font-xyz px-6 lg:px-16 py-12 lg:py-0">
+        <div className="h-fit  justify-center flex  w-[100vw] border-2 text-[#1A2562] bg-[#F8FDFF] font-xyz">
+            <div className='w-[80%] mx-auto border-2 flex flex-col p-4 space-y-8 mt-[80px]'>
             <div className="text-[40px]">Créer un sondage :</div>
-            <div className="flex lg:flex-row flex-col lg:space-x-64 space-y-6 text-[23px]">
+            <div className="flex lg:flex-row flex-col lg:space-x-6    text-[23px]">
                     <div className="flex flex-row space-x-6">
                         <div>Titre :</div>
                         <input placeholder={title} className="shadow-md rounded-md outline-none h-[40px] w-[350px] px-3" onChange={(e)=>setTitle(e.target.value)}/>
                     </div> 
-                    <div className="flex flex-row space-x-6">
+                    <div className="flex flex-row space-x-6  ">
                         <div>Duree :</div>
                         <input placeholder={duree} className="shadow-md rounded-md outline-none h-[40px] w-[80px] px-3" type='number' min="1" max='7' onChange={(e)=>setDuree(e.target.value)}/>
                         <div className="text-[#8F8F8F] italic">jours</div>
@@ -77,14 +83,14 @@ const CreerSondage = ({toastsRef}) => {
             </div>
             <div className="flex flex-row space-x-12 text-[23px]">
                 <div>Description :</div>
-                <input placeholder={description} className="shadow-md rounded-md outline-none h-[40px] lg:w-[780px] min-w-fit px-3" onChange={(e)=>setDescription(e.target.value)}/>
+                <textarea placeholder={description} className="shadow-md rounded-md outline-none h-[80px] lg:w-[500px] min-w-fit px-3 resize-none " onChange={(e)=>setDescription(e.target.value)}/>
             </div>
             <div className="flex flex-col lg:flex-row space-x-16 text-[23px]">
                 <div>Choix</div>
-                <div className="flex flex-row flex-wrap gap-[0.5px]">
+                <div className="flex flex-row flex-wrap gap-[10px]">
                     {options.map((el,index)=>{ 
                         return(
-                            <div className="flex flex-row h-[40px] relative lg:w-[500px] min-w-[300px] bg-white shadow-md border-2 rounded-md border-black px-3">
+                            <div className="flex flex-row h-[40px] relative lg:w-[500px] min-w-[300px] bg-white shadow-md  rounded-md  px-3">
                                 <div>{el}</div>
                                 <img src='pou.png' className="object-contain h-[25px] absolute right-4 top-2 cursor-pointer" onClick={(e)=>setOptions(options.filter((el,i)=>i !== index))}/>
                             </div>
@@ -94,10 +100,10 @@ const CreerSondage = ({toastsRef}) => {
             </div>
             <div className="hover:cursor-pointer bg-[#32AFF5] h-[40px] w-[260px] rounded-full text-[22px] flex place-content-center cursor-pointer" onClick={(e)=>setClick(!click)}>Ajouter un choix :</div>
             <form onSubmit={optionhandler} className={`flex flex-row space-x-12 ${!click ? 'hidden' : 'flex'}`}>
-                <input autoFocus placeholder="Ajoutez un choix ..." className="h-[40px] w-[400px] px-3 border-2 border-black shadow-md rounded-md text-[22px]" value={option} onChange={(e)=>setOption(e.target.value)}/>
-                <button type="submit" className="bg-blue-400 h-[35px] flex items-center justify-center w-[130px] rounded-full text-[22px] cursor-pointer">Ajouter</button>
+                <input autoFocus placeholder="Ajoutez un choix ..." className="h-[40px] w-[400px] px-3  shadow-md rounded-md text-[22px]" value={option} onChange={(e)=>setOption(e.target.value)}/>
+                <button type="submit" className="bg-bo h-[35px] flex items-center justify-center w-[130px] rounded-full text-[22px] cursor-pointer bg-boutton">Ajouter</button>
             </form>
-            <div className="lg:w-[80vw] w-[95vw] flex justify-end items-end">
+            <div className="lg:w-[80vw] w-[95vw] flex justify-center ">
                 {
                      loading?(
                         <svg role="status" class="h-[60px] lg:w-[360px] min-w-[250px] text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,6 +116,8 @@ const CreerSondage = ({toastsRef}) => {
                 }
                
             </div>
+            </div>
+       
         </div>
     )
 }
