@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import AcceuilStudent from "../components/AcceuilStudent";
 import CardsStudent from "../components/CardsStudent";
 import HorisontalNavbar from "../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
+import { useStoreActions } from "../store/hooks";
 
 const studentDashboard = props => {
+    const {getUserInfo} = useStoreActions(store=>store.user)
+    useEffect(()=>{
+        getUserInfo();
+    },[])
     return (
         <>
             <HorisontalNavbar/>

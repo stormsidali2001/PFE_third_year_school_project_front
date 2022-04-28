@@ -37,8 +37,7 @@ const AjouterEtudiant = props => {
 
     return (
 
-        <
-        form className = "h-fit lg:h-[70vh] justify-center flex flex-col space-y-6 min-w-[80vw] text-[#1A2562] bg-[#F8FDFF] font-xyz px-6 lg:px-16 py-12 lg:py-0" >
+        <form className = "h-fit lg:h-[70vh] justify-center flex flex-col space-y-6 min-w-[80vw] text-[#1A2562] bg-[#F8FDFF] font-xyz px-6 lg:px-16 py-12 lg:py-0" >
         <
         div className = "text-[30px]" > Ajouter un Etudiant < /div>
 

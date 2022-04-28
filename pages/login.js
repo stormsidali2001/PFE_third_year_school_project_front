@@ -34,7 +34,7 @@ const Login = ({toastsRef}) => {
         try{
             setLoading(true)
             const user = await loginThunk({email,password});
-            toastsRef.current.addMessage({text:`Bienvenue ${user.firstName} ${user.lastName}`,mode:'Alert'})
+            toastsRef.current.addMessage({text:`Bienvenue ${user.student.firstName} ${user.student.lastName}`,mode:'Alert'})
          
             router.push('/studentDashboard')
           

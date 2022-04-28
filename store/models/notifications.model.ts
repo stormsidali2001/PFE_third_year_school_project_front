@@ -2,6 +2,7 @@ import  jwt_decode from "jwt-decode";
 import { action, Action, thunk, Thunk } from "easy-peasy";
 import axios from "axios";
 import { UserModel } from "./user.model";
+import { Socket } from "socket.io-client";
 export interface  Notification {
        id?:string;
        description?:string;
@@ -42,27 +43,25 @@ export const notificationsServiceModel:NotificationsServiceModel={
     getLastNotificationsThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
          try{
 
-             console.log(getStoreState().user.accesToken,'access token')
-                const decodedJwt = jwt_decode(getStoreState().user.accesToken);
-                const expired = Date.now() >= decodedJwt.exp*1000;
-                if(expired){
-                    const res = await axios.get('http://localhost:8080/refrechtoken',{
-                    headers:{
-                        'Authorization':'Bearer '+getStoreState().user.refrechToken
-                    }
-                    })
-                    const tokens = res.data;
-                    console.log('got new tokens!!!',tokens)
-                    getStoreActions().user.setUser({...getStoreState().user,...tokens}) 
-                }
-                console.log(decodedJwt,'***********************')
+            
+              
+               
+               
                 const res = await axios.get('http://localhost:8080/notifications/3',{
-                    headers:{
-                        'Authorization':'Bearer '+getStoreState().user.accesToken
-                    }
+                   
+                    withCredentials:true
                 })
                 actions.setTotalNotificationsCount(res.data.totalNotificationCount)
                 actions.setNotifications(res.data.notifications)
+                const socket = getStoreState().socketModel.socket as Socket;
+                // socket.on('new-notification',async()=>{
+                //     const res = await axios.get('http://localhost:8080/notifications/3',{
+                   
+                //         withCredentials:true
+                //     })
+                //     actions.setTotalNotificationsCount(res.data.totalNotificationCount)
+                //     actions.setNotifications(res.data.notifications)
+                // })
 
          }catch(err){
             console.log(err)

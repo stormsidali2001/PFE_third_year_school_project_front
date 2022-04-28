@@ -13,9 +13,11 @@ const HorisontalNavbar = () => {
   
     const notificationRef =useRef(null);
     const lastMessagesRef = useRef(null);
-    const {firstName,lastName} = useStoreState(store=>store.user)
+    const {student} = useStoreState(store=>store.user)
+    const {firstName,lastName} = student | {};
     const {open:openNotifications,setOpen:setOpenNotifications} = useOutSideContainer({ref:notificationRef});
     const {open:openlastMessages,setOpen:setOpenLastMessages} = useOutSideContainer({ref:notificationRef});
+
 
     return ( 
         <div className="absolute z-50 w-[80vw] left-[50%] -translate-x-1/2  ">
