@@ -45,6 +45,7 @@ export interface UserThunks{
     logout:Thunk<this,undefined,undefined,undefined>;
     uploadFileThunk:Thunk<this,any,undefined,any>;
     uploadFilesThunk:Thunk<this,any,undefined,any>;
+    getFileThunk:Thunk<this,string,undefined,undefined>;
 
 
 }
@@ -134,6 +135,17 @@ export const userModel:UserModel | null={
             withCredentials:true
         
         })
+    }),
+    getFileThunk:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
+        window.open(`http://localhost:8080/getFile/${payload}`)
+        return  await axios.get(`http://localhost:8080/getFile/${payload}`,{
+            headers:{
+                'Content-Type':'multipart/form-data',
+            },
+            withCredentials:true
+        
+        })
+       
     })
 
     
