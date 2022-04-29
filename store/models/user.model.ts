@@ -43,6 +43,9 @@ export interface UserThunks{
     loginThunk:Thunk<this,LoginPayload,undefined,any>;
     getUserInfo:Thunk<this,undefined,undefined,any>;
     logout:Thunk<this,undefined,undefined,undefined>;
+    uploadFileThunk:Thunk<this,any,undefined,any>;
+    uploadFilesThunk:Thunk<this,any,undefined,any>;
+
 
 }
 export interface UserModel extends UserState,UserActions,UserThunks{
@@ -95,6 +98,7 @@ export const userModel:UserModel | null={
              const socket = await io("http://localhost:8080",
              {withCredentials:true}) as Socket;
 
+             //@ts-ignore
              getStoreActions().socketModel.setSocket(socket);
             //  socket.emit('user-online',{user})
             // socket.on('test',(data)=>{
@@ -113,6 +117,24 @@ export const userModel:UserModel | null={
     logout:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
         actions.setUser(null)
     }),
+    uploadFileThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
+        await axios.post('http://localhost:8080/uploadFile',payload,{
+            headers:{
+                'Content-Type':'multipart/form-data',
+            },
+            withCredentials:true
+        
+        })
+    }),
+    uploadFilesThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
+      return  await axios.post('http://localhost:8080/uploadFiles',payload,{
+            headers:{
+                'Content-Type':'multipart/form-data',
+            },
+            withCredentials:true
+        
+        })
+    })
 
     
 }
