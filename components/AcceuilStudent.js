@@ -1,7 +1,7 @@
 import Link from 'next/link'
 const AcceuilStudent = props => {
     return (
-        <div className="flex flex-row lg:h-[100vh] items-center justify-center font-xyz text-textcolor p-[80px]">
+        <div className="flex flex-row lg:h-[90vh] items-center justify-center font-xyz text-textcolor px-[80px]">
             <div className="flex flex-col space-y-16 items-center justify-center">
                 <div className="text-[40px]">Bonjours ,</div>
                 <div className="text-[26px] px-6 text-center">Nous somme heureux de vous acceuil sur notre plateforme. On espère qu’elle vous serait utile dans le managment du votre projet,</div>
