@@ -5,6 +5,8 @@ import MenuIcon from "../icons/MenuIcon";
 import Student from "../icons/Student";
 import Team from "../icons/Team";
 
+
+//
 const StudentVerticalNavbar = props => {
     return (
         <div className="fixed left-0 z-50 top-[50%] -translate-y-1/2 ">
