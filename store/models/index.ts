@@ -5,6 +5,7 @@ import { NoTeamStudentListModel, noTeamStudentListModel } from "./noTeamStudentL
 import { invitationModel, InvitationModel } from "./invitationList";
 import { socketModel, SocketModel } from "./socket.model";
 import { surveysModel, SurveysModel } from "./surveys.model";
+import { teamAnnouncementsModel, TeamAnnouncementsModel } from "./teamAnnouncements.model";
 export interface Model{
     user:UserModel;
     notificationService:NotificationsServiceModel;
@@ -12,6 +13,7 @@ export interface Model{
     invitationModel:InvitationModel;
     socketModel:SocketModel;
     surveysModel:SurveysModel;
+    teamAnnouncementsModel:TeamAnnouncementsModel;
 }
 
 export const model:Model={
@@ -20,6 +22,7 @@ export const model:Model={
     noTeamStudentListModel:persist(noTeamStudentListModel),
     invitationModel:invitationModel,
     socketModel:socketModel,
-    surveysModel:surveysModel
+    surveysModel:surveysModel,
+    teamAnnouncementsModel:teamAnnouncementsModel
     
 }

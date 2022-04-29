@@ -4,15 +4,15 @@ import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import AjouterAnnouncemnt from "../components/AjouterAnnouncemnt";
 
 
-const AddAnnouncemnt = props => {
+const AddAnnouncemnt = ({toastsRef}) => {
 
 
     return (
         <>
+        <div className="h-[200vh] bg-background min-h-screen items-center  flex flex-col   ">
             <HorisontalNavbar/>
-        <div className="h-[200vh] bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8 ">
             <StudentVerticalNavbar/>
-            <AjouterAnnouncemnt/>
+            <AjouterAnnouncemnt toastsRef={toastsRef}/>
 
             
 

@@ -4,12 +4,11 @@ import { useRouter } from "next/router";
 
 
 const CreerSondage = ({toastsRef}) => {
-   
     const [click , setClick] = useState(false);
     const [option , setOption] = useState('');
     const [title,setTitle] = useState('Titre');
-    const [description , setDescription] = useState('Ajoutez une description');
-    const [duree , setDuree] = useState(1);
+    const [description , setDescription] = useState('Ajoutez une description...');
+    const [duree,setDuree] = useState(1);
     const [options , setOptions] = useState([]);
     const {createSurveyThunk} = useStoreActions(store=>store.surveysModel);
     const [loading,setLoading] = useState(false)
