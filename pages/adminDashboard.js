@@ -1,4 +1,15 @@
+import AcceuilAdmin from "../components/AcceuilAdmin";
+import HorisontalNavbar from "../components/HorisontalNavbar";
+import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
+
 const adminDashboard = props => {
-    <div></div>
+   return(
+       <div>
+            <HorisontalNavbar/>
+            <div>
+                <AcceuilAdmin/>
+            </div>
+       </div>
+   )
 }
 export default adminDashboard;
