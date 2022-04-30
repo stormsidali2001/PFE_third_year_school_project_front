@@ -1,4 +1,4 @@
-import AcceuilAdmin from "../components/AcceuilAdmin";
+import AcceuilEntreprise from "../components/AcceuilEntreprise";
 import HorisontalNavbar from "../components/HorisontalNavbar";
 
 const adminDashboard = props => {
@@ -6,7 +6,7 @@ const adminDashboard = props => {
        <div>
             <HorisontalNavbar/>
             <div>
-                <AcceuilAdmin/>
+                <AcceuilEntreprise/>
             </div>
        </div>
    )
