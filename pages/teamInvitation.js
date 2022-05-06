@@ -9,9 +9,10 @@ const TeamInvitation = ({toastsRef})=>{
     const {getTeamInvitationListThunk,accepteRefuseInvitation} = useStoreActions(store=>store.invitationModel)
 
     const {teamInvitationList} = useStoreState(store=>store.invitationModel)
- 
-    useEffect(()=>{
-       getTeamInvitationListThunk()
+    console.log(formatData(teamInvitationList))
+    
+    useEffect(async ()=>{
+        await getTeamInvitationListThunk()
        
     },[])
     const handleClick = async(accepted,id)=>{
@@ -40,6 +41,24 @@ const TeamInvitation = ({toastsRef})=>{
         </div>
 
     )
+    function formatData(teamInvitationList){
+        return teamInvitationList?.map(el=>{
+            const {id,description,senderTeam,student} = el;
+            if(senderTeam && !student){
+                 const {teamLeader:{firstname,lastName}} = senderTeam;
+
+                 return {id,description,teamName:senderTeam.nickname,leader:firstname+' '+lastName}
+
+            }else if(!senderTeam && student){
+                const {firstname,lastName} = student;
+
+                 return {id,description,student:`${firstname} ${lastName}`}
+            }
+           
+        })
+       
+
+    }
     return(
         <>
       
@@ -47,13 +66,7 @@ const TeamInvitation = ({toastsRef})=>{
         <StudentVerticalNavbar/>
         <div  className="bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8">
             <Table
-                data={teamInvitationList?.map(el=>{
-                    const {id,description,senderTeam} = el;
-                 
-                    const {teamLeader:{firstname,lastName}} = senderTeam;
-
-                    return {id,description,teamName:senderTeam.nickname,leader:firstname+' '+lastName}
-                })}
+                data={formatData(teamInvitationList)}
                
               
                

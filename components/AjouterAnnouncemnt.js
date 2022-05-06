@@ -4,14 +4,17 @@ import { useStoreActions } from "../store/hooks";
 import AttachFileIcon from "../icons/AttachFileIcon";
 import SpeakerIcon from "../icons/SpeakerIcon";
 import DocumentIcon from "../icons/documentIcon";
+import { useRouter } from "next/router";
 
 
 const AjouterAnnouncemnt = ({toastsRef}) => {
-    const [title,setTitle] = useState('titre ici...');
-    const [description,setDescription] = useState('ajouter une description de maximum 250 caracteres');
+    const [title,setTitle] = useState('');
+    const [description,setDescription] = useState('');
     const [files, setFiles] = useState([]);
     const {uploadFilesThunk} = useStoreActions(store=>store.user)
     const {createAnnouncementThunk} = useStoreActions(store=>store.teamAnnouncementsModel)
+    const router = useRouter();
+    const [loading,setLoading] = useState(false);
 
 
     function handleChange(event) {
@@ -42,6 +45,7 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
      
            
         try{
+            setLoading(true);
            const res =  await uploadFilesThunk(formData)
            console.log(res.data,"...")
            const savedFiles = res.data;
@@ -58,6 +62,10 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
                }):[]
            })
            toastsRef.current.addMessage({text:"annoncement cree avec success!!",mode:'Alert'})
+           setLoading(false);
+           setDescription('')
+           setTitle('')
+           setFiles([])
 
 
         }catch(err){
@@ -85,7 +93,8 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
                             <div className="flex-1  space-x-6">
                                 <div> Title</div>
                                 <input 
-                                    placeholder={title} 
+                                    placeholder='title ici...'
+                                    value={title}
                                     className=" border   rounded-[5px]  outline-none h-[30px] w-[80%] px-3 bg-gray-200 text-black" 
                                     onChange={(e)=>setTitle(e.target.value)}
                                 />
@@ -96,7 +105,8 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
                         <div className="flex-1  space-x-6">
                             <div> Description</div> 
                                 <textarea 
-                                    placeholder={description}   
+                                    placeholder='ajouter une description de maximum 250 caracteres'
+                                    value={description}
                                     maxLength="250" 
                                     className=" resize-none border   outline-none rounded-2xl h-[200px] w-[80%] px-3 bg-gray-200 text-black" 
                                     onChange={(e)=>setDescription(e.target.value)}
@@ -122,22 +132,26 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
                         {
                             [...files].map(file=>{
                                 return(
-                                    <div className=" w-fit flex flex-col">
-                                         <div className=" bg-gray-100 flex justify-center items-center p-4 w-fit">
-                                            
-                                            <DocumentIcon
-                                                className='w-8'
-                                            />
-                                            
-                                        </div>
-                                        <div className="w-full  text-center  break-words text-sm">{file.name}</div>
-                                    </div>
+                                  <Document
+                                    file={file}
+                                  />
                                    
                                 )
                             })
                         }
                     </div>
-                    <button type="submit" className="bg-[#5375E2]/80 backdrop-blur-[8px]   font-semibold  px-4 border-2 border-white hover:bg-[#5375E2]/60 rounded-full text-white ease-in transition-colors tracking-wider ml-auto">Valider</button>
+                    {
+                         loading?(
+                            <svg role="status" class="h-[60px] lg:w-[360px] min-w-[250px] text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+<path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+</svg>
+                        ):(
+                            <button type="submit" className="bg-[#5375E2]/80 backdrop-blur-[8px]   font-semibold  px-4 border-2 border-white hover:bg-[#5375E2]/60 rounded-full text-white ease-in transition-colors tracking-wider ml-auto">Valider</button>
+
+                        )
+                    }
+                   
                     
                     
             </div>

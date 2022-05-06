@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Thunk ,thunk} from "easy-peasy";
+import { Action, Thunk ,thunk,action} from "easy-peasy";
 
 
 interface AnnouncementDoc{
@@ -12,23 +12,49 @@ export interface TeamAnnouncementPayload{
     description:string;
     documents:AnnouncementDoc[];
 }
+export interface TeamAnnouncementState{
+    announcements:TeamAnnouncementPayload[];
+}
+export interface TeamAnnouncementActions{
+    setAnnouncements:Action<this,TeamAnnouncementPayload[]>
+}
 export interface TeamAnnouncementsThunks{
     createAnnouncementThunk:Thunk<this,TeamAnnouncementPayload,undefined,undefined>;
+    getAnnouncementsThunk:Thunk<this,undefined,undefined,undefined>;
 }
 
-export interface TeamAnnouncementsModel extends TeamAnnouncementsThunks{
+export interface TeamAnnouncementsModel extends TeamAnnouncementsThunks,TeamAnnouncementState,TeamAnnouncementActions{
 
 }
 
 
 export const teamAnnouncementsModel:TeamAnnouncementsModel = {
+    announcements:[],
+    setAnnouncements:action( (state,payload)=>{
+        state.announcements = payload;
+    }),
     createAnnouncementThunk:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
-        return  await axios.post('http://localhost:8080/createTeamAnnouncement',payload,{
-            headers:{
-                'Content-Type':'multipart/form-data',
-            },
+        console.log(payload,'kkkkkkkkkkkkkkkkkkkkkkkkkk');
+        return  await axios.post('http://localhost:8080/createTeamAnnouncement',{...payload},{
+           
             withCredentials:true
         
         })
+    }),
+    getAnnouncementsThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
+   
+        try{
+           const res =  await axios.get('http://localhost:8080/getAnnouncement',{
+           
+                withCredentials:true
+            
+            })
+            actions.setAnnouncements(res.data)
+
+        }catch(err){
+            console.log(err)
+        }
+     
+        
     })
 }

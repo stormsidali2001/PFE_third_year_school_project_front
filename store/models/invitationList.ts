@@ -44,7 +44,6 @@ export const invitationModel:InvitationModel  = {
     }),
     getTeamInvitationListThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
         try{
-            console.log(getStoreState().user.accesToken,'access token')
                const res = await axios.get('http://localhost:8080/getInvitationList',{
                 withCredentials:true
                })
