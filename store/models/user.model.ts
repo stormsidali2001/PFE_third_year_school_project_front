@@ -119,7 +119,7 @@ export const userModel:UserModel | null={
         actions.setUser(null)
     }),
     uploadFileThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
-        await axios.post('http://localhost:8080/uploadFile',payload,{
+       return  await axios.post('http://localhost:8080/uploadFile',payload,{
             headers:{
                 'Content-Type':'multipart/form-data',
             },

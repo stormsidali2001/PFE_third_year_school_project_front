@@ -15,11 +15,11 @@ const AnnouncementList = ({toastsRef}) => {
         getAnnouncementsThunk();
     },[])
     const handleClick = async doc=>{
-        
+         
          const file = await getFileThunk(doc.url.split("./files/")[1]);
-     
+                        
         console.log("*//*/*/*/*/",file)
-       
+
         
     }
     return (

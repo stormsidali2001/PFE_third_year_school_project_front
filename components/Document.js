@@ -1,10 +1,11 @@
 import DocumentIcon from "../icons/documentIcon"
 
-const Document = ({file,onClick})=>{
+const Document = ({file,onClick,...otherProps})=>{
     return (
-        <div 
+    <label 
             className=" w-fit flex flex-col hover:scale-105 cursor-pointer transition-transform ease-in"
             onClick={onClick}
+            {...otherProps}
         
         >
         <div className=" bg-gray-100 flex justify-center items-center p-4 w-fit">
@@ -15,7 +16,7 @@ const Document = ({file,onClick})=>{
            
        </div>
        <div className="w-full  text-center  break-words text-sm">{file.name}</div>
-   </div>
+   </label>
     )
 }
 export  default Document;
