@@ -1,5 +1,5 @@
 import Link from 'next/link'
-const AcceuilStudent = props => {
+const AcceuilStudent = ({possedeEquipe , debutProjet}) => {
     return (
         <div className="flex flex-row lg:h-[90vh] items-center justify-center font-xyz text-textcolor px-[80px]">
             <div className="flex flex-col space-y-16 items-center justify-center">
@@ -7,8 +7,8 @@ const AcceuilStudent = props => {
                 <div className="text-[26px] px-6 text-center">Nous somme heureux de vous acceuil sur notre plateforme. On espère qu’elle vous serait utile dans le managment du votre projet,</div>
                 <div className="text-[30px] px-16 text-center">Vous n’avez pas une équipe cliquer sur l’un de ces bouton qui va vous aider à créer ou joindre une.</div>
                 <div className="flex flex-row space-x-10">
-                    <button className="h-[40px] w-[120px] text-white bg-[#32AFF5] rounded-full"><Link href='/studentlist'>Inviter</Link ></button>
-                    <button className="h-[40px] w-[120px] bg-[#8FD4FB] rounded-full"><Link  href='/teamInvitation'>Joindre</Link ></button>
+                    <Link href={possedeEquipe === true ? (debutProjet === true ? "/teacherdoc":"/themes") :"/studentlist"}><button className={`h-[40px] ${possedeEquipe === true ?'w-[200px]':'w-[120px]'} text-white bg-[#32AFF5] rounded-full`}>{possedeEquipe === true ? (debutProjet === true ? "Documents":"Liste des thèmes") :"Inviter"}</button></Link>
+                    <Link href={possedeEquipe === true ? "/chat" :"/listEquipe"}><button className="h-[40px] w-[120px] bg-[#8FD4FB] rounded-full">{possedeEquipe === true ? "Chat" :"Joindre"}</button></Link>
                 </div>
             </div>
             <img src="AcceuilStudent.png" className="mix-blend-darken object-contain"/>
@@ -16,3 +16,4 @@ const AcceuilStudent = props => {
     )
 }
 export default AcceuilStudent;
+//h-[40px] w-[200px] text-white bg-[#32AFF5] rounded-full
