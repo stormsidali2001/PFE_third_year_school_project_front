@@ -18,6 +18,9 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
 
 
     function handleChange(event) {
+        const { files: fileLst } = event.target;
+        // setFiles(fileLst);
+        console.log(fileLst, [...fileLst].map(({name}) => {return {name}}));
         setFiles(event.target.files)
       };
     const Empty = (elements)=>{
@@ -99,7 +102,7 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
                                     onChange={(e)=>setTitle(e.target.value)}
                                 />
                             </div>   
-                    </div> 
+                </div> 
 
                     <div className='flex flex-wrap -mx-3 mb-6 '>
                         <div className="flex-1  space-x-6">
@@ -130,11 +133,24 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
                     <div className="w-full grid lg:grid-cols-4  md:grid-cols-3 grid-cols-2 place-content-center content-center p-2 gap-4  rounded-[5px] ">
                      
                         {
-                            [...files].map(file=>{
+                    [...files].map((file,index)=>{
                                 return(
-                                  <Document
-                                    file={file}
-                                  />
+                                    <label 
+                                    className=" w-fit flex flex-col hover:scale-105 cursor-pointer transition-transform ease-in"
+                                    key={index}
+                                
+                                >
+                                <div className=" bg-gray-100 flex justify-center items-center p-4 w-fit">
+                                   
+                                   <DocumentIcon
+                                       className='w-8'
+                                   />
+                                   
+                               </div>
+                               <div className="w-full  text-center  break-words text-sm">{file.name}</div>
+                           </label>
+
+                               
                                    
                                 )
                             })
