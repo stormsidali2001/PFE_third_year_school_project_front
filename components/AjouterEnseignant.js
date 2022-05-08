@@ -37,9 +37,6 @@ const AjouterEnseignant = props => {
                     <input placeholder={Module} className=" border border-primary border-blue-700  rounded-full outline-none h-[50px] w-[350px] px-3" onChange={(e)=>setModule(e.target.value)}/>
                 </div>     
             </div> 
-
-           
-               
                
             <div className="lg:w-[80vw] w-[95vw] flex justify-end items-end">
                 <button type="submit" className="bg-blue-500 h-[50px] w-[200px] rounded-full shadow-lg text-[24px]">Valider</button>

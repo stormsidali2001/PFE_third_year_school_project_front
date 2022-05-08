@@ -7,7 +7,7 @@ import { useStoreActions } from "../store/hooks";
 
 const studentDashboard = props => {
     const [possedeEquipe , setPossedeEquipe] = useState(false)
-    const [debutProjet , setDebutProjet] = useState(true)
+    const [debutProjet , setDebutProjet] = useState(false)
     const {getUserInfo} = useStoreActions(store=>store.user)
     useEffect(()=>{
         getUserInfo();
@@ -16,7 +16,7 @@ const studentDashboard = props => {
         <div>
             <HorisontalNavbar/>
             <div className="h-[200vh] bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8 ">
-                <StudentVerticalNavbar/>
+                <StudentVerticalNavbar possedeEquipe = {possedeEquipe} debutProjet = {debutProjet}/>
                 <AcceuilStudent possedeEquipe = {possedeEquipe} debutProjet = {debutProjet}/>
                 <CardsStudent/>
             </div>

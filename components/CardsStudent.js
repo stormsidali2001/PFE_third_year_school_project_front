@@ -64,7 +64,7 @@ const CardsStudent = props => {
             {
                 data.map((el,index)=> {
                     return(
-                        <div className="h-[300px] hover:h-[310px] hover:w-[260px] w-[250px] flex flex-col items-center bg-gradient-to-b hover:from-slate-400 hover:to-slate-600 from-slate-300 to-slate-500  border-2 rounded-lg border-zinc-600 relative text-gray-900">
+                        <div className="h-[300px] w-[250px] flex flex-col items-center bg-gradient-to-b from-blue-100 to-blue-300 hover:from-blue-50 hover:to-blue-200  border-2 rounded-lg shadow-lg relative text-gray-900 cursor-pointer">
                             <div className="  h-full w-full"> 
                                 <img src = {el.url} className="object-contain h-full w-full mix-blend-darken opacity-50"/>
                             </div>
