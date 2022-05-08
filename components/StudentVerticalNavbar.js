@@ -16,31 +16,31 @@ const StudentVerticalNavbar = ({possedeEquipe , debutProjet}) => {
             (debutProjet === true ?
             <div>
                 <Link href="/login">
-                    <button> <Team className='hover:cursor-pointer' /></button>
+                    <button></button>
                 </Link>
                 <Link href="/login">
-                    <button><Student className='hover:cursor-pointer' /></button>
+                    <button></button>
                 </Link>
                 <Link href="/login">
-                    <button><Theme className='hover:cursor-pointer' /></button>
+                    <button></button>
                 </Link>
                 <Link href="/login">
-                   <button> <Invitation className='hover:cursor-pointer' /></button>
+                   <button></button>
                 </Link>
             </div>
             :
             <div>
                 <Link href="/login">
-                    <button> <Team className='hover:cursor-pointer' /></button>
+                    <button></button>
                 </Link>
                 <Link href="/login">
-                    <button><Student className='hover:cursor-pointer' /></button>
+                    <button></button>
                 </Link>
                 <Link href="/login">
-                    <button><Theme className='hover:cursor-pointer' /></button>
+                    <button></button>
                 </Link>
                 <Link href="/login">
-                   <button> <Invitation className='hover:cursor-pointer' /></button>
+                   <button></button>
                 </Link>
             </div>
             )
