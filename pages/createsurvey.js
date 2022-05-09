@@ -8,7 +8,6 @@ import HorisontalNavbar from "../components/HorisontalNavbar";
 
 const CreerSondage = ({toastsRef}) => {
 
-    const [click , setClick] = useState(false);
     const [option , setOption] = useState('');
     const [title,setTitle] = useState('');
     const [description , setDescription] = useState('');
