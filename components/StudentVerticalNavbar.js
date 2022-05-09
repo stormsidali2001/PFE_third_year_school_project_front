@@ -13,37 +13,37 @@ const StudentVerticalNavbar = ({possedeEquipe , debutProjet}) => {
         <div className="relative h-[80vh] ">
             <div className="absolute h-full border-l-white border-l-[60px] drop-shadow-[8px_8px_8px_rgba(0,0,0,0.25)] rounded-r-[500px]"/>
             {possedeEquipe === true ? 
-            (debutProjet === true ?
-            <div>
-                <Link href="/login">
-                    <button> <Team className='hover:cursor-pointer' /></button>
-                </Link>
-                <Link href="/login">
-                    <button><Student className='hover:cursor-pointer' /></button>
-                </Link>
-                <Link href="/login">
-                    <button><Theme className='hover:cursor-pointer' /></button>
-                </Link>
-                <Link href="/login">
-                   <button> <Invitation className='hover:cursor-pointer' /></button>
-                </Link>
-            </div>
-            :
-            <div>
-                <Link href="/login">
-                    <button> <Team className='hover:cursor-pointer' /></button>
-                </Link>
-                <Link href="/login">
-                    <button><Student className='hover:cursor-pointer' /></button>
-                </Link>
-                <Link href="/login">
-                    <button><Theme className='hover:cursor-pointer' /></button>
-                </Link>
-                <Link href="/login">
-                   <button> <Invitation className='hover:cursor-pointer' /></button>
-                </Link>
-            </div>
-            )
+                (debutProjet === true ?
+                <div>
+                    <Link href="/login">
+                        <button></button>
+                    </Link>
+                    <Link href="/login">
+                        <button></button>
+                    </Link>
+                    <Link href="/login">
+                        <button></button>
+                    </Link>
+                    <Link href="/login">
+                    <button></button>
+                    </Link>
+                </div>
+                :
+                <div>
+                    <Link href="/login">
+                        <button></button>
+                    </Link>
+                    <Link href="/login">
+                        <button></button>
+                    </Link>
+                    <Link href="/login">
+                        <button></button>
+                    </Link>
+                    <Link href="/login">
+                    <button></button>
+                    </Link>
+                </div>
+                )
              : 
             <div className="absolute space-y-10 my-32 px-2">
                 <Link href="/listEquipe">
