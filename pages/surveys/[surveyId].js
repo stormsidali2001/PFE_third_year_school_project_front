@@ -15,7 +15,9 @@ const SingleSurvey = ({toastsRef})=>{
     const [loading,setLoading] = useState(false)
     const [chosenOption,setChosenOption] = useState(0);
     const [argument,setArgument] = useState(survey?.answer );
-
+    const [createdAt,setCreatedAt] = useState('');
+    const [pageLoaded,setPageLoaded] = useState(false)
+  
   
      const {getSurveyThunk} = useStoreActions(store=>store.surveysModel)
      const {getUserInfo} = useStoreActions(store=>store.user)
@@ -24,6 +26,25 @@ const SingleSurvey = ({toastsRef})=>{
 
     const router = useRouter();
     const {surveyId} = router.query;
+    let tempsRestant = new Date(createdAt).getTime() + duree - Date.now();
+
+    const formatedRemainingTime = new Date(tempsRestant).getDate() + "J:" + new Date(tempsRestant).getHours() + ":" + new Date(tempsRestant).getMinutes() + ":" + new Date(tempsRestant).getSeconds() ;
+    console.log(tempsRestant,"_____",title)
+    if(tempsRestant < 0){
+        tempsRestant = 0;
+    }
+    const surveyClosed  =  tempsRestant === 0;
+    let winningOptions = [];
+    let max =-Infinity;
+
+    
+    options?.forEach(op=>{
+        if(op.answersCount >= max){
+            max = op.answersCount;
+        }
+    })
+    winningOptions = options?.filter(op=>op.answersCount ===max)
+    
     useEffect(async()=>{
         await getUserInfo();
         console.log(surveyId,"33333333333")
@@ -33,7 +54,9 @@ const SingleSurvey = ({toastsRef})=>{
         setOptions(survey?.options)
         setDuree(survey?.period)
         setArgument(survey?.answer)
+        setCreatedAt(survey?.createdAt)
         setLoading(false)
+        setPageLoaded(true)
     },[surveyId])
     const optionhandler = (e) => {
         e.preventDefault();
@@ -71,7 +94,7 @@ const SingleSurvey = ({toastsRef})=>{
         }
       
     }
-    
+    if(!pageLoaded) return "Loading..."
     return(
         <div className="h-[200vh] bg-background min-h-screen items-center  flex flex-col   ">
             <HorisontalNavbar/>
@@ -84,7 +107,7 @@ const SingleSurvey = ({toastsRef})=>{
     >
        <div className="text-[30px] flex space-x-4"> 
                
-                <span className="">Survey</span>
+                <span className="">Sondage</span>
               
        </div>
        <div className='space-y-3 flex flex-col w-[95%]  px-8'>
@@ -129,19 +152,50 @@ const SingleSurvey = ({toastsRef})=>{
                 </div> 
                 <div className='flex flex-wrap -mx-3 mb-6 '>
                     <div className="flex-1  space-x-6">
+                        <div> Les options gagnants</div> 
+                           
+                        {
+                                  surveyClosed&&(
+                                      <div className='flex flex-col'>
+                                          <div>les options gagnants:</div>
+                                          {
+                                              winningOptions.map(op=>{
+                                                  return (
+                                                      <div
+                                                        className='flex  items-center space-x-2 w-fit '
+                                                      >
+
+
+                                                         <div className={`w-[15px] h-[15px] rounded-full bg-blue-100 flex items-center justify-center text-[10px]`}>{op.answersCount}</div>
+                                                          <div>{op.description}</div>
+                                                      </div>
+                                                  )
+                                              })
+                                          }
+                                      </div>
+
+                                  )
+                              }
+                    </div>   
+                </div> 
+                             
+             {  !surveyClosed&& <div className='flex flex-wrap -mx-3 mb-6 '>
+                    <div className="flex-1  space-x-6">
                         <div> Options</div> 
                            
                              <div 
                            
                              
                           >
-                              {options?.map(({description},index)=>{
+                              
+                              {options?.map(({description,answersCount},index)=>{
                                 return(
                                     <div 
                                     key={index} 
                                     className='flex  items-center space-x-2 w-fit cursor-pointer'
                                     onClick={(e)=>setChosenOption(index)}
                                     >
+                                        <div className={`w-[15px] h-[15px] rounded-full bg-blue-100 flex items-center justify-center text-[10px]`}>{answersCount}</div>
                                         <div className={`w-[15px] h-[15px] rounded-full ${chosenOption === index?"bg-blue-300":"bg-blue-100"} `}></div>
                                         <div >{description}</div>
                                     </div>
@@ -151,8 +205,8 @@ const SingleSurvey = ({toastsRef})=>{
                           </div>
                     </div>   
                     
-                </div> 
-                <div className='flex flex-wrap -mx-3 mb-6 '>
+                </div> }
+             {  !surveyClosed&& <div className='flex flex-wrap -mx-3 mb-6 '>
                     <div className="flex-1  space-x-6">
                         <div> Argument</div> 
                             <textarea 
@@ -163,7 +217,7 @@ const SingleSurvey = ({toastsRef})=>{
                                 onChange={(e)=>setArgument(e.target.value)}
                             />
                     </div>   
-                </div>
+                </div>}
                
         
               
@@ -178,7 +232,7 @@ const SingleSurvey = ({toastsRef})=>{
 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
 </svg>
                     ):(
-                        <button type='submit' className="bg-[#5375E2]/80 backdrop-blur-[8px]   font-semibold  px-4 border-2 border-white hover:bg-[#5375E2]/60 rounded-full text-white ease-in transition-colors tracking-wider ml-auto">Voter</button>
+                       !surveyClosed&&<button type='submit' className="bg-[#5375E2]/80 backdrop-blur-[8px]   font-semibold  px-4 border-2 border-white hover:bg-[#5375E2]/60 rounded-full text-white ease-in transition-colors tracking-wider ml-auto">Voter</button>
 
                     )
                 }
