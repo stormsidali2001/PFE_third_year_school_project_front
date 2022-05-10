@@ -23,7 +23,7 @@ const Table = ({data = [],extraColumns = [],handleClick})=>{
                 {
                     data.map(row=>{
                         return(
-                            <tr  className=" bg-white/60  rounded-[10px] bg-white/60  border-red  border-b-2">
+                            <tr  className=" bg-white/60  rounded-[10px] border-red border-b-2">
                                
 
                                 {

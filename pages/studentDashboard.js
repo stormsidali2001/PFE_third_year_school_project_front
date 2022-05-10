@@ -6,8 +6,8 @@ import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import { useStoreActions } from "../store/hooks";
 
 const studentDashboard = props => {
-    const [possedeEquipe , setPossedeEquipe] = useState(true)
-    const [debutProjet , setDebutProjet] = useState(true)
+    const [possedeEquipe , setPossedeEquipe] = useState(false)
+    const [debutProjet , setDebutProjet] = useState(false)
     const {getUserInfo} = useStoreActions(store=>store.user)
     useEffect(()=>{
         getUserInfo();
