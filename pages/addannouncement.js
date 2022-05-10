@@ -9,13 +9,10 @@ const AddAnnouncemnt = ({toastsRef}) => {
 
     return (
         <>
-        <div className="h-[200vh] bg-background min-h-screen items-center  flex flex-col   ">
+        <div className="h-[200vh] bg-background min-h-screen items-center flex flex-col">
             <HorisontalNavbar/>
             <StudentVerticalNavbar/>
             <AjouterAnnouncemnt toastsRef={toastsRef}/>
-
-            
-
         </div>
         </>
     )
