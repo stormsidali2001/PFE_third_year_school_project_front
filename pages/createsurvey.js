@@ -1,5 +1,5 @@
 import { useStoreActions } from "../store/hooks";
-import { useState } from "react"
+import { useState ,useEffect} from "react"
 import { useRouter } from "next/router";
 import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import HorisontalNavbar from "../components/HorisontalNavbar";
@@ -16,7 +16,10 @@ const CreerSondage = ({toastsRef}) => {
     const {createSurveyThunk} = useStoreActions(store=>store.surveysModel);
     const [loading,setLoading] = useState(false)
     const router = useRouter();
-    
+    const {getUserInfo} = useStoreActions(store=>store.user)
+    useEffect(async()=>{
+        await getUserInfo()
+    },[])
 
 
     const optionhandler = (e) => {

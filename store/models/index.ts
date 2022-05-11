@@ -7,6 +7,7 @@ import { socketModel, SocketModel } from "./socket.model";
 import { surveysModel, SurveysModel } from "./surveys.model";
 import { teamAnnouncementsModel, TeamAnnouncementsModel } from "./teamAnnouncements.model";
 import { teamDocumentModel, TeamDocumentModel } from "./teamDocuments.model";
+import { adminStudentListModel, AdminStudentListModel } from "./adminStudentList";
 export interface Model{
     user:UserModel;
     notificationService:NotificationsServiceModel;
@@ -16,6 +17,7 @@ export interface Model{
     surveysModel:SurveysModel;
     teamAnnouncementsModel:TeamAnnouncementsModel;
     teamDocumentModel:TeamDocumentModel;
+    adminStudentListModel:AdminStudentListModel;
 }
 
 export const model:Model={
@@ -26,6 +28,7 @@ export const model:Model={
     socketModel:socketModel,
     surveysModel:surveysModel,
     teamAnnouncementsModel:teamAnnouncementsModel,
-    teamDocumentModel:teamDocumentModel
+    teamDocumentModel:teamDocumentModel,
+    adminStudentListModel:adminStudentListModel
     
 }

@@ -9,10 +9,13 @@ const TeamInvitation = ({toastsRef})=>{
     const {getTeamInvitationListThunk,accepteRefuseInvitation} = useStoreActions(store=>store.invitationModel)
 
     const {teamInvitationList} = useStoreState(store=>store.invitationModel)
+    const {getUserInfo} = useStoreActions(store=>store.user)
     console.log(formatData(teamInvitationList))
     
     useEffect(async ()=>{
         await getTeamInvitationListThunk()
+        await getUserInfo()
+
        
     },[])
     const handleClick = async(accepted,id)=>{

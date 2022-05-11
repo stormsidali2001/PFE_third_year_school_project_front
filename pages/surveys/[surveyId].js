@@ -7,6 +7,7 @@ import StudentVerticalNavbar from "../../components/StudentVerticalNavbar";
 const SingleSurvey = ({toastsRef})=>{
     const {survey} = useStoreState(store=>store.surveysModel);
     const {submitAnswerThunk} = useStoreActions(store=>store.surveysModel)
+
     const [title,setTitle] = useState(survey?.title);
     const [description,setDescription] = useState(survey?.description);
     const [options,setOptions] = useState(survey?.options);
@@ -14,7 +15,7 @@ const SingleSurvey = ({toastsRef})=>{
     const [duree,setDuree] = useState(survey?.period);
     const [loading,setLoading] = useState(false)
     const [chosenOption,setChosenOption] = useState(0);
-    const [argument,setArgument] = useState(survey?.answer );
+    const [argument,setArgument] = useState(survey?.argument );
     const [createdAt,setCreatedAt] = useState('');
     const [pageLoaded,setPageLoaded] = useState(false)
   
@@ -23,13 +24,14 @@ const SingleSurvey = ({toastsRef})=>{
      const {getUserInfo} = useStoreActions(store=>store.user)
      const user = useStoreState(store=>store.user)
      const teamLeader = user?.student?.team?.teamLeader;
-
+     useEffect(async()=>{
+       await  getUserInfo()
+     },[])
     const router = useRouter();
     const {surveyId} = router.query;
     let tempsRestant = new Date(createdAt).getTime() + duree - Date.now();
 
-    const formatedRemainingTime = new Date(tempsRestant).getDate() + "J:" + new Date(tempsRestant).getHours() + ":" + new Date(tempsRestant).getMinutes() + ":" + new Date(tempsRestant).getSeconds() ;
-    console.log(tempsRestant,"_____",title)
+  
     if(tempsRestant < 0){
         tempsRestant = 0;
     }
@@ -53,9 +55,12 @@ const SingleSurvey = ({toastsRef})=>{
         setDescription(survey?.description)
         setOptions(survey?.options)
         setDuree(survey?.period)
-        setArgument(survey?.answer)
+        setArgument(survey?.argument )
         setCreatedAt(survey?.createdAt)
         setLoading(false)
+        const index = survey?.options?.findIndex(op=>op.id === survey?.answer.id);
+      
+        setChosenOption(index?index:0)
         setPageLoaded(true)
     },[surveyId])
     const optionhandler = (e) => {
@@ -80,7 +85,7 @@ const SingleSurvey = ({toastsRef})=>{
             await submitAnswerThunk({
                 surveyId,
                 optionId:options[chosenOption].id,
-                argument,
+                argument:argument?argument:'',
             })
             setLoading(false)
             toastsRef.current.addMessage({text:"Votre reponse a eté envoyée",mode:'Alert'})
@@ -91,6 +96,7 @@ const SingleSurvey = ({toastsRef})=>{
         }catch(err){
             console.log(err);
             toastsRef.current.addMessage({text:"ops... Erreur",mode:'Error'})
+            setLoading(false)
         }
       
     }

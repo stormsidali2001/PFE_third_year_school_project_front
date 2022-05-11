@@ -15,12 +15,13 @@ const TeamDocs = ({toastsRef})=>{
     const {createTeamDocument,getTeamDocuments,deleteTeamDocs} = useStoreActions(store=>store.teamDocumentModel)
     const {documents} = useStoreState(store=>store.teamDocumentModel)
    
-
+    const {getUserInfo} = useStoreActions(store=>store.user)
     const  {uploadFileThunk} = useStoreActions(store=>store.user)
     useEffect(async()=>{
         try{
 
             await getTeamDocuments();
+            await getUserInfo()
         }catch(err){
             console.log(err)
             toastsRef.current.addMessage({text:"Probleme",mode:'Error'})
