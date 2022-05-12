@@ -4,6 +4,7 @@ import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
 import DownIcon from "../../icons/DownIcon"
 import UpIcon from "../../icons/UpIcon"
+import Trash from "../../icons/Trash"
 
 const theme = props => {
 
@@ -11,15 +12,15 @@ const theme = props => {
         [
             {
                 nomEquipe : "IT experts",
-                lienProfil : "/"
+                lienProfil : "/chat"
             },
             {
                 nomEquipe : "IT experts 2",
-                lienProfil : "/"
+                lienProfil : "/login"
             },
             {
                 nomEquipe : "IT experts 3",
-                lienProfil : "/"
+                lienProfil : "/studentList"
             },
         ]
     ) 
@@ -46,14 +47,14 @@ const theme = props => {
     const [title , setTilte] = useState("PFE")
     const [description , setDescription] = useState("Plateforme de gestion des projets de fin d'études")
     const [specialite , setSpecialite] = useState("Application web")
-    const [document , setDocument] =useState("document")
+    const [document , setDocument] = useState("document")
     const [countEncadreur , setCountEncadreur] = useState(encadreur.length)
     const [countEquipe , setCountEquipe] = useState(equipes.length)
-    const [clickDownEquipe, setClickDownEquipe] = useState (false)
-    const [clickDownEncadreur , setClickDownEncadreur] = useState (false)
-    const [clickUpEquipe, setClickUpEquipe] = useState (false)
-    const [clickUpEncadreur , setClickUpEncadreur] = useState (false)
-
+    const [clickDownEquipe, setClickDownEquipe] = useState(false)
+    const [clickDownEncadreur , setClickDownEncadreur] = useState(false)
+    const [clickUpEquipe, setClickUpEquipe] = useState(false)
+    const [clickUpEncadreur , setClickUpEncadreur] = useState(false)
+   
     return (
         <div>
             <StudentVerticalNavbar/>
@@ -87,30 +88,36 @@ const theme = props => {
                                 {
                                     encadreur.map((element , index)=> {
                                         return(
-                                            <div className={`flex flex-row-reverse items-center justify-center ${countEncadreur > 2 && index > 1 ? (clickDownEncadreur === true && clickUpEncadreur === false ? "flex" : "hidden") : "flex"}`}>
-                                                <div className={`items-center justify-center flex-col space-y-10 hover:text-blue-500 bg-blue-300/20 backdrop-blur-lg rounded-full px-3`}>{element.nomEncadreur}</div>
-                                                <input type="checkbox" className={`${modifier === true ? "flex" : "hidden"}`}/>
+                                            <div className={`flex flex-row space-x-2 items-center justify-center ${countEncadreur > 2 && index > 1 ? (clickDownEncadreur === true && clickUpEncadreur === false ? "flex" : "hidden") : "flex"}`}>
+                                                <Link href={element.lienProfil}><button className={`items-center justify-center flex-col space-y-10 hover:text-blue-500 bg-blue-300/20 backdrop-blur-lg rounded-full px-3`}>{element.nomEncadreur}</button></Link> 
+                                                <button  className={`${modifier === true ? "flex" : "hidden"}`}><Trash/></button>
                                             </div>
                                         )
                                     })
                                 }
-                                <button className={`${clickDownEncadreur === true ? "hidden" : "flex"}`} onClick={(e) => {setClickDownEncadreur(true) ; setClickUpEncadreur(false)}}><DownIcon/></button>
-                                <button className={`${clickDownEncadreur === true && clickUpEncadreur === false  ? "flex" : "hidden"}`} onClick={(e) => {setClickUpEncadreur(true) ; setClickDownEncadreur(false)}}><UpIcon/></button>
+                               <div className={`${modifier === true ? "hidden" : "flex"}`}>
+                                    <button className={`${clickDownEncadreur === true ? "hidden" : "flex"}`} onClick={(e) => {setClickDownEncadreur(true) ; setClickUpEncadreur(false)}}><DownIcon/></button>
+                                    <button className={`${clickDownEncadreur === true && clickUpEncadreur === false  ? "flex" : "hidden"}`} onClick={(e) => {setClickUpEncadreur(true) ; setClickDownEncadreur(false)}}><UpIcon/></button>
+                               </div>
+                               <Link href="/"><button className={`h-[30px] w-[100px] text-[18px] flex items-center justify-center bg-blue-300 hover:bg-blue-400 rounded-full ${modifier === true ? "flex" : "hidden"}`}>Ajouter</button></Link>
                             </div>
                             <div className="flex flex-row items-center flex-wrap space-x-4">
                                 <div className="text-[19px]">Affécté à :</div>
                                 {
                                     equipes.map((element , index)=> {
                                         return(
-                                            <div className={` flex flex-row-reverse items-center justify-center ${countEquipe > 2 && index > 1 ? (clickDownEquipe === true && clickUpEncadreur === false ? "flex" : "hidden") : "flex"}`}>
-                                                <div className={`items-center justify-center flex-col space-y-10 bg-blue-300/20 backdrop-blur-lg rounded-full px-3 hover:text-blue-500 `}>{element.nomEquipe}</div>
-                                                <input type="checkbox" className={`${modifier === true ? "flex" : "hidden"}`}/>
+                                            <div className={` flex flex-row space-x-2 items-center justify-center ${countEquipe > 2 && index > 1 ? (clickDownEquipe === true && clickUpEncadreur === false ? "flex" : "hidden") : "flex"}`}>
+                                                <Link href={element.lienProfil}><button className={`items-center justify-center flex-col space-y-10 bg-blue-300/20 backdrop-blur-lg rounded-full px-3 hover:text-blue-500 `}>{element.nomEquipe}</button></Link>
+                                                <button  className={`${modifier === true ? "flex" : "hidden"}`}><Trash/></button>
                                             </div>
                                         )
                                     })
                                 }
-                                <button className={`${clickDownEquipe === true ? "hidden" : "flex"}`} onClick={(e) => {setClickDownEquipe(true) , setClickUpEquipe(false)}}><DownIcon/></button>
-                                <button className={`${clickDownEquipe === true && clickUpEquipe === false  ? "flex" : "hidden"}`} onClick={(e) => {setClickUpEquipe(true) ; setClickDownEquipe(false)}}><UpIcon/></button>
+                                <div className={`${modifier === true ? "hidden" : "flex"}`}>
+                                    <button className={`${clickDownEquipe === true ? "hidden" : "flex"}`} onClick={(e) => {setClickDownEquipe(true) , setClickUpEquipe(false)}}><DownIcon/></button>
+                                    <button className={`${clickDownEquipe === true && clickUpEquipe === false  ? "flex" : "hidden"}`} onClick={(e) => {setClickUpEquipe(true) ; setClickDownEquipe(false)}}><UpIcon/></button>
+                                </div>
+                                <Link href="/"><button className={`h-[30px] w-[100px] text-[18px] flex items-center justify-center bg-blue-300 hover:bg-blue-400 rounded-full ${modifier === true ? "flex" : "hidden"}`}>Ajouter</button></Link>
                             </div>
                         <div className="flex items-center justify-center">
                         <button className="h-[40px] w-[120px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full " onClick={(e)=>setModifier(true)}>Modifier</button>
