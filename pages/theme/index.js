@@ -1,6 +1,7 @@
-import HorisontalNavbar from "../components/HorisontalNavbar";
-import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
+import HorisontalNavbar from "../../components/HorisontalNavbar";
+import StudentVerticalNavbar from "../../components/StudentVerticalNavbar";
 import Link from "next/link";
+import { data } from "autoprefixer";
 
 const theme = props => {
 
@@ -8,7 +9,7 @@ const theme = props => {
 
     const data = [
         {
-            Numéro : 1,
+            id : 1,
             Titre : "PFE",
             Spécialité : "Application Web",
             Encadreur : "Encadreur1 , Encadreur2"
@@ -20,37 +21,37 @@ const theme = props => {
             Encadreur : "Encadreur1 , Encadreur2"
         },
         {
-            Numéro : 3,
+            id : 3,
             Titre : "PFE",
             Spécialité : "Application Web",
             Encadreur : "Encadreur1 , Encadreur2"
         },
         {
-            Numéro : 4,
+            id : 4,
             Titre : "PFE",
             Spécialité : "Application Web",
             Encadreur : "Encadreur1 , Encadreur2"
         },
         {
-            Numéro : 1,
+            id : 1,
             Titre : "PFE",
             Spécialité : "Application Web",
             Encadreur : "Encadreur1 , Encadreur2"
         },
         {
-            Numéro : 2,
+            id : 2,
             Titre : "PFE",
             Spécialité : "Application Web",
             Encadreur : "Encadreur1 , Encadreur2"
         },
         {
-            Numéro : 3,
+            id : 3,
             Titre : "PFE",
             Spécialité : "Application Web",
             Encadreur : "Encadreur1 , Encadreur2"
         },
         {
-            Numéro : 4,
+            id: 4,
             Titre : "PFE",
             Spécialité : "Application Web",
             Encadreur : "Encadreur1 , Encadreur2"
@@ -87,7 +88,7 @@ const theme = props => {
                              <th className="text-center">Options</th>
                         </tr>
                     </thead>
-                    <tbody className=" ">
+                    <tbody className="">
                         {
                             data.map(row=>{
                                 return(
@@ -95,15 +96,14 @@ const theme = props => {
                                         {
                                             Object.keys(data[0]).filter(el=>el!=='id').map(col=>{
                                                 return(
-                                                    <td className="text-center  h-[36px] ">
+                                                    <td className="text-center truncate h-[36px] ">
                                                         {row[col]}
                                                     </td>
                                                 )
                                             })
                                         }
-                                        <td className="flex items-center justify-center flex-row space-x-4">
-                                            <button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button>
-                                            <button className={`shadow-lg h-[25px] mt-1 w-[100px] text-[15px] items-center justify-center bg-blue-400 hover:bg-blue-300 rounded-full  ${typeUtilisateur === "admin" ? "flex" : "hidden"}`}>Modifier</button>
+                                        <td className="flex items-center justify-center">
+                                            <Link href={`/theme/${row.id}`}><button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button></Link>
                                         </td>
                                     </tr>
                                 )
