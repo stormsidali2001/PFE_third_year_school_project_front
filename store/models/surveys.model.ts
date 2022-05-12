@@ -79,15 +79,13 @@ export const surveysModel:SurveysModel={
          }
     }),
     submitAnswerThunk:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
-        try{
-            const res = await axios.post('http://localhost:8080/submitSurveyAnswer',payload,{
+       
+            return await axios.post('http://localhost:8080/submitSurveyAnswer',payload,{
                withCredentials:true
             })
 
-           console.log(res)
-         }catch(err){
-            console.log(err)
-         }
+        
+        
     })
     ,
     setSurveys:action((state,payload)=>{

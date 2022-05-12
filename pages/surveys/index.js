@@ -10,8 +10,10 @@ const AfficherTousLesSondages = props => {
 
     const {getSurveysThunk} = useStoreActions(store=>store.surveysModel)
     const {surveys} = useStoreState(store=>store.surveysModel)
-    useEffect(()=>{
-        getSurveysThunk();
+    const {getUserInfo} = useStoreActions(store=>store.user)
+    useEffect(async()=>{
+        await getSurveysThunk();
+        await getUserInfo();
     },[])
     
     

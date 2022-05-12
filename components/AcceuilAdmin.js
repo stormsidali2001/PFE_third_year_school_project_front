@@ -10,7 +10,7 @@ const AcceuilAdmin = ({ajouteEtudiant , valideEquipe , finProjet , soutenance}) 
                 <div className="text-[30px] font-semibold">Nous somme heureux de vous acceuil sur notre plateforme. On espère qu’elle vous serait utile dans le managment des projets pluridiciplinaires.</div>
                 <div className="text-[27px] font-light">Vous pouvez déjà commencer par ajouter les étudiants et les enseignants participant au projets.</div>
                 <div className="flex flex-row space-x-10 text-[21px] font-extralight">
-                    <Link href={ajouteEtudiant === true ? (valideEquipe === true ? (finProjet === true ? (soutenance === true ? "/listEquipe" : "/listEquipe") : "/listepv" ) : "/studentlist") : "/AddStudent"}>
+                    <Link href={ajouteEtudiant === true ? (valideEquipe === true ? (finProjet === true ? (soutenance === true ? "/listEquipe" : "/listEquipe") : "/listepv" ) : "/studentlist") : "/addstudent"}>
                         <button className="h-[40px] w-[270px] text-white bg-[#32AFF5] rounded-full">{ajouteEtudiant === true ? (valideEquipe === true ? (finProjet === true ? (soutenance === true ? "Note final" : "Programmer soutenance") : "Consulter les PV" ) : "Valider équipes") : "Ajouter étudiants"}</button>
                     </Link>
                     <Link href={ajouteEtudiant === true ? (valideEquipe === true ? (finProjet === true ? (soutenance === true ? "rapportProjet" : "/rapportProjet") : "/themes" ) : "/themes") : "/AddTeacher"}>

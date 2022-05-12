@@ -13,8 +13,10 @@ const StudentList = ({toastsRef})=>{
     const [modalOpen,setModalOpen] = useState(false)
     const [description,setDescription] = useState('');
     const [recieverId,setRecieverId] = useState('')
+    const {getUserInfo} = useStoreActions(store=>store.user)
     useEffect(()=>{
         getNoTeamStudentList()
+        getUserInfo()
     },[])
     const handleClick = (recieverId)=>{
          

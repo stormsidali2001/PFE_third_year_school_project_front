@@ -56,8 +56,8 @@ export interface UserModel extends UserState,UserActions,UserThunks{
 export const userModel:UserModel | null={
     setUser:action((state,payload)=>{
             console.log(state,payload)
-            state.student = payload.student;
             state.userType = payload.userType
+            state[payload.userType] = payload[payload.userType];
 
         
     }),
