@@ -61,7 +61,7 @@ const theme = props => {
             <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor justify-center">
                 <div className="flex flex-col items-center justify-center">
                     <img src="/themeStudent.png" className="mix-blend-darken absolute"/>
-                    <div className={`p-10 justify-center flex-col space-y-8 h-[500px] w-fit px-10 bg-white/70 backdrop-blur-sm shadow-lg rounded-xl text-[16px] ${idtheme === 1 ? "flex" : "hidden"}`}>
+                    <div className={`p-10 justify-center flex-col space-y-8 h-[500px] w-[650px] px-10 bg-white/70 backdrop-blur-sm shadow-lg rounded-xl text-[16px] ${idtheme === 1 ? "flex" : "hidden"}`}>
                         <div className="flex flex-row items-center space-x-4 text-[26px]">
                             <div className="text-[28px]">Titre :</div>
                             <div className={` ${modifier === false ? "flex" : "hidden"}`}>{title}</div>
@@ -82,34 +82,35 @@ const theme = props => {
                             <div className={`${modifier === false ? "flex" : "hidden"}`}>{document}</div>
                             <input value={document} className={`${modifier === true ? "flex" : "hidden"}`} onChange={(e) => {setDocument(e.target.value)}}/>
                         </div>
-                        <div className="flex flex-row items-center space-x-4">
+                        <div className="flex flex-row items-center flex-wrap space-x-4">
                                 <div className="text-[19px]">Encadreur(s) :</div>
                                 {
                                     encadreur.map((element , index)=> {
                                         return(
-                                            <div className={`${countEncadreur > 2 && index > 1 ? (clickDownEncadreur === true ? "flex" : "hidden") : "flex"}`}>
-                                                <div className={`items-center justify-center flex-col space-y-10 hover:text-blue-500 bg-blue-300/20 backdrop-blur-lg rounded-full px-3 ${modifier === false ? "flex" : "hidden"}`}>{element.nomEncadreur}</div>
-                                                <input value={element.nomEncadreur} className={`${modifier === true ? "flex" : "hidden"}`}/>
+                                            <div className={`flex flex-row-reverse items-center justify-center ${countEncadreur > 2 && index > 1 ? (clickDownEncadreur === true && clickUpEncadreur === false ? "flex" : "hidden") : "flex"}`}>
+                                                <div className={`items-center justify-center flex-col space-y-10 hover:text-blue-500 bg-blue-300/20 backdrop-blur-lg rounded-full px-3`}>{element.nomEncadreur}</div>
+                                                <input type="checkbox" className={`${modifier === true ? "flex" : "hidden"}`}/>
                                             </div>
                                         )
                                     })
                                 }
-                                <button className={`${clickDownEncadreur === true ? "hidden" : "flex"}`} onClick={(e) => {setClickDownEncadreur(true)}}><DownIcon/></button>
-                                <button className={`${clickDownEncadreur === true && clickUpEncadreur === false ? "flex" : "hidden"}`} onClick={(e) => {setClickUpEncadreur(true)}}><UpIcon/></button>
+                                <button className={`${clickDownEncadreur === true ? "hidden" : "flex"}`} onClick={(e) => {setClickDownEncadreur(true) ; setClickUpEncadreur(false)}}><DownIcon/></button>
+                                <button className={`${clickDownEncadreur === true && clickUpEncadreur === false  ? "flex" : "hidden"}`} onClick={(e) => {setClickUpEncadreur(true) ; setClickDownEncadreur(false)}}><UpIcon/></button>
                             </div>
-                            <div className="flex flex-row items-center space-x-4">
+                            <div className="flex flex-row items-center flex-wrap space-x-4">
                                 <div className="text-[19px]">Affécté à :</div>
                                 {
                                     equipes.map((element , index)=> {
                                         return(
-                                            <div className={` flex flex-row items-center justify-center ${countEquipe > 2 && index > 1 ? (clickDownEquipe === true ? "flex" : "hidden") : "flex"}`}>
-                                                <div className={`items-center justify-center flex-col space-y-10 bg-blue-300/20 backdrop-blur-lg rounded-full px-3 hover:text-blue-500 ${modifier === false ? "flex" : "hidden"} `}>{element.nomEquipe}</div>
-                                                <input value={element.nomEquipe} className={`${modifier === true ? "flex" : "hidden"}`}/>
+                                            <div className={` flex flex-row-reverse items-center justify-center ${countEquipe > 2 && index > 1 ? (clickDownEquipe === true && clickUpEncadreur === false ? "flex" : "hidden") : "flex"}`}>
+                                                <div className={`items-center justify-center flex-col space-y-10 bg-blue-300/20 backdrop-blur-lg rounded-full px-3 hover:text-blue-500 `}>{element.nomEquipe}</div>
+                                                <input type="checkbox" className={`${modifier === true ? "flex" : "hidden"}`}/>
                                             </div>
                                         )
                                     })
                                 }
-                                <button className={`${clickDownEquipe === true ? "hidden" : "flex"}`} onClick={(e) => {setClickDownEquipe(true)}}><DownIcon/></button>
+                                <button className={`${clickDownEquipe === true ? "hidden" : "flex"}`} onClick={(e) => {setClickDownEquipe(true) , setClickUpEquipe(false)}}><DownIcon/></button>
+                                <button className={`${clickDownEquipe === true && clickUpEquipe === false  ? "flex" : "hidden"}`} onClick={(e) => {setClickUpEquipe(true) ; setClickDownEquipe(false)}}><UpIcon/></button>
                             </div>
                         <div className="flex items-center justify-center">
                         <button className="h-[40px] w-[120px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full " onClick={(e)=>setModifier(true)}>Modifier</button>
