@@ -15,12 +15,12 @@ const config = props => {
                 <div className="flex flex-col fit p-3 w-[350px] bg-white text-[20px] rounded-lg shadow-lg">
                     <Link href='/AddStudent'><button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Ajouter des étudiant</button></Link>
                     <Link href='/AddTeacher'><button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Ajouter des enseignant</button></Link>
-                   <Link href='/admin/studentlist'><button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Liste des étudiants</button></Link>
-                    <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Liste des enseignant</button>
+                    <Link href='/admin/studentlist'><button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Liste des étudiants</button></Link>
+                    <Link href='/admin/teacherlist'><button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Liste des enseignant</button></Link>
                     <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Valider les équipes</button>
-                    <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Valider les thèmes</button>
-                    <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Affcter les thèmes</button>
-                    <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Fiches de voeux</button>
+                    <Link href="/theme"><button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Valider les thèmes</button></Link>
+                    <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Affecter les thèmes</button>
+                    <Link href="/ficheDeVoeux "><button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Fiches de voeux</button></Link>
                     <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Fin de projets</button>
                     <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Préparer les soutenances</button>
                     <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Rapport de projet</button>
