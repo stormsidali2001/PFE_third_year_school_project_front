@@ -7,7 +7,7 @@ export  interface TeacherPayload{
     firstName:string;
     lastName:string;
     ssn:string;
-    spiciality:string;
+    speciality:string;
 }
 export interface Teacher extends TeacherPayload {
     id:string;
@@ -63,7 +63,7 @@ export const teacherListModel:teacherListModel = {
     deleteTeacher:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
      
              await axios.post("http://localhost:8080/deleteTeacher",{
-                 studentId:payload
+                 teacherId:payload
              },{
                 withCredentials:true
             })

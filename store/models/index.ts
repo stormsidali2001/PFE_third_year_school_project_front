@@ -8,6 +8,7 @@ import { surveysModel, SurveysModel } from "./surveys.model";
 import { teamAnnouncementsModel, TeamAnnouncementsModel } from "./teamAnnouncements.model";
 import { teamDocumentModel, TeamDocumentModel } from "./teamDocuments.model";
 import { adminStudentListModel, AdminStudentListModel } from "./adminStudentList";
+import { teacherListModel } from "./teacherList";
 export interface Model{
     user:UserModel;
     notificationService:NotificationsServiceModel;
@@ -18,6 +19,7 @@ export interface Model{
     teamAnnouncementsModel:TeamAnnouncementsModel;
     teamDocumentModel:TeamDocumentModel;
     adminStudentListModel:AdminStudentListModel;
+    teacherListModel:teacherListModel;
 }
 
 export const model:Model={
@@ -29,6 +31,7 @@ export const model:Model={
     surveysModel:surveysModel,
     teamAnnouncementsModel:teamAnnouncementsModel,
     teamDocumentModel:teamDocumentModel,
-    adminStudentListModel:adminStudentListModel
+    adminStudentListModel:adminStudentListModel,
+    teacherListModel:teacherListModel
     
 }
