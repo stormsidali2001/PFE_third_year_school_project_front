@@ -30,7 +30,7 @@ const FicheVoeux = props => {
             <HorisontalNavbar/>
             <div className="h-[200vh] bg-background min-h-screen items-center px-4 pt-[100px] flex flex-col  py-8 ">
                 <StudentVerticalNavbar/>
-                <div className="flex flex-col h-screen w-[90%] bg-white  text-textcolor  font-mono"> {/* list wrapper */}
+                <div className="flex flex-col h-fit py-2 w-[90%] bg-white  text-textcolor  font-mono"> {/* list wrapper */}
                     <div className="w-full text-center text-[26px]">La fiche des voeux</div>
                     <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="droppable">
@@ -39,7 +39,7 @@ const FicheVoeux = props => {
             <div
               {...provided.droppableProps}
               ref={provided.innerRef}
-              className = 'w-[90%]  bg-[#282873]/10  px-[30px] mx-auto py-2 flex flex-col space-y-2'
+              className = 'w-[90%]  bg-[#282873]/10  px-[30px] mx-auto py-4 flex flex-col space-y-2'
           
             >
                 
@@ -54,7 +54,7 @@ const FicheVoeux = props => {
                      
                     >
                         <div className="flex space-x-2 items-center">
-                            <span className="flex items-center justify-center bg-blue-400 rounded-full w-[15px] h-[15px] text-white p-2"> {index+1}</span>
+                            <span className="flex items-center justify-center bg-blue-400 rounded-full w-[15px] h-[15px] text-[12px] text-white p-2"> {index+1}</span>
                            <span>{item.content}</span>
 
                         </div>
@@ -74,6 +74,7 @@ const FicheVoeux = props => {
         </Droppable>
       </DragDropContext>
                   
+                <button className="bg-blue-400 text-white w-fit mt-4 px-2 rounded-[20px] mx-auto">Valider</button>
                 </div>
             </div>
         </div>
