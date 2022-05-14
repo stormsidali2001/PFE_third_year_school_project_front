@@ -3,7 +3,6 @@ import HorisontalNavbar from "../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import AjouterAnnouncemnt from "../components/AjouterAnnouncemnt";
 
-
 const AddAnnouncemnt = ({toastsRef}) => {
 
 

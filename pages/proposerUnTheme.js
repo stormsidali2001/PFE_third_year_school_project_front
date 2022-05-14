@@ -1,6 +1,17 @@
+import HorisontalNavbar from "../components/HorisontalNavbar";
+import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
+import SuggestTheme from "../components/SuggestTheme";
+
 const proposerUnTheme = props => {
     return (
-        <div className="text-3xl">Cette est page est celle de proposer un thème , elle n'a pas été ahcevée</div>
+        <>
+            <HorisontalNavbar/>
+            <div className="h-[200vh] bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8 ">
+            <StudentVerticalNavbar/>
+            <SuggestTheme/>
+
+        </div>
+        </>
     )
 }
 export default proposerUnTheme;
