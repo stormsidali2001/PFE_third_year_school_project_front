@@ -26,7 +26,9 @@ const config = props => {
     const [minEtudiantEquipe , setMinEtudiantEquipe] = useState(1)
     const [maxEtudiantEquipe , setMaxEtudiantEquipe] = useState(1)
     const [affecterEtudiantSansEquipes , setAffecterEtudiantsSansEquipes] = useState(false)
+    const [bouttonAffectationEquipe , setBouttonAffectationEquipes] = useState(false)
     const [conpleterEquipes , setCompleterEquipes] = useState(false)
+    const [bouttonCompleterEquipe , setBouttonComplterEquipes] = useState(false)
     return (
         <div>
             <StudentVerticalNavbar/>
@@ -68,13 +70,17 @@ const config = props => {
                                 </div>
                             </div>
                             <div>
-                                <button className="hover:text-blue-400">Affecter les étudiants sans équipes</button>
+                                <button onClick={(e) => setBouttonAffectationEquipes(true)} className="hover:text-blue-400">Affecter les étudiants sans équipes</button>
                                 <button className="hover:text-blue-400">Compléter les équipes</button>
                             </div>
-                            <button className="h-[40px] w-[120px] hover:bg-blue-500 bg-[#8FD4FB] rounded-full">Valider</button>
+                            <button onClick={(e) => setBouttonComplterEquipes(true)}  className="h-[40px] w-[120px] hover:bg-blue-500 bg-[#8FD4FB] rounded-full">Valider</button>
                         </div>
                         <button className={`rotate-180 absolute bottom-2 right-4 ${choosenPromo === true ? "hidden": "flex"}`} onClick={(e) => {longueur === 1 ? setChoosenPromo(true) : ""}}><ArrowIcon/></button>
                         <button onClick={(e) => {longueur === 1 ? setChoosenPromo(false) : ""}} className={`absolute bottom-2 left-4 ${choosenPromo === false ? "hidden": "flex"}`} ><ArrowIcon/></button>
+                    </div>
+                    <div className={`absolute h-[300px] w-[400px] z-50 bg-white space-y-6 shadow-lg rounded-xl flex-col justify-center items-center flex ${(bouttonAffectationEquipe === true) ||  bouttonCompleterEquipe === true ? "flex":"hidden"}`}>
+                        <div className="text-center">{bouttonAffectationEquipe === true ? "En cliquant sur valider , l'affectation se fera de manière automatique" : "En cliquant sur valider , les équipes non satisfaisantes les condition seront complété aléatoirement"}</div>
+                        <button className="h-[40px] w-[120px] hover:bg-blue-500 bg-[#8FD4FB] rounded-full" onClick={(e) => {bouttonAffectationEquipe === true ? setAffecterEtudiantsSansEquipes(true) : setCompleterEquipes(true) ; setBouttonAffectationEquipes(false) ; setBouttonComplterEquipes(false)}}>Valider</button>
                     </div>
                 </div>
                 <div className="flex flex-col fit p-3 w-[350px] bg-white text-[20px] rounded-lg shadow-lg">
