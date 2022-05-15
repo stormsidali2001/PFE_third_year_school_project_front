@@ -88,10 +88,9 @@ const TeamList = props => {
                                             })
                                         }
                                       <td className="flex items-center space-x-4 justify-center">
-                                            <Link href={`/team`}><button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button></Link>
+                                            <Link href={`/team/${row.id}`}><button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button></Link>
                                             <button className={`shadow-lg items-center justify-center h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full ${typeUtilisateur === "admin" && colonne[row.id] === colonne[row.id] ? "flex" : "hidden"}`} onClick={(e)=> {setColonne([...colonne , row.id])}}>Valider</button>
                                         </td>
-                                        
                                     </tr>
                                 )
                             })
