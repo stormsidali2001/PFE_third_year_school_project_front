@@ -16,10 +16,19 @@ const config = props => {
             {promo : ["2CS"]},
             {promo : ["3CS"]}]
     )
+    const [specialite , setSpecialite] = useState(
+        [ 
+            {spécialité : ["SIW"]} , 
+            {spécialité : ["ISI"]} ,
+        ]
+    )
     const [validerEquipes , setvaliderEquipe] = useState(true)
     const [ValiderEquipePromotion , setValiderEquipePromotion] = useState(promotion)
+    const [ValiderEquipeSpécialité , setValiderEquipeSpécialité] = useState(specialite)
     const [downIconValiderEquipePromotion , setDownIconValiderEquipePromotion] = useState(false)
+    const [downIconValiderEquipeSpécialité , setDownIconValiderEquipeSpécialité] = useState(false)
     const [longueur , setLongueur] = useState(ValiderEquipePromotion.length)
+    const [longueurSpécialité , setLongueurSpécialité] = useState(ValiderEquipeSpécialité.length)
     const [choosenPromo , setChoosenPromo] = useState(false)
     return (
         <div>
@@ -43,6 +52,25 @@ const config = props => {
                                         promotion.map((element , index) => {
                                             return (
                                                 <button className={`h-[35px] w-full hover:border-2 border-y-slate-200 border-x-transparent`} onClick={(e)=>{setValiderEquipePromotion(element.promo) ; setLongueur(ValiderEquipePromotion.length) ; setDownIconValiderEquipePromotion(false)}}>{element.promo}</button>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className={` ${choosenPromo === true ? "flex":"hidden"}`}>
+                        <div>Spécialité :</div>
+                            <div className="flex flex-col space-y-2">
+                               <div className="flex flex-row space-x-4">
+                                    <input className="h-[40px] w-[250px] rounded-full shadow-md flex items-center px-3" value = {`${longueurSpécialité === 1 ? ValiderEquipeSpécialité : "Choisir une promotion"}`} />
+                                    <button className={`pt-4 ${downIconValiderEquipeSpécialité === true ? "hidden": "flex"}`} onClick={(e)=>{setDownIconValiderEquipeSpécialité(true)}}><DownIcon/></button>
+                               </div>
+                                <div className={`bg-gray-50 shadow-sm rounded-xl p-2 backdrop-blur-sm justify-start w-[250px] flex flex-col ${downIconValiderEquipeSpécialité === true ? "flex": "hidden"}`}>
+                                {
+                                        specialite.map((element , index) => {
+                                            return (
+                                                <button className={`h-[35px] w-full hover:border-2 border-y-slate-200 border-x-transparent`} onClick={(e)=>{setValiderEquipeSpécialité(element.spécialité) ; setLongueurSpécialité(ValiderEquipeSpécialité.length) ; setDownIconValiderEquipeSpécialité(false)}}>{element.spécialité}</button>
+
                                             )
                                         })
                                     }
