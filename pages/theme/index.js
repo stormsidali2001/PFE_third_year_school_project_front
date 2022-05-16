@@ -2,11 +2,12 @@ import HorisontalNavbar from "../../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar";
 import Link from "next/link";
 import { data } from "autoprefixer";
+import { useStoreActions } from "../../store/hooks";
+import { useEffect } from "react";
 
 const theme = props => {
-
     const typeUtilisateur = "admin"
-
+    
     const data = [
         {
             id : 1,
@@ -56,8 +57,12 @@ const theme = props => {
             Spécialité : "Application Web",
             Encadreur : "Encadreur1 , Encadreur2"
         },
-       
+        
     ]
+    const {getThemeSuggestionsThunk} = useStoreActions(store=>store.themeSuggestionsModel)
+    useEffect(async()=>{
+        await getThemeSuggestionsThunk()
+    },[])
 
     if(data.length === 0) return <div>Aucune donnée</div>
    const columns = [...Object.keys(data[0]).filter(el=>el!=='id')];

@@ -1,53 +1,32 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
 import DownIcon from "../../icons/DownIcon"
 import UpIcon from "../../icons/UpIcon"
 import Trash from "../../icons/Trash"
-
+import { useStoreActions, useStoreState } from "../../store/hooks"
+import { useRouter } from "next/router"
 const teamId = props => {
 
-    const [membre , setMembre] = useState(
-        [
-            {
-                nomMembre : "Sidali assoul",
-                lienProfil : "/",
-                chef : true
-            },
-            {
-                nomMembre : "Sidali assoul",
-                lienProfil : "/",
-                chef : false
-            },
-            {
-                nomMembre : "Sidali assoul",
-                lienProfil : "/",
-                chef : false
-            },
-            {
-                nomMembre : "Sidali assoul",
-                lienProfil : "/",
-                chef : false
-            },
-            {
-                nomMembre : "Sidali assoul",
-                lienProfil : "/",
-                chef : false
-            },
-        ]
-    ) 
+   
     const [encadreur , setEncadreur] = useState("Mimouna mimoun") 
     const userType = "admin"
-    const [modifier , setModifier] = useState(false)
-    const [idtheme , setIdtheme] = useState(1)
-    const [teamName , setTeamName] = useState("IT experts")
-    const [theme , setTheme] = useState("PFE")
-    const [countEquipe , setCountEquipe] = useState(membre.length)
+    const [pseudo,setPseudo] = useState('')
+    const []
     const [clickDownEquipe, setClickDownEquipe] = useState(false)
     const [clickUpEquipe, setClickUpEquipe] = useState(false)
-    
-   
+    const {getTeam} = useStoreActions(store=>store.teamListModel)
+    const router = useRouter();
+    const {teamId} = router.query;
+
+    useEffect(async()=>{
+
+         await getTeam(teamId)
+         
+    },[teamId])
+
+ 
     return (
         <div>
             <HorisontalNavbar/>

@@ -1,10 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
 import DownIcon from "../../icons/DownIcon"
 import UpIcon from "../../icons/UpIcon"
 import Trash from "../../icons/Trash"
+
 
 const theme = props => {
 
@@ -46,7 +47,6 @@ const theme = props => {
     const [idtheme , setIdtheme] = useState(1)
     const [title , setTilte] = useState("PFE")
     const [description , setDescription] = useState("Plateforme de gestion des projets de fin d'études")
-    const [specialite , setSpecialite] = useState("Application web")
     const [document , setDocument] = useState("document")
     const [countEncadreur , setCountEncadreur] = useState(encadreur.length)
     const [countEquipe , setCountEquipe] = useState(equipes.length)
@@ -73,11 +73,7 @@ const theme = props => {
                             <div className={`${modifier === false ? "flex" : "hidden"}`}>{description}</div>
                             <input value={description} className={`${modifier === true ? "flex" : "hidden"}`} onChange={(e) => {setDescription(e.target.value)}}/>
                         </div>
-                        <div className="flex items-center flex-row space-x-4">
-                            <div className="text-[19px]">Spécialité :</div>
-                            <div className={`${modifier === false ? "flex" : "hidden"}`}>{specialite}</div>
-                            <input value={specialite} className={`${modifier === true ? "flex" : "hidden"}`} onChange={(e) => {setSpecialite(e.target.value)}}/>
-                        </div>
+                    
                         <div className="flex flex-row items-center space-x-4">
                             <div className="text-[19px]">Document(s) :</div>
                             <div className={`${modifier === false ? "flex" : "hidden"}`}>{document}</div>

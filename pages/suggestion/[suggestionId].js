@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
 import DownIcon from "../../icons/DownIcon"
 import UpIcon from "../../icons/UpIcon"
 import Trash from "../../icons/Trash"
+import { useRouter } from "next/router";
+import { useStoreActions } from "../../store/hooks"
 
 const suggestion = props => {
 
@@ -28,13 +30,25 @@ const suggestion = props => {
     const userType = "admin"
     const [modifier , setModifier] = useState(false)
     const [idtheme , setIdtheme] = useState(1)
-    const [title , setTilte] = useState("PFE")
-    const [description , setDescription] = useState("Plateforme de gestion des projets de fin d'études")
+    const [title , setTilte] = useState('')
+    const [description , setDescription] = useState('')
     const [specialite , setSpecialite] = useState("Application web")
     const [document , setDocument] = useState("document")
     const [countEncadreur , setCountEncadreur] = useState(proposePar.length)
     const [clickDownEncadreur , setClickDownEncadreur] = useState(false)
     const [clickUpEncadreur , setClickUpEncadreur] = useState(false)
+    const {getThemeSuggestionThunk} = useStoreActions(store=>store.themeSuggestionsModel)
+    const router = useRouter();
+    const {suggestionId} = router.query;
+
+   
+    useEffect(async()=>{
+        console.log(suggestionId)
+        const data = await getThemeSuggestionThunk(suggestionId)
+        setTilte(data?.title)
+        setDescription(data?.description)
+
+    },[suggestionId])
    
     return (
         <div>

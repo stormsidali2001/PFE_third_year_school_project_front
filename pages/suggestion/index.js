@@ -1,6 +1,8 @@
 import Link from "next/link"
+import { useEffect } from "react"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
+import { useStoreActions, useStoreState } from "../../store/hooks"
 
 const suggestion = props => {
 
@@ -28,8 +30,15 @@ const suggestion = props => {
        
     ]
 
-    if(data.length === 0) return <div>Aucune donnée</div>
-   const columns = [...Object.keys(data[0]).filter(el=>el!=='id')];
+    const {getThemeSuggestionsThunk} = useStoreActions(store=>store.themeSuggestionsModel)
+    const {themeSuggestions} = useStoreState(store=>store.themeSuggestionsModel)
+    useEffect(async()=>{
+        await getThemeSuggestionsThunk()
+    },[])
+
+
+    if(themeSuggestions.length === 0) return <div>Aucune donnée</div>
+   const columns = [...Object.keys(themeSuggestions[0]).filter(el=>el!=='id')];
 
 
     return (
@@ -60,11 +69,11 @@ const suggestion = props => {
                 </thead>
                 <tbody className="">
                     {
-                        data.map(row=>{
+                        themeSuggestions.map(row=>{
                             return(
                                 <tr  className=" bg-white/60  rounded-[10px] border-red  border-b-2">
                                     {
-                                        Object.keys(data[0]).filter(el=>el!=='id').map(col=>{
+                                        Object.keys(themeSuggestions[0]).filter(el=>el!=='id').map(col=>{
                                             return(
                                                 <td className="text-center truncate h-[36px] ">
                                                     {row[col]}

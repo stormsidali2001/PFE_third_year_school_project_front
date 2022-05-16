@@ -1,51 +1,29 @@
 import Link from "next/link"
 import { userInfo } from "os"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
+import { useStoreActions, useStoreState } from "../../store/hooks"
 
 const TeamList = props => {
 
     const typeUtilisateur = "admin"
+    const {getTeamsList} = useStoreActions(store=>store.teamListModel)
+    const {teamsList} =useStoreState(store=>store.teamListModel)
+  
 
-    const data = [
-        {
-            id : 1,
-            Equipe : "It experts",
-            nombre : 3,
-            Thème : "",
-        },
-        {
-            id : 2,
-            Equipe : "It experts",
-            nombre : 6,
-            Thème : "Enseignement",
-        },
-        {
-            id : 3,
-            Equipe : "It experts",
-            nombre : 2,
-            Thème : "E-commerce",
-        },
-        {
-            id : 4,
-            Equipe : "It experts",
-            nombre : 2,
-            Thème : "",
-        },
-        {
-            id : 5,
-            Equipe : "It experts",
-            nombre : 6,
-            Thème : "PFE",
-        },
-    ]
+  
 
-    if(data.length === 0) return <div>Aucune donnée</div>
-    const columns = [...Object.keys(data[0]).filter(el=>el !=='id')];
+   
 
     const [colonne , setColonne] = useState ([])
     const [copie , setCopie] = useState([])
+    useEffect(async()=>{
+        await getTeamsList();
+        
+   },[])
+    if(teamsList.length === 0) return <div>Aucune donnée</div>
+    const columns = [...Object.keys(teamsList[0]).filter(el=>el !=='id')];
     
     return (
         <div>
@@ -74,14 +52,14 @@ const TeamList = props => {
                     </thead>
                     <tbody className="">
                         {
-                            data.map(row=>{
+                            teamsList.map(row=>{
                                 return(
                                     <tr  className=" bg-white/60  rounded-[10px] border-red  border-b-2">
                                         {
-                                            Object.keys(data[0]).filter(el=>el!=='id').map(col=>{
+                                            Object.keys(teamsList[0]).filter(el=>el!=='id').map(col=>{
                                                 return(
                                                     <td className="text-center truncate h-[36px] ">
-                                                        {row[col]}
+                                                        {row[col]?row[col]:'___'}
                                                     </td>
                                                     
                                                 )

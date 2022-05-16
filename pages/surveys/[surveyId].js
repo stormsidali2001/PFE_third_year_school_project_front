@@ -24,9 +24,7 @@ const SingleSurvey = ({toastsRef})=>{
      const {getUserInfo} = useStoreActions(store=>store.user)
      const user = useStoreState(store=>store.user)
      const teamLeader = user?.student?.team?.teamLeader;
-     useEffect(async()=>{
-       await  getUserInfo()
-     },[])
+    
     const router = useRouter();
     const {surveyId} = router.query;
     let tempsRestant = new Date(createdAt).getTime() + duree - Date.now();
