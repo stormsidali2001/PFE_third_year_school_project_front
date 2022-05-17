@@ -98,7 +98,7 @@ export const userModel:UserModel | null={
             actions.setUser(user)
              const socket = await io("http://localhost:8080",
              {withCredentials:true}) as Socket;
-
+             socket.emit("joinTeamRoom")
              //@ts-ignore
              getStoreActions().socketModel.setSocket(socket);
             //  socket.emit('user-online',{user})
