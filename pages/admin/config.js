@@ -17,7 +17,7 @@ const config = props => {
             {promo : ["3CS"]} , 
         ]  
     )
-   
+    
     const [validerEquipes , setvaliderEquipe] = useState(false)
     const [ValiderEquipePromotion , setValiderEquipePromotion] = useState(promotion)
     const [downIconValiderEquipePromotion , setDownIconValiderEquipePromotion] = useState(false)
