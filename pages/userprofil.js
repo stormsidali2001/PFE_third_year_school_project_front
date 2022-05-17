@@ -4,10 +4,10 @@ import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 
 const userProfil = props => {
     
-    const idUser = 1;
+    const idUser = 5;
     const data = 
         {
-            userType : 'student', //admin teacher
+            userType : 'teacher', //admin teacher
             email : "h.debza@esi-sba.dz",
             student:{
                 id : 1,
@@ -27,6 +27,20 @@ const userProfil = props => {
                 lastName : "bnadem",
                 pseudo : "Kado",
                 dob : "25/11/2042",
+                encadre : [
+                    {
+                        id : 1,
+                        teamName : "team2"
+                    },
+                    {
+                        id : 1,
+                        teamName : "team2"
+                    },
+                    {
+                        id : 1,
+                        teamName : "team3"
+                    },
+                ]
             },
             admin:{
                 id : 1,
@@ -49,8 +63,8 @@ const userProfil = props => {
             <HorisontalNavbar/>
             <StudentVerticalNavbar/>
             <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor justify-center">
-                <img src="/studentProfil.jpg" className="h-[520px] object-contain mix-blend-darken opacity-30"/>
-                <div className="text-[20px] h-[500px] w-[500px] shadow-lg rounded-xl bg-white/50 backdrop-blur-sm flex items-center justify-center absolute">
+                <img src="/studentProfil.jpg" className="h-[550px] object-contain mix-blend-darken opacity-30"/>
+                <div className="text-[20px] h-[500px] w-[600px] shadow-lg rounded-xl bg-white/50 backdrop-blur-sm flex items-center justify-center absolute">
                 {  
                     <div className="flex items-center justify-center flex-col space-y-6">
                         <div className="text-[30px] flex flex-row space-x-4">{idUser === data.student.id ? "Votre Profil" : data.student.pseudo}</div>
@@ -73,7 +87,7 @@ const userProfil = props => {
                                 />
                             </div>
                             <div className="flex flex-row space-x-4">
-                                <div>Date of birth :</div>
+                                <div>Date de naissance :</div>
                                 <div>{typeUtilisateur.dob}</div>
                             </div>
                             <div className="flex flex-row space-x-4">
@@ -83,6 +97,18 @@ const userProfil = props => {
                             <div className={`flex flex-row space-x-4 ${data.userType === 'student' ? "flex" : "hidden"}`}>
                                 <div>Team :</div>
                                 <div>{data.student.team.nom}</div>
+                            </div>
+                            <div className={`flex flex-row space-x-4 ${data.userType === 'teacher' ? "flex" : "hidden"}`}>
+                                <div>Equipes :</div>
+                                <div className="flex flex-row items-center justify-center space-x-3">
+                                    {
+                                        data.teacher.encadre.map((el , index) => {
+                                            return (
+                                                <div className="h-[30px] w-fit px-3 rounded-full bg-blue-400 hover:bg-blue-300 shadow-blue-200 shadow-md ">{el.teamName}</div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                         <button 
