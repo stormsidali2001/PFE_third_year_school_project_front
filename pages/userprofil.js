@@ -4,7 +4,7 @@ import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 
 const userProfil = props => {
     
-    const idUser = 5;
+    const idUser = 1;
     const data = 
         {
             userType : 'teacher', //admin teacher
