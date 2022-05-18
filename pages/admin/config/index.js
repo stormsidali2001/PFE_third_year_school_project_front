@@ -6,6 +6,7 @@ import StudentVerticalNavbar from "../../../components/StudentVerticalNavbar";
 import DownIcon from "../../../icons/DownIcon"
 import ArrowIcon from "../../../icons/ArrowIcon";
 import ValiderEquipes from "./ValiderEquipes";
+import AffecterTheme from "./AffecterTheme";
 
 
 const config = props => {
@@ -22,6 +23,8 @@ const config = props => {
     const [affecterTheme , setAffecterTheme] = useState(false)
     const [affecterThemeEquipe , setAffecterThemeEquipe] = useState(false)
     const [affecterThemeEnseignant , setAffecterThemeEnseignant] = useState(false)
+    const [affectationThemeFifo , setAffectationThemeFifo] = useState(false)
+    const [affecterThemeMoy , setAffecterThemeMoy] = useState(false)
     const [validerEquipes , setvaliderEquipe] = useState(false)
     const [ValiderEquipePromotion , setValiderEquipePromotion] = useState(promotion)
     const [downIconValiderEquipePromotion , setDownIconValiderEquipePromotion] = useState(false)
@@ -78,43 +81,27 @@ const config = props => {
                         setMaxEtudiantEquipe = {setMaxEtudiantEquipe}
                     />
 
-
-                    <div className={`absolute h-[400px] px-4 w-[500px] bg-white/80 shadow-lg rounded-xl flex-col justify-center items-center flex ${affecterTheme === true ? "flex":"hidden"}`}>
-                        <div className="flex flex-col space-y-8 items-center justify-center text-center text-[20px]">
-                            <div className="text-[30px]">Affecter les themes :</div>
-                            <div className={`flex flex-col space-y-6 items-center justify-center ${affecterThemeEnseignant === true || affecterThemeEquipe === true ? "hidden" : "flex"}`}>
-                                <div className="text-[23px]">
-                                    Vous voulez affecter les thèmes au étudiant ou enseignat
-                                </div>
-                                <div className="flex flex-row space-x-6">
-                                    <button 
-                                        className="bg-blue-300 hover:bg-blue-400 h-[35px] w-[120px] rounded-full shadow-md"
-                                        onClick = {(e) => {setAffecterThemeEquipe(true)}}
-                                    >
-                                        Etudiants
-                                    </button>
-                                    <button 
-                                        className="bg-blue-400 hover:bg-blue-300 h-[35px] w-[140px] rounded-full shadow-md"
-                                        onClick = {(e) => {setAffecterThemeEnseignant(true)}}
-                                    >
-                                        Enseignants
-                                    </button>
-                                </div>
-                            </div>
-                            <div className={`flex flex-col space-y-6 items-center px-3 justify-center ${affecterThemeEquipe === true ? "flex" : "hidden"}`}>
-                                <div className="flex flex-col items-center justify-center space-y-3">
-                                    <div>Choisisser la manière d'affectation des étudiant suivant la fiche de voeux:</div>
-                                    <button 
-                                        className="hover:text-blue-400"  
-                                    >
-                                        Premier arrivé premier servi
-                                    </button>
-                                    <button>Par moyenne</button>
-                                </div>
-                                <button>Valider</button>
-                            </div>
-                        </div>
-                    </div> 
+                    <AffecterTheme
+                        promotion={promotion}  
+                        ValiderEquipePromotion = {ValiderEquipePromotion}  
+                        setDownIconValiderEquipePromotion = {setDownIconValiderEquipePromotion}  
+                        choosenPromo = {choosenPromo} 
+                        longueur = {longueur} 
+                        downIconValiderEquipePromotion = {downIconValiderEquipePromotion} 
+                        maxEtudiantEquipe = {maxEtudiantEquipe} 
+                        clickChoixPromotionHandler = {clickChoixPromotionHandler} 
+                        setChoosenPromo = {setChoosenPromo} 
+                        affecterTheme = {affecterTheme} 
+                        setAffecterTheme = {setAffecterTheme} 
+                        affectationThemeFifo = {affectationThemeFifo} 
+                        setAffectationThemeFifo = {setAffectationThemeFifo} 
+                        affecterThemeMoy = {affecterThemeMoy} 
+                        setAffecterThemeMoy = {setAffecterThemeMoy} 
+                        affecterThemeEquipe = {affecterThemeEquipe} 
+                        affecterThemeEnseignant = {affecterThemeEnseignant} 
+                        setAffecterThemeEquipe = {setAffecterThemeEquipe}
+                    />
+                   
 
 
                     <div className={`absolute h-[300px] w-[400px] z-50 bg-white space-y-6 shadow-lg rounded-xl flex-col justify-center items-center flex ${(bouttonAffectationEquipe === true) ||  bouttonCompleterEquipe === true ? "flex":"hidden"}`}>
