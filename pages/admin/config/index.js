@@ -145,7 +145,7 @@ const config = props => {
                     </button>
                     <button 
                         className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent"
-                        onClick={(e)}
+                        
                     >
                         Affecter les equipes
                     </button>
@@ -154,13 +154,13 @@ const config = props => {
                     </Link>
                     <button 
                         className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent"
-                        onClick={(e)}
+                        
                     >
                         Préparer les soutenances
                     </button>
                     <button 
                         className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent"
-                        onClick={(e)}
+                        
                     >
                         Rapport de projet
                     </button>
