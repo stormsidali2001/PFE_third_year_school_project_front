@@ -101,10 +101,11 @@ const chat = props => {
                             <div>
                                 {
                                     discussion.map((element) => {
+                                        console.log(element,student)
                                         return (
-                                            <div className={`flex-col  flex h-full w-full space-y-10 ${student?.sender?.id === element?.sender?.id ? "items-end" : "items-start"}`}>
+                                            <div className={`flex-col  flex h-full w-full space-y-10 ${student?.id === element?.sender?.id ? "items-end" : "items-start"}`}>
                                                 {idDiscussion === element.chatId ? 
-                                                    <div className={`z-50 rounded-2xl py-1 px-4 my-[2px] space-y-2 break-all max-w-[300px] ${student?.sender?.id === element?.sender?.id ? "bg-[#36b5ff] text-white" : " bg-[#8FD4FB] "} flex flex-col`}>
+                                                    <div className={`z-50 rounded-2xl py-1 px-4 my-[2px] space-y-2 break-all max-w-[300px] ${student?.id === element?.sender?.id ? "bg-[#36b5ff] text-white" : " bg-[#8FD4FB] "} flex flex-col`}>
                                                          <div className="text-[12px] ">par: {element?.sender?.firstName+' '+element?.sender?.lastName}</div>
                                                         <div>{element.message}</div>
                                                        
