@@ -1,5 +1,4 @@
 import ArrowIcon from "../../../icons/ArrowIcon"
-
 import DownIcon from "../../../icons/DownIcon"
 
 const AffecterTheme = ({promotion  , ValiderEquipePromotion ,  setDownIconValiderEquipePromotion   , choosenPromo , longueur , downIconValiderEquipePromotion, clickChoixPromotionHandler , setChoosenPromo ,affecterTheme , setAffecterTheme , affectationThemeFifo , setAffectationThemeFifo , affecterThemeMoy , setAffecterThemeMoy , affecterThemeEquipe , affecterThemeEnseignant , setAffecterThemeEquipe}) => {

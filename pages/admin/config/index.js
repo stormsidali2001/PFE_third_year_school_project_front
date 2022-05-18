@@ -143,12 +143,27 @@ const config = props => {
                     >
                         Affecter les thèmes
                     </button>
-                    <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Affecter les equipes</button>
+                    <button 
+                        className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent"
+                        onClick={(e)}
+                    >
+                        Affecter les equipes
+                    </button>
                     <Link href="/ficheDeVoeux ">
                         <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Fiches de voeux</button>
                     </Link>
-                    <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Préparer les soutenances</button>
-                    <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Rapport de projet</button>
+                    <button 
+                        className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent"
+                        onClick={(e)}
+                    >
+                        Préparer les soutenances
+                    </button>
+                    <button 
+                        className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent"
+                        onClick={(e)}
+                    >
+                        Rapport de projet
+                    </button>
                 </div>
             </div>
         </div>
