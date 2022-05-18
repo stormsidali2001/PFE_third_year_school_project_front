@@ -12,8 +12,13 @@ const teamId = props => {
    
     const [encadreur , setEncadreur] = useState("Mimouna mimoun") 
     const userType = "admin"
-    const [pseudo,setPseudo] = useState('')
-    const []
+   const [pseudo,setPseudo] = useState('')
+   const [description,setDescription] = useState('')
+   const [rules,setRules] = useState('')
+ 
+   
+
+    
     const [clickDownEquipe, setClickDownEquipe] = useState(false)
     const [clickUpEquipe, setClickUpEquipe] = useState(false)
     const {getTeam} = useStoreActions(store=>store.teamListModel)
@@ -21,12 +26,10 @@ const teamId = props => {
     const {teamId} = router.query;
 
     useEffect(async()=>{
-
-         await getTeam(teamId)
-         
+        const team =  await getTeam(teamId)
+        setPseudo(team?.pseudo)
     },[teamId])
 
- 
     return (
         <div>
             <HorisontalNavbar/>

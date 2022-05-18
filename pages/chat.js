@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HorisontalNavbar from "../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import Send from "../icons/Send";
+import { useStoreActions, useStoreState } from "../store/hooks";
 
 const chat = props => {
 
@@ -11,55 +12,8 @@ const chat = props => {
     const [newMessage , setNewMessage] = useState ("")
     const [discussion , setDiscussion] = useState(
         [
-            {
-                id : 1 ,
-                chatId : 1,
-                createdAt : new Date().toLocaleDateString(),
-                proprietaire : 1 ,
-                message : "Bonjour1",
-            },
-            {
-                id : 2 ,
-                chatId : 1,
-                createdAt : new Date().toLocaleDateString(),
-                proprietaire : 2 ,
-                message : "Bonjour2",
-            },
-            {
-                id : 3 ,
-                chatId : 1,
-                createdAt : new Date().toLocaleDateString(),
-                proprietaire : 2 ,
-                message : "Bonjour3",
-            },
-            {
-                id : 4 ,
-                chatId : 1,
-                createdAt : new Date().toLocaleDateString(),
-                proprietaire : 1 ,
-                message : "Bonjour4",
-            },
-            {
-                id : 5 ,
-                chatId : 1,
-                createdAt : new Date().toLocaleDateString(),
-                proprietaire : 2 ,
-                message : "Bonjour5ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp",
-            },
-            {
-                id : 6 ,
-                chatId : 1,
-                createdAt : new Date().toLocaleDateString(),
-                proprietaire : 1 ,
-                message : "Bonjour6 jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-            },
-            {
-                id : 7 ,
-                chatId : 1,
-                createdAt : new Date().toLocaleDateString(),
-                proprietaire : 1 ,
-                message : "Bonjour7",
-            },
+           
+         
         ],
     )
     const data = [
@@ -69,11 +23,54 @@ const chat = props => {
             url : "favicon.ico",
         },
     ]
+    const {sendMessage,getMessages} = useStoreActions(store=>store.teamMessagesModel)
+    const {getUserInfo} = useStoreActions(store=>store.user)
+    const user = useStoreState(store=>store.user)
+    const {messages} = useStoreState(store=>store.teamMessagesModel)
+    const {socket} = useStoreState(store=>store.socketModel)
+    const {userType } = user;
+   
+    const {student} = user;
+ 
+    useEffect(async()=>{
+        await getUserInfo()
+        await getMessages();
+       
+    },[])
+    useEffect(async=>{
+        setDiscussion(messages.map(msg=>{
 
-    const handleSubmitMessage = () => {
+            return {
+                id:msg.id,
+                chatId:1,
+                createdAt:msg.createdAt,
+                message:msg.message,
+                sender:msg.owner,
+
+            }
+        }))
+    },[messages])
+    useEffect(async()=>{
+    
+        socket?.on("teamMessageToClient",payload=>{
+          
+            setDiscussion(discussion=>[...discussion,{id : 1 , chatId : 1 , createdAt : new Date().toLocaleDateString(), sender : payload.sender, message : payload.txt}]);
+        })
+       
+    },[socket])
+     if(userType !== 'student'){
+        return "not a student";
+    }
+
+    const handleSubmitMessage = async() => {
         if (newMessage !== "") {
-            setDiscussion([...discussion,{id : 1 , chatId : idDiscussion , createdAt : new Date().toLocaleDateString(), proprietaire : userId, message : newMessage}]);
+            await sendMessage({
+                txt:newMessage,
+                sender:student
+            })
             setNewMessage('')
+         
+
         }
     }
 
@@ -105,10 +102,14 @@ const chat = props => {
                                 {
                                     discussion.map((element) => {
                                         return (
-                                            <div className={`flex-col flex h-full w-full space-y-10 ${userId === element.proprietaire ? "items-end" : "items-start"}`}>
+                                            <div className={`flex-col  flex h-full w-full space-y-10 ${student?.sender?.id === element?.sender?.id ? "items-end" : "items-start"}`}>
                                                 {idDiscussion === element.chatId ? 
-                                                    <div className={`z-50 rounded-2xl py-1 px-4 my-[2px] space-y-2 break-all max-w-[300px] ${userId === element.proprietaire ? "bg-[#36b5ff] text-white" : " bg-[#8FD4FB] "}`}>{element.message}
+                                                    <div className={`z-50 rounded-2xl py-1 px-4 my-[2px] space-y-2 break-all max-w-[300px] ${student?.sender?.id === element?.sender?.id ? "bg-[#36b5ff] text-white" : " bg-[#8FD4FB] "} flex flex-col`}>
+                                                         <div className="text-[12px] ">par: {element?.sender?.firstName+' '+element?.sender?.lastName}</div>
+                                                        <div>{element.message}</div>
+                                                       
                                                 </div> : ""}
+                                              
                                             </div>
                                         )
                                     })
