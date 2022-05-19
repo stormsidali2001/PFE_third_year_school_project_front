@@ -119,7 +119,18 @@ const encadreEquipes = (el) => {
                             {encadre.length > 1 ? 
                                teachers.map((element , index) => {
                                    return (
-                                       <div key={index}></div>
+                                       <div className="">
+                                            {
+                                                encadre.map((el ,i) => {
+                                                    return (
+                                                        <div className="flex flex-row space-x-2 items-center justify-center">
+                                                            <div>{el === element.id ? element.nom : ""}</div>
+                                                            <div>{el === element.id ? element.prenom : ""}</div>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                       </div>
                                    )
                                })
                                : 
