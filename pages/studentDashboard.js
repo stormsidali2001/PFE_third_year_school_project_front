@@ -5,18 +5,19 @@ import HorisontalNavbar from "../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import { useStoreActions } from "../store/hooks";
 
-const studentDashboard = props => {
+const studentDashboard = ({toastsRef}) => {
     const [possedeEquipe , setPossedeEquipe] = useState(false)
     const [debutProjet , setDebutProjet] = useState(false)
     const {getUserInfo} = useStoreActions(store=>store.user)
-    useEffect(()=>{
-        getUserInfo();
+    useEffect(async ()=>{
+        await getUserInfo();
+        console.log('useEffect')
     },[])
     return (
         <div>
-            <HorisontalNavbar/>
+            <HorisontalNavbar toastsRef = {toastsRef}/>
             <div className="h-[200vh] bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8 ">
-                <StudentVerticalNavbar possedeEquipe = {possedeEquipe} debutProjet = {debutProjet}/>
+                <StudentVerticalNavbar possedeEquipe = {possedeEquipe} debutProjet = {debutProjet} />
                 <AcceuilStudent possedeEquipe = {possedeEquipe} debutProjet = {debutProjet}/>
                 <CardsStudent/>
             </div>

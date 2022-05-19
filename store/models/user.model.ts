@@ -8,6 +8,7 @@ import {io, Socket} from 'socket.io-client';
 
 export interface  UserState  {
        userType?:string;
+       email?:string;
        student?:{
            id:string;
            firstName:string;
@@ -57,6 +58,7 @@ export const userModel:UserModel | null={
     setUser:action((state,payload)=>{
             console.log(state,payload)
             state.userType = payload.userType
+            state.email  = payload.email;
             state[payload.userType] = payload[payload.userType];
 
         
