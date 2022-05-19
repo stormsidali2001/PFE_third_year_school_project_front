@@ -39,7 +39,7 @@ const teachers = [
 const theme = [
     {
         id : 1,
-        nom : "PFE"
+        nom : "PFE",
     },
     {
         id : 2,
@@ -64,6 +64,27 @@ const [booleanChoosenTheme , setBooleanChoosenTheme] = useState(false)
 const [ajouter , setAjouter] = useState(false)
 const [encadre , setEncadre] = useState([])
 
+const clickThemeHandler = (el) => {
+    setBooleanChoosenTheme(true) ; 
+    setChoosenTheme(el.nom) ; 
+    setIdChoosenTheme(el.id);
+}
+
+const encadreEquipes = (el) => {
+    if(encadre.length > 0)
+    {
+        encadre.map((element) => {
+             (
+                 element === el.id ?  setEncadre([...encadre]) : setEncadre([...encadre , el.id]) 
+             )    
+        })
+    }
+    else
+    {
+        setEncadre([el.id]) 
+    }
+}
+
 
     return (
         <div>
@@ -77,8 +98,9 @@ const [encadre , setEncadre] = useState([])
                             theme.map((el,index) => {
                                 return (
                                     <button 
+                                        key={index}
                                         className="h-[40px] flex flex-row items-center justify-center space-x-2 border-transparent border-y-2 hover:border-gray-300 hover:shadow-inner"
-                                        onClick={(e) => {setChoosenTheme(el.nom) ; setIdChoosenTheme(el.id) ; setBooleanChoosenTheme(true) ; setEncadre([idChoosenTheme])}}
+                                        onClick={(e) => {clickThemeHandler(el) ; setEncadre([])}}
                                     >
                                         <div>{el.nom}</div>
                                         <div>{el.prenom}</div>
@@ -94,8 +116,14 @@ const [encadre , setEncadre] = useState([])
                     <div className={` mt-24 h-[500px] w-[500px] items-center justify-center bg-white/50 shadow-lg flex-col rounded-2xl backdrop-blur-sm absolute ${booleanChoosenTheme === true ? "flex" : "hidden"}`}>
                         <div className="text-[30px] px-8 absolute top-6">Ajoutez des encadreurs au  thème : {choosenTheme}</div>
                         <div className="h-[200px] w-[350px] text-[20px] px-3 border-2 border-dashed border-gray-400 flex items-center justify-center">
-                            {encadre.length > 1 ?   
-                              "" : "Les encadreurs s'afficheront ici après ajout."
+                            {encadre.length > 1 ? 
+                               teachers.map((element , index) => {
+                                   return (
+                                       <div key={index}></div>
+                                   )
+                               })
+                               : 
+                               "Les encadreurs s'afficheront ici après ajout."
                             }
                         </div>
                         <div className="flex flex-row space-x-40 absolute bottom-6">
@@ -116,9 +144,10 @@ const [encadre , setEncadre] = useState([])
                         {
                             teachers.map((el,index) => {
                                 return (
-                                    <button 
+                                    <button
+                                        key={index} 
                                         className="h-[40px] flex flex-row items-center justify-center space-x-2 border-transparent border-y-2 hover:border-gray-300 hover:shadow-inner"
-                                        onClick={(e) => {idChoosenTheme === encadre[0] ? setEncadre([...encadre , el.id].filter()) :""}}
+                                        onClick={(e) => {encadreEquipes(el)}}
                                     > 
                                         <div>{el.nom}</div>
                                         <div>{el.prenom}</div>
