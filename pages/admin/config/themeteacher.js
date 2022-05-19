@@ -65,6 +65,8 @@ const [ajouter , setAjouter] = useState(false)
 const [encadre , setEncadre] = useState([])
 const [modifier , setModifier] = useState(false)
 const [encadreurSupprime , setEncadreurSupprime] = useState()
+const [nonEncadrant , setNonEncadrant] = useState(teachers)
+
 
 const clickThemeHandler = (el) => {
     setBooleanChoosenTheme(true) ; 
@@ -79,7 +81,8 @@ const encadreEquipes = (el) => {
     {
         encadre.map((element) => {
              (
-                 element === el.id ?  setEncadre([...encadre]) : setEncadre([...encadre , el.id]) 
+                 element === el.id ?  setEncadre([...encadre]) : (setEncadre([...encadre , el.id])) 
+                 
              )    
         })
     }
@@ -88,8 +91,6 @@ const encadreEquipes = (el) => {
         setEncadre([el.id]) 
     }
 }
-
-
     return (
         <div>
             <HorisontalNavbar/>
@@ -167,16 +168,16 @@ const encadreEquipes = (el) => {
                     <div className="text-[30px]">Enseignants :</div>
                     <div className={`w-[320px] py-3 h-fit shadow-lg rounded-xl flex flex-col space-y-2 text-[20px] ${ajouter === true ? "bg-cyan-100":"bg-white"}`}>
                         {
-                            teachers.map((el,index) => {
+                            nonEncadrant.map((el,index) => {
                                 return (
                                     <button
-                                        key={index} 
-                                        className="h-[40px] flex flex-row items-center justify-center space-x-2 border-transparent border-y-2 hover:border-gray-300 hover:shadow-inner"
+                                        key={index}
+                                        className={`h-[40px] flex flex-row items-center justify-center space-x-2 border-transparent border-y-2 hover:border-gray-300 hover:shadow-inner`}
                                         onClick={(e) => {encadreEquipes(el)}}
                                     > 
                                         <div>{el.nom}</div>
                                         <div>{el.prenom}</div>
-                                    </button>
+                                    </button> 
                                 )
                             })
                         }
@@ -187,3 +188,4 @@ const encadreEquipes = (el) => {
     )
 }
 export default themeTeacher
+                                   
