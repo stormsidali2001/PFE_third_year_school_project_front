@@ -1,4 +1,3 @@
-import Team from "../icons/Team";
 
 const CardsStudent = props => {
     const data = [

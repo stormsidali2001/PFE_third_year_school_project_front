@@ -16,9 +16,11 @@ export interface NotificationsServiceState{
 export interface NotificationsServiceActions{
     setNotifications:Action<this,Notification[]>;
     setTotalNotificationsCount:Action<this,number>;
+    setNotification:Action<this,Notification>;
 }
 export interface NotificationsServiceThunks{
     getLastNotificationsThunk:Thunk<this,undefined,undefined,any>;
+    getNewNotificationThunk:Thunk<this,any,any,any>;
 
 }
 
@@ -54,6 +56,7 @@ export const notificationsServiceModel:NotificationsServiceModel={
                 actions.setTotalNotificationsCount(res.data.totalNotificationCount)
                 actions.setNotifications(res.data.notifications)
                 const socket = getStoreState().socketModel.socket as Socket;
+              
                 // socket.on('new-notification',async()=>{
                 //     const res = await axios.get('http://localhost:8080/notifications/3',{
                    
@@ -66,6 +69,20 @@ export const notificationsServiceModel:NotificationsServiceModel={
          }catch(err){
             console.log(err)
          }
+    }),
+    setNotification:action((state,payload:Notification)=>{
+        state.notifications = [payload,...state.notifications]
+        state.totalNotificationCount++;
+        console.log(state.notifications,"new notifications")
+      
+  }),
+    getNewNotificationThunk:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
+        const socket = getStoreState().socketModel.socket as Socket;
+        socket?.on("new_notification", notfication =>{
+            
+                    actions.setNotification(notfication)
+                   payload.current.addMessage({text:notfication.description,mode:'Alert'})
+    })
     })
 
 

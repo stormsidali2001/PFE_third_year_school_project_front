@@ -7,9 +7,11 @@ import Profil from "../icons/Profil";
 import LastMessages from "./LastMessages";
 import Notification from "./Notification";
 import {useStoreState} from '../store/hooks';
+import Link from 'next/link'
 
 
-const HorisontalNavbar = () => {
+const HorisontalNavbar = ({toastsRef}) => {
+    const countRef = useRef(null)
   
     const notificationRef =useRef(null);
     const lastMessagesRef = useRef(null);
@@ -19,7 +21,9 @@ const HorisontalNavbar = () => {
     const {open:openNotifications,setOpen:setOpenNotifications} = useOutSideContainer({ref:notificationRef});
     const {open:openlastMessages,setOpen:setOpenLastMessages} = useOutSideContainer({ref:notificationRef});
 
+    const {totalNotificationCount} = useStoreState(store=>store.notificationService)
 
+    
     return ( 
         <div className="fixed z-50 w-[80vw] left-[50%] -translate-x-1/2  ">
             <div className="w-[100%] rounded-b-[500px] relative text-[24px] font-xyz text-textcolor bg-white h-[60px] flex flex-row   justify-between px-8 items-center drop-shadow-[8px_8px_8px_rgba(0,0,0,0.25)] ">
@@ -27,6 +31,7 @@ const HorisontalNavbar = () => {
           <Notification
             open={openNotifications}
             ref={notificationRef}
+            toastsRef = {toastsRef}
           />
           <LastMessages
             open={openlastMessages}
@@ -34,19 +39,29 @@ const HorisontalNavbar = () => {
           />
 
                         <div className="flex flex-row space-x-2">
-                                <Profil/>
+                               <Link href='/userprofil'>
+                                <Profil
+                                            className='cursor-pointer'
+                                    />
+                               </Link> 
                                 <div>{student?.firstName}</div>
                                 <div>{student?.lastName}</div>
                         </div>
                         <div className="flex flex-row space-x-8">
                             <MessageIcon
-                                className='hover:cursor-pointer' 
+                                className='cursor-pointer' 
                                 onMouseDown={()=>setOpenLastMessages(!openlastMessages)}
                             />
+                            <div className="relative ">
                             <NotificationIcon 
                                 className='hover:cursor-pointer' 
                                 onMouseDown={()=>setOpenNotifications(!openNotifications)}
                             /> 
+                            <div  className="absolute w-4 h-4 rounded-full bg-blue-400 -right-2 -top-2 text-white text-[8px] flex justify-center items-center font-bold">{totalNotificationCount}</div>
+
+
+                            </div>
+                          
                         </div>
              
             </div>

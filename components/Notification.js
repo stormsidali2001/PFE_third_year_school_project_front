@@ -1,19 +1,33 @@
-import { forwardRef,useEffect } from "react";
+import React, { forwardRef,useEffect } from "react";
 import DotsIcon from "../icons/DotsIcon";
 import ErrorIcon from "../icons/ErrorIcon";
 import { useStoreActions, useStoreState } from "../store/hooks";
 
 
-const Notification = forwardRef(({open},ref)=>{
-    const {getLastNotificationsThunk} = useStoreActions(store=>store.notificationService)
+const Notification = forwardRef(({open,toastsRef},ref)=>{
+    const {getLastNotificationsThunk,getNewNotificationThunk} = useStoreActions(store=>store.notificationService)
     const {notifications,totalNotificationCount} = useStoreState(store=>store.notificationService)
-    useEffect(()=>{
-        getLastNotificationsThunk();
+    const {socket} = useStoreState(store=>store.socketModel)
+    console.log("Notifications",notifications)
+    useEffect(async()=>{
+        await getLastNotificationsThunk();
     },[])
   
+    useEffect(async ()=>{
+        if(!socket) {
+            console.log("socket not initialized yet");
+            return;
+        }
+        console.log("zzzzzzzzzzzzzzzzzz",socket)
+        await getNewNotificationThunk(toastsRef) 
+      
+     
+    },[socket])
+
+  console.log('render')
     return(
         <div ref={ref} className={`absolute font-roboto bg-white rounded-[10px] w-[400px] h-fit pt-2 pb-2 drop-shadow-[2px_5px_4px_rgba(0,0,0,0.25)] flex flex-col right-0 bottom-0 translate-y-[102%]  items-center space-y-2 ${open?'scale-100':'scale-0'} `}>
-
+          
         <div className="absolute right-2 top-2 w-fit p-1 aspect-square rounded-full bg-[#CAEAFE] text-[12px] flex justify-center items-center font-medium">
                 +<span className="">{totalNotificationCount}</span>
         </div>
