@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useEffect } from 'react';
+import AdminVerticalNavbar from '../../components/AdminVerticalNavbar';
 import HorisontalNavbar from "../../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar";
 import ModificationIcon from '../../icons/modificationIcon';
@@ -30,7 +31,7 @@ const TeacherList = ({toastsRef}) => {
     return (
         <div >
             <HorisontalNavbar/>
-            <StudentVerticalNavbar/>
+            <AdminVerticalNavbar/>
              <div className="w-full h-full  relative flex flex-col space-y-16 items-center justify-center font-xyz text-textcolor py-[100px] ">
                 <div className="text-[30px] mt-10">Liste des enseignants</div>
                 <div className="flex flex-row space-x-24">

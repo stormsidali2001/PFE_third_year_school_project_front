@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AcceuilAdmin from "../components/AcceuilAdmin";
+import AdminVerticalNavbar from "../components/AdminVerticalNavbar";
 import HorisontalNavbar from "../components/HorisontalNavbar";
 
 const adminDashboard = props => {
@@ -10,6 +11,7 @@ const adminDashboard = props => {
    return(
        <div>
             <HorisontalNavbar/>
+            <AdminVerticalNavbar/>
             <AcceuilAdmin ajouteEtudiant = {ajouteEtudiant} valideEquipe = {valideEquipe} finProjet = {finProjet} soutenance = {soutenance}/>
        </div>
    )
