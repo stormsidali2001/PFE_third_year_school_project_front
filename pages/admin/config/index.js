@@ -117,11 +117,17 @@ const config = props => {
                 </div>
 
                 <div className="flex flex-col fit p-3 w-[350px] bg-white text-[20px] rounded-lg shadow-lg">
+                    <Link href='/admin/variablesysteme'>
+                        <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Variables du système</button>
+                    </Link>
                     <Link href='/AddStudent'>
                         <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Ajouter des étudiant</button>
                     </Link>
                     <Link href='/AddTeacher'>
                         <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Ajouter des enseignant</button>
+                    </Link>
+                    <Link href='/admin/addentreprise'>
+                        <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Ajouter des entreprise</button>
                     </Link>
                     <Link href='/admin/studentlist'>
                         <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Liste des étudiants</button>
