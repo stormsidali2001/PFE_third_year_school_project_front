@@ -7,6 +7,7 @@ import DownIcon from "../../../icons/DownIcon"
 import ArrowIcon from "../../../icons/ArrowIcon";
 import ValiderEquipes from "./ValiderEquipes";
 import AffecterTheme from "./AffecterTheme";
+import AdminVerticalNavbar from "../../../components/AdminVerticalNavbar";
 
 
 const config = props => {
@@ -54,7 +55,7 @@ const config = props => {
     
     return (
         <div>
-            <StudentVerticalNavbar/>
+            <AdminVerticalNavbar/>
             <HorisontalNavbar/>
             <div className="bg-background space-x-10 h-screen w-screen relative flex flex-row items-center justify-center font-xyz text-textcolor">
                 <div className="flex items-center justify-center relative flex-col text-[20px]">
@@ -149,7 +150,7 @@ const config = props => {
                     >
                         Affecter les equipes
                     </button>
-                    <Link href="/ficheDeVoeux ">
+                    <Link href="/admin/fichevoeux">
                         <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Fiches de voeux</button>
                     </Link>
                     <button 
