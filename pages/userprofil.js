@@ -8,52 +8,7 @@ const userProfil = props => {
     
     const idUser = 5;
 
-    // const data = 
-    //     {
-    //         userType : 'teacher', //admin teacher
-    //         email : "h.debza@esi-sba.dz",
-    //         student:{
-    //             id : 1,
-    //             firstName : "kadour",
-    //             lastName : "bnadem",
-    //             pseudo : "Kado",
-    //             dob : "25/11/2042",
-    //             team : {
-    //                 id : 1111,
-    //                 nom : "jjjjjjjjjj",
-                   
-    //             },
-    //         },
-    //         teacher:{
-    //             id : 1,
-    //             firstName : "yamina",
-    //             lastName : "bnadem",
-    //             pseudo : "Kado",
-    //             dob : "25/11/2042",
-    //             encadre : [
-    //                 {
-    //                     id : 1,
-    //                     teamName : "team2"
-    //                 },
-    //                 {
-    //                     id : 1,
-    //                     teamName : "team2"
-    //                 },
-    //                 {
-    //                     id : 1,
-    //                     teamName : "team3"
-    //                 },
-    //             ]
-    //         },
-    //         admin:{
-    //             id : 1,
-    //             firstName : "yamina",
-    //             lastName : "bnadem",
-    //             pseudo : "Kado",
-    //             dob : "25/11/2042",
-    //         },
-            
-    //     }
+   
 
         const user = useStoreState(store => store.user);
         const {getUserInfo} = useStoreActions(store => store.user);
