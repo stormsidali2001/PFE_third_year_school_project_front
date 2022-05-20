@@ -5,6 +5,7 @@ import HorisontalNavbar from "../../components/HorisontalNavbar";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import SortAscIcon from "../../icons/SortAsc";
+import AdminVerticalNavbar from "../../components/AdminVerticalNavbar";
 const FicheVoeux = props => {
    const listeRef = useRef(null);
     const {getUserInfo} = useStoreActions(store=>store.user)
@@ -64,7 +65,7 @@ const FicheVoeux = props => {
         <div >
             <HorisontalNavbar/>
             <div className="h-[200vh] bg-background min-h-screen items-center px-4 pt-[100px] flex flex-col  py-8 ">
-                <StudentVerticalNavbar/>
+                <AdminVerticalNavbar/>
                 <div className="flex flex-col h-screen w-[90%] bg-white  text-textcolor  font-mono"> {/* list wrapper */}
                     <div className="w-full text-center text-[26px]">La fiche des voeux</div>
                 

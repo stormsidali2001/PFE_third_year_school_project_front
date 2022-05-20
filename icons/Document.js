@@ -1,22 +1,28 @@
 const Document = props => {
     return (
-        <svg {...props} width="40" height="45" viewBox="0 0 40 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_d_356_7)">
-        <path d="M13.7503 30.4167V26.25V30.4167ZM20.0003 30.4167V22.0833V30.4167ZM26.2503 30.4167V17.9167V30.4167ZM30.417 38.75H9.58366C8.47859 38.75 7.41878 38.311 6.63738 37.5296C5.85598 36.7482 5.41699 35.6884 5.41699 34.5833V5.41667C5.41699 4.3116 5.85598 3.25179 6.63738 2.47039C7.41878 1.68899 8.47859 1.25 9.58366 1.25H21.2212C21.7737 1.25012 22.3035 1.46969 22.6941 1.86042L33.9732 13.1396C34.364 13.5302 34.5835 14.06 34.5837 14.6125V34.5833C34.5837 35.6884 34.1447 36.7482 33.3633 37.5296C32.5819 38.311 31.5221 38.75 30.417 38.75Z" stroke="#03045E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" shape-rendering="crispEdges"/>
-        </g>
-        <defs>
-        <filter id="filter0_d_356_7" x="0.416992" y="0.25" width="39.167" height="47.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-        <feOffset dy="4"/>
-        <feGaussianBlur stdDeviation="2"/>
-        <feComposite in2="hardAlpha" operator="out"/>
-        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_356_7"/>
-        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_356_7" result="shape"/>
-        </filter>
-        </defs>
-        </svg>
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_610_2)">
+<g filter="url(#filter0_d_610_2)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8 8C8 6.93913 8.42143 5.92172 9.17157 5.17157C9.92172 4.42143 10.9391 4 12 4H21.172C22.2328 4.00023 23.25 4.4218 24 5.172L30.828 12C31.5782 12.75 31.9998 13.7672 32 14.828V32C32 33.0609 31.5786 34.0783 30.8284 34.8284C30.0783 35.5786 29.0609 36 28 36H12C10.9391 36 9.92172 35.5786 9.17157 34.8284C8.42143 34.0783 8 33.0609 8 32V8Z" fill="#03045E"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_610_2" x="4" y="4" width="32" height="40" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_610_2"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_610_2" result="shape"/>
+</filter>
+<clipPath id="clip0_610_2">
+<rect width="40" height="40" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
     )
 }
 export default Document

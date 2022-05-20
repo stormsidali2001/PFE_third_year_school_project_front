@@ -1,4 +1,5 @@
 import { useState } from "react"
+import AdminVerticalNavbar from "../../../components/AdminVerticalNavbar"
 import HorisontalNavbar from "../../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../../components/StudentVerticalNavbar"
 
@@ -91,7 +92,7 @@ const encadreEquipes = (el) => {
     return (
         <div>
             <HorisontalNavbar/>
-            <StudentVerticalNavbar/>
+           <AdminVerticalNavbar/>
             <div className={`bg-background space-x-10 h-screen w-screen relative flex text-center flex-row font-xyz text-textcolor  justify-center `}>
             <div className="flex flex-col space-y-6 ml-24 mt-24">
                     <div className="text-[30px]">Equipes :</div>
