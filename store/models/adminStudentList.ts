@@ -8,6 +8,7 @@ export  interface StudentPayload{
     lastName:string;
     dob:string;
     code:string;
+    promotionId:string;
 }
 export interface Student extends StudentPayload {
     id:string;

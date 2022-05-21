@@ -1,10 +1,11 @@
-import { useStoreActions } from "../store/hooks";
-import { useState } from "react";
+import { useStoreActions, useStoreState } from "../store/hooks";
+import { useEffect, useState } from "react";
 import HorisontalNavbar from "../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import ArrowIcon from "../icons/ArrowIcon";
 import AttachFileIcon from "../icons/AttachFileIcon";
 import readXlsxFile from 'read-excel-file'
+import Select from 'react-select'
 
 const addStudent = ({toastsRef}) => {
 
@@ -17,17 +18,30 @@ const addStudent = ({toastsRef}) => {
     const [dob , setDob] = useState("20-04-2001")
     const [file,setFile] = useState({})
     const {addSingleStudent,addMultipleStudents} = useStoreActions(store=>store.adminStudentListModel)
+    const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
+    const {promotions} = useStoreState(store=>store.promotionsModel)
     const [loading,setLoading] = useState(false)
+    const [chosenPromotion,setChoosenPromotion] = useState(null)
+    useEffect(async()=>{
+        await getAllPromotionsThunk();
+    },[])
     const handleAddSingleStudent = async e=>{
         e.preventDefault();
+        if(!chosenPromotion    ||  email === '' || firstName === '' || lastName === '' || dob === '' ){
+            toastsRef.current.addMessage({text:"remplir tout les champs",mode:'Error'})
+            return;
+        }
+      
         try{
+            
             setLoading(true)
             await addSingleStudent({
                 firstName,
                 lastName,
                 email,
                 code:matricule,
-                dob:dob
+                dob:dob,
+                promotionId:chosenPromotion.value
             })
             toastsRef.current.addMessage({text:"Etudiant ajouté...",mode:'Alert'})
             setLoading(false)
@@ -57,7 +71,7 @@ const addStudent = ({toastsRef}) => {
         
     }
   
-    const extension = "csv"
+    const extension = "csv";
     const convertToArrayOfObjects = rows=>{
         const headerColsExist = new Set();
         if(rows.length ===0){
@@ -114,6 +128,21 @@ const addStudent = ({toastsRef}) => {
                                      className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Matricule..." 
                                      onChange={(e)=>{setMatricule(e.target.value)}}
                                      value={matricule}
+                                />
+                            </td>
+                        </tr>
+                        <tr className="">
+                            <td className="py-2">Promotion :</td>
+                            <td>
+                                <Select
+                                     className=" z-50 h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Matricule..." 
+                                     onChange={(option)=>{setChoosenPromotion(option)}}
+                                     options={promotions.map(el=>{return {value:el.id,label:el.name}})}
+                                     isLoading = {!promotions}
+                                     value={chosenPromotion}
+                                     styles = {{menuPortal:base=>({...base,zIndex:100})}}
+                                    
+
                                 />
                             </td>
                         </tr>

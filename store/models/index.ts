@@ -12,6 +12,7 @@ import { teacherListModel } from "./teacherList";
 import { themeSuggestionsModel, ThemeSuggestionsModel } from "./themeSuggestion.model";
 import { teamListModel, TeamListModel } from "./teamsList.model";
 import { teamMessagesModel, TeamMessagesModel } from "./teamMessages.model";
+import { promotionsModel, PromotionsModel } from "./promotion.model";
 export interface Model{
     user:UserModel;
     notificationService:NotificationsServiceModel;
@@ -26,6 +27,7 @@ export interface Model{
     themeSuggestionsModel:ThemeSuggestionsModel;
     teamListModel:TeamListModel;
     teamMessagesModel:TeamMessagesModel;
+    promotionsModel:PromotionsModel;
 }
 
 export const model:Model={
@@ -41,6 +43,7 @@ export const model:Model={
     teacherListModel:teacherListModel,
     themeSuggestionsModel:themeSuggestionsModel,
     teamListModel:teamListModel,
-    teamMessagesModel:teamMessagesModel
+    teamMessagesModel:teamMessagesModel,
+    promotionsModel:promotionsModel
     
 }

@@ -59,7 +59,12 @@ const TeamList = props => {
                                             Object.keys(teamsList[0]).filter(el=>el!=='id').map(col=>{
                                                 return(
                                                     <td className="text-center truncate h-[36px] ">
-                                                        {row[col]?row[col]:'___'}
+                                                        {
+                                                        col === 'validated'?( row[col]?'true':'false')
+                                                        :( row[col]?row[col]:'___')
+                                                        
+                                                        
+                                                        }
                                                     </td>
                                                     
                                                 )

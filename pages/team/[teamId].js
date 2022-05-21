@@ -17,6 +17,7 @@ const Team = props => {
    const [rules,setRules] = useState('')
    const [theme,setTheme] = useState('')
    const [membres,setMembres] = useState([])
+   const [validated,setValidated] = useState(false)
  
    
 
@@ -40,6 +41,7 @@ const Team = props => {
         setRules(team?.rules)
         setTheme(team?.givenTheme?team?.givenTheme:'___')
         setMembres(team?.members)
+        setValidated(team?.validated)
 
 
     },[teamId])
@@ -63,6 +65,10 @@ const Team = props => {
                             <div className="text-[19px]">Theme :</div>
                             <div className={`${modifier === false ? "flex" : "hidden"}`}>{theme}</div>
                             <input value={theme} className={`${modifier === true ? "flex" : "hidden"}`} onChange={(e) => {setTheme(e.target.value)}}/>
+                        </div>
+                        <div className="flex items-center flex-row space-x-4">
+                            <div className="text-[19px]">Validee :</div>
+                            <div className={``}>{validated?"true":"false"}</div>
                         </div>
                         {/* <div className="flex flex-row items-center flex-wrap space-x-4">
                             <div className="text-[19px]">Encadreur(s) :</div>

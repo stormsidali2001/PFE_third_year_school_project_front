@@ -117,10 +117,10 @@ const config = props => {
                 </div>
 
                 <div className="flex flex-col fit p-3 w-[350px] bg-white text-[20px] rounded-lg shadow-lg">
-                    <Link href='/AddStudent'>
+                    <Link href='/addstudent'>
                         <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Ajouter des étudiant</button>
                     </Link>
-                    <Link href='/AddTeacher'>
+                    <Link href='/addteacher'>
                         <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Ajouter des enseignant</button>
                     </Link>
                     <Link href='/admin/studentlist'>
