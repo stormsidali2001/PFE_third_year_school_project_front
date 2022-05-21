@@ -11,6 +11,7 @@ export interface ThemeSuggestionPayload{
     title?:string;
     description?:string;
     documents?:ThemeSuggestionDoc[];
+    promotionId?:string;
 }
 export interface ThemeSuggestionState{
     themeSuggestions:ThemeSuggestionPayload[];
@@ -24,8 +25,9 @@ export interface ThemeSuggestionActions{
 export interface ThemeSuggestionThunks{
     createThemeSuggestionThunk:Thunk<this,ThemeSuggestionPayload,undefined,undefined>;
     
-    getThemeSuggestionsThunk:Thunk<this,undefined,undefined,undefined>;
+    getThemeSuggestionsThunk:Thunk<this,string|undefined,undefined,undefined>;
     getThemeSuggestionThunk:Thunk<this,string,undefined,undefined>;
+    validateThemeSuggestionThunk:Thunk<this,string,undefined,undefined>;
 }
 
 export interface ThemeSuggestionsModel extends ThemeSuggestionThunks,ThemeSuggestionState,ThemeSuggestionActions{
@@ -54,11 +56,23 @@ export const themeSuggestionsModel:ThemeSuggestionsModel = {
     getThemeSuggestionsThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
    
         try{
-           const res =  await axios.get('http://localhost:8080/getThemeSuggestions',{
+            let res;
+            if(payload){
+                res =  await axios.get(`http://localhost:8080/getThemeSuggestions/${payload}`,{
            
-                withCredentials:true
-            
-            })
+                    withCredentials:true
+                
+                })
+
+            }else{
+                res =  await axios.get('http://localhost:8080/getThemeSuggestions',{
+           
+                    withCredentials:true
+                
+                })
+
+            }
+          
             actions.setThemeSuggestions(res.data)
 
         }catch(err){
@@ -84,6 +98,24 @@ export const themeSuggestionsModel:ThemeSuggestionsModel = {
      
         
     }),
+    validateThemeSuggestionThunk:thunk(async (actions,payload)=>{
+        try{
+                await axios.post('http://localhost:8080/validateThemeSuggestion',{
+                themeId:payload
+            },{
+            
+                 withCredentials:true
+             
+             })
+
+            
+          
+ 
+         }catch(err){
+             console.log(err)
+         }
+
+    })
     
 
 }

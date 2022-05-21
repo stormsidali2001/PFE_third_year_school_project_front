@@ -39,7 +39,7 @@ const TeacherList = ({toastsRef}) => {
                          <div className='text-[18px]'>Choisir une promotion :</div>
                          <input className='h-[40px] w-[250px] rounded-full shadow-sm px-3' placeholder='Choisir une promotion ...'/>
                     </div>
-                    <Link href="/addstudent1"><button className="shadow-lg h-[40px] w-[220px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full">+ Ajouter Enseignant </button></Link>
+                    <Link href="/addteacher"><button className="shadow-lg h-[40px] w-[220px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full">+ Ajouter Enseignant </button></Link>
                  </div>
                  {
                      (teachers.length === 0)?(

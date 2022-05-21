@@ -74,7 +74,7 @@ const studentList = ({toastsRef}) => {
     },
    ]
    const {getStudents,deleteStudent} = useStoreActions(store=>store.adminStudentListModel)
-   const {students} = useStoreState(store=>store.adminStudentListModel)
+   const {students:StudentsData} = useStoreState(store=>store.adminStudentListModel)
    const handleDeleteStudent = async (id)=>{
        try{
 
@@ -90,6 +90,13 @@ const studentList = ({toastsRef}) => {
    useEffect(async ()=>{
         await getStudents();
    },[])
+   
+   let students = StudentsData?.map(student=>{  
+       return{
+           ...student,
+           promotion:student.promotion.name,
+       }
+    })
    if(students.length === 0) return <div>Aucune donnée</div>
    const columns = [...Object.keys(students[0]).filter(el=>el!=='id')];
     return (

@@ -108,7 +108,7 @@ const addStudent = ({toastsRef}) => {
     return (
        <div>
            <StudentVerticalNavbar/>
-           <HorisontalNavbar/>
+           <HorisontalNavbar toastsRef={toastsRef}/>
             <div className="bg-background h-screen w-screen relative flex items-center justify-center font-xyz text-textcolor">
                 <img src="addStudent.jpg" className="h-full w-full object-contain mix-blend-darken absolute"/>
                 <div className={`h-[200px] w-[450px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>

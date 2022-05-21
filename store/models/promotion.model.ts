@@ -29,6 +29,7 @@ export const promotionsModel:PromotionsModel = {
                 withCredentials:true
             })
             actions.setPromotions(res.data)
+            return res.data;
         }catch(err){
             console.log(err)
         }

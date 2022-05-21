@@ -15,9 +15,11 @@ const HorisontalNavbar = ({toastsRef}) => {
   
     const notificationRef =useRef(null);
     const lastMessagesRef = useRef(null);
-    const {student} = useStoreState(store=>store.user)
+    const user = useStoreState(store=>store.user)
+    const{userType,student,teacher,entreprise,admin} = user;
+    const entity =  user[userType] ;
+    
   
-    console.log(student,"//*//*//")
     const {open:openNotifications,setOpen:setOpenNotifications} = useOutSideContainer({ref:notificationRef});
     const {open:openlastMessages,setOpen:setOpenLastMessages} = useOutSideContainer({ref:notificationRef});
 
@@ -44,8 +46,18 @@ const HorisontalNavbar = ({toastsRef}) => {
                                             className='cursor-pointer'
                                     />
                                </Link> 
-                                <div>{student?.firstName}</div>
-                                <div>{student?.lastName}</div>
+                               {
+                                   userType === 'entreprise' ?(
+                                    <div>{entity?.name}</div>
+                                   ):(
+                                       <>
+                                          <div>{entity?.firstName}</div>
+                                          <div>{entity?.lastName}</div>
+                                       </>
+                                    
+                                   )
+                               }
+                                
                         </div>
                         <div className="flex flex-row space-x-8">
                             <MessageIcon

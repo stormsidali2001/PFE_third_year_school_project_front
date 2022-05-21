@@ -78,10 +78,11 @@ export const notificationsServiceModel:NotificationsServiceModel={
   }),
     getNewNotificationThunk:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
         const socket = getStoreState().socketModel.socket as Socket;
-        socket?.on("new_notification", notfication =>{
+        socket.on("new_notification", notfication =>{
             
                     actions.setNotification(notfication)
                    payload.current.addMessage({text:notfication.description,mode:'Alert'})
+                   alert('sdsdd')
     })
     })
 

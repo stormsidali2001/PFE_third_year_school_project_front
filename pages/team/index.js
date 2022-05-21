@@ -10,18 +10,14 @@ const TeamList = props => {
     const typeUtilisateur = "admin"
     const {getTeamsList} = useStoreActions(store=>store.teamListModel)
     const {teamsList} =useStoreState(store=>store.teamListModel)
-  
-
-  
-
-   
-
     const [colonne , setColonne] = useState ([])
     const [copie , setCopie] = useState([])
     useEffect(async()=>{
         await getTeamsList();
         
    },[])
+
+  
     if(teamsList.length === 0) return <div>Aucune donnée</div>
     const columns = [...Object.keys(teamsList[0]).filter(el=>el !=='id')];
     

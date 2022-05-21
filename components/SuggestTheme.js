@@ -1,10 +1,10 @@
-import React, { useState } from "react"
-import axios from 'axios';
-import { useStoreActions } from "../store/hooks";
+import React, { useEffect, useState } from "react"
 import AttachFileIcon from "../icons/AttachFileIcon";
 import SpeakerIcon from "../icons/SpeakerIcon";
 import DocumentIcon from "../icons/documentIcon";
 import { useRouter } from "next/router";
+import {useStoreActions,useStoreState} from '../store/hooks';
+import Select from 'react-select'
 
 
 const SuggestTheme = ({toastsRef}) => {
@@ -15,6 +15,12 @@ const SuggestTheme = ({toastsRef}) => {
     const {createThemeSuggestionThunk} = useStoreActions(store=>store.themeSuggestionsModel)
     const router = useRouter();
     const [loading,setLoading] = useState(false);
+    const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
+    const {promotions} = useStoreState(store=>store.promotionsModel)
+    const [chosenPromotion,setChoosenPromotion] = useState(null)
+    useEffect(async()=>{
+        await getAllPromotionsThunk();
+    },[])
 
 
     function handleChange(event) {
@@ -30,7 +36,7 @@ const SuggestTheme = ({toastsRef}) => {
       
     const handleSubmit = async e=>{
         e.preventDefault();
-        if(Empty([title,description])){
+        if(Empty([title,description]) && !chosenPromotion){
             toastsRef.current.addMessage({text:"tout les champs doivent etre remplit",mode:'Error'})
             return;
          }
@@ -62,7 +68,8 @@ const SuggestTheme = ({toastsRef}) => {
                         name:originalname,
                         url:path,
                    }
-               }):[]
+               }):[],
+               promotionId:chosenPromotion.value
            })
            toastsRef.current.addMessage({text:"la suggestion de theme a etee cree avec success!!",mode:'Alert'})
            setLoading(false);
@@ -102,6 +109,26 @@ const SuggestTheme = ({toastsRef}) => {
                                     className=" border   rounded-[5px]  outline-none h-[30px] w-[80%] px-3 bg-gray-200 text-black" 
                                     onChange={(e)=>setTitle(e.target.value)}
                                 />
+                            </div>   
+                </div> 
+               
+                <div className='flex flex-wrap -mx-3 mb-6  '>
+                            <div className="flex-1  space-x-6">
+                                <div> Promotion</div>
+                                    <div className="h-[30px] w-[80%]">
+                                    <Select
+                                   placeholder="Promotion" 
+                                     onChange={(option)=>{setChoosenPromotion(option)}}
+                                     options={promotions.map(el=>{return {value:el.id,label:el.name}})}
+                                     isLoading = {!promotions}
+                                     value={chosenPromotion}
+                                     styles = {{menuPortal:base=>({...base,zIndex:100,width:'80%',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
+                                    
+
+                                />
+
+                                    </div>
+                                 
                             </div>   
                 </div> 
 
