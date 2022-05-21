@@ -123,6 +123,9 @@ const config = props => {
                     <Link href='/addteacher'>
                         <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Ajouter des enseignant</button>
                     </Link>
+                    <Link href='/admin/addentreprise'>
+                        <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Ajouter des entreprise</button>
+                    </Link>
                     <Link href='/admin/studentlist'>
                         <button className="h-[40px] w-full hover:border-2 border-y-slate-200 border-x-transparent">Liste des étudiants</button>
                     </Link>
