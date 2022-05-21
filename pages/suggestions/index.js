@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useState,useRef } from "react"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
 import { useStoreActions, useStoreState } from "../../store/hooks"
@@ -9,10 +9,11 @@ import { useRouter } from "next/router";
 
 
 const Suggestions = ({toastsRef}) => {
-
+    const renders = useRef(null)
     const router = useRouter();
     console.log(router.query,'********')
     const {promotion} = router.query;
+    renders?.current++
 
    
     const {getThemeSuggestionsThunk,validateThemeSuggestionThunk} = useStoreActions(store=>store.themeSuggestionsModel)
@@ -23,20 +24,18 @@ const Suggestions = ({toastsRef}) => {
     useEffect(async()=>{
        await getAllPromotionsThunk();
        await getThemeSuggestionsThunk()
-        if(promotion){
-
-            setChoosenPromotion({value:promotion,label:promotions.find(el=>el.id === promotion)})
-        }
+       
+    
+       
        
     },[])
-    useEffect(async()=>{
-       
-        if(!chosenPromotion) return
-        router.push(`/suggestions?promotion=${chosenPromotion.value}`)
-        
-        await getThemeSuggestionsThunk(chosenPromotion.value)
-
-    },[chosenPromotion])
+    
+   
+    const handleChange = async option=>{
+        setChoosenPromotion(option)
+        router.push(`/suggestions?promotion=${option.value}`)
+         await getThemeSuggestionsThunk(option.value)
+    }
 
     const hanldeValidateThemeSuggestion = async(themeId)=>{
         try{
@@ -98,9 +97,10 @@ const Suggestions = ({toastsRef}) => {
                 {/* <Link href="/addstudent1"><button className={`shadow-lg h-[40px] w-[220px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full items-center justify-center ${typeUtilisateur === "admin" ? "flex" : "hidden"}`}>+ Ajouter suggestion </button></Link> */}
              </div>
              <div className="w-[300px]">
+                 {/* {renders?.current} */}
                 <Select
                                     placeholder="Promotion" 
-                                        onChange={(option)=>{setChoosenPromotion(option)}}
+                                        onChange={(option)=>{handleChange(option)}}
                                         options={promotions.map(el=>{return {value:el.id,label:el.name}})}
                                         isLoading = {!promotions}
                                         value={chosenPromotion}

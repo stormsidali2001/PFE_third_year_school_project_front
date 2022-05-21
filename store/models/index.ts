@@ -13,6 +13,7 @@ import { themeSuggestionsModel, ThemeSuggestionsModel } from "./themeSuggestion.
 import { teamListModel, TeamListModel } from "./teamsList.model";
 import { teamMessagesModel, TeamMessagesModel } from "./teamMessages.model";
 import { promotionsModel, PromotionsModel } from "./promotion.model";
+import { themesModel, ThemesModel } from "./theme.model";
 export interface Model{
     user:UserModel;
     notificationService:NotificationsServiceModel;
@@ -28,6 +29,7 @@ export interface Model{
     teamListModel:TeamListModel;
     teamMessagesModel:TeamMessagesModel;
     promotionsModel:PromotionsModel;
+    themesModel:ThemesModel
 }
 
 export const model:Model={
@@ -44,6 +46,7 @@ export const model:Model={
     themeSuggestionsModel:themeSuggestionsModel,
     teamListModel:teamListModel,
     teamMessagesModel:teamMessagesModel,
-    promotionsModel:promotionsModel
+    promotionsModel:promotionsModel,
+    themesModel:themesModel
     
 }
