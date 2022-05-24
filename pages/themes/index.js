@@ -21,41 +21,62 @@ const Themes = ({toastsRef}) => {
     const {promotions} = useStoreState(store=>store.promotionsModel)
     const {themes:themesData} = useStoreState(store=>store.themesModel)
       const [chosenPromotion,setChoosenPromotion] = useState(null)
-    useEffect(async()=>{
-       await getAllPromotionsThunk();
-       await getThemesThunk()
-       
-    
-       
-       
-    },[])
-    
+      useEffect(async()=>{
+      
+        
+        
+        if(promotions?.length === 0) await getAllPromotionsThunk()
+        
+      
+      
+            if(!promotion || promotion?.length === 0) {
+               
+                promotions?.length > 0 && await getThemesThunk()
+                return;
+            }
+            const label = promotions.find(el=>el.id=== promotion)?.name
+            if(!label) {
+               
+                return ;
+            }
+          
+            setChoosenPromotion({value:promotion,label})
+            await getThemesThunk(promotion)
+
+        
+        
+
+    },[promotion,promotions])
+   
    
     const handleChange = async option=>{
-        setChoosenPromotion(option)
-        router.push(`/suggestions?promotion=${option.value}`)
-         await getThemesThunk(option.value)
+      
+        router.push(`/themes?promotion=${option.value}`)
+       
     }
+
 
  
    
 
     
    
-    return "sssssssssss"
+    
    
 
-
+    let suggestedBy;
     let themes = themesData.map(th=>{
         const newObj = {...th};
         if(th.promotion){
             newObj.promotion = th.promotion.name;
         }
         if(th.suggestedByTeacher){
+            suggestedBy = 'teacher'
             newObj.suggestedByTeacher = th.suggestedByTeacher.firstName+' '+th.suggestedByTeacher.lastName;
             delete newObj.suggestedByEntreprise;
             
         }else if(th.suggestedByEntreprise){
+            suggestedBy = 'entreprise'
             newObj.suggestedByEntreprise = th.suggestedByEntreprise.name;
             delete newObj.suggestedByTeacher;
         }
@@ -101,8 +122,58 @@ const Themes = ({toastsRef}) => {
                                     />
 
                 </div>
-           { themes.length !== 0 &&  <div className="bg-[#282873]/10 backdrop-blur-[8px] shadow-lg  leading-normal h-fit p-4   w-[80vw]">
-               
+           { themes.length !== 0 &&  <div className="  h-fit p-4   w-[80vw] flex flex-wrap">
+                    {
+                        themes.map(({title,description,suggestedByTeacher,suggestedByEntreprise,promotion})=>{
+                            return (
+                                <div 
+                        className="h-[300px] w-[250px]  flex flex-col items-center bg-gradient-to-b from-blue-100 to-blue-300 hover:from-blue-100 hover:to-blue-200   rounded-lg shadow-lg relative text-textcolor cursor-pointer group"
+                        
+                        >
+                    <div className="  h-full w-full"> 
+                        <img src ="vote.jpg" className="object-contain h-full w-full mix-blend-darken opacity-50"/>
+                    </div>
+                    <div className="absolute space-y-4  flex items-center justify-center flex-col w-full h-full">
+                        {
+                            promotion&&(
+                                <div className="text-[22px] w-[90%] mx-2  text-center">
+                                     {promotion}
+                                 </div>
+
+                            )
+                        }
+                   
+                    <div className="text-[22px] w-[90%] mx-2  text-center">
+                        {title}
+                    </div>
+                        <div className="text-[14px] break-all   px-2 mx-2 bg-background/10 transition-all ease-in group-hover:bg-background/30 backdrop-blur-sm w-[90%]   py-1 h-[20%] flex flex-col">
+                            <span className="font-[500] font-mono text-[15px]">Par{ suggestedBy === 'teacher'?" Enseignant":" Entreprise"}:</span>
+                        {
+
+                            suggestedBy === 'teacher'?(
+                                <span className="text-center">{suggestedByTeacher}</span>
+                            ):(
+
+                                <span className="text-center">{suggestedByEntreprise}</span>
+
+                            )
+                        }
+                        
+                        </div>
+                      
+                        <div className="text-[14px] break-all   px-2 mx-2 bg-background/10 transition-all ease-in group-hover:bg-background/30 backdrop-blur-sm w-[90%]   py-1 h-[30%] flex flex-col">
+                            <span className="font-[500] font-mono text-[15px]">Description:</span>
+                            <span className=" h-[100%] break-all px-2 overflow-hidden ">{description}fsakfsjlfsajlfasj;lfasjl;fasjfsafsjfsfsj;fsaj;asfjfsajsfajkasfljsafkjsfakjlfsjklfaskjlasfkjsfjklfsaljksfajfsajfsakjllfksfajjfsfasjklfslakjfsjlksfjalkasfjlsafkjlkfslkljfsajksfalkjfsakjsfajlkfslkjfsakjsafjklfasjl;fsaj;</span>
+                        
+                        </div>
+                            
+                       
+                    </div>
+                </div>
+                            )
+                            
+                        })
+                    }
             </div>   }
         
        

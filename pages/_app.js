@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import {useEffect, useRef} from 'react'
 import {StoreProvider} from 'easy-peasy'
 import {store} from '../store'
+import Layout from '../components/Layout'
 
 
 function MyApp({ Component, pageProps }) {
@@ -14,9 +15,11 @@ function MyApp({ Component, pageProps }) {
   
   return(
     <StoreProvider store={store} >
-        <Component {...pageProps} toastsRef={toastsRef} />
-        <ToastPortal ref={toastsRef} />
-    </StoreProvider>
+        <Layout toastsRef={toastsRef}>
+          <Component {...pageProps} toastsRef={toastsRef} />
+          <ToastPortal ref={toastsRef} />
+        </Layout>
+      </StoreProvider>
   ) 
 }
 

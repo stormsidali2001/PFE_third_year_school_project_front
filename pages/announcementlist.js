@@ -11,11 +11,10 @@ const AnnouncementList = ({toastsRef}) => {
     const {getAnnouncementsThunk} = useStoreActions(store=>store.teamAnnouncementsModel)
     const {announcements} = useStoreState(store=>store.teamAnnouncementsModel)
     const {getFileThunk} = useStoreActions(store=>store.user)
-    const {getUserInfo} = useStoreActions(store=>store.user)
     
     useEffect(async ()=>{
         await getAnnouncementsThunk();
-        await getUserInfo()
+       
     },[])
     const handleClick = async doc=>{
          

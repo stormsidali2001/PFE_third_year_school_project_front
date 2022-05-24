@@ -6,64 +6,30 @@ import { useStoreActions } from "../../store/hooks";
 import { useEffect } from "react";
 
 const theme = props => {
-    const typeUtilisateur = "admin"
+   
     
-    const data = [
-        {
-            id : 1,
-            Titre : "PFE",
-            Spécialité : "Application Web",
-            Encadreur : "Encadreur1 , Encadreur2"
-        },
-        {
-            Numéro : 2,
-            Titre : "PFE",
-            Spécialité : "Application Web",
-            Encadreur : "Encadreur1 , Encadreur2"
-        },
-        {
-            id : 3,
-            Titre : "PFE",
-            Spécialité : "Application Web",
-            Encadreur : "Encadreur1 , Encadreur2"
-        },
-        {
-            id : 4,
-            Titre : "PFE",
-            Spécialité : "Application Web",
-            Encadreur : "Encadreur1 , Encadreur2"
-        },
-        {
-            id : 1,
-            Titre : "PFE",
-            Spécialité : "Application Web",
-            Encadreur : "Encadreur1 , Encadreur2"
-        },
-        {
-            id : 2,
-            Titre : "PFE",
-            Spécialité : "Application Web",
-            Encadreur : "Encadreur1 , Encadreur2"
-        },
-        {
-            id : 3,
-            Titre : "PFE",
-            Spécialité : "Application Web",
-            Encadreur : "Encadreur1 , Encadreur2"
-        },
-        {
-            id: 4,
-            Titre : "PFE",
-            Spécialité : "Application Web",
-            Encadreur : "Encadreur1 , Encadreur2"
-        },
-        
-    ]
-    const {getThemeSuggestionsThunk} = useStoreActions(store=>store.themeSuggestionsModel)
+  
     useEffect(async()=>{
-        await getThemeSuggestionsThunk()
-    },[])
+        await getAllPromotionsThunk()
+        if(!promotion || promotion?.length === 0) {
+            await getThemeSuggestionsThunk()
+            return;
+        }
+        const label = promotions.find(el=>el.id=== promotion)?.name
+        if(!label) {
+            await getThemeSuggestionsThunk()
+            return ;
+        }
+        setChoosenPromotion({value:promotion,label})
+        await getThemeSuggestionsThunk(promotion)
 
+    },[promotion])
+   
+    const handleChange = async option=>{
+      
+        router.push(`/suggestions?promotion=${option.value}`)
+       
+    }
     if(data.length === 0) return <div>Aucune donnée</div>
    const columns = [...Object.keys(data[0]).filter(el=>el!=='id')];
 
@@ -75,7 +41,7 @@ const theme = props => {
                 <img src="themeStudent.png"  className="object-contain mix-blend-darken absolute inset-1/4"/>
                 <div className="flex flex-row space-x-72 items-center justify-center pt-10">
                 <div className="text-[30px]">Liste des thèmes</div>
-                    <Link href="/addstudent1"><button className={`shadow-lg h-[40px] w-[220px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full items-center justify-center ${typeUtilisateur === "admin" ? "flex" : "hidden"}`}>+ Ajouter thème </button></Link>
+                   
                  </div>
                 <table className="bg-[#282873]/10 backdrop-blur-[8px] shadow-lg  leading-normal h-fit p-4   w-[80vw]">
                     <thead>

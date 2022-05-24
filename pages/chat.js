@@ -24,7 +24,6 @@ const chat = props => {
         },
     ]
     const {sendMessage,getMessages} = useStoreActions(store=>store.teamMessagesModel)
-    const {getUserInfo} = useStoreActions(store=>store.user)
     const user = useStoreState(store=>store.user)
     const {messages} = useStoreState(store=>store.teamMessagesModel)
     const {socket} = useStoreState(store=>store.socketModel)
@@ -33,7 +32,6 @@ const chat = props => {
     const {student} = user;
  
     useEffect(async()=>{
-        await getUserInfo()
         await getMessages();
        
     },[])
@@ -94,7 +92,7 @@ const chat = props => {
                 </div>
                 <div className={`h-[80vh] w-[90vw] flex items-center justify-center relative ${discussionOuverte === true ? "" : "mix-blend-darken"}`}>
                 <img src="chat.jpg" className={`h-[70vh] w-fit object-contain mix-blend-darken ${discussionOuverte === true ? "opacity-10" : ""}`}/>
-                    <div className={`flex flex-col min-h-full w-full space-y-10 items-center justify-center absolute z-50 ${discussionOuverte === true ? "p-12 bg-white shadow-md rounded-xl backdrop-blur-lg overflow-y-scroll overflow-x-hidden" : ""}`}>
+                    <div className={`flex flex-col min-h-full w-full space-y-10 items-center justify-center absolute z-40 ${discussionOuverte === true ? "p-12 bg-white shadow-md rounded-xl backdrop-blur-lg overflow-y-scroll overflow-x-hidden" : ""}`}>
                         <img src="chat.jpg" className={`h-[70vh] w-fit object-contain mix-blend-darken absolute ${discussionOuverte === true ? "opacity-10" : ""}`}/>
                         <div className={`text-[25px] font-thin absolute bottom-4 ${discussionOuverte === true ? "hidden" : "flex"}`}>Cliquer sur un groupe pour afficher les messages</div>
                         <div className={`flex-col h-full w-full space-y-10`}>
@@ -105,7 +103,7 @@ const chat = props => {
                                         return (
                                             <div className={`flex-col  flex h-full w-full space-y-10 ${student?.id === element?.sender?.id ? "items-end" : "items-start"}`}>
                                                 {idDiscussion === element.chatId ? 
-                                                    <div className={`z-50 rounded-2xl py-1 px-4 my-[2px] space-y-2 break-all max-w-[300px] ${student?.id === element?.sender?.id ? "bg-[#36b5ff] text-white" : " bg-[#8FD4FB] "} flex flex-col`}>
+                                                    <div className={`z-40 rounded-2xl py-1 px-4 my-[2px] space-y-2 break-all max-w-[300px] ${student?.id === element?.sender?.id ? "bg-[#36b5ff] text-white" : " bg-[#8FD4FB] "} flex flex-col`}>
                                                          <div className="text-[12px] ">par: {element?.sender?.firstName+' '+element?.sender?.lastName}</div>
                                                         <div>{element.message}</div>
                                                        
@@ -116,10 +114,10 @@ const chat = props => {
                                     })
                                 }
                             </div>
-                            <div className= {`pb-8 fixed flex h-fit w-full flex-row justify-start ${discussionOuverte === true ? "flex" : "hidden"} z-50`}>
-                                <input value={newMessage} className={`bg-zinc-100 h-[45px] w-10/12 rounded-2xl shadow-md px-4`} onChange={(e)=> {setNewMessage(e.target.value)}} placeholder = "Ecrivez un message ..."/>
-                                <button onClick={() => handleSubmitMessage()}><Send/></button>
-                            </div>
+                            <form onSubmit={(e) => {e.preventDefault();handleSubmitMessage();}} className= {`pb-8 fixed flex h-fit w-full flex-row justify-start ${discussionOuverte === true ? "flex" : "hidden"} z-40`}>
+                                <input value={newMessage}  className={`bg-zinc-100 h-[45px] w-10/12 rounded-2xl shadow-md px-4`} onChange={(e)=> {setNewMessage(e.target.value)}} placeholder = "Ecrivez un message ..."/>
+                                <button  ><Send/></button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useEffect, useState,useRef } from "react"
+import { useEffect, useState,useRef, useLayoutEffect } from "react"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
 import { useStoreActions, useStoreState } from "../../store/hooks"
@@ -21,20 +21,40 @@ const Suggestions = ({toastsRef}) => {
     const {promotions} = useStoreState(store=>store.promotionsModel)
     const {themeSuggestions:themeSuggestionsData} = useStoreState(store=>store.themeSuggestionsModel)
       const [chosenPromotion,setChoosenPromotion] = useState(null)
+       
+     
+   
     useEffect(async()=>{
-       await getAllPromotionsThunk();
-       await getThemeSuggestionsThunk()
-       
-    
-       
-       
-    },[])
-    
+      
+        
+        
+        if(promotions?.length === 0) await getAllPromotionsThunk()
+        
+      
+      
+            if(!promotion || promotion?.length === 0) {
+               
+                promotions?.length > 0 && await getThemeSuggestionsThunk()
+                return;
+            }
+            const label = promotions.find(el=>el.id=== promotion)?.name
+            if(!label) {
+               
+                return ;
+            }
+          
+            setChoosenPromotion({value:promotion,label})
+            await getThemeSuggestionsThunk(promotion)
+
+        
+        
+
+    },[promotion,promotions])
    
     const handleChange = async option=>{
-        setChoosenPromotion(option)
+      
         router.push(`/suggestions?promotion=${option.value}`)
-         await getThemeSuggestionsThunk(option.value)
+       
     }
 
     const hanldeValidateThemeSuggestion = async(themeId)=>{
@@ -97,7 +117,7 @@ const Suggestions = ({toastsRef}) => {
                 {/* <Link href="/addstudent1"><button className={`shadow-lg h-[40px] w-[220px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full items-center justify-center ${typeUtilisateur === "admin" ? "flex" : "hidden"}`}>+ Ajouter suggestion </button></Link> */}
              </div>
              <div className="w-[300px]">
-                 {/* {renders?.current} */}
+                 {renders?.current}
                 <Select
                                     placeholder="Promotion" 
                                         onChange={(option)=>{handleChange(option)}}

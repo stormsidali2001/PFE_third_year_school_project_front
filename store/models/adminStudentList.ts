@@ -9,6 +9,7 @@ export  interface StudentPayload{
     dob:string;
     code:string;
     promotionId:string;
+    moy:string;
 }
 export interface Student extends StudentPayload {
     id:string;

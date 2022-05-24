@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import axios from 'axios';
 import { useStoreActions } from "../store/hooks";
 import AttachFileIcon from "../icons/AttachFileIcon";
 import SpeakerIcon from "../icons/SpeakerIcon";

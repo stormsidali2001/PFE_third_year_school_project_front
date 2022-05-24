@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { userInfo } from "os"
 import { useEffect, useState } from "react"
+import AdminVerticalNavbar from "../../components/AdminVerticalNavbar"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
 import { useStoreActions, useStoreState } from "../../store/hooks"
@@ -24,7 +25,7 @@ const TeamList = props => {
     return (
         <div>
             <HorisontalNavbar/>
-            <StudentVerticalNavbar/>
+            <AdminVerticalNavbar/>
             <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor">
             <img src="themeStudent.png"  className="object-contain mix-blend-darken absolute inset-1/4"/>
                 
@@ -68,7 +69,6 @@ const TeamList = props => {
                                         }
                                       <td className="flex items-center space-x-4 justify-center">
                                             <Link href={`/team/${row.id}`}><button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button></Link>
-                                            <button className={`shadow-lg items-center justify-center h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full ${typeUtilisateur === "admin" && colonne[row.id] === colonne[row.id] ? "flex" : "hidden"}`} onClick={(e)=> {setColonne([...colonne , row.id])}}>Valider</button>
                                         </td>
                                     </tr>
                                 )

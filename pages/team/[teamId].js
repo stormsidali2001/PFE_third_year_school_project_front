@@ -29,11 +29,8 @@ const Team = props => {
     const {teamId} = router.query;
     const [modifier,setModifier] = useState(false)
     const user = useStoreState(store=>store.user)
-    const {getUserInfo} = useStoreActions(store=>store.user)
     const {userType,student} = user;
-    useEffect(async()=>{
-        await getUserInfo()
-    },[])
+ 
     useEffect(async()=>{
         const team =  await getTeam(teamId)
         setTeamName(team?.pseudo)

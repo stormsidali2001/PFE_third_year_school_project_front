@@ -9,6 +9,7 @@ import {useState} from 'react'
 import ListIcon from "../icons/ListIcon";
 import TeamIcon from "../icons/TeamIcon";
 import { useStoreActions, useStoreState } from "../store/hooks";
+import ChatIcon from "../icons/ChatIcon";
 
 
 const StudentVerticalNavbar = () => {
@@ -97,6 +98,14 @@ const StudentVerticalNavbar = () => {
                     </Link>
 
                 </div>}
+                {  hasTeam&&  <div className='relative cursor-pointer group'>
+                    <div className='absolute right-0 translate-x-[100%] top-0 text-textcolor bg-white rounded-80 font-semibold w-fit px-2 hidden group-hover:flex rounded-[10px] shadow-lg'>Chat</div>
+                    <Link href="/chat" >
+                    
+                        <button><ChatIcon className='hover:cursor-pointer w-[40px] h-[39px] text-[#03045E]' /></button>
+                    </Link>
+
+                </div>}
 
                 {(!hasTeam || isTeamLeader)&&<div className='relative cursor-pointer group'>
                     <div className='absolute right-0 translate-x-[100%] top-0 text-textcolor bg-white rounded-80 font-semibold w-fit px-2 hidden group-hover:flex rounded-[10px] shadow-lg'>Inviter</div>
@@ -114,6 +123,7 @@ const StudentVerticalNavbar = () => {
                     </Link>
 
                 </div>}
+                
                 
                
                 

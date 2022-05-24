@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/login.js", "components/Notification.js"  ],
+, "pages/login.js", "components/Notification.js", "components/Layout.js"  ],
   "exclude": [
     "node_modules"
   ]

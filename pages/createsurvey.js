@@ -16,10 +16,7 @@ const CreerSondage = ({toastsRef}) => {
     const {createSurveyThunk} = useStoreActions(store=>store.surveysModel);
     const [loading,setLoading] = useState(false)
     const router = useRouter();
-    const {getUserInfo} = useStoreActions(store=>store.user)
-    useEffect(async()=>{
-        await getUserInfo()
-    },[])
+   
 
 
     const optionhandler = (e) => {

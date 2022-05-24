@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useStoreActions } from "../../store/hooks";
 import HorisontalNavbar from "../../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar";
+import ModalPortal from "../../components/ModalPortal";
 const SingleSurvey = ({toastsRef})=>{
     const {survey} = useStoreState(store=>store.surveysModel);
     const {submitAnswerThunk} = useStoreActions(store=>store.surveysModel)
@@ -18,10 +19,11 @@ const SingleSurvey = ({toastsRef})=>{
     const [argument,setArgument] = useState(survey?.argument );
     const [createdAt,setCreatedAt] = useState('');
     const [pageLoaded,setPageLoaded] = useState(false)
+    const [showOptionDetails,setShowOptionDetails] = useState(false)
   
   
-     const {getSurveyThunk} = useStoreActions(store=>store.surveysModel)
-     const {getUserInfo} = useStoreActions(store=>store.user)
+     const {getSurveyThunk,getSurveyParticipantsArguments} = useStoreActions(store=>store.surveysModel)
+     const {surveyParticipantsArguments} = useStoreState(store=>store.surveysModel)
      const user = useStoreState(store=>store.user)
      const teamLeader = user?.student?.team?.teamLeader;
     
@@ -46,7 +48,6 @@ const SingleSurvey = ({toastsRef})=>{
     winningOptions = options?.filter(op=>op.answersCount ===max)
     
     useEffect(async()=>{
-        await getUserInfo();
         console.log(surveyId,"33333333333")
         const survey = await  getSurveyThunk(surveyId)
         setTitle(survey?.title)
@@ -61,20 +62,21 @@ const SingleSurvey = ({toastsRef})=>{
         setChosenOption(index?index:0)
         setPageLoaded(true)
     },[surveyId])
-    const optionhandler = (e) => {
-        e.preventDefault();
-        if(option.length === 0){
-            toastsRef.current.addMessage({text:"L'option doit etre non vide",mode:'Error'})
-            return;
-        }
-        if(options.length < 10){
+    const handleShowParticipants = async optionId=>{
+        if(!surveyId) return;
+        
+        try{
+            await getSurveyParticipantsArguments({
+                surveyId,
+                optionId
+            })
+            setShowOptionDetails(true)
 
-            setOptions([...options, option])
-            setOption('')
+        }catch(err){
+            console.log(err)
         }
-        else{
-            toastsRef.current.addMessage({text:"il y a trop d'options",mode:'Error'})
-        }
+      
+
     }
     const handleSubmitAnswer  = async(e)=>{
         e.preventDefault();
@@ -156,7 +158,7 @@ const SingleSurvey = ({toastsRef})=>{
                 </div> 
                 <div className='flex flex-wrap -mx-3 mb-6 '>
                     <div className="flex-1  space-x-6">
-                        <div> Les options gagnants</div> 
+                      
                            
                         {
                                   surveyClosed&&(
@@ -192,16 +194,16 @@ const SingleSurvey = ({toastsRef})=>{
                              
                           >
                               
-                              {options?.map(({description,answersCount},index)=>{
+                              {options?.map(({description,answersCount,id},index)=>{
                                 return(
                                     <div 
                                     key={index} 
                                     className='flex  items-center space-x-2 w-fit cursor-pointer'
-                                    onClick={(e)=>setChosenOption(index)}
+                                   
                                     >
-                                        <div className={`w-[15px] h-[15px] rounded-full bg-blue-100 flex items-center justify-center text-[10px]`}>{answersCount}</div>
-                                        <div className={`w-[15px] h-[15px] rounded-full ${chosenOption === index?"bg-blue-300":"bg-blue-100"} `}></div>
-                                        <div >{description}</div>
+                                        <div className={`w-[15px] h-[15px] rounded-full bg-blue-100 flex items-center justify-center text-[10px] hover:scale-110 hover:font-bold`} onClick={()=>handleShowParticipants(id)}>{answersCount}</div>
+                                        <div className={`w-[15px] h-[15px] rounded-full ${chosenOption === index?"bg-blue-300":"bg-blue-100 cursor-pointer"} `}  onClick={(e)=>setChosenOption(index)}></div>
+                                        <div className=" cursor-pointer"  onClick={(e)=>setChosenOption(index)}>{description}</div>
                                     </div>
                                       
                                 )
@@ -245,6 +247,41 @@ const SingleSurvey = ({toastsRef})=>{
                 
         </div>
  </form>
+ <ModalPortal
+        open={showOptionDetails}
+        handleClose={()=>{setShowOptionDetails(false)}}
+
+    >
+        <div className="flex flex-col text-textcolor space-y-4 bg-white">
+            <div className="text-semibold text-[20px] text-center text-textcolor font-medium">{"Liste d'argument par participant"}</div>
+            <div className="px-4">
+                Une reponse de Sondage sans arguments est  comme un coffre sans clé.
+            </div>
+            <div className="flex flex-col mx-auto px-2 py-1 space-y-2 w-full items-center max-h-[50vh] overflow-y-auto">
+                {
+                    surveyParticipantsArguments.map(({id,student,argument})=>{
+                        return (
+                            <div 
+                                key={id} 
+                                className = 'bg-white shadow-lg flex flex-col space-y-1 w-[80%]  py-2 rounded-[10px]'
+                            >
+                                
+                                  <div className='flex flex-col space-x-2'>
+                                    <div className="pl-1">Argument:</div>
+                                    <div className="bg-gray-200 h-[60px] text-textcolor rounded-[10px] px-2 break-all">{argument}</div>
+                                    <div className=" text-sm">By: {student.firstName + ' ' + student.lastName}</div>
+
+                                  </div>
+                                 
+                              
+
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        </div>
+    </ModalPortal>
 
 
  </div>

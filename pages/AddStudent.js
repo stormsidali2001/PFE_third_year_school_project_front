@@ -1,7 +1,7 @@
 import { useStoreActions, useStoreState } from "../store/hooks";
 import { useEffect, useState } from "react";
 import HorisontalNavbar from "../components/HorisontalNavbar";
-import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
+import AdminVerticalNavbar from "../components/AdminVerticalNavbar";
 import ArrowIcon from "../icons/ArrowIcon";
 import AttachFileIcon from "../icons/AttachFileIcon";
 import readXlsxFile from 'read-excel-file'
@@ -15,6 +15,7 @@ const addStudent = ({toastsRef}) => {
     const [email , setEmail] = useState("")
     const [firstName , setFirstName] = useState("")
     const [lastName , setLastName] = useState("")
+    const [moyenne,setMoyenne] = useState(10.0)
     const [dob , setDob] = useState("20-04-2001")
     const [file,setFile] = useState({})
     const {addSingleStudent,addMultipleStudents} = useStoreActions(store=>store.adminStudentListModel)
@@ -22,8 +23,11 @@ const addStudent = ({toastsRef}) => {
     const {promotions} = useStoreState(store=>store.promotionsModel)
     const [loading,setLoading] = useState(false)
     const [chosenPromotion,setChoosenPromotion] = useState(null)
+   
     useEffect(async()=>{
+     
         await getAllPromotionsThunk();
+
     },[])
     const handleAddSingleStudent = async e=>{
         e.preventDefault();
@@ -41,7 +45,9 @@ const addStudent = ({toastsRef}) => {
                 email,
                 code:matricule,
                 dob:dob,
-                promotionId:chosenPromotion.value
+                promotionId:chosenPromotion.value,
+                moy:moyenne
+
             })
             toastsRef.current.addMessage({text:"Etudiant ajouté...",mode:'Alert'})
             setLoading(false)
@@ -54,11 +60,20 @@ const addStudent = ({toastsRef}) => {
         
     }
     const handleAddMultipleStudents = async e=>{
+        if(promotions?.length ===0){
+            toastsRef.current.addMessage({text:"ressayer...",mode:'Error'})
+            return;
+        }
         e.preventDefault();
         try{
             setLoading(true)
             await addMultipleStudents(
-                file
+                file.map(el=>{
+                    return{
+                        ...el,
+                        promotionId:promotions.find(p=>p.name === el.promotion).id
+                    }
+                })
                )
             toastsRef.current.addMessage({text:"Etudiants ajouté...",mode:'Alert'})
             setLoading(false)
@@ -83,7 +98,7 @@ const addStudent = ({toastsRef}) => {
             
         })
 
-        if(!headerColsExist.has('firstName') || !headerColsExist.has('lastName') || !headerColsExist.has('code') || !headerColsExist.has('email') || !headerColsExist.has('dob')){
+        if(!headerColsExist.has('firstName') || !headerColsExist.has('lastName') || !headerColsExist.has('code') || !headerColsExist.has('email') || !headerColsExist.has('dob') || !headerColsExist.has('promotion') || !headerColsExist.has('moy')){
             toastsRef.current.addMessage({text:"un attribut est absent dans a tete de document excel",mode:'Error'})
             return []
 
@@ -107,9 +122,9 @@ const addStudent = ({toastsRef}) => {
     }
     return (
        <div>
-           <StudentVerticalNavbar/>
+           <AdminVerticalNavbar/>
            <HorisontalNavbar toastsRef={toastsRef}/>
-            <div className="bg-background h-screen w-screen relative flex items-center justify-center font-xyz text-textcolor">
+            <div className="bg-background h-screen w-screen relative flex items-center justify-center font-xyz text-textcolor ">
                 <img src="addStudent.jpg" className="h-full w-full object-contain mix-blend-darken absolute"/>
                 <div className={`h-[200px] w-[450px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
                     <div className="text-[23px] text-center px-10">Vous voulez ajouter un ou plusieur étudiant ?</div>
@@ -118,10 +133,25 @@ const addStudent = ({toastsRef}) => {
                         <button className="h-[35px] w-[160px] rounded-full bg-[#8FD4FB]" onClick={()=> setManyClick(true)}>Plusieurs</button>
                     </div>
                 </div>
-                <form className = {`h-[550px] w-[650px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[23px] ${oneclick === true ? "flex" : "hidden"}`} onSubmit={handleAddSingleStudent}>
+                <form className = {`h-[550px] w-[650px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[23px] ${oneclick === true ? "flex" : "hidden"} mt-[100px]`} onSubmit={handleAddSingleStudent}>
                     <div className="text-[35px]">Ajouter un étudiant</div>
                     <table>
+                    <tr className="">
+                            <td className="py-2">Promotion :</td>
+                            <td >
+                                <Select
+                                    placeholder="Promotion..." 
+                                    className="z-50 h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
+                                     onChange={(option)=>{setChoosenPromotion(option)}}
+                                     options={promotions.map(el=>{return {value:el.id,label:el.name}})}
+                                     isLoading = {!promotions}
+                                     value={chosenPromotion}
+                                     styles = {{menuPortal:base=>({...base,zIndex:500})}}
+                                />
+                            </td>
+                        </tr>
                         <tr className="">
+                            
                             <td className="py-2">Matricule :</td>
                             <td>
                                 <input
@@ -132,20 +162,16 @@ const addStudent = ({toastsRef}) => {
                             </td>
                         </tr>
                         <tr className="">
-                            <td className="py-2">Promotion :</td>
+                            <td className="py-2">Moyenne :</td>
                             <td>
-                                <Select
-                                     className=" z-50 h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Matricule..." 
-                                     onChange={(option)=>{setChoosenPromotion(option)}}
-                                     options={promotions.map(el=>{return {value:el.id,label:el.name}})}
-                                     isLoading = {!promotions}
-                                     value={chosenPromotion}
-                                     styles = {{menuPortal:base=>({...base,zIndex:100})}}
-                                    
-
+                                <input
+                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Matricule..." 
+                                     onChange={(e)=>{setMoyenne(e.target.value)}}
+                                     value={moyenne}
                                 />
                             </td>
                         </tr>
+                      
                         <tr className="">
                             <td className="py-2">Email :</td>
                             <td>
