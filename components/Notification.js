@@ -18,6 +18,7 @@ const Notification = forwardRef(({open,toastsRef},ref)=>{
             console.log("socket not initialized yet");
             return;
         }
+       
         console.log("zzzzzzzzzzzzzzzzzz",socket)
         await getNewNotificationThunk(toastsRef) 
       

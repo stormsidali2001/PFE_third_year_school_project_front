@@ -81,8 +81,7 @@ export const notificationsServiceModel:NotificationsServiceModel={
         socket.on("new_notification", notfication =>{
             
                     actions.setNotification(notfication)
-                   payload.current.addMessage({text:notfication.description,mode:'Alert'})
-                   alert('sdsdd')
+                   payload?.current?.addMessage({text:notfication.description,mode:'Alert'})
     })
     })
 
