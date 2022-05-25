@@ -10,7 +10,7 @@ const TeamList = props => {
 
     const typeUtilisateur = "admin"
     const {getTeamsList} = useStoreActions(store=>store.teamListModel)
-    const {teamsList} =useStoreState(store=>store.teamListModel)
+    const {teamsList:teamsData} =useStoreState(store=>store.teamListModel)
     const [colonne , setColonne] = useState ([])
     const [copie , setCopie] = useState([])
     useEffect(async()=>{
@@ -19,9 +19,16 @@ const TeamList = props => {
    },[])
 
   
+   let teamsList = teamsData.map(el=>{
+       return {
+           ...el,
+           theme:el.theme.title
+       }
+   })
+   console.log(teamsList,'******')
+   
     if(teamsList.length === 0) return <div>Aucune donnée</div>
     const columns = [...Object.keys(teamsList[0]).filter(el=>el !=='id')];
-    
     return (
         <div>
             <HorisontalNavbar/>

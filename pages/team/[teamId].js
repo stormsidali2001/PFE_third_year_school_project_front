@@ -2,15 +2,12 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
-import DownIcon from "../../icons/DownIcon"
-import UpIcon from "../../icons/UpIcon"
-import Trash from "../../icons/Trash"
+
 import { useStoreActions, useStoreState } from "../../store/hooks"
 import { useRouter } from "next/router"
 const Team = props => {
 
    
-    const [encadreur , setEncadreur] = useState("Mimouna mimoun") 
   
    const [teamName,setTeamName] = useState('')
    const [description,setDescription] = useState('')
@@ -18,6 +15,8 @@ const Team = props => {
    const [theme,setTheme] = useState('')
    const [membres,setMembres] = useState([])
    const [validated,setValidated] = useState(false)
+   const [promotion,setPromotion] = useState({})
+   const [teamLeader,setTeamLeader] = useState({})
  
    
 
@@ -32,13 +31,16 @@ const Team = props => {
     const {userType,student} = user;
  
     useEffect(async()=>{
+        if(!teamId) return;
         const team =  await getTeam(teamId)
         setTeamName(team?.pseudo)
         setDescription(team?.description)
         setRules(team?.rules)
-        setTheme(team?.givenTheme?team?.givenTheme:'___')
+        setTheme(team?.theme?team?.theme:{})
         setMembres(team?.members)
         setValidated(team?.validated)
+        setPromotion(team?.promotion)
+        setTeamLeader(team?.teamLeader)
 
 
     },[teamId])
@@ -52,6 +54,11 @@ const Team = props => {
                 <div className="flex flex-col items-center justify-center">
                     <img src="/themeStudent.png" className="mix-blend-darken absolute"/>
                     <div className={`p-10 justify-center flex-col space-y-8 h-[500px] w-[650px] px-10 bg-white/70 backdrop-blur-sm shadow-lg rounded-xl text-[16px] `}>
+                    <div className="flex flex-row items-center space-x-4 text-[26px]">
+                            <div className={`text-center w-full`}>
+                               {promotion?.name}
+                            </div>
+                        </div>
                         <div className="flex flex-row items-center space-x-4 text-[26px]">
                             <div className={` ${modifier === false ? "flex" : "hidden"}`}>
                                {teamName}
@@ -60,8 +67,8 @@ const Team = props => {
                         </div>
                         <div className="flex items-center flex-row space-x-4">
                             <div className="text-[19px]">Theme :</div>
-                            <div className={`${modifier === false ? "flex" : "hidden"}`}>{theme}</div>
-                            <input value={theme} className={`${modifier === true ? "flex" : "hidden"}`} onChange={(e) => {setTheme(e.target.value)}}/>
+                            <div className={`${modifier === false ? "flex" : "hidden"}`}>{(theme?.title)?theme?.title:'__'}</div>
+                     
                         </div>
                         <div className="flex items-center flex-row space-x-4">
                             <div className="text-[19px]">Validee :</div>
@@ -84,7 +91,7 @@ const Team = props => {
                                                 
                                                 <button key={index} className=' bg-blue-300/40 backdrop-blur-lg rounded-full px-3 hover:text-blue-500 w-[200px]  flex flex-row space-x-2 items-center'>
                                                     <div className=" w-4 h-4 rounded-full bg-blue-300 text-white text-[10px] flex items-center justify-center">{index+1}</div>
-                                                   <span>{` ${el?.firstName} ${el?.lastName} ${student?.team?.teamLeader?.id === el.id?'(CF)':''}`}</span>
+                                                   <span>{` ${el?.firstName} ${el?.lastName} ${teamLeader?.id === el.id?'(CF)':''}`}</span>
                                                     
                                                     </button>
                                                 

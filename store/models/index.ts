@@ -14,6 +14,8 @@ import { teamListModel, TeamListModel } from "./teamsList.model";
 import { teamMessagesModel, TeamMessagesModel } from "./teamMessages.model";
 import { promotionsModel, PromotionsModel } from "./promotion.model";
 import { themesModel, ThemesModel } from "./theme.model";
+import { WishListModel, wishListModel } from "./wishList.entity";
+import {  adminAsignTeamsToThemesModel, AdminAsignTeamsToThemesModel } from "./adminAsignTeamToThemes";
 export interface Model{
     user:UserModel;
     notificationService:NotificationsServiceModel;
@@ -29,7 +31,9 @@ export interface Model{
     teamListModel:TeamListModel;
     teamMessagesModel:TeamMessagesModel;
     promotionsModel:PromotionsModel;
-    themesModel:ThemesModel
+    themesModel:ThemesModel;
+    wishListModel:WishListModel
+    adminAsignTeamsToThemesModel:AdminAsignTeamsToThemesModel;
 }
 
 export const model:Model={
@@ -47,6 +51,8 @@ export const model:Model={
     teamListModel:teamListModel,
     teamMessagesModel:teamMessagesModel,
     promotionsModel:promotionsModel,
-    themesModel:themesModel
+    themesModel:themesModel,
+    wishListModel:wishListModel,
+    adminAsignTeamsToThemesModel:adminAsignTeamsToThemesModel
     
 }

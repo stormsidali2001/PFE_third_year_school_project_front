@@ -61,7 +61,7 @@ const Suggestions = ({toastsRef}) => {
         try{
             await validateThemeSuggestionThunk(themeId)
             toastsRef.current.addMessage({text:"c'est fait !!",mode:'Alert'})
-            await getThemeSuggestionsThunk(chosenPromotion.value)
+            await getThemeSuggestionsThunk(promotion)
         }catch(err){
             console.log(err)
             toastsRef.current.addMessage({text:"ops... Erreur",mode:'Error'})
@@ -177,7 +177,7 @@ const Suggestions = ({toastsRef}) => {
                                         })
                                     }
                                     <td className="flex items-center justify-center space-x-4">
-                                         <Link href={`/`}><button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button></Link> 
+                                         <Link href={`/suggestions/${row['id']}`}><button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button></Link> 
                                       {  !row['validated']&& <button 
                                             className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full"
                                             onClick={(e)=>{e.preventDefault();hanldeValidateThemeSuggestion(row['id'])}}

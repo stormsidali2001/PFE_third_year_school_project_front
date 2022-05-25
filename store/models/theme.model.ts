@@ -65,6 +65,7 @@ export const themesModel:ThemesModel = {
             }
           
             actions.setThemes(res.data)
+            return res.data
 
         }catch(err){
             console.log(err)

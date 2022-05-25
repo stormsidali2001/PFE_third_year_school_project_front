@@ -1,66 +1,101 @@
 import { useEffect, useState ,useRef} from "react";
-import { useStoreActions } from "easy-peasy";
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar";
 import HorisontalNavbar from "../../components/HorisontalNavbar";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useStoreActions } from "../../store/hooks";
 
 import SortAscIcon from "../../icons/SortAsc";
 import AdminVerticalNavbar from "../../components/AdminVerticalNavbar";
-const FicheVoeux = props => {
+import { useStoreState } from "easy-peasy";
+const FicheVoeux = ({toastsRef}) => {
+  const {getThemesThunk} = useStoreActions(store=>store.themesModel)
+  const {themes} = useStoreState(store=>store.themesModel)
+
    const listeRef = useRef(null);
-    const {getUserInfo} = useStoreActions(store=>store.user)
-    const [themeList,setThemeList] = useState(Array.from({ length: 10 }, (v, k) => k).map(k => ({
-        id: `item-${k}`,
-        content: `PFE projet fin d'etude ${k}`
-      })));
-  const [dragging,setDragging] = useState(false);
-  const currentNode = useRef();
-    useEffect(()=>{
-        getUserInfo();
-    },[])
+    const user = useStoreState(store=>store.user)
+    const promotionId = user?.student?.promotion?.id
+    const [themeList,setThemeList] = useState(themes);
+    const [dragging,setDragging] = useState(false);
+    const currentNode = useRef();
+    const dragNode = useRef()
+    const {submitWishList} = useStoreActions(store=>store.wishListModel)
+    useEffect(async ()=>{
+      if(!promotionId) return;
+     const data =  await getThemesThunk(promotionId)
+     setThemeList(data)
+    },[promotionId])
    
     const handleDragEnd = e =>{
-      console.log(e.target,"handleDragEnd")
-     
+      console.log("handleDragEnd :")
+   
 
-        currentNode.current.style.visibility = ''
-        setDragging(false)
+       setDragging(false)
+       dragNode.current.removeEventListener("dragend",handleDragEnd)
+       dragNode.current = null;
+       currentNode.current = null;
+  
+
      
     
     }
-    const handleDragStart = e=>{
-      console.log(e.target,"handleDragStart")
+    const handleDragStart = (e,index)=>{
+      console.log("handleDragStart index:",index,e.target)
      
-      currentNode.current = e.target;
-      setTimeout(()=>{
-        setDragging(true)
+      currentNode.current = index;
+      dragNode.current = e.target;
+       dragNode.current.addEventListener("dragend",handleDragEnd)
+       setTimeout(()=>{
 
-        currentNode.current.style.visibility = 'hidden'
-      },0)
-      console.log(e.target.getAttribute("data-item-id"))
+         setDragging(true)
+       },0)
+
     
 
     }
-    const handleDragEnter = e =>{
+    const handleDragEnter = (e,index) =>{
       console.log(e.target,"handleDragEnter")
-      if(e.target === currentNode.current) {
+      if(index === currentNode.current) {
         console.log("same node")
         return;
       }
-        const startIndex = currentNode.current.getAttribute('data-item-id')
-        const endIndex = e.target.getAttribute('data-item-id')
+        const startIndex = currentNode.current;
+        const endIndex = index;
+        if(!Number.isInteger(index)){
+          return;
+        }
         console.log("start index",startIndex,"end index ",endIndex)
-        const newThemeList = [...themeList];
-        const tmp = {...newThemeList[endIndex]};
-        newThemeList[endIndex] = {...newThemeList[startIndex]};
-        newThemeList[startIndex] = tmp;
-        console.log(newThemeList)
-        setThemeList(newThemeList)
 
+        setThemeList(themeList=>{
+          const newThemeList= [...themeList]
+          const tmp ={...newThemeList[startIndex]}
+          newThemeList[startIndex] = {...newThemeList[endIndex]}
+          newThemeList[endIndex] = tmp;
+          currentNode.current = endIndex;
+          return newThemeList;
+        })
+      
 
 
     }
-    
+    const handleSubmitWishList = async(e)=>{
+      e.preventDefault();
+      try{
+        await submitWishList({
+          wishes:themeList.map(({id},index)=>{
+            return {
+              order:index,
+              themeId:id
+            }
+          })
+        })
+        toastsRef.current.addMessage({mode:'Alert',text:"c'est fait!!"})
+
+      }catch(err){
+        console.log(err)
+        toastsRef.current.addMessage({mode:'Error',text:'ops...Erreur'})
+      }
+     
+      
+    }
     return (
         <div >
             <HorisontalNavbar/>
@@ -80,17 +115,17 @@ const FicheVoeux = props => {
                 
                     <div
                   
-                      className = 'text-black bg-white cursor-pointer h-[30px] px-4 rounded-[3px] flex justify-between'
-                      onDragStart={handleDragStart}
-                      onDragEnter = {dragging&&handleDragEnter}
-                      onDragEnd = {dragging&&handleDragEnd}
-                      draggable
-                      data-item-id = {index}
+                      className ={ `text-black bg-white cursor-pointer h-[30px] px-4 rounded-[3px]  justify-between flex ${dragging&&(index === currentNode.current)?'invisible':'visible'}`}
+                      onDragStart={(e)=>handleDragStart(e,index)}
+                      onDragEnter={(e)=>dragging?handleDragEnter(e,index):null}
+                    
+                      draggable = {true}
+                  
                       
                     >
                         <div className="flex space-x-2 items-center">
                             <span className="flex items-center justify-center bg-blue-400 rounded-full w-[15px] h-[15px] text-[12px] text-white p-2"> {index+1}</span>
-                           <span>{item.content}</span>
+                           <span>{item.title}</span>
           
                         </div>
                        
@@ -102,6 +137,12 @@ const FicheVoeux = props => {
                 
               ))}
             
+              </div>
+              <div className="w-[90%] mx-auto flex items-center justify-end ">
+                  <button
+                  onClick = {handleSubmitWishList}
+                    className="bg-blue-300 px-2 py-1 rounded-[10px] mt-2"
+                  >Envoyer</button>
               </div>
       
                        

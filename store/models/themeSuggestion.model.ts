@@ -84,7 +84,7 @@ export const themeSuggestionsModel:ThemeSuggestionsModel = {
     getThemeSuggestionThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
    
         try{
-           const res =  await axios.get(`http://localhost:8080/getThemeSuggestions/${payload}`,{
+           const res =  await axios.get(`http://localhost:8080/getThemeSuggestion/${payload}`,{
            
                 withCredentials:true
             
