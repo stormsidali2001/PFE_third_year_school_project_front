@@ -17,6 +17,10 @@ export interface EncadrerThemePayload{
     themeId:string;
     teacherId:string;
 }
+export interface teamsTeacherPayload{
+    teacherId:string;
+    teamIds:string[];
+}
 export interface ThemeState{
     themes:ThemePayload[];
     theme:ThemePayload;
@@ -31,6 +35,7 @@ export interface ThemesThunks{
     getThemesThunk:Thunk<this,string|undefined,undefined,undefined>;
     getThemeThunk:Thunk<this,string,undefined,undefined>;
     encadrerThemeThunk:Thunk<this,EncadrerThemePayload,undefined,undefined>;
+    assignTeamsToTeacher:Thunk<this,teamsTeacherPayload,undefined,undefined>;
 }
 
 export interface ThemesModel extends ThemesThunks,ThemeState,ThemesActions{
@@ -98,21 +103,21 @@ export const themesModel:ThemesModel = {
         
     }),
     encadrerThemeThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
-   
-      
            
                 const res =  await axios.post(`http://localhost:8080/encadrerTheme`,{...payload},{
            
                     withCredentials:true
                 
                 })
-
         
+    }),
+    assignTeamsToTeacher:thunk(async (actions,payload)=>{
+        await axios.post(`http://localhost:8080/assignTeamsToTeacher`,{...payload},{
            
-
-      
-     
+            withCredentials:true
         
+        })
+       
     })
   
    

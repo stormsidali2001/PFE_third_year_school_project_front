@@ -13,7 +13,7 @@ const Theme = ({toastsRef}) => {
     const router = useRouter();
     const {themeId} = router.query;
     const {theme} = useStoreState(store=>store.themesModel)
-    const {getThemeThunk,encadrerThemeThunk} = useStoreActions(store=>store.themesModel)
+    const {getThemeThunk,encadrerThemeThunk,assignTeamsToTeacher} = useStoreActions(store=>store.themesModel)
     const [open,setOpen] = useState(false)
     const [openAddTeam,setOpenAddTeam] = useState(false)
     const {getTeachers} = useStoreActions(store=>store.teacherListModel)
@@ -42,6 +42,7 @@ const Theme = ({toastsRef}) => {
         if(!openAddTeam){
             setOpenAddTeam(o=>!o)
             setAddTeamChosenTeacher({value:teacherId,label:firstName+' '+lastName})
+            
         }
 
         
@@ -68,7 +69,8 @@ const Theme = ({toastsRef}) => {
                 text:"c'est fait !!",
                 mode:'Alert'
             })
-            setOpen(true)
+            setOpen(false)
+            await getThemeThunk(themeId)
 
         }catch(err){
             console.log(err)
@@ -76,12 +78,38 @@ const Theme = ({toastsRef}) => {
                 text:err?.response?.data?.message,
                 mode:'Error'
             })
+            setOpen(false)
         }
         
       
     }
     
-    
+    const handleSubmitAssignTeamsToTeacher = async e=>{
+        e.preventDefault();
+        try{
+            console.log(addTeamChosenTeacher,'99999999999')
+            await assignTeamsToTeacher({
+                teacherId:addTeamChosenTeacher.value,
+                teamIds:addTeamChosenTeam.map(el=>el?.value)
+            })
+            toastsRef.current.addMessage({
+                text:"C'est fait!!",
+                mode:'Alert'
+            })
+            setOpenAddTeam(false)
+            await getThemeThunk(themeId)
+
+        }catch(err){
+            console.log(err)
+            toastsRef.current.addMessage({
+                text:err?.response?.data?.message,
+                mode:'Error'
+            })
+            setOpenAddTeam(false)
+
+        }
+     
+    }
     return (
         <div>
             <StudentVerticalNavbar/>
@@ -122,16 +150,31 @@ const Theme = ({toastsRef}) => {
                                 theme?.encadrement?.map(({id,teacher})=>{
                                     const {firstName,lastName,id:teacherId} = teacher;
                                     return(
-                                        <div key={id} className=" flex flex-2 space-x-3 " >
-                                           <div className="bg-blue-300 rounded-[10px] w-fit h-fit  px-2 py-1">#{firstName+' '+lastName}</div>
-                                           <div className="flex space-x-2 cursor-pointer"
-                                            onClick={async (e)=>{e.preventDefault();await handleOpenModalTeam(teacherId,firstName,lastName)}}
-                                           >
-                                           <AddIcon
-                                            className = 'w-6 h-6 text-textcolor/90 group-hover:text-textcolor'
-                                        />
-                                               <div className="text-[15px]">ajouter equipe</div>
+                                        <div key={id} className=" flex space-y-2  flex-col " >
+                                              <div className="flex space-x-2">
+                                                    <div className="bg-blue-300 rounded-[10px] w-fit h-fit  px-2 py-1">#{firstName+' '+lastName}</div>
+                                                    
+                                                    <div className="flex space-x-2 cursor-pointer"
+                                                        onClick={async (e)=>{e.preventDefault();await handleOpenModalTeam(teacherId,firstName,lastName)}}
+                                                    >
+                                                            <AddIcon
+                                                                className = 'w-6 h-6 text-textcolor/90 group-hover:text-textcolor'
+                                                                />
+                                                            <div className="text-[15px]">ajouter equipe</div>
 
+                                                    </div>
+                                              </div>
+                                           <div className="pl-4 flex  flex-wrap gap-4">
+                                            {
+                                                teacher?.teamsInCharge.map(({id,team})=>{
+                                                    return (
+                                                        <div id={id} className="bg-blue-300 rounded-[10px] w-fit h-fit  px-2 py-1">
+                                                {team?.nickName}
+                                                        </div>
+
+                                                    )
+                                                })
+                                            }
                                            </div>
                                            
                                         </div>
@@ -207,7 +250,7 @@ const Theme = ({toastsRef}) => {
                             <Select
                                         placeholder="Enseignants..." 
                                         onChange={(option)=>{setAddTeamChosenTeam(option)}}
-                                        options={theme?.teams.map(({id,nickName})=>{return {value:id,label:nickName}})}
+                                        options={theme?.teams?.map(({id,nickName})=>{return {value:id,label:nickName}})}
                                         isMulti
                                         isLoading = {!theme?.teams}
                                         value={addTeamChosenTeam}
@@ -221,7 +264,7 @@ const Theme = ({toastsRef}) => {
                     <div>
                         
                     </div>
-                    <button onClick={handleEncadrerTheme} className="bg-blue-300 w-fit px-2 py-1  mx-auto rounded-[10px]">Valider</button>
+                    <button onClick={handleSubmitAssignTeamsToTeacher} className="bg-blue-300 w-fit px-2 py-1  mx-auto rounded-[10px]">Valider</button>
                 </form>
 
             </ModalPortal>
