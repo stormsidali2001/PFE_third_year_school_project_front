@@ -67,7 +67,8 @@ const Team = props => {
                         </div>
                         <div className="flex items-center flex-row space-x-4">
                             <div className="text-[19px]">Theme :</div>
-                            <div className={`${modifier === false ? "flex" : "hidden"}`}>{(theme?.title)?theme?.title:'__'}</div>
+                            <div className={`${modifier === false ? "flex" : "hidden"}`}>{(theme?.title)?theme?.title
+                            :'__'}</div>
                      
                         </div>
                         <div className="flex items-center flex-row space-x-4">

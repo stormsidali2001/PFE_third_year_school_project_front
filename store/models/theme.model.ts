@@ -13,6 +13,10 @@ export interface ThemePayload{
     documents?:ThemeDoc[];
     promotionId?:string;
 }
+export interface EncadrerThemePayload{
+    themeId:string;
+    teacherId:string;
+}
 export interface ThemeState{
     themes:ThemePayload[];
     theme:ThemePayload;
@@ -25,7 +29,8 @@ export interface ThemesActions{
 export interface ThemesThunks{
     
     getThemesThunk:Thunk<this,string|undefined,undefined,undefined>;
-    // getThemeThunk:Thunk<this,string,undefined,undefined>;
+    getThemeThunk:Thunk<this,string,undefined,undefined>;
+    encadrerThemeThunk:Thunk<this,EncadrerThemePayload,undefined,undefined>;
 }
 
 export interface ThemesModel extends ThemesThunks,ThemeState,ThemesActions{
@@ -73,6 +78,42 @@ export const themesModel:ThemesModel = {
      
         
     }),
+    getThemeThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
+   
+        try{
+           
+                const res =  await axios.get(`http://localhost:8080/getTheme/${payload}`,{
+           
+                    withCredentials:true
+                
+                })
+
+            actions.setTheme(res.data)
+            return res.data
+
+        }catch(err){
+            console.log(err)
+        }
+     
+        
+    }),
+    encadrerThemeThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
+   
+      
+           
+                const res =  await axios.post(`http://localhost:8080/encadrerTheme`,{...payload},{
+           
+                    withCredentials:true
+                
+                })
+
+        
+           
+
+      
+     
+        
+    })
   
    
 

@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 
 
 
+
 const Themes = ({toastsRef}) => {
     const renders = useRef(null)
     const router = useRouter();
@@ -20,7 +21,7 @@ const Themes = ({toastsRef}) => {
     const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
     const {promotions} = useStoreState(store=>store.promotionsModel)
     const {themes:themesData} = useStoreState(store=>store.themesModel)
-      const [chosenPromotion,setChoosenPromotion] = useState(null)
+    const [chosenPromotion,setChoosenPromotion] = useState(null)
       useEffect(async()=>{
       
         
@@ -61,7 +62,7 @@ const Themes = ({toastsRef}) => {
 
     
    
-    
+   
    
 
     let suggestedBy;
@@ -86,11 +87,9 @@ const Themes = ({toastsRef}) => {
 
     });
     console.log(themes,'**** th')
-    //  if(themes.length === 0) return <div>Aucune donnée</div>
-     const columns = themes.length !== 0?[...Object.keys(themes[0]).filter(el=>el!=='id')]:[];
 
 
-   
+    if(!themes  ) return 'loading'
   
 
   
@@ -106,7 +105,7 @@ const Themes = ({toastsRef}) => {
             <div className="text-[30px]">Liste des Themes </div>
                 
             
-                {/* <Link href="/addstudent1"><button className={`shadow-lg h-[40px] w-[220px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full items-center justify-center ${typeUtilisateur === "admin" ? "flex" : "hidden"}`}>+ Ajouter suggestion </button></Link> */}
+               
              </div>
              <div className="w-[300px]">
                  {/* {renders?.current} */}
@@ -122,12 +121,14 @@ const Themes = ({toastsRef}) => {
                                     />
 
                 </div>
-           { themes.length !== 0 &&  <div className="  h-fit p-4   w-[80vw] flex flex-wrap">
+           { themes?.length !== 0 &&  <div className="  h-fit p-4   w-[80vw] flex flex-wrap gap-4">
                     {
-                        themes.map(({title,description,suggestedByTeacher,suggestedByEntreprise,promotion})=>{
+                        themes?.map(({title,description,suggestedByTeacher,suggestedByEntreprise,promotion,id})=>{
                             return (
-                                <div 
-                        className="h-[300px] w-[250px]  flex flex-col items-center bg-gradient-to-b from-blue-100 to-blue-300 hover:from-blue-100 hover:to-blue-200   rounded-lg shadow-lg relative text-textcolor cursor-pointer group"
+                               <div 
+                        className="h-[300px]  w-[250px]  flex flex-col items-center bg-gradient-to-b from-blue-100 to-blue-300 hover:from-blue-100 hover:to-blue-200   rounded-lg shadow-lg relative text-textcolor cursor-pointer group"
+                        onClick={()=>id&&router.push(`/themes/${id}`)}
+                        
                         
                         >
                     <div className="  h-full w-full"> 
@@ -166,10 +167,12 @@ const Themes = ({toastsRef}) => {
                             <span className=" h-[100%] break-all px-2 overflow-hidden ">{description}fsakfsjlfsajlfasj;lfasjl;fasjfsafsjfsfsj;fsaj;asfjfsajsfajkasfljsafkjsfakjlfsjklfaskjlasfkjsfjklfsaljksfajfsajfsakjllfksfajjfsfasjklfslakjfsjlksfjalkasfjlsafkjlkfslkljfsajksfalkjfsakjsfajlkfslkjfsakjsafjklfasjl;fsaj;</span>
                         
                         </div>
+                       
                             
                        
                     </div>
                 </div>
+                
                             )
                             
                         })
