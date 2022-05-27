@@ -10,7 +10,7 @@ const AcceuilTeacher = ({possedeEquipe , validationEquipes}) => {
                 <div className="text-[27px] font-semibold">Nous somme heureux de vous acceuil sur notre plateforme. On espère qul'elle vous aiderait a communiquer avec les équipes que vous encadrez et qu'elle vous faciliterait ce dernier.</div>
                 <div className="text-[25px] font-light">Accédez à la listes des équipes , proposez un thèmes et beaucoup plus d'autre fonctionnalitées !</div>
                 <div className="flex flex-row space-x-10 text-[21px] font-extralight">
-                   <Link href={validationEquipes === true ? (possedeEquipe=== true ? "/teacherdoc":"/studentlist") :"/proposerUnTheme"}><button className="h-[40px] w-[260px] text-white bg-[#36b5ff] rounded-full">{validationEquipes === true ? (possedeEquipe=== true ? " Voir les documents ":" Proposer encadrement") :"Proposer un thème"}</button></Link>
+                   <Link href={validationEquipes === true ? (possedeEquipe=== true ? "/teacherdoc":"/studentlist") :"/createthemesuggestion"}><button className="h-[40px] w-[260px] text-white bg-[#36b5ff] rounded-full">{validationEquipes === true ? (possedeEquipe=== true ? " Voir les documents ":" Proposer encadrement") :"Proposer un thème"}</button></Link>
                    <Link href={possedeEquipe === true ? "/chat" : "/studentlist"}><button className="h-[40px] w-[230px] bg-[#8FD4FB] rounded-full">{possedeEquipe === true ? "Accéder au chat" :"Voir les équipes"}</button></Link>
                 </div>
             </div>

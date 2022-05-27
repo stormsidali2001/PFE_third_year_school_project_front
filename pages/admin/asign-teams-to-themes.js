@@ -26,7 +26,10 @@ const AssignTeamsToThemes = ({toastsRef}) => {
 },[])
 const handleAsignThemesToTeams = async e=>{
     e.preventDefault()
-    if(!chosenPromotion || results&&results.length >0) return;
+    if(!chosenPromotion ) {
+        toastsRef.current.addMessage({text:"Chose a promotion !!",mode:'Error'})
+        return;
+    }
     try{
 
         await asignThemesToTeams({
@@ -139,9 +142,17 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                        
                         
                       </div>
-                      <button className="bg-blue-300 px-2 py-1 rounded-[5px]" 
-                        onClick={handleApplyThemesToTeamsAssignements}
-                      >Confirmer</button>
+                      <div className="flex space-x-2">
+                          <button className="bg-blue-300 px-2 py-1 rounded-[5px]" 
+                              onClick={()=>setStep(0)}
+                          >Back</button>
+                        <button className="bg-blue-300 px-2 py-1 rounded-[5px]" 
+                            onClick={handleApplyThemesToTeamsAssignements}
+                        >Confirmer</button>
+
+                      </div>
+                     
+
 
                        </div>
                      }

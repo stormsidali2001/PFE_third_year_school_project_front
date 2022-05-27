@@ -97,7 +97,10 @@ const Theme = ({toastsRef}) => {
                 mode:'Alert'
             })
             setOpenAddTeam(false)
-            await getThemeThunk(themeId)
+            setTimeout(async()=>{
+
+                await getThemeThunk(themeId)
+            },2000)
 
         }catch(err){
             console.log(err)
@@ -145,7 +148,7 @@ const Theme = ({toastsRef}) => {
                                 }
                         </div>
                         <div className="font-medium">Encadreurs disponible:</div>
-                        <div className="border-2 px-2 rounded-[5px]  font-normal text-[15px] w-full flex  h-[80px] overflow-y-auto flex-wrap py-2 gap-5">
+                        <div className="border-2 px-2 rounded-[5px]  font-normal text-[15px] w-full flex  h-[80px] overflow-y-auto flex-col py-2 gap-5">
                             {
                                 theme?.encadrement?.map(({id,teacher})=>{
                                     const {firstName,lastName,id:teacherId} = teacher;
@@ -232,7 +235,7 @@ const Theme = ({toastsRef}) => {
             >
                 <form className="flex flex-col w-[50vw] h-fit py-4 px-2 text-textcolor space-y-3">
                     <div className="text-center text-[20px]">Encadrer equipe</div>
-                    <div className="px-4">choisir un encadreur parmis la liste des ensiegnant</div>
+                    <div className="px-4">choisir une Equipe a encadrer parmis les equipe de theme <stron className='font-semibold'>{theme?.title}</stron></div>
                     <div className="flex space-x-2 items-center mx-auto">
                             <div>Enseignant:</div>
                             <Select
@@ -248,7 +251,7 @@ const Theme = ({toastsRef}) => {
                     <div className="flex space-x-2 items-center mx-auto">
                             <div>Equipe:</div>
                             <Select
-                                        placeholder="Enseignants..." 
+                                        placeholder="Equipes..." 
                                         onChange={(option)=>{setAddTeamChosenTeam(option)}}
                                         options={theme?.teams?.map(({id,nickName})=>{return {value:id,label:nickName}})}
                                         isMulti
