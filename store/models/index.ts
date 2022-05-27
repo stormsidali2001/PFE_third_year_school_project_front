@@ -16,6 +16,7 @@ import { promotionsModel, PromotionsModel } from "./promotion.model";
 import { themesModel, ThemesModel } from "./theme.model";
 import { WishListModel, wishListModel } from "./wishList.entity";
 import {  adminAsignTeamsToThemesModel, AdminAsignTeamsToThemesModel } from "./adminAsignTeamToThemes";
+import { commitsModel, CommitsModel } from "./commits.model";
 export interface Model{
     user:UserModel;
     notificationService:NotificationsServiceModel;
@@ -34,6 +35,7 @@ export interface Model{
     themesModel:ThemesModel;
     wishListModel:WishListModel
     adminAsignTeamsToThemesModel:AdminAsignTeamsToThemesModel;
+    commitsModel:CommitsModel;
 }
 
 export const model:Model={
@@ -53,6 +55,7 @@ export const model:Model={
     promotionsModel:promotionsModel,
     themesModel:themesModel,
     wishListModel:wishListModel,
-    adminAsignTeamsToThemesModel:adminAsignTeamsToThemesModel
+    adminAsignTeamsToThemesModel:adminAsignTeamsToThemesModel,
+    commitsModel:commitsModel
     
 }
