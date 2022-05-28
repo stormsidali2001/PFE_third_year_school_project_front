@@ -99,8 +99,6 @@ const Suggestions = ({toastsRef}) => {
 
 
    
-    
-
   
 
 
