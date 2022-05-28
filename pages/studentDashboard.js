@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import AcceuilStudent from "../components/AcceuilStudent";
-import CardsStudent from "../components/CardsStudent";
-import HorisontalNavbar from "../components/HorisontalNavbar";
-import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import { useStoreActions } from "../store/hooks";
 
 const studentDashboard = ({toastsRef}) => {
