@@ -48,8 +48,7 @@ const Team = props => {
     
     return (
         <div>
-            <HorisontalNavbar/>
-            <StudentVerticalNavbar/>
+           
             <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor justify-center">
                 <div className="flex flex-col items-center justify-center">
                     <img src="/themeStudent.png" className="mix-blend-darken absolute"/>

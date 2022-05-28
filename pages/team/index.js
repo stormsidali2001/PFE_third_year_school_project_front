@@ -32,8 +32,7 @@ const TeamList = props => {
     const columns = [...Object.keys(teamsList[0]).filter(el=>el !=='id')];
     return (
         <div>
-            <HorisontalNavbar/>
-            <AdminVerticalNavbar/>
+           
             <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor">
             <img src="themeStudent.png"  className="object-contain mix-blend-darken absolute inset-1/4"/>
                 
