@@ -4,7 +4,7 @@ import HorisontalNavbar from "../components/HorisontalNavbar";
 const adminDashboard = props => {
    return(
        <div>
-            <HorisontalNavbar/>
+           
             <div>
                 <AcceuilEntreprise/>
             </div>

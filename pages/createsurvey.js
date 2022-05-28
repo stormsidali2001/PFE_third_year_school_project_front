@@ -71,8 +71,7 @@ const CreerSondage = ({toastsRef}) => {
 
     return(
 <div className="h-[200vh] bg-background min-h-screen items-center  flex flex-col   ">
-            <HorisontalNavbar/>
-            <StudentVerticalNavbar/>
+         
         <div 
         className="h-fit  justify-center flex flex-col space-y-6  text-[#1A2562]  font-xyz mt-[100px] mx-auto  items-center bg-white shadow-lg p-2 lg:w-[40vw] w-[80vw]"
         

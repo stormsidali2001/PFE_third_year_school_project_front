@@ -64,9 +64,7 @@ const TeamInvitation = ({toastsRef})=>{
     }
     return(
         <>
-      
-        <HorisontalNavbar/>
-        <StudentVerticalNavbar/>
+   
         <div  className="bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8">
             <Table
                 data={formatData(teamInvitationList)}

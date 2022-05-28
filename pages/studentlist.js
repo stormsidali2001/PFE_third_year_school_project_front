@@ -68,8 +68,7 @@ const StudentList = ({toastsRef})=>{
                <button type="submit"  className="bg-[#5375E2]/80 backdrop-blur-[8px]   font-semibold  px-4 border-2 border-white hover:bg-[#5375E2]/60 rounded-full text-white ease-in transition-colors tracking-wider">Submit</button>
             </form>
         </ModalPortal>
-        <HorisontalNavbar/>
-        <StudentVerticalNavbar/>
+      
         <div  className="bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8">
             <Table
                 data={students}

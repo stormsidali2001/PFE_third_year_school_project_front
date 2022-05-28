@@ -74,8 +74,7 @@ const chat = props => {
 
     return (
         <div className="bg-background h-full w-screen relative">
-            <HorisontalNavbar/>
-            <StudentVerticalNavbar/>
+         
             <div className="flex flex-row space-x-10 font-xyz text-textcolor p-28">
                 <div className="h-[80vh] w-[350px] pt-6 rounded-xl bg-white flex flex-col space-y-4 text-center shadow-md">
                     <div className="pb-4 text-[18px] px-4">Cliquez sur un groupe pour démarrer une discussion</div>

@@ -12,7 +12,7 @@ const teacherDashboard = ({toastsRef}) => {
     },[])
     return (
         <div>
-            <HorisontalNavbar toastsRef={toastsRef}/>
+            
             <AcceuilTeacher possedeEquipe={possedeEquipe} validationEquipes ={validationEquipes}/>
         </div>
     )

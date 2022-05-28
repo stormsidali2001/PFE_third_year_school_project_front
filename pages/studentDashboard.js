@@ -15,9 +15,8 @@ const studentDashboard = ({toastsRef}) => {
     },[])
     return (
         <div>
-            <HorisontalNavbar toastsRef = {toastsRef}/>
-            <div className="h-[200vh] bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8 ">
-                <StudentVerticalNavbar possedeEquipe = {possedeEquipe} debutProjet = {debutProjet} />
+          
+            <div className="h-[200vh] pl-[100px] bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8 ">
                 <AcceuilStudent possedeEquipe = {possedeEquipe} debutProjet = {debutProjet}/>
                 <CardsStudent/>
             </div>

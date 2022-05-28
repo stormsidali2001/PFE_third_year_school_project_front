@@ -10,9 +10,8 @@ const adminDashboard = ({toastsRef}) => {
     const [soutenance , setSoutenance] = useState (false);
     
    return(
-       <div>
-            <HorisontalNavbar toastsRef={toastsRef}/>
-            <AdminVerticalNavbar/>
+       <div className="pl-[100px] pt-[100px]">
+          
             <AcceuilAdmin ajouteEtudiant = {ajouteEtudiant} valideEquipe = {valideEquipe} finProjet = {finProjet} soutenance = {soutenance}/>
        </div>
    )

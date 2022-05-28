@@ -130,8 +130,7 @@ const TeamDocs = ({toastsRef})=>{
     }
     return(
 <div className="h-[200vh] bg-background min-h-screen      border-2 border-red-700 pl-[60px]">
-        <HorisontalNavbar/>
-        <StudentVerticalNavbar/>
+       
      <div  className="h-[80vh]   flex lg:flex-row flex-col-reverse    text-[#1A2562]  font-xyz mt-[120px]    bg-white shadow-lg p-4 mx-[50px] ">
          <div className="lg:w-[80%] w-full h-full flex flex-col ">
                 <div 
@@ -246,7 +245,7 @@ const TeamDocs = ({toastsRef})=>{
                { 
                         file?(
                             <>
-                            
+
 
                                 <Document
                                     file = {file}

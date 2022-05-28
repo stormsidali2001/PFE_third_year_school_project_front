@@ -27,8 +27,7 @@ const AnnouncementList = ({toastsRef}) => {
     return (
         <>
         <div className="min-h-[200vh] bg-background h-fit  items-center  flex flex-col   ">
-            <HorisontalNavbar/>
-            <StudentVerticalNavbar/>
+           
             <div className="bg-white w-[70vw] min-h-[100vh] mt-[100px] shadow-lg flex flex-col items-center text-textcolor pt-2">
                 <div className="text-[30px] flex space-x-4 "> 
                         <SpeakerIcon className=' w-12 text-[#5375E2]  text-3xl'/>

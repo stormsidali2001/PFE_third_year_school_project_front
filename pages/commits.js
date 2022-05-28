@@ -35,8 +35,7 @@ const commitDocumentTeacher = props => {
 
         return (
             <div>
-                <TeacherVerticalNavbar/>
-                <HorisontalNavbar/>
+             
                 <div className="bg-background space-x-10 h-screen w-screen relative flex flex-row pt-24 pl-24 font-xyz text-textcolor">
                     <div className="flex flex-col space-y-6">
                         <div className="text-[30px] text-center">Vos équipes</div>

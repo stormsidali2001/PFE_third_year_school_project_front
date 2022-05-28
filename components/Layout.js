@@ -1,20 +1,19 @@
 import { useEffect } from "react"
 import { useStoreActions, useStoreState } from "../store/hooks"
-import {HorisontalNavbar} from './HorisontalNavbar'
-
-const Layout = ({toastsRef,children})=>{
+const Layout = ({toastsRef,children,HorisontalNavbar,StudentVerticalNavbar,TeacherVerticalNavbar,AdminVerticalNavbar})=>{
     const {getUserInfo} = useStoreActions(store=>store.user)
     const user = useStoreState(store=>store.user)
     const {userType} = user;
+    console.log(userType,'kakarouto')
     useEffect(async()=>{
         await getUserInfo()
     },[])
 
     return (
         <div>
-            {/* <HorisontalNavbar toastsRef={toastsRef}/> */}
-            
-            {/* {
+            <HorisontalNavbar toastsRef={toastsRef} HorisontalNavbar={HorisontalNavbar}/>
+            <div>
+            {
                 userType === 'admin'?(
                     <AdminVerticalNavbar/>
 
@@ -23,10 +22,15 @@ const Layout = ({toastsRef,children})=>{
                     userType === 'student'?(
                         <StudentVerticalNavbar/>
                         
-                    ):''
+                    ):(
+                        userType === 'teacher'?(
+                            <TeacherVerticalNavbar/>
+                        ):<></>
+                    )
                 )
             }
-            */}
+            </div>
+          
             {children}
         </div>
     )

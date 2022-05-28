@@ -25,8 +25,7 @@ const userProfil = props => {
        
     return (
         <div>
-            <HorisontalNavbar/>
-            <StudentVerticalNavbar/>
+       
             <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor justify-center">
                 <img src="/studentProfil.jpg" className="h-[550px] object-contain mix-blend-darken opacity-30"/>
                 <div className="text-[20px] h-[500px] w-[600px] shadow-lg rounded-xl bg-white/50 backdrop-blur-sm flex items-center justify-center absolute">

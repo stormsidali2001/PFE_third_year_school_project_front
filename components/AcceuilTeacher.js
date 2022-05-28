@@ -3,7 +3,7 @@ import TeacherVerticalNavbar from "./TeacherVerticalNavbar";
 
 const AcceuilTeacher = ({possedeEquipe , validationEquipes}) => {
     return (
-        <div className="text-[#1A2562] bg-[#F8FDFF] font-xyz px-12 flex flex-row space-y-3 py-10 lg:h-[100vh] h-fit w-[100vw] items-center justify-center">
+        <div className="pl-[100px] text-[#1A2562] bg-[#F8FDFF] font-xyz px-12 flex flex-row space-y-3 py-10 lg:h-[100vh] h-fit w-[100vw] items-center justify-center">
             <TeacherVerticalNavbar/>
             <div className="flex flex-col space-y-8 px-12 items-center justify-center text-center">
                 <div className="text-[40px] font-bold">Bonjour ,</div>
