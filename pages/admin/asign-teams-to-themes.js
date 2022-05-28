@@ -7,7 +7,7 @@ import Select from 'react-select'
 
 
 const AssignTeamsToThemes = ({toastsRef}) => {
-  const [open,setOpen] = useState(false)
+  const [open,setOpen] = useState(true)
   const [chosenPromotion,setChoosenPromotion] = useState(null)
   const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
   const {promotions} = useStoreState(store=>store.promotionsModel)
@@ -67,15 +67,20 @@ const handleApplyThemesToTeamsAssignements = async e=>{
    return(
       
             <div className="h-screen w-screen pl-[100px] pt-[100px] bg-background font-xyz relative flex items-center justify-center">
-                <img src="/teamToTheme.jpg" className="h-screen object-contain mix-blend-darken opacity-60"/>
-                <div className="absolute bg-white/80 shadow-xl text-center rounded-xl h-[450px] w-[700px] flex flex-col space-y-6 items-center justify-center">
+                <img src="/teamToTheme.jpg" className="h-[550px] object-contain mix-blend-darken opacity-60"/>
+                <div className="absolute bg-white/80 shadow-xl text-center rounded-xl h-[450px] w-[700px] flex flex-col space-y-8 items-center justify-center p-6">
                     <div className="text-[28px] font-semibold underline italic">Affecter les thèmes au équipes</div>
                     <div className="text-[20px] font-thin">En cliquant sur affecter et en choisissant une méthode d'affectation toutes les équipes receveront un thème</div>
-                    <div className="text-[18px] font-thin">
-                        <div className="text-red-500 underline">Remarque : </div>
-                        <div>les équipes non renvoyantes la fiche de voeux seront affécter automatiquement</div>
+                    <div className="text-[18px] font-thin flex-col space-y-2 italic">
+                        <div className="text-red-500 underline text-ellipsis">Remarque : </div>
+                        Les équipes non renvoyantes la fiche de voeux seront affécter automatiquement
                     </div>
-                    <button>Affecter les thèmes</button>
+                    <button 
+                        className="h-[35px] w-[250px] rounded-full shadow-lg bg-blue-200 hover:bg-blue-300 text-[18px]"
+                        onClick={(e) => setOpen(true)}
+                    >
+                        Affecter les thèmes
+                    </button>
                 </div>
             
                <ModalPortal
@@ -83,21 +88,19 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                     handleClose = {setOpen}
                >
                    <form
-                    className="w-[50vw] "
+                    className="w-[450px]"
                    >
                    {  step===0 &&<div className="w-full py-2 flex flex-col space-y-2 items-center">
                        <div className="mx-auto text-textcolor text-[24px]">Affectation</div>
-                     
-
                         <Select
-                                        placeholder="Promotion..." 
-                                        className="z-50 h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
-                                        onChange={(option)=>{setChoosenPromotion(option)}}
-                                        options={promotions.map(el=>{return {value:el.id,label:el.name}})}
-                                        isLoading = {!promotions}
-                                        value={chosenPromotion}
-                                        styles = {{menuPortal:base=>({...base,zIndex:500,width:'100%'})}}
-                                    />
+                            placeholder="Promotion..." 
+                            className="z-50 h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
+                            onChange={(option)=>{setChoosenPromotion(option)}}
+                            options={promotions.map(el=>{return {value:el.id,label:el.name}})}
+                            isLoading = {!promotions}
+                            value={chosenPromotion}
+                            styles = {{menuPortal:base=>({...base,zIndex:500,width:'100%'})}}
+                        />
                       <div className="mx-auto text-textcolor text-[22px]">Methode d{"'"}affectation</div>
                       <div className="w-[80%] h-fit py-2 border-2 flex flex-col items-center">
                          { 
