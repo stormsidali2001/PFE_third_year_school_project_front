@@ -1,9 +1,9 @@
-import { useStoreActions } from "../store/hooks";
+import { useStoreActions } from "../../store/hooks";
 import { useState } from "react";
-import HorisontalNavbar from "../components/HorisontalNavbar";
-import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
-import ArrowIcon from "../icons/ArrowIcon";
-import AttachFileIcon from "../icons/AttachFileIcon";
+import HorisontalNavbar from "../../components/HorisontalNavbar";
+import StudentVerticalNavbar from "../../components/StudentVerticalNavbar";
+import ArrowIcon from "../../icons/ArrowIcon";
+import AttachFileIcon from "../../icons/AttachFileIcon";
 import readXlsxFile from 'read-excel-file'
 
 
@@ -110,10 +110,10 @@ const addTeacher = ({toastsRef}) => {
     
     }
     return (
-       <div>
+       <div className="bg-background min-h-screen min-w-screen">
          
             <div className="bg-background h-screen w-screen relative flex items-center justify-center font-xyz text-textcolor">
-                <img src="addStudent.jpg" className="h-full w-full object-contain mix-blend-darken absolute"/>
+                <img src="/addStudent.jpg" className="h-full w-full object-contain mix-blend-darken absolute"/>
                 <div className={`h-[200px] w-[450px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
                     <div className="text-[23px] text-center px-10">Vous voulez ajouter un ou plusieur enseignants ?</div>
                     <div className="space-x-6">
