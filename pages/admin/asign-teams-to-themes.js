@@ -7,7 +7,7 @@ import Select from 'react-select'
 
 
 const AssignTeamsToThemes = ({toastsRef}) => {
-  const [open,setOpen] = useState(true)
+  const [open,setOpen] = useState(false)
   const [chosenPromotion,setChoosenPromotion] = useState(null)
   const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
   const {promotions} = useStoreState(store=>store.promotionsModel)
@@ -65,9 +65,19 @@ const handleApplyThemesToTeamsAssignements = async e=>{
 
 }
    return(
-       <div>
-            <HorisontalNavbar toastsRef={toastsRef}/>
-            <div className="pt-[100px] px-[80px] bg-white w-[90%] h-screen">
+      
+            <div className="h-screen w-screen pl-[100px] pt-[100px] bg-background font-xyz relative flex items-center justify-center">
+                <img src="/teamToTheme.jpg" className="h-screen object-contain mix-blend-darken opacity-60"/>
+                <div className="absolute bg-white/80 shadow-xl text-center rounded-xl h-[450px] w-[700px] flex flex-col space-y-6 items-center justify-center">
+                    <div className="text-[28px] font-semibold underline italic">Affecter les thèmes au équipes</div>
+                    <div className="text-[20px] font-thin">En cliquant sur affecter et en choisissant une méthode d'affectation toutes les équipes receveront un thème</div>
+                    <div className="text-[18px] font-thin">
+                        <div className="text-red-500 underline">Remarque : </div>
+                        <div>les équipes non renvoyantes la fiche de voeux seront affécter automatiquement</div>
+                    </div>
+                    <button>Affecter les thèmes</button>
+                </div>
+            
                <ModalPortal
                     open={open}
                     handleClose = {setOpen}
@@ -166,8 +176,6 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                    </form>
 
                </ModalPortal>
-            </div>
-            <AdminVerticalNavbar/>
        </div>
    )
 }
