@@ -6,8 +6,7 @@ import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import { useStoreActions } from "../store/hooks";
 
 const studentDashboard = ({toastsRef}) => {
-    const [possedeEquipe , setPossedeEquipe] = useState(false)
-    const [debutProjet , setDebutProjet] = useState(false)
+
     const {getUserInfo} = useStoreActions(store=>store.user)
     useEffect(async ()=>{
         await getUserInfo();
@@ -15,10 +14,8 @@ const studentDashboard = ({toastsRef}) => {
     },[])
     return (
         <div>
-          
-            <div className="h-[200vh] pl-[100px] bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8 ">
-                <AcceuilStudent possedeEquipe = {possedeEquipe} debutProjet = {debutProjet}/>
-                <CardsStudent/>
+            <div className="lg:h-screen h-fit min-w-screen bg-background min-h-screen items-center flex flex-col ">
+                <AcceuilStudent/>
             </div>
         </div>
     )

@@ -1,31 +1,53 @@
-import { useStoreActions } from "../../store/hooks";
-import { useState } from "react";
+import { useStoreActions, useStoreState } from "../../store/hooks";
+import { useEffect, useState } from "react";
 import HorisontalNavbar from "../../components/HorisontalNavbar";
 import AdminVerticalNavbar from "../../components/AdminVerticalNavbar";
 import ArrowIcon from "../../icons/ArrowIcon";
 import AttachFileIcon from "../../icons/AttachFileIcon";
 import readXlsxFile from 'read-excel-file'
+import Select from 'react-select'
 
-const addEntreprise = ({toastsRef}) => {
+const addStudent = ({toastsRef}) => {
 
     const [oneclick , setOneClick] = useState(false)
     const [manyClick , setManyClick] = useState(false)
-    const [code , setCode] = useState("")
+    const [matricule , setMatricule] = useState("")
     const [email , setEmail] = useState("")
-    const [entrepriseName , setEntrepriseName] = useState("")
+    const [firstName , setFirstName] = useState("")
+    const [lastName , setLastName] = useState("")
+    const [moyenne,setMoyenne] = useState(10.0)
+    const [dob , setDob] = useState("20-04-2001")
     const [file,setFile] = useState({})
     const {addSingleStudent,addMultipleStudents} = useStoreActions(store=>store.adminStudentListModel)
+    const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
+    const {promotions} = useStoreState(store=>store.promotionsModel)
     const [loading,setLoading] = useState(false)
+    const [chosenPromotion,setChoosenPromotion] = useState(null)
+   
+    useEffect(async()=>{
+     
+        await getAllPromotionsThunk();
+
+    },[])
     const handleAddSingleStudent = async e=>{
         e.preventDefault();
+        if(!chosenPromotion    ||  email === '' || firstName === '' || lastName === '' || dob === '' ){
+            toastsRef.current.addMessage({text:"remplir tout les champs",mode:'Error'})
+            return;
+        }
+      
         try{
+            
             setLoading(true)
             await addSingleStudent({
                 firstName,
                 lastName,
                 email,
                 code:matricule,
-                dob:dob
+                dob:dob,
+                promotionId:chosenPromotion.value,
+                moy:moyenne
+
             })
             toastsRef.current.addMessage({text:"Etudiant ajouté...",mode:'Alert'})
             setLoading(false)
@@ -38,11 +60,20 @@ const addEntreprise = ({toastsRef}) => {
         
     }
     const handleAddMultipleStudents = async e=>{
+        if(promotions?.length ===0){
+            toastsRef.current.addMessage({text:"ressayer...",mode:'Error'})
+            return;
+        }
         e.preventDefault();
         try{
             setLoading(true)
             await addMultipleStudents(
-                file
+                file.map(el=>{
+                    return{
+                        ...el,
+                        promotionId:promotions.find(p=>p.name === el.promotion).id
+                    }
+                })
                )
             toastsRef.current.addMessage({text:"Etudiants ajouté...",mode:'Alert'})
             setLoading(false)
@@ -55,7 +86,7 @@ const addEntreprise = ({toastsRef}) => {
         
     }
   
-    const extension = "csv"
+    const extension = "csv";
     const convertToArrayOfObjects = rows=>{
         const headerColsExist = new Set();
         if(rows.length ===0){
@@ -67,7 +98,7 @@ const addEntreprise = ({toastsRef}) => {
             
         })
 
-        if(!headerColsExist.has('firstName') || !headerColsExist.has('lastName') || !headerColsExist.has('code') || !headerColsExist.has('email') || !headerColsExist.has('dob')){
+        if(!headerColsExist.has('firstName') || !headerColsExist.has('lastName') || !headerColsExist.has('code') || !headerColsExist.has('email') || !headerColsExist.has('dob') || !headerColsExist.has('promotion') || !headerColsExist.has('moy')){
             toastsRef.current.addMessage({text:"un attribut est absent dans a tete de document excel",mode:'Error'})
             return []
 
@@ -91,29 +122,54 @@ const addEntreprise = ({toastsRef}) => {
     }
     return (
        <div className="bg-background min-h-screen min-w-screen">
-
             <div className="bg-background h-screen w-screen relative flex items-center justify-center font-xyz text-textcolor">
                 <img src="/addStudent.jpg" className="h-full w-full object-contain mix-blend-darken absolute"/>
                 <div className={`h-[200px] w-[450px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
-                    <div className="text-[23px] text-center px-10">Vous voulez ajouter une ou plusieur entreprise ?</div>
-                    <div className="space-x-6">
-                        <button className="h-[35px] w-[160px] rounded-full bg-[#32AFF5] text-white" onClick={()=> setOneClick(true)}>Un seul</button>
-                        <button className="h-[35px] w-[160px] rounded-full bg-[#8FD4FB]" onClick={()=> setManyClick(true)}>Plusieurs</button>
+                    <div className="sm:text-[23px] text-[17px] text-center px-10">Vous voulez ajouter un ou plusieur étudiant ?</div>
+                    <div className="space-x-6 flex flex-row">
+                        <button className="h-[35px] sm:w-[160px] w-[100px] rounded-full bg-[#32AFF5] text-white" onClick={()=> setOneClick(true)}>Un seul</button>
+                        <button className="h-[35px] sm:w-[160px] w-[120px] rounded-full bg-[#8FD4FB]" onClick={()=> setManyClick(true)}>Plusieurs</button>
                     </div>
                 </div>
-                <form className = {`h-[550px] w-[650px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[23px] ${oneclick === true ? "flex" : "hidden"}`} onSubmit={handleAddSingleStudent}>
-                    <div className="text-[35px]">Ajouter une entreprise</div>
+                <form className = {`h-[550px] w-[650px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[23px] ${oneclick === true ? "flex" : "hidden"} mt-[100px]`} onSubmit={handleAddSingleStudent}>
+                    <div className="text-[35px]">Ajouter un étudiant</div>
                     <table>
-                        <tr className="">
-                            <td className="py-2">Code :</td>
-                            <td>
-                                <input
-                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Code..." 
-                                     onChange={(e)=>{setCode(e.target.value)}}
-                                     value={code}
+                    <tr className="">
+                            <td className="py-2">Promotion :</td>
+                            <td >
+                                <Select
+                                    placeholder="Promotion..." 
+                                    className="z-50 h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
+                                     onChange={(option)=>{setChoosenPromotion(option)}}
+                                     options={promotions.map(el=>{return {value:el.id,label:el.name}})}
+                                     isLoading = {!promotions}
+                                     value={chosenPromotion}
+                                     styles = {{menuPortal:base=>({...base,zIndex:500})}}
                                 />
                             </td>
                         </tr>
+                        <tr className="">
+                            
+                            <td className="py-2">Matricule :</td>
+                            <td>
+                                <input
+                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Matricule..." 
+                                     onChange={(e)=>{setMatricule(e.target.value)}}
+                                     value={matricule}
+                                />
+                            </td>
+                        </tr>
+                        <tr className="">
+                            <td className="py-2">Moyenne :</td>
+                            <td>
+                                <input
+                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Matricule..." 
+                                     onChange={(e)=>{setMoyenne(e.target.value)}}
+                                     value={moyenne}
+                                />
+                            </td>
+                        </tr>
+                      
                         <tr className="">
                             <td className="py-2">Email :</td>
                             <td>
@@ -125,8 +181,24 @@ const addEntreprise = ({toastsRef}) => {
                         <tr className="">
                             <td className="py-2">Nom :</td>
                             <td>
-                                <input className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" placeholder="Nom de l'entreprise..." onChange={(e)=>{setEntrepriseName(e.target.value)}}
-                                value={entrepriseName}
+                                <input className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" placeholder="Nom..." onChange={(e)=>{setFirstName(e.target.value)}}
+                                value={firstName}
+                                />
+                            </td>
+                        </tr>
+                       <tr className="">
+                            <td className="py-2">Prénom :</td>
+                           <td>
+                                <input className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Prénom..." onChange={(e)=>{setLastName(e.target.value)}}
+                                value={lastName}
+                                />
+                           </td>
+                        </tr>
+                        <tr className="">
+                            <td className="py-2 pr-12">Date de naissance:</td>
+                            <td>
+                                <input type='date' className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin"  onChange={(e)=>{setDob(e.target.value)}}
+                                value={dob}
                                 />
                             </td>
                         </tr>
@@ -151,8 +223,8 @@ const addEntreprise = ({toastsRef}) => {
                     onSubmit={handleAddMultipleStudents}
                 
                 >
-                    <div className="text-[30px]">Ajouter plusieurs entreprise</div>
-                    <div className="text-[17px] font-thin">Ajouter un ficher contenant plusieurs entreprise en cliquant sur le lien ci dessous.</div>
+                    <div className="text-[30px]">Ajouter plusieurs étudiant</div>
+                    <div className="text-[17px] font-thin">Ajouter un ficher contenant plusieurs étudiant en cliquant sur le lien ci dessous.</div>
                     <label className=" w-fit p-8 flex items-center justify-center flex-col cursor-pointer transition-transform ease-in bg-white/10 backdrop-blur-3xl rounded-3xl" for = "file">
                         <div className=" flex justify-center items-center p-4 w-fit">         
                         <label for='file'  className="flex space-x-2 group cursor-pointer">
@@ -173,4 +245,4 @@ const addEntreprise = ({toastsRef}) => {
        </div>
     )
 }
-export default addEntreprise;
+export default addStudent;
