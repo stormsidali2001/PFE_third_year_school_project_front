@@ -4,17 +4,16 @@ import AcceuilTeacher from "../components/AcceuilTeacher";
 import HorisontalNavbar from "../components/HorisontalNavbar";
 
 const teacherDashboard = ({toastsRef}) => {
-    const [possedeEquipe , setPossedeEquipe] = useState(true);
-    const [validationEquipes , setValidationEquipe] = useState(false)
     const {getUserInfo} = useStoreActions(store=>store.user)
     useEffect(async ()=>{
         await getUserInfo();
     },[])
     return (
         <div>
-            
-            <AcceuilTeacher possedeEquipe={possedeEquipe} validationEquipes ={validationEquipes}/>
+        <div className="lg:h-screen h-fit min-w-screen bg-background min-h-screen items-center">
+            <AcceuilTeacher/>
         </div>
+    </div>
     )
 }
 export default teacherDashboard;
