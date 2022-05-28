@@ -7,8 +7,9 @@ import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import AttachFileIcon from "../icons/AttachFileIcon";
 import DocumentIcon from "../icons/documentIcon";
 import Select from "react-select";
-
+import { useRouter } from "next/router";
 const TeamDocs = ({toastsRef})=>{
+    const router = useRouter()
     const [newDocModal,setNewDocModal] = useState(false)
     const [description,setDescription] = useState('');
     const [file,setFile] = useState(null);
@@ -198,7 +199,7 @@ const TeamDocs = ({toastsRef})=>{
                             <div className="w-full  text-center font-medium text-xl">Document Infos:</div>
                             <div className="text-textcolor/90 "><span className="">Name: </span><span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].name}</span></div>
                             <div>Type: <span className="text-sm">{ selectedFiles[Object.keys(selectedFiles)[0]].type.name}</span></div>
-                            <div  className="text-textcolor/90">Url: <span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].url}</span> </div>
+                            <div  onClick={()=>router.push('http://localhost:8080/'+selectedFiles[Object.keys(selectedFiles)[0]].url?.slice(2))}  className="text-textcolor/90 cursor-pointer hover:underline">Url: <span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].url}</span> </div>
                             <div  className="text-textcolor/90">Owner: </div>
                             <div className="flex w-full flex-col pl-5 text-textcolor/90">
                             <div>Name: <span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].owner.firstName+' '+selectedFiles[Object.keys(selectedFiles)[0]].owner.lastName}</span></div>
