@@ -1,3 +1,4 @@
+import Link from "next/link";
 import StudentVerticalNavbar from "./StudentVerticalNavbar";
 
 const AcceuilEntreprise = props => {
@@ -8,8 +9,8 @@ const AcceuilEntreprise = props => {
                 <div className="text-[20px] font-semibold">Nous somme heureux de vous acceuil sur notre plateforme. On espère qul'elle vous aiderait à réaliser des projets que vous aviez toujour eu envie de réaliser et à faire connaissance avec des etudiants ambicieux et des enseignts professionnels.</div>
                 <div className="text-[22px] font-light">Accédez a la listes des thèmes proposés , puis proposez un !</div>
                 <div className="flex flex-row space-x-10 text-[18px] font-extralight">
-                    <button className="h-[40px] w-[180px] text-white bg-[#32AFF5] rounded-full">Proposer un thème</button>
-                    <button className="h-[40px] w-[180px] bg-[#8FD4FB] rounded-full">Voir les thèmes</button>
+                   <Link href='/createthemesuggestion'><button className="h-[40px] w-[180px] text-white bg-[#32AFF5] rounded-full">Proposer un thème</button></Link>
+                    <Link href='/themes'><button className="h-[40px] w-[180px] bg-[#8FD4FB] rounded-full">Voir les thèmes</button></Link>
                 </div>
             </div>
             <img src="AcceuilEntreprise.jpg" className="lg:h-[400px] w-full object-contain mix-blend-darken"/>
