@@ -193,7 +193,7 @@ const MyTeams = props => {
                                             })
                                         }
                                         <div className="w-full flex justify-center">
-                                            <button className="bg-blue-300 hover:bg-blue-400 rounded-full shadow-lg h-[30px] w-[100px]">Voir plus</button>
+                                            <button className="bg-blue-300 hover:bg-blue-400 rounded-full shadow-lg h-[30px] w-[180px]">Voir les documents</button>
                                         </div>
                                     </div>
                                 </div>
