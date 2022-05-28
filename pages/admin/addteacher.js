@@ -126,10 +126,10 @@ const addTeacher = ({toastsRef}) => {
                     onSubmit = {handleAddSingleTeacher}
                 
                 >
-                    <div className="text-[35px]">Ajouter un enseignant</div>
+                    <div className="md:text-[28px] text-[22px]">Ajouter un enseignant</div>
                     <table>
                         <tr className="">
-                            <td className="py-2">SSN :</td>
+                            <td className="py-1 hidden sm:flex">SSN :</td>
                             <td>
                                 <input 
                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" 
@@ -140,7 +140,7 @@ const addTeacher = ({toastsRef}) => {
                             </td>
                         </tr>
                         <tr className="">
-                            <td className="py-2">Email :</td>
+                            <td className="py-1 hidden sm:flex">Email :</td>
                             <td>
                                 <input 
                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" 
@@ -151,7 +151,7 @@ const addTeacher = ({toastsRef}) => {
                             </td>
                         </tr>
                         <tr className="">
-                            <td className="py-2">Nom :</td>
+                            <td className="py-1 hidden sm:flex">Nom :</td>
                             <td>
                                 <input 
                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" 
@@ -162,7 +162,7 @@ const addTeacher = ({toastsRef}) => {
                             </td>
                         </tr>
                        <tr className="">
-                            <td className="py-2">Prénom :</td>
+                            <td className="py-1 hidden sm:flex">Prénom :</td>
                            <td>
                                 <input 
                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Prénom..." 
@@ -172,7 +172,7 @@ const addTeacher = ({toastsRef}) => {
                            </td>
                         </tr>
                         <tr className="">
-                            <td className="py-2 pr-12">Spécialité :</td>
+                            <td className="py-1 hidden sm:flex pr-12">Spécialité :</td>
                             <td>
                                 <input 
                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Spécialité..." 
@@ -199,10 +199,10 @@ const addTeacher = ({toastsRef}) => {
                     </button>
                 </form>
                 <form 
-                    className = {`h-[500px] w-[550px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[20px] text-center px-12 ${manyClick === true ? "flex" : "hidden"}`}
+                    className = {`h-[550px] w-[550px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[20px] text-center px-12 ${manyClick === true ? "flex" : "hidden"}`}
                     onSubmit = {handleAddMultipleTeachers}
                 >
-                    <div className="text-[30px]">Ajouter plusieurs enseignants</div>
+                    <div className="md:text-[26px] text-[20px]">Ajouter plusieurs enseignants</div>
                     <div className="text-[17px] font-thin">Ajouter un ficher contenant plusieurs étudiant en cliquant sur le lien ci dessous.</div>
                     <label className=" w-fit p-8 flex items-center justify-center flex-col cursor-pointer transition-transform ease-in bg-white/10 backdrop-blur-3xl rounded-3xl" for = "file">
                         <div className=" flex justify-center items-center p-4 w-fit">         
@@ -211,7 +211,7 @@ const addTeacher = ({toastsRef}) => {
                                 <div> Joindre des fichiers </div>
                             </label>
                         </div>
-                        <img src = {extension === "csv" ? "csv.jpg" : "excel.png"} className={`h-[80px] w-[80px] object-contain opacity-40 ${file ? "flex" : "hidden"}`}/>
+                        <img src = {extension === "csv" ? "/csv.jpg" : "/excel.png"} className={`h-[80px] w-[80px] object-contain opacity-40 ${file ? "flex" : "hidden"}`}/>
                         <div className="w-full text-center break-words text-sm">{file?.name}</div>
                      </label>
                      <input id="file" className="hidden" type="file" multiple onChange={handleFileChange} optional/>
