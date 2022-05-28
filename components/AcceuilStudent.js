@@ -1,7 +1,7 @@
 
 const AcceuilStudent = props => {
     return (
-        <div className="flex md:flex-row flex-col-reverse pt-[100px] pl-[100px] h-fit w-screen items-center justify-center font-xyz text-textcolor px-[80px]">
+        <div className="flex lg:flex-row flex-col-reverse pt-[100px] pl-[100px] h-fit w-screen items-center justify-center font-xyz text-textcolor px-[80px]">
             <div className="flex flex-col space-y-10 items-center justify-center">
                 <div className="text-[32px]">Bonjours ,</div>
                 <div className="text-[20px] px-6 text-center">Nous somme heureux de vous acceuil sur notre plateforme. On espère qu’elle vous serait utile dans le managment du votre projet,</div>
