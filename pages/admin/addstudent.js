@@ -131,11 +131,11 @@ const addStudent = ({toastsRef}) => {
                         <button className="h-[35px] sm:w-[160px] w-[120px] rounded-full bg-[#8FD4FB]" onClick={()=> setManyClick(true)}>Plusieurs</button>
                     </div>
                 </div>
-                <form className = {`h-[550px] w-[650px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[23px] ${oneclick === true ? "flex" : "hidden"} mt-[100px]`} onSubmit={handleAddSingleStudent}>
-                    <div className="text-[35px]">Ajouter un étudiant</div>
+                <form className = {`h-[500px] md:w-[650px] w-fit px-10 py-10 bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center relative text-[18px] ${oneclick === true ? "flex" : "hidden"} mt-[100px]`} onSubmit={handleAddSingleStudent}>
+                    <div className="sm:text-[26px] text-[22px]">Ajouter un étudiant</div>
                     <table>
                     <tr className="">
-                            <td className="py-2">Promotion :</td>
+                            <td className="py-1 hidden sm:flex">Promotion :</td>
                             <td >
                                 <Select
                                     placeholder="Promotion..." 
@@ -150,7 +150,7 @@ const addStudent = ({toastsRef}) => {
                         </tr>
                         <tr className="">
                             
-                            <td className="py-2">Matricule :</td>
+                            <td className="py-1 hidden sm:flex">Matricule :</td>
                             <td>
                                 <input
                                      className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Matricule..." 
@@ -160,7 +160,7 @@ const addStudent = ({toastsRef}) => {
                             </td>
                         </tr>
                         <tr className="">
-                            <td className="py-2">Moyenne :</td>
+                            <td className="py-1 hidden sm:flex">Moyenne :</td>
                             <td>
                                 <input
                                      className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Matricule..." 
@@ -171,7 +171,7 @@ const addStudent = ({toastsRef}) => {
                         </tr>
                       
                         <tr className="">
-                            <td className="py-2">Email :</td>
+                            <td className="py-1 hidden sm:flex">Email :</td>
                             <td>
                                 <input className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" placeholder="E-mail..." onChange={(e)=>{setEmail(e.target.value)}}
                                  value={email}
@@ -179,7 +179,7 @@ const addStudent = ({toastsRef}) => {
                             </td>
                         </tr>
                         <tr className="">
-                            <td className="py-2">Nom :</td>
+                            <td className="py-1 hidden sm:flex">Nom :</td>
                             <td>
                                 <input className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" placeholder="Nom..." onChange={(e)=>{setFirstName(e.target.value)}}
                                 value={firstName}
@@ -187,7 +187,7 @@ const addStudent = ({toastsRef}) => {
                             </td>
                         </tr>
                        <tr className="">
-                            <td className="py-2">Prénom :</td>
+                            <td className="py-1 hidden sm:flex">Prénom :</td>
                            <td>
                                 <input className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Prénom..." onChange={(e)=>{setLastName(e.target.value)}}
                                 value={lastName}
@@ -195,7 +195,7 @@ const addStudent = ({toastsRef}) => {
                            </td>
                         </tr>
                         <tr className="">
-                            <td className="py-2 pr-12">Date de naissance:</td>
+                            <td className="py-1 sm:pr-12 hidden sm:flex">Date de naissance:</td>
                             <td>
                                 <input type='date' className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin"  onChange={(e)=>{setDob(e.target.value)}}
                                 value={dob}
@@ -219,11 +219,11 @@ const addStudent = ({toastsRef}) => {
                     </button>
                 </form>
                 <form 
-                    className = {`h-[500px] w-[550px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[20px] text-center px-12 ${manyClick === true ? "flex" : "hidden"}`}
+                    className = {`h-[550px] w-[550px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[20px] text-center px-12 ${manyClick === true ? "flex" : "hidden"}`}
                     onSubmit={handleAddMultipleStudents}
                 
                 >
-                    <div className="text-[30px]">Ajouter plusieurs étudiant</div>
+                    <div className="md:text-[26px] text-[22px]">Ajouter plusieurs étudiant</div>
                     <div className="text-[17px] font-thin">Ajouter un ficher contenant plusieurs étudiant en cliquant sur le lien ci dessous.</div>
                     <label className=" w-fit p-8 flex items-center justify-center flex-col cursor-pointer transition-transform ease-in bg-white/10 backdrop-blur-3xl rounded-3xl" for = "file">
                         <div className=" flex justify-center items-center p-4 w-fit">         
@@ -236,7 +236,7 @@ const addStudent = ({toastsRef}) => {
                         <div className="w-full text-center break-words text-sm">{file?.name}</div>
                      </label>
                      <input id="file" className="hidden" type="file" multiple onChange={handleFileChange} optional/>
-                    <button className="h-[40px] w-[120px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full" type="submit">Valider</button>
+                    <button className="h-[40px] w-[120px] text-[18px] mb-6 bg-blue-300 hover:bg-blue-400 rounded-full" type="submit">Valider</button>
                     <button className="absolute bottom-[35px] left-[20px]" onClick = {(e)=>{setManyClick(false);e.preventDefault()}}>
                         <ArrowIcon/>
                     </button>
