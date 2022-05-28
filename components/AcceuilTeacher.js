@@ -1,7 +1,7 @@
 import Link from "next/link";
 import TeacherVerticalNavbar from "./TeacherVerticalNavbar";
 
-const AcceuilTeacher = ({possedeEquipe , validationEquipes}) => {
+const AcceuilTeacher = props => {
     return (
         <div className="pl-[100px] pt-[100px] text-[#1A2562] font-xyz px-12 flex flex-col-reverse md:flex-row space-y-3 py-10 h-fit w-[100vw] items-center justify-center">
             <div className="flex flex-col space-y-8 items-center justify-center text-center">
