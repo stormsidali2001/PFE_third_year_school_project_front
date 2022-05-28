@@ -97,8 +97,7 @@ const Themes = ({toastsRef}) => {
 
     return (
         <div>
-       <HorisontalNavbar/>
-       <StudentVerticalNavbar/>
+   
         <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor">
             <img src="themeStudent.png"  className="object-contain mix-blend-darken absolute inset-1/4"/>
             <div className="flex flex-row space-x-72 items-center justify-center pt-10">

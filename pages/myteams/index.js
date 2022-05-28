@@ -1,159 +1,57 @@
 import Avatar from "../../components/Avatar"
 import TeacherVerticalNavbar from "../../components/TeacherVerticalNavbar"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import  Select  from "react-select"
-
+import { useStoreState,useStoreActions } from "../../store/hooks"
+import {useRouter} from 'next/router'
 const MyTeams = props => {
-
-    const teams = [
-        {
-            id : 1,
-            name : 'team5',
-            teamLeader : {
-                id : 5,
-                firstName : 'chef',
-                lastName : 'équipe',
-                image : null
-                
-            },
-            members : [
-                {
-                    id : 1,
-                    firstName : 'student1',
-                    lastName : 'etudiant1',
-                    image : null
-                },
-                {
-                    id : 5,
-                    firstName : 'chef',
-                    lastName : 'équipe',
-                    image : null
-                },
-                {
-                    id : 6,
-                    firstName : 'membre',
-                    lastName : 'membre5',
-                    image : null
-                },
-                {
-                    id : 7,
-                    firstName : 'etudiant',
-                    lastName : 'etudiante',
-                    image : null
-                }
-            ]
-        },
-        {
-            id : 1,
-            name : 'team7',
-            teamLeader : {
-                id : 5,
-                firstName : 'chef',
-                lastName : 'équipe',
-                image : null
-            },
-            members : [
-                {
-                    id : 1,
-                    firstName : 'student1',
-                    lastName : 'etudiant1',
-                    image : null
-                },
-                {
-                    id : 5,
-                    firstName : 'chef',
-                    lastName : 'équipe',
-                    image : null
-                },
-                {
-                    id : 6,
-                    firstName : 'membre',
-                    lastName : 'membre5',
-                    image : null
-                },
-                {
-                    id : 7,
-                    firstName : 'etudiant',
-                    lastName : 'etudiante',
-                    image : null
-                }
-            ]
-        },
-        {
-            id : 1,
-            name : 'team6',
-            teamLeader : {
-                id : 5,
-                firstName : 'chef',
-                lastName : 'équipe',
-                image : null
-            },
-            members : [
-                {
-                    id : 1,
-                    firstName : 'student1',
-                    lastName : 'etudiant1',
-                    image : null
-                },
-                {
-                    id : 5,
-                    firstName : 'chef',
-                    lastName : 'équipe',
-                    image : null
-                },
-                {
-                    id : 6,
-                    firstName : 'membre',
-                    lastName : 'membre5',
-                    image : null
-                },
-                {
-                    id : 7,
-                    firstName : 'etudiant',
-                    lastName : 'etudiante',
-                    image : "/sondage.png"
-                },
-                {
-                    id : 6,
-                    firstName : 'membre',
-                    lastName : 'membre5',
-                    image : null
-                },
-                {
-                    id : 7,
-                    firstName : 'etudiant',
-                    lastName : 'etudiante',
-                    image : "/sondage.png"
-                }
-            ]
-        }
-    ]
-
+    const router = useRouter()
+    const {promotion}  = router.query;
+    
+    const {promotions} = useStoreState(store=>store.promotionsModel)
+    const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
     const [choosenPromotion , setChoosenPromotion] = useState(null)
 
-    const promotions = [
-        {
-            id : 1,
-            name : '1CPI'
-        },
-        {
-            id : 1,
-            name : '2CPI'
-        },
-        {
-            id : 1,
-            name : '1CS'
-        },
-        {
-            id : 1,
-            name : '2CS'
-        },
-        {
-            id : 1,
-            name : '3CS'
-        }
-    ]
+    const {getTeamsTeacherResponsibleForWithMembers} = useStoreActions(store=>store.teacherTeamCommitDocsModel)
+    const {teams} = useStoreState(store=>store.teacherTeamCommitDocsModel)
+
+   
+
+    const handleChange = async option=>{
+      
+        router.push(`/myteams?promotion=${option.value}`)
+       
+    }
+
+    useEffect(async()=>{
+      
+        
+        
+        if(promotions?.length === 0) await getAllPromotionsThunk()
+        
+      
+      
+            if(!promotion || promotion?.length === 0) {
+               
+                promotions?.length > 0 && await getTeamsTeacherResponsibleForWithMembers()
+                return;
+            }
+            const label = promotions.find(el=>el.id=== promotion)?.name
+            if(!label) {
+               
+                return ;
+            }
+          
+            setChoosenPromotion({value:promotion,label})
+            await getTeamsTeacherResponsibleForWithMembers(promotion)
+
+        
+        
+
+    },[promotion,promotions])
+
+
 
     return(
         <div>
@@ -164,7 +62,7 @@ const MyTeams = props => {
                 <Select
                     placeholder="Promotion..." 
                     className="z-50 h-[40px] w-[230px] rounded-lg bg-slate-200 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
-                    onChange={(option)=>{setChoosenPromotion(option)}}
+                    onChange={(option)=>{handleChange(option)}}
                     options={promotions.map(el=>{return {value:el.id,label:el.name}})}
                     value={choosenPromotion}
                     styles = {{menuPortal:base=>({...base,zIndex:500})}}
@@ -179,10 +77,10 @@ const MyTeams = props => {
                                     <div className="absolute top-2 flex flex-col space-y-2">
                                         <div className="w-full text-center text-[17px]">{el.name}</div>
                                         {
-                                            el.members.map((element) => {
+                                            el.students.map((element) => {
                                                 return (
                                                     <div className="flex flex-row items-center space-x-2">
-                                                        <Avatar firstName={element.firstName} lastName={element.lastName} image={element.image}/>
+                                                        <Avatar firstName={element.firstName} lastName={element.lastName}/>
                                                         <div className="text-black">{element.firstName}</div>
                                                         <div className="text-black">{element.lastName}</div>
                                                         {
@@ -193,7 +91,7 @@ const MyTeams = props => {
                                             })
                                         }
                                         <div className="w-full flex justify-center">
-                                            <button className="bg-blue-300 hover:bg-blue-400 rounded-full shadow-lg h-[30px] w-[180px]">Voir les documents</button>
+                                            <button onClick={()=>router.push('/myteams/'+el.id)} className="bg-blue-300 hover:bg-blue-400 rounded-full shadow-lg h-[30px] w-[180px]">Voir les documents</button>
                                         </div>
                                     </div>
                                 </div>

@@ -17,7 +17,7 @@ import { themesModel, ThemesModel } from "./theme.model";
 import { WishListModel, wishListModel } from "./wishList.entity";
 import {  adminAsignTeamsToThemesModel, AdminAsignTeamsToThemesModel } from "./adminAsignTeamToThemes";
 import { commitsModel, CommitsModel } from "./commits.model";
-import { teacherTeamCommitsModel, TeacherTeamCommitsModel } from "./teacherTeamCommits.model";
+import { TeacherTeamCommitDocsModel, teacherTeamCommitDocsModel,  } from "./teacherTeamCommits.model";
 export interface Model{
     user:UserModel;
     notificationService:NotificationsServiceModel;
@@ -37,7 +37,7 @@ export interface Model{
     wishListModel:WishListModel
     adminAsignTeamsToThemesModel:AdminAsignTeamsToThemesModel;
     commitsModel:CommitsModel;
-    teacherTeamCommitsModel:TeacherTeamCommitsModel
+    teacherTeamCommitDocsModel:TeacherTeamCommitDocsModel
 }
 
 export const model:Model={
@@ -59,7 +59,7 @@ export const model:Model={
     wishListModel:wishListModel,
     adminAsignTeamsToThemesModel:adminAsignTeamsToThemesModel,
     commitsModel:commitsModel,
-    teacherTeamCommitsModel:teacherTeamCommitsModel
+    teacherTeamCommitDocsModel:teacherTeamCommitDocsModel
 
     
 }
