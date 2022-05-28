@@ -5,25 +5,8 @@ import { useStoreActions, useStoreState } from "../store/hooks";
 
 
 const Notification = forwardRef(({open,toastsRef},ref)=>{
-    const {getLastNotificationsThunk,getNewNotificationThunk} = useStoreActions(store=>store.notificationService)
     const {notifications,totalNotificationCount} = useStoreState(store=>store.notificationService)
-    const {socket} = useStoreState(store=>store.socketModel)
-    console.log("Notifications",notifications)
-    useEffect(async()=>{
-        await getLastNotificationsThunk();
-    },[])
   
-    useEffect(async ()=>{
-        if(!socket) {
-            console.log("socket not initialized yet");
-            return;
-        }
-       
-        console.log("zzzzzzzzzzzzzzzzzz",socket)
-        await getNewNotificationThunk(toastsRef) 
-      
-     
-    },[socket])
 
   console.log('render')
     return(
