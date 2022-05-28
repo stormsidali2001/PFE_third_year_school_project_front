@@ -18,14 +18,15 @@ const TeamList = props => {
         
    },[])
 
-  
+ 
    let teamsList = teamsData.map(el=>{
        return {
            ...el,
-           theme:el.theme.title
+           theme:el?.theme?.title
        }
    })
    console.log(teamsList,'******')
+   
    
     if(teamsList.length === 0) return <div>Aucune donnée</div>
     const columns = [...Object.keys(teamsList[0]).filter(el=>el !=='id')];

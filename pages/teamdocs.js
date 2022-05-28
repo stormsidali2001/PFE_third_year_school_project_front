@@ -6,22 +6,28 @@ import ModalPortal from "../components/ModalPortal";
 import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import AttachFileIcon from "../icons/AttachFileIcon";
 import DocumentIcon from "../icons/documentIcon";
-
+import Select from "react-select";
+import { useRouter } from "next/router";
 const TeamDocs = ({toastsRef})=>{
+    const router = useRouter()
     const [newDocModal,setNewDocModal] = useState(false)
     const [description,setDescription] = useState('');
     const [file,setFile] = useState(null);
     const [selectedFiles,setSelectedFiles] = useState({})
-    const {createTeamDocument,getTeamDocuments,deleteTeamDocs} = useStoreActions(store=>store.teamDocumentModel)
-    const {documents} = useStoreState(store=>store.teamDocumentModel)
+    const {createTeamDocument,getTeamDocuments,deleteTeamDocs,getPromotionDocumentTypes,commitDocs} = useStoreActions(store=>store.teamDocumentModel)
+    const {documents,documentTypes} = useStoreState(store=>store.teamDocumentModel)
+    const [chosenDocType,setChosenDocType] = useState(null)
    
-    const {getUserInfo} = useStoreActions(store=>store.user)
     const  {uploadFileThunk} = useStoreActions(store=>store.user)
+    const [openCommitModal,setOpenCommitModel] = useState(false)
+    const [commitTitle,setCommitTitle] = useState('')
+    const [commitDescription,setCommitDescription] = useState('')
     useEffect(async()=>{
         try{
 
             await getTeamDocuments();
-            await getUserInfo()
+            await getPromotionDocumentTypes();
+
         }catch(err){
             console.log(err)
             toastsRef.current.addMessage({text:"Probleme",mode:'Error'})
@@ -35,6 +41,10 @@ const TeamDocs = ({toastsRef})=>{
                 toastsRef.current.addMessage({text:"inserez un fichier !!",mode:'Error'})
                 return;
             }
+            if(!chosenDocType){
+                toastsRef.current.addMessage({text:"selectionez le type de document",mode:'Error'})
+                return;
+            }
 
 
            
@@ -44,7 +54,7 @@ const TeamDocs = ({toastsRef})=>{
             const {filename,destination,originalname} = res.data;
             console.log(res.data)
             const url = destination+'/'+filename;
-            await createTeamDocument({name:originalname,url,description})
+            await createTeamDocument({name:originalname,url,description,typeDocId:chosenDocType.value})
             toastsRef.current.addMessage({text:"document ajouté avec success",mode:'Alert'})
             setDescription('')
             setFile(null)
@@ -83,6 +93,22 @@ const TeamDocs = ({toastsRef})=>{
         }
        
 
+    }
+    const handleCommitDocs = async e=>{
+        e.preventDefault();
+        try{
+            await commitDocs({
+                title:commitTitle,
+                description:commitDescription,
+                docsIds:Object.keys(selectedFiles)
+            })
+            toastsRef.current.addMessage({text:"c'est fait",mode:'Alert'})
+            setOpenCommitModel(false)
+        }catch(err){
+            console.log(err)
+            toastsRef.current.addMessage({text:"ops ... erreur",mode:'Error'})
+            setOpenCommitModel(false)
+        }
     }
     function handleChange(e) {
         setFile(e.target.files[0])
@@ -157,6 +183,7 @@ const TeamDocs = ({toastsRef})=>{
                             </div>}
                            { Object.keys(selectedFiles).length >=1 &&<div 
                                     className="h-full border-2 border-gray-200 w-1/4 justify-center flex items-center cursor-pointer"
+                                    onClick = {()=>setOpenCommitModel(c=>!c)}
                             >
                                         Commit
                             </div>}
@@ -171,15 +198,22 @@ const TeamDocs = ({toastsRef})=>{
                            <>
                             <div className="w-full  text-center font-medium text-xl">Document Infos:</div>
                             <div className="text-textcolor/90 "><span className="">Name: </span><span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].name}</span></div>
-                            <div  className="text-textcolor/90">Url: <span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].url}</span> </div>
+                            <div>Type: <span className="text-sm">{ selectedFiles[Object.keys(selectedFiles)[0]].type.name}</span></div>
+                            <div  onClick={()=>router.push('http://localhost:8080/'+selectedFiles[Object.keys(selectedFiles)[0]].url?.slice(2))}  className="text-textcolor/90 cursor-pointer hover:underline">Url: <span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].url}</span> </div>
                             <div  className="text-textcolor/90">Owner: </div>
                             <div className="flex w-full flex-col pl-5 text-textcolor/90">
                             <div>Name: <span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].owner.firstName+' '+selectedFiles[Object.keys(selectedFiles)[0]].owner.lastName}</span></div>
+                           
+                            
+                           
+                           
+                           
                             </div>
                             <div  className="text-textcolor/90">Description: </div>
                             <div className="w-full py-1 px-2 text-textcolor/90 bg-gray-200/30 text-justify backdrop-blur-md break-words">
                                 {selectedFiles[Object.keys(selectedFiles)[0]].description}
                             </div>
+                           
                            </>
                         )}
                     </>
@@ -197,6 +231,18 @@ const TeamDocs = ({toastsRef})=>{
             <form className="w-full h-full flex flex-col items-center space-y-4" onSubmit={handleNewDoc}>
                 <h1 className=" text-2xl text-textcolor font-semibold">Nouveau fichier</h1>
                 <div className="w-[90%] text-center text-sm">Inserer un nouveau fichier dans l'espace de travail de votre equipe</div>
+                  <div className="flex space-x-2 items-center mx-auto">
+                          <div>Type:</div>
+                            <Select
+                                        placeholder="type de document..." 
+                                        onChange={(option)=>{setChosenDocType(option)}}
+                                        options={documentTypes.map(el=>{return {value:el.id,label:el.name}})}
+                                        isLoading = {!documentTypes}
+                                        value={chosenDocType}
+                                        styles = {{menuPortal:base=>({...base,zIndex:100,width:'100px',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
+                                        
+                            />
+                    </div>
                { 
                         file?(
                             <>
@@ -234,6 +280,51 @@ const TeamDocs = ({toastsRef})=>{
                         
                             Submit
                     </button>
+            </form>
+        </ModalPortal>
+        <ModalPortal
+            open={openCommitModal}
+            handleClose ={setOpenCommitModel}
+        >
+            <form className="flex flex-col w-[400px] items-center space-y-4 text-textcolor">
+            <h1 className=" text-2xl text-textcolor font-semibold">Commit</h1>
+                <div className="w-[90%] text-center text-sm">{Object.keys(selectedFiles).length} fichier selectionnés</div>
+                <div className="flex space-x-2 w-[90%]">
+                    <div>Title:</div>
+                    <input 
+                        placeholder="title..."
+                        className="w-full bg-blue-50 backdrop-blur-sm rounded-[10px] px-2"
+                        value={commitTitle}
+                        onChange={(e)=>setCommitTitle(e.target.value)}
+                    />
+                   
+
+                </div>
+                <div className="flex  flex-col space-y-1  w-[90%]">
+                    <div>Description:</div>
+                    <textarea 
+                   
+                       
+                        className='   p-1 h-[60px] resize-none scroll-none w-[90%] bg-blue-50 backdrop-blur-sm rounded-[5px]'
+                        placeholder="description..."
+                        value={commitDescription}
+                        onChange={(e)=>setCommitDescription(e.target.value)}
+                        
+                />
+                   
+
+                </div>
+                <div className="flex  space-x-2  w-[90%] justify-center">
+                    <button className="font-medium text-black/70 transition-all ease-in bg-blue-300 hover:bg-blue-200 backdrop-blur-sm px-2 py-1 rounded-[5px]" onClick = {()=>setOpenCommitModel(false)}>Annuler</button>
+                    <button 
+                        className="font-medium text-black/70 transition-all ease-in bg-blue-300 hover:bg-blue-200 backdrop-blur-sm px-2 py-1 rounded-[5px]"
+                        onClick={handleCommitDocs}
+                    
+                    >Envoyer</button>
+                   
+
+                </div>
+               
             </form>
         </ModalPortal>
         
