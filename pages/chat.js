@@ -75,23 +75,23 @@ const chat = props => {
     return (
         <div className="bg-background min-h-screen w-screen relative">
          
-            <div className="flex flex-row space-x-10 font-xyz text-textcolor pr-4 pb-4 pt-[100px] pl-[100px]">
+            <div className="flex flex-row md:space-x-10 font-xyz text-textcolor pr-4 pb-4 pt-[100px] md:pl-[100px] pl-4">
                 <div className={`md:h-fit min-h-[80vh] md:min-h-[400px] w-[350px] pt-6 rounded-xl bg-white flex flex-col space-y-4 text-center shadow-md ${discussionOuverte === true ? 'hidden'  : 'flex'}`}>
-                    <div className={`pb-4 text-[18px] px-4`}>Cliquez sur un groupe pour démarrer une discussion</div>
+                    <div className={`pb-4 text-[15px] md:text-[18px] px-4`}>Cliquez sur un groupe pour démarrer une discussion</div>
                     {
                         data.map((el , index) => {
                             return (
-                                <div className="flex flex-row items-center space-x-4 px-8 cursor-pointer" onClick={()=>{setDiscussionOuverte(true) ; setIdDiscussion(el.id)}}>
-                                    <img src={el.url} className="h-[40px] w-[40px] object-contain rounded-full"/>
-                                    <div>{el.nomGroupe}</div>
+                                <div className="flex flex-row items-center space-x-1 md:space-x-4 px-8 cursor-pointer" onClick={()=>{setDiscussionOuverte(true) ; setIdDiscussion(el.id)}}>
+                                    <img src={el.url} className="md:h-[40px] w-[25px] h-[25px] md:w-[40px] object-contain rounded-full "/>
+                                    <div className="text-[12px] md:text-[16px]">{el.nomGroupe}</div>
                                 </div>
                             )
                         })
                     }
                 </div>
-                <div className={`h-[500px] w-[90vw] flex items-center justify-center relative ${discussionOuverte === true ? "" : "mix-blend-darken hidden md:flex"}`}>
+                <div className={`h-[500px] min-w-[90vw] md:min-w-[90vw] flex items-center justify-center relative ${discussionOuverte === true ? "" : "mix-blend-darken hidden md:flex"}`}>
                 <img src="chat.jpg" className={`h-[400px] w-fit object-contain mix-blend-darken ${discussionOuverte === true ? "opacity-10" : "hidden md:flex"}`}/>
-                    <div className={`flex flex-col h-[500px] w-full space-y-10 items-center justify-center absolute z-40 ${discussionOuverte === true ? " p-12 bg-white shadow-md rounded-xl backdrop-blur-lg overflow-y-scroll overflow-x-hidden" : ""}`}>
+                    <div className={`flex flex-col h-[500px] w-full space-y-10 items-center justify-center absolute z-40 ${discussionOuverte === true ? " p-2 md:p-12 bg-white shadow-md rounded-xl backdrop-blur-lg overflow-y-scroll overflow-x-hidden" : ""}`}>
                         <img src="chat.jpg" className={`h-[400px] w-fit object-contain mix-blend-darken absolute ${discussionOuverte === true ? "opacity-10" : "hidden md:flex"}`}/>
                         <div className={`text-[25px] font-thin absolute bottom-4 ${discussionOuverte === true ? "hidden" : "md:flex hidden"}`}>Cliquer sur un groupe pour afficher les messages</div>
                         <div className={`flex-col h-full w-full space-y-10`}>
@@ -113,8 +113,8 @@ const chat = props => {
                                     })
                                 }
                             </div>
-                            <form onSubmit={(e) => {e.preventDefault();handleSubmitMessage();}} className= {`pb-8 bottom-2 absolute flex h-fit w-full flex-row justify-start ${discussionOuverte === true ? "flex" : "hidden"} z-40`}>
-                                <input value={newMessage}  className={`bg-zinc-100 h-[45px] w-10/12 rounded-2xl shadow-md px-4`} onChange={(e)=> {setNewMessage(e.target.value)}} placeholder = "Ecrivez un message ..."/>
+                            <form onSubmit={(e) => {e.preventDefault();handleSubmitMessage();}} className= {`pb-2 items-center justify-center bottom-2 absolute flex  h-fit w-full flex-row  ${discussionOuverte === true ? "flex" : "hidden"} z-40`}>
+                                <input value={newMessage}  className={`bg-zinc-100 h-[30px] md:h-[45px] w-2/3 md:w-10/12 rounded-2xl shadow-md px-4`} onChange={(e)=> {setNewMessage(e.target.value)}} placeholder = "Ecrivez un message ..."/>
                                 <button><Send/></button>
                             </form>
                         </div>
