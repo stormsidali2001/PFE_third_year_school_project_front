@@ -113,12 +113,20 @@ const chat = props => {
                                     })
                                 }
                             </div>
+                           
                             <form onSubmit={(e) => {e.preventDefault();handleSubmitMessage();}} className= {`pb-2 items-center justify-center bottom-2 absolute flex  h-fit w-full flex-row  ${discussionOuverte === true ? "flex" : "hidden"} z-40`}>
                                 <input value={newMessage}  className={`bg-zinc-100 h-[30px] md:h-[45px] w-2/3 md:w-10/12 rounded-2xl shadow-md px-4`} onChange={(e)=> {setNewMessage(e.target.value)}} placeholder = "Ecrivez un message ..."/>
                                 <button><Send/></button>
                             </form>
                         </div>
+                       
                     </div>
+                    <button 
+                        className="absolute top-0 left-2 z-50"
+                        onClick={(e) => {setDiscussionOuverte(false)}}
+                    >
+                        bye
+                    </button>
                 </div>
             </div>
         </div>
