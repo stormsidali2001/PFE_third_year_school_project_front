@@ -80,17 +80,7 @@ const creerSoutenance = props => {
                             value={description} className='h-[60px] w-[500px] bg-white/50 rounded-md shadow-md border-2 border-slate-200 resize-none p-3' 
                             onChange={(e) => setDescription(e.target.value)}/>
                     </div>
-                    <div className='flex flex-row items-center space-x-4'>
-                        <div>Promotion :</div>
-                        <Select
-                            placeholder="Promotion..." 
-                            className="z-50 h-[40px] w-[380px] border-2 border-slate-200 rounded-md bg-slate-200 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
-                            onChange={(option)=>{setChoosenPromotion(option)}}
-                            options={promotions.map(el=>{return {value:el.id,label:el.name}})}
-                            value={choosenPromotion}
-                            styles = {{menuPortal:base=>({...base,zIndex:500})}}
-                        />
-                    </div>
+                
                     <div className='flex flex-row space-x-4 items-center'>
                         <div>Date :</div>
                         <input 
@@ -100,6 +90,7 @@ const creerSoutenance = props => {
                             className = 'bg-transparent outline-none'
                         />
                     </div>
+               
                     <div className='flex flex-row space-x-4 items-center'>
                         <div>Equipe :</div>
                         <button 
