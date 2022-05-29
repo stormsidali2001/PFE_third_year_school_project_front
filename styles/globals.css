@@ -10,16 +10,17 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  
  
 }
 input,textarea{
   @apply outline-none;
   overflow: auto;
+  background-image: url('');
 }
 a {
   color: inherit;
-  text-decoration: none;
-  
+  text-decoration: none;  
 }
 
 * {

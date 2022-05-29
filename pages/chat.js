@@ -57,9 +57,9 @@ const chat = props => {
         })
        
     },[socket])
-    //  if(userType !== 'student'){
-    //     return "not a student";
-    // }
+     if(userType !== 'student'){
+         return "not a student";
+     }
 
     const handleSubmitMessage = async() => {
         if (newMessage !== "") {
@@ -90,20 +90,32 @@ const chat = props => {
                         })
                     }
                 </div>
-                <div className={`h-[500px] min-w-[90vw] md:min-w-[70vw] flex items-center justify-center relative ${discussionOuverte === true ? "" : "mix-blend-darken hidden md:flex"}`}>
-                <img src="chat.jpg" className={`h-[400px] w-fit object-contain mix-blend-darken ${discussionOuverte === true ? "opacity-10" : "hidden md:flex"}`}/>
-                    <div className={`flex flex-col h-[500px] w-full space-y-10 items-center justify-center absolute z-40 ${discussionOuverte === true ? " p-2 md:p-12 bg-white shadow-md rounded-xl backdrop-blur-lg overflow-y-scroll overflow-x-hidden" : ""}`}>
-                        <img src="chat.jpg" className={`h-[400px] w-fit object-contain mix-blend-darken absolute ${discussionOuverte === true ? "opacity-10" : "hidden md:flex"}`}/>
-                        <div className={`text-[25px] font-thin absolute bottom-4 ${discussionOuverte === true ? "hidden" : "md:flex hidden"}`}>Cliquer sur un groupe pour afficher les messages</div>
+                <div className={`h-[450px] min-w-[90vw] md:min-w-[70vw] flex items-center justify-center relative ${discussionOuverte === true ? "" : "mix-blend-darken hidden md:flex"}`}
+                style={{
+                    backgroundImage:"url('./chat.jpg')",
+                    backgroundSize:'contain',
+                    backgroundRepeat:'no-repeat',
+                    backgroundAttachment:'fixed',
+                    backgroundPositionX:'50%',
+                    transform:'scale(1)',
+                }}
+                >
+                    <div className={`flex flex-col h-[450px] w-full space-y-10 items-center justify-center absolute top-0 z-40 ${discussionOuverte === true ? " p-2 md:p-12 bg-white/90 backdrop-blur-sm shadow-xl rounded-xl scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 overflow-x-hidden" : ""}`}
+                   
+                    >
+                    
+                        <div className={`text-[25px] font-thin absolute bottom-4 ${discussionOuverte === true ? "hidden" : "md:flex hidden "}`}>Cliquer sur un groupe pour afficher les messages</div>
                         <div className={`flex-col h-full w-full space-y-10`}>
-                            <div>
+                            
+                                <div>
                                 {
                                     discussion.map((element) => {
                                         console.log(element,student)
                                         return (
-                                            <div className={`flex-col  flex h-full w-full space-y-10 ${student?.id === element?.sender?.id ? "items-end" : "items-start"}`}>
+                                            <div className={`flex-col  flex h-full w-full space-y-10 ${student?.id === element?.sender?.id ? "items-end" : "items-start"}`}
+                                           >
                                                 {idDiscussion === element.chatId ? 
-                                                    <div className={`z-40 rounded-2xl py-1 px-4 my-[2px] space-y-2 break-all max-w-[300px] ${student?.id === element?.sender?.id ? "bg-[#36b5ff] text-white" : " bg-[#8FD4FB] "} flex flex-col`}>
+                                                    <div className={`z-40 rounded-2xl py-1 px-4 my-[2px] space-y-2 break-all max-w-[60vw] md:max-w-[300px] ${student?.id === element?.sender?.id ? "bg-[#36b5ff] text-white" : " bg-[#8FD4FB] "} flex flex-col`}>
                                                          <div className="text-[12px] ">par: {element?.sender?.firstName+' '+element?.sender?.lastName}</div>
                                                         <div>{element.message}</div>
                                                        
@@ -112,13 +124,7 @@ const chat = props => {
                                             </div>
                                         )
                                     })
-                                }
-                            </div>
-                           
-                            <form onSubmit={(e) => {e.preventDefault();handleSubmitMessage();}} className= {`pb-2 items-center justify-center bottom-2 absolute flex  h-fit w-full flex-row  ${discussionOuverte === true ? "flex" : "hidden"} z-40`}>
-                                <input value={newMessage}  className={`bg-zinc-100 h-[30px] md:h-[45px] w-2/3 md:w-10/12 rounded-2xl shadow-md px-4`} onChange={(e)=> {setNewMessage(e.target.value)}} placeholder = "Ecrivez un message ..."/>
-                                <button><Send/></button>
-                            </form>
+                                } </div>         
                         </div>
                        
                     </div>
@@ -128,6 +134,10 @@ const chat = props => {
                     >
                         <ArrowIcon/>
                     </button>}
+                    <form onSubmit={(e) => {e.preventDefault();handleSubmitMessage();}} className= {`items-center justify-center  -bottom-16 absolute flex  h-fit w-full flex-row  ${discussionOuverte === true ? "flex" : "hidden"} z-40`}>
+                        <input value={newMessage}  className={`bg-zinc-100 h-[30px] md:h-[45px] w-2/3 md:w-10/12 rounded-2xl shadow-xl px-4`} onChange={(e)=> {setNewMessage(e.target.value)}} placeholder = "Ecrivez un message ..."/>
+                        <button><Send/></button>
+                    </form>
                 </div>
             </div>
         </div>
