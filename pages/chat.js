@@ -75,9 +75,9 @@ const chat = props => {
     return (
         <div className="bg-background min-h-screen w-screen relative">
          
-            <div className="flex flex-row space-x-10 font-xyz text-textcolor p-28">
-                <div className="h-fit min-h-[400px] w-[350px] pt-6 rounded-xl bg-white flex flex-col space-y-4 text-center shadow-md">
-                    <div className="pb-4 text-[18px] px-4">Cliquez sur un groupe pour démarrer une discussion</div>
+            <div className="flex flex-row space-x-10 font-xyz text-textcolor pr-4 pb-4 pt-[100px] pl-[100px]">
+                <div className={`md:h-fit min-h-[80vh] md:min-h-[400px] w-[350px] pt-6 rounded-xl bg-white flex flex-col space-y-4 text-center shadow-md ${discussionOuverte === true ? 'hidden'  : 'flex'}`}>
+                    <div className={`pb-4 text-[18px] px-4`}>Cliquez sur un groupe pour démarrer une discussion</div>
                     {
                         data.map((el , index) => {
                             return (
@@ -89,11 +89,11 @@ const chat = props => {
                         })
                     }
                 </div>
-                <div className={`h-[500px] w-[90vw] flex items-center justify-center relative ${discussionOuverte === true ? "" : "mix-blend-darken"}`}>
-                <img src="chat.jpg" className={`h-[400px] w-fit object-contain mix-blend-darken ${discussionOuverte === true ? "opacity-10" : ""}`}/>
+                <div className={`h-[500px] w-[90vw] flex items-center justify-center relative ${discussionOuverte === true ? "" : "mix-blend-darken hidden md:flex"}`}>
+                <img src="chat.jpg" className={`h-[400px] w-fit object-contain mix-blend-darken ${discussionOuverte === true ? "opacity-10" : "hidden md:flex"}`}/>
                     <div className={`flex flex-col h-[500px] w-full space-y-10 items-center justify-center absolute z-40 ${discussionOuverte === true ? " p-12 bg-white shadow-md rounded-xl backdrop-blur-lg overflow-y-scroll overflow-x-hidden" : ""}`}>
-                        <img src="chat.jpg" className={`h-[400px] w-fit object-contain mix-blend-darken absolute ${discussionOuverte === true ? "opacity-10" : ""}`}/>
-                        <div className={`text-[25px] font-thin absolute bottom-4 ${discussionOuverte === true ? "hidden" : "flex"}`}>Cliquer sur un groupe pour afficher les messages</div>
+                        <img src="chat.jpg" className={`h-[400px] w-fit object-contain mix-blend-darken absolute ${discussionOuverte === true ? "opacity-10" : "hidden md:flex"}`}/>
+                        <div className={`text-[25px] font-thin absolute bottom-4 ${discussionOuverte === true ? "hidden" : "md:flex hidden"}`}>Cliquer sur un groupe pour afficher les messages</div>
                         <div className={`flex-col h-full w-full space-y-10`}>
                             <div>
                                 {
