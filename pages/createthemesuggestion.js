@@ -6,10 +6,9 @@ const ProposerUnTheme = ({toastsRef}) => {
     return (
         <>
           
-            <div className="h-[200vh] bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8 ">
-           
+        <div className="h-screen bg-background min-h-screen items-center pt-[100px] flex flex-col  py-8 relative">
+            <img src="createsuggestion.webp" className="h-[550px] object-contain mix-blend-darken opacity-50"/> 
             <SuggestTheme toastsRef={toastsRef}/>
-
         </div>
         </>
     )

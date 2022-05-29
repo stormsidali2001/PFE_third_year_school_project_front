@@ -64,47 +64,7 @@ const config = props => {
                         src="/config.jpg" 
                         className={`h-[600px] object-contain mix-blend-darken ${validerEquipes === true || affecterTheme === true ? "opacity-20":""}`}
                     />
-                    <ValiderEquipes 
-                        promotion={promotion} 
-                        validerEquipes = {validerEquipes}  
-                        ValiderEquipePromotion = {ValiderEquipePromotion}  
-                        setDownIconValiderEquipePromotion = {setDownIconValiderEquipePromotion}  
-                        setBouttonAffectationEquipes = {setBouttonAffectationEquipes} 
-                        setBouttonComplterEquipes = {setBouttonComplterEquipes} 
-                        choosenPromo = {choosenPromo} 
-                        longueur = {longueur} 
-                        downIconValiderEquipePromotion = {downIconValiderEquipePromotion} 
-                        minEtudiantEquipe = {minEtudiantEquipe} 
-                        maxEtudiantEquipe = {maxEtudiantEquipe} 
-                        clickChoixPromotionHandler = {clickChoixPromotionHandler} 
-                        setChoosenPromo = {setChoosenPromo} 
-                        setMinEtudiantEquipe = {setMinEtudiantEquipe} 
-                        setMaxEtudiantEquipe = {setMaxEtudiantEquipe}
-                    />
-
-                    <AffecterTheme
-                        promotion={promotion}  
-                        ValiderEquipePromotion = {ValiderEquipePromotion}  
-                        setDownIconValiderEquipePromotion = {setDownIconValiderEquipePromotion}  
-                        choosenPromo = {choosenPromo} 
-                        longueur = {longueur} 
-                        downIconValiderEquipePromotion = {downIconValiderEquipePromotion} 
-                        maxEtudiantEquipe = {maxEtudiantEquipe} 
-                        clickChoixPromotionHandler = {clickChoixPromotionHandler} 
-                        setChoosenPromo = {setChoosenPromo} 
-                        affecterTheme = {affecterTheme} 
-                        setAffecterTheme = {setAffecterTheme} 
-                        affectationThemeFifo = {affectationThemeFifo} 
-                        setAffectationThemeFifo = {setAffectationThemeFifo} 
-                        affecterThemeMoy = {affecterThemeMoy} 
-                        setAffecterThemeMoy = {setAffecterThemeMoy} 
-                        affecterThemeEquipe = {affecterThemeEquipe} 
-                        affecterThemeEnseignant = {affecterThemeEnseignant} 
-                        setAffecterThemeEquipe = {setAffecterThemeEquipe}
-                    />
-                   
-
-
+                    
                     <div className={`absolute h-[300px] w-[400px] z-50 bg-white space-y-6 shadow-lg rounded-xl flex-col justify-center items-center flex ${(bouttonAffectationEquipe === true) ||  bouttonCompleterEquipe === true ? "flex":"hidden"}`}>
                         <div className="text-center">{bouttonAffectationEquipe === true ? "En cliquant sur valider , l'affectation se fera de manière automatique" : "En cliquant sur valider , les équipes non satisfaisantes les condition seront complété aléatoirement"}</div>
                         <button 
