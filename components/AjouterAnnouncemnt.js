@@ -84,7 +84,7 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
             className="h-[500px] w-[500px]  justify-center flex flex-col space-y-6  text-[#1A2562]  font-xyz mt-[100px] mx-auto rounded-2xl items-center bg-white/80 backdrop-blur-sm shadow-xl p-2  absolute"
             onSubmit={handleSubmit}
         >
-            <span className="text-[26px]">Announcemnt</span>
+            <span className="text-[26px]">Annoncement</span>
         
            <div className='space-y-3 flex flex-col w-[95%] items-center px-8'>
                
