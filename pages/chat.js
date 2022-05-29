@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import HorisontalNavbar from "../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
+import ArrowIcon from "../icons/ArrowIcon";
 import Send from "../icons/Send";
 import { useStoreActions, useStoreState } from "../store/hooks";
 
@@ -76,7 +77,7 @@ const chat = props => {
         <div className="bg-background min-h-screen w-screen relative">
          
             <div className="flex flex-row md:space-x-10 font-xyz text-textcolor pr-4 pb-4 pt-[100px] md:pl-[100px] pl-4">
-                <div className={`md:h-fit min-h-[80vh] md:min-h-[400px] w-[350px] pt-6 rounded-xl bg-white flex flex-col space-y-4 text-center shadow-md ${discussionOuverte === true ? 'hidden'  : 'flex'}`}>
+                <div className={`md:h-fit min-h-[80vh] md:min-h-[400px] min-w-full  md:min-w-[250px] pt-6 rounded-xl bg-white flex flex-col space-y-4 text-center shadow-md ${discussionOuverte === true ? 'md:flex hidden'  : 'flex'}`}>
                     <div className={`pb-4 text-[15px] md:text-[18px] px-4`}>Cliquez sur un groupe pour démarrer une discussion</div>
                     {
                         data.map((el , index) => {
@@ -89,7 +90,7 @@ const chat = props => {
                         })
                     }
                 </div>
-                <div className={`h-[500px] min-w-[90vw] md:min-w-[90vw] flex items-center justify-center relative ${discussionOuverte === true ? "" : "mix-blend-darken hidden md:flex"}`}>
+                <div className={`h-[500px] min-w-[90vw] md:min-w-[70vw] flex items-center justify-center relative ${discussionOuverte === true ? "" : "mix-blend-darken hidden md:flex"}`}>
                 <img src="chat.jpg" className={`h-[400px] w-fit object-contain mix-blend-darken ${discussionOuverte === true ? "opacity-10" : "hidden md:flex"}`}/>
                     <div className={`flex flex-col h-[500px] w-full space-y-10 items-center justify-center absolute z-40 ${discussionOuverte === true ? " p-2 md:p-12 bg-white shadow-md rounded-xl backdrop-blur-lg overflow-y-scroll overflow-x-hidden" : ""}`}>
                         <img src="chat.jpg" className={`h-[400px] w-fit object-contain mix-blend-darken absolute ${discussionOuverte === true ? "opacity-10" : "hidden md:flex"}`}/>
@@ -121,12 +122,12 @@ const chat = props => {
                         </div>
                        
                     </div>
-                    <button 
-                        className="absolute top-0 left-2 z-50"
+                {discussionOuverte &&  <button 
+                        className={`absolute top-2 left-2 z-50 `}
                         onClick={(e) => {setDiscussionOuverte(false)}}
                     >
-                        bye
-                    </button>
+                        <ArrowIcon/>
+                    </button>}
                 </div>
             </div>
         </div>
