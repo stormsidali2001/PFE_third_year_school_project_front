@@ -58,8 +58,8 @@ const chat = props => {
        
     },[socket])
      if(userType !== 'student'){
-         return "not a student";
-     }
+        return "not a student";
+    }
 
     const handleSubmitMessage = async() => {
         if (newMessage !== "") {
