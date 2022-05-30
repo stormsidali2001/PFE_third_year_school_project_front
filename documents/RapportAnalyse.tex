@@ -1,0 +1,534 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{wallpaper}
+\usepackage{mdframed}
+\usepackage[top=2cm, bottom=2cm, outer=0cm, inner=0cm]{geometry}
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Computer Modern fonts
+\graphicspath{ {figures/} }
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{Cahier de charges}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+%---------------------
+\begingroup
+\ThisLRCornerWallPaper{1.0}{Pictures/cover page.png}
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 1
+%----------------------------------------------------------------------------------------
+
+\chapter{intorduction}
+\section{Introduction}
+Afin de formaliser et rendre le développement plus fidèle aux besoins des clients, une transformation du cahier des charges (un énoncé informel) vers un format plus formel est une étape nécessaire pour éviter les ambiguïtés et cela est fait à travers une 
+méthode d’analyse. \\
+Cette dernière permet de lister les résultats attendus, en termes de fonctionnalités, performance, robustesse ainsi que maintenance, sous forme de diagrammes structurels (diagramme de classes d’analyse), d’interactions (diagrammes de séquence) et comportementaux (diagramme d’activité et d’état).\\
+Nous allons entamer dans le présent document, quelques-uns de ces diagrammes et également une présentation des méthodes utilisé pour la réalisation de ces derniers.
+\section{les methodes de modilisation}
+\subsection{le langage de Modélisation}
+\hspace{0.5cm} \textbf{UML (Unified Modeling Language)}: est un langage de modélisation graphique à base de pictogrammes conçu comme une méthode normalisée de visualisation dans les domaines du développement logiciel et en conception orientée objet.\\
+conçu pour :
+\begin{itemize}
+    \item Pouvoir documenter un projet.
+    \item Réaliser des simulations avant de construire le réel système.
+    \item Exprimer, dans un seul modèle, tous les aspects statiques, dynamiques, juridiques, spécifications, etc…
+\end{itemize}
+\subsection{ L’Outil de Modélisation Utilisé}
+\subsubsection{Astah}
+Anciennement appelé Jude (Java and UML Developers’ 
+Environment, prononcée judo), est un outil de modélisation UML créé par la compagnie japonaise ‘ChangeVision’.**
+Il est facile et simple à manipuler et offre plusieurs possibilités et formes nécessaire pour la conception des diagrammes UML qui vont être le sujet de ce rapport.
+\subsubsection{draw.io}
+ Draw.io est une application qui permet de faire des schémas et du dessin vectoriel. Elle a la particularité d'être une application web (qui tourne entièrement dans le navigateur). C'est une alternative libre à des logiciels comme Microsoft Visio. Elle peut être utilisée indépendamment, intégrée à une application web ou même en temps qu'application desktop.\\
+ Il est possible d'exporter dans différents formats ouverts (png, svg…). 
+\section{ Diagrammes Structurels}
+Les diagrammes structurels sont des diagrammes qui permettent de modéliser la structure statique d’un système donc c’est la représentation des briques de base 
+statiques tels que les classes, interfaces, attributs, opérations, etc. \\
+Il englobe toutes les classes intervenant dans notre système et les interactions et les relations entre elles.\\
+Voici le schéma représentant le diagramme de classe d’analyse :
+
+\subsubsection{Diagramme de Classes d’Analyse}
+Pour pouvoir visualiser et spécifier notre analyse du système, on utilise un diagramme de classe d’analyse qui est un diagramme structurel donc statique. //
+Il permet d’illustrer toutes les classes manipulées par notre système et les relations 
+entre eux.//
+Ci-dessous dans la Figure 1 notre diagramme de classes d’analyse :
+%-----------------------------------------------------------------chapter 1--------------------%
+\chapter{diagrammes de Gestion des comptes}
+\section{Diagrammes d'Interactions}
+\subsection{Diagrammes de Séquence}
+Ils se concentrent sur la description du flux de messages au sein d'un système, en fournissant du contexte pour une ou plusieurs lignes de vie. Ils peuvent également servir à illustrer des séquences ordonnées et permettre de visualiser des données en temps réel entre l’acteur et le système (l’interface, le contrôle et les entités).
+\newpage
+\subsubsection{Diagramme de Séquence d’Authentification}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/authentification.PNG}
+    \caption{Diagramme de Séquence d’Authentification}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de Séquence de Création d’un 
+Compte ‘Enseignant’, ‘Etudiant’, ou ‘Entreprise’}
+
+
+\newpage
+\subsubsection{ Diagramme de Séquence de ‘Mot de Passe Oublié’}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence Recuper un compte.png}
+    \caption{Diagramme de Séquence de ‘Mot de Passe Oublié’}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de Séquence de Supprission d’un 
+Compte ‘Enseignant’, ‘Etudiant’, ou ‘Entreprise’}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence supprimer un utlisateur.png}
+    \caption{Diagramme de Séquence de Supprission d’un 
+Compte ‘Enseignant’, ‘Etudiant’, ou ‘Entreprise’}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\section{Diagrammes Comportementaux}
+\subsection{Diagrammes d’Activité}
+Le diagramme d'activité est un diagramme comportemental d'UML, permettant de représenter le déclenchement d'événements en fonction des états du système et de modéliser des comportements parallélisables. Il peut être également utilisé pour décrire un flux de travail.
+\newpage
+\subsubsection{Diagramme d’activité d’Authentification}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Activity authentification.png}
+    \caption{Diagramme d’activité d’Authentification}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme d’activité de Création d’un 
+Compte ‘Enseignant’, ‘Etudiant’, ou ‘Entreprise’}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Activity Create a new account.png}
+    \caption{Diagramme d’activité de Création d’un 
+Compte ‘Enseignant’, ‘Etudiant’, ou ‘Entreprise’}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme d’activité de Supprission d’un 
+Compte ‘Enseignant’, ‘Etudiant’, ou ‘Entreprise’}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Activity supprimer utilisateur.png}
+    \caption{Diagramme d’activité de Supprission d’un 
+Compte ‘Enseignant’, ‘Etudiant’, ou ‘Entreprise’}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsection{ Diagrammes d’État-Transitions}
+Les diagrammes d'états décrivent les transitions entre les états et les actions que le
+système ou ses parties réalisent en réponse à un événement.
+Il s'agit d'une représentation séquentielle des états d'un système. Il se compose d’états,
+de transitions, de conditions, d’effets et d’activités.
+\subsubsection{Diagramme d’État-Transitions d’un Compte}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Statemachine compte.png}
+    \caption{Diagramme d’État-Transitions d’un Compte}
+    \label{fig:pca}
+\end{figure}
+%---------------------------------------------------------------------------------chapter 2----------%
+\chapter{Diagrammes de gestion des equipes}
+\section{Diagrammes d'interactions}
+\subsection{Diagrammes des sequences}
+\subsubsection{diagramme de sequence de creation d'un equipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/creation d'un equipe.drawio(1).png}
+    \caption{diagramme de sequence de creation d'un equipe}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{diagramme de sequence de repondre a une invitation}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence repondre au invitation.png}
+    \caption{diagramme de sequence de repondre a une invitation}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{diagramme de sequence de validation d'une equipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence valider une equipe.png}
+    \caption{diagramme de sequence de validation d'une equipe}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{diagramme de sequence d'envoyer une invitation de jointure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/demande de joindre-Page-8.jpg}
+    \caption{diagramme d'envoyer une invitation de jointure}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{diagramme de sequence de quitter une equipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence quitter une equipe.png}
+    \caption{Diagramme de sequence de quitter une equipe}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\section{Diagrammes Comportementaux}
+\subsection{Diagrammes d’Activité}
+\subsubsection{Diagramme d'activité de creation d'une equipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme d'activité de validation d'une equipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsection{Diagramme d'activité de quitter une equipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsection{Diagrammes d’État-Transitions}
+\subsubsection{Diagramme d'État-Transitions d'une equipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Statemachine equipe.png}
+    \caption{Diagramme d'État-Transitions d'une equipe}
+    \label{fig:pca}
+\end{figure}
+%----------------------------------------------------------------------------chapter 3---------%
+\chapter{Diagrammes de gestion des themes}
+\section{Diagrammes d'interactions}
+\subsection{Diagrammes des sequences}
+\subsubsection{Diagramme de sequence de dépot d'un thème}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/ajouter un theme.PNG}
+    \caption{Diagramme de sequence de dépot d'un thème}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de sequence de validation d'un theme}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/valider un theme.png}
+    \caption{Diagramme de sequence de validation d'un theme}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de sequence d'envoyer la fiche de voeux}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence envoyer la fiche de vouex.png}
+    \caption{Diagramme de sequence d'envoyer la fiche de voeux}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de sequence de rendre la fiche de voeux}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence remplir la fiche de vouex.jpg}
+    \caption{Diagramme de sequence de rendre la fiche de voeux}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de séquence d'affectation des thèmes à une équipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence affectation d'un theme a une equipe.jpg}
+    \caption{Diagramme de séquence d'affectation des thèmes à une équipe}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de séquence d'affectation des encadreurs à une équipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence affectation un encadreur a une equipe.jpg}
+    \caption{Diagramme de séquence d'affectation des encadreurs à une équipe}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\section{Diagrammes Comportementaux}
+\subsection{Diagrammes d’Activité}
+\subsubsection{Diagramme d'activité de dépot d'un theme}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Activity depot d'un theme.png}
+    \caption{Diagramme d'activité de dépot d'un theme}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme d'activité d'envoyer et rendre la fiche de voeux}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Activity fiche de vouex.png}
+    \caption{Diagramme d'activité d'envoyer et rendre la fiche de voeux}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsection{Diagrammes d’État-Transitions}
+\subsubsection{Diagramme d’État-Transitions d'un thème}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Statemachine theme.png}
+    \caption{Diagramme d’État-Transitions d'un thème}
+    \label{fig:pca}
+\end{figure}
+%-------------------------------------------------------------------chapter 4--------------------------%
+\chapter{Diagrammes de gestion des documents}
+\section{Diagrammes d'interactions}
+\subsection{Diagrammes des sequences}
+\newpage
+\subsubsection{Diagramme de sequence d'ajouter un document}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence ajouter un document.png}
+    \caption{Diagramme de sequence d'ajouter un document}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de sequence de supprimer un document}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence supprimer un document.png}
+    \caption{Diagramme de sequence de supprimer un document}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de sequence de fournir un document}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/fournir un document-Page-8.jpg}
+    \caption{Diagramme de sequence de fournir un document}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\section{Diagrammes Comportementaux}
+\subsection{Diagrammes d’Activité}
+\subsubsection{Diagramme d’Activité d'ajouter un document}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme d’Activité de manipulation d'un document}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme d’Activité de fournir un document}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsection{Diagrammes d’État-Transitions}
+\subsubsection{Diagramme d’État-Transitions d'un document}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Statemachine document.png}
+    \caption{Diagramme d’État-Transitions d'un document}
+    \label{fig:pca}
+\end{figure}
+
+%-------------------------------------------------------------------chapter 5--------------------------%
+\chapter{Diagrammes de gestion d'encadrement}
+\section{Diagrammes d'interactions}
+\subsection{Diagrammes des sequences}
+\newpage
+\subsubsection{Diagramme de sequence de échanger avec l'encadreur ou les membres d'équipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence etudiant echange avec les membres d'equipe ou l'encadreur.png}
+    \caption{Diagramme de sequence de échanger avec l'encadreur ou les membres d'équipe}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de sequence d'echanger avec ses équipes}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence echanger avec ses etudiants.png}
+    \caption{Diagramme de sequence d'echanger avec ses équipes}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsection{diagramme de sequence de evaluer les document d'un equipe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence evaluer un document.png}
+    \caption{diagramme de sequence de evaluer les document d'un equipe}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\section{Diagrammes Comportementaux}
+\subsection{Diagrammes d’Activité}
+\subsubsection{Diagramme d’Activité d'echanger }
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme d’Activité d'evaluation d'un document}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsection{Diagrammes d’État-Transitions}
+\subsubsection{Diagramme d’État-Transitions d'enseignant}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Statemachine Enseignant.png}
+    \caption{Diagramme d’État-Transitions d'enseignant}
+    \label{fig:pca}
+\end{figure}
+%-----------------------------------------------------------------------chapter 6-------------%
+\chapter{Diagrammes de gestion des soutenance}
+\section{Diagrammes d'interactions}
+\subsection{Diagrammes des sequences}
+\subsubsection{Diagramme de sequence de dépôt d'un pfe}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence depot de pfe.png}
+    \caption{Diagramme de sequence de dépôt d'un pfe}
+    \label{fig:pca}
+\end{figure}
+\newpage
+
+\subsubsection{Diagramme de sequence d'autorisation de soutenance}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence autorisation de soutenance.png}
+    \caption{Diagramme de sequence d'autorisation de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme de sequence de preciser la jury}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence preciser la jury.png}
+    \caption{Diagramme de sequence de preciser la jury}
+    \label{fig:pca}
+\end{figure}
+\newpage
+
+\subsubsection{Diagramme de sequence de saisir Pv de soutenance}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence saisir le pv de soutenance.png}
+    \caption{Diagramme de sequence de saisir Pv de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\section{Diagrammes Comportementaux}
+\subsection{Diagrammes d’Activité}
+\subsubsection{Diagramme d'Activité d'autorisation de soutenance}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsection{Diagramme d'Activité de preciser la jury}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsubsection{Diagramme d'Activité de saisir le PV de soutenance}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+\chapter{Conclusion}
+L'analyse fonctionnelle d'un projet informatique est une étape qui s'avère très souvent nécessaire pour mener à bien ce dernier. Elle permet de concevoir un système pour 
+lequel toutes les options seront parfaitement conçues, orientées vers une satisfaction 
+client maximale.  \\
+Et c’était le but de ce fichier, nous avons pu voir l’analyse de chaque incrément en détails qui ont été très utile lors du développement.
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\end{document}
