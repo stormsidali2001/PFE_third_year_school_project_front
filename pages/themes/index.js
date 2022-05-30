@@ -32,7 +32,7 @@ const Themes = ({toastsRef}) => {
       
             if(!promotion || promotion?.length === 0) {
                
-                promotions?.length > 0 && await getThemesThunk()
+                await getThemesThunk()
                 return;
             }
             const label = promotions.find(el=>el.id=== promotion)?.name

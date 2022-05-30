@@ -21,7 +21,7 @@ export interface TeamListActions{
 }
 
 export interface TeamListThunks{
-    getTeamsList:Thunk<this,undefined,undefined,undefined>;
+    getTeamsList:Thunk<this,string,undefined,undefined>;
     getTeam:Thunk<this,string,undefined,undefined>;
 }
 
@@ -40,7 +40,7 @@ export const teamListModel:TeamListModel = {
     }),
     getTeamsList:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
         try{
-            const res =   await axios.get('http://localhost:8080/getTeams',{
+            const res =   await axios.get(`http://localhost:8080/getAllTeams/${payload?payload:'all'}`,{
                 withCredentials:true,
             })
             actions.setTeamsList(res.data)

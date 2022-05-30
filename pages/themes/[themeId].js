@@ -44,10 +44,6 @@ const Theme = ({toastsRef}) => {
             setAddTeamChosenTeacher({value:teacherId,label:firstName+' '+lastName})
             
         }
-
-        
-      
-
     }
     const handleEncadrerTheme = async e =>{
         e.preventDefault();
@@ -115,8 +111,7 @@ const Theme = ({toastsRef}) => {
     }
     return (
         <div>
-            <StudentVerticalNavbar/>
-            <HorisontalNavbar/>
+          
             <div className="bg-background h-screen w-screen px-[80px] relative flex flex-col items-center pt-[100px] font-xyz text-textcolor justify-center">
                 <div className="bg-white shadow-lg w-[50vw] h-fit py-4 space-y-2 rounded-[10px] flex flex-col items-start px-4 text-textcolor">
                     <div className="text-[24px] w-full text-center">Theme</div>
