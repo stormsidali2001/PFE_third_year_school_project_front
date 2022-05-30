@@ -23,6 +23,7 @@ export interface TeamListActions{
 export interface TeamListThunks{
     getTeamsList:Thunk<this,string,undefined,undefined>;
     getTeam:Thunk<this,string,undefined,undefined>;
+    getTeamsWithThemes:Thunk<this,string,undefined,undefined>;
 }
 
 export interface TeamListModel extends TeamListState , TeamListActions , TeamListThunks{
@@ -50,6 +51,19 @@ export const teamListModel:TeamListModel = {
         }
   
     }),
+    getTeamsWithThemes:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
+        try{
+            const res =   await axios.get(`http://localhost:8080/getTeamsWithThemes/${payload?payload:'all'}`,{
+                withCredentials:true,
+            })
+            actions.setTeamsList(res.data)
+
+        }catch(err){
+            console.log(err);
+        }
+  
+    })
+    ,
     getTeam:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
         try{
             const res =   await axios.get(`http://localhost:8080/getTeams/${payload}`,{

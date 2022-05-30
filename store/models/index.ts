@@ -19,6 +19,8 @@ import {  adminAsignTeamsToThemesModel, AdminAsignTeamsToThemesModel } from "./a
 import { commitsModel, CommitsModel } from "./commits.model";
 import { TeacherTeamCommitDocsModel, teacherTeamCommitDocsModel,  } from "./teacherTeamCommits.model";
 import { AdminTeamsDocsModel, adminTeamsDocsModel } from "./admin-teams-docs.model";
+import { soutenanceModel, SoutenanceModel } from "./soutenance.model";
+import { sallesModel, SallesModel } from "./salle.model";
 export interface Model{
     user:UserModel;
     notificationService:NotificationsServiceModel;
@@ -40,6 +42,8 @@ export interface Model{
     commitsModel:CommitsModel;
     teacherTeamCommitDocsModel:TeacherTeamCommitDocsModel;
     adminTeamsDocsModel:AdminTeamsDocsModel
+    soutenanceModel:SoutenanceModel;
+    sallesModel:SallesModel
 }
 
 export const model:Model={
@@ -62,7 +66,9 @@ export const model:Model={
     adminAsignTeamsToThemesModel:adminAsignTeamsToThemesModel,
     commitsModel:commitsModel,
     teacherTeamCommitDocsModel:teacherTeamCommitDocsModel,
-    adminTeamsDocsModel:adminTeamsDocsModel
+    adminTeamsDocsModel:adminTeamsDocsModel,
+    soutenanceModel:soutenanceModel,
+    sallesModel:sallesModel
 
     
 }
