@@ -5,7 +5,8 @@ import { useEffect, useState } from "react"
 import  Select  from "react-select"
 import { useStoreState,useStoreActions } from "../../store/hooks"
 import {useRouter} from 'next/router'
-const MyTeams = props => {
+import ModalPortal from "../../components/ModalPortal"
+const MyTeams = ({toastsRef}) => {
     const router = useRouter()
     const {promotion}  = router.query;
     
@@ -15,6 +16,9 @@ const MyTeams = props => {
 
     const {getTeamsTeacherResponsibleForWithMembers} = useStoreActions(store=>store.teacherTeamCommitDocsModel)
     const {teams} = useStoreState(store=>store.teacherTeamCommitDocsModel)
+    const {canSoutenir} = useStoreActions(store=>store.soutenanceModel)
+    const [selectedTeam,setSelectedTeam] = useState(null)
+    const [openCanSoutenir,setOpenCanSoutenir] = useState(false)
 
    
 
@@ -22,6 +26,27 @@ const MyTeams = props => {
       
         router.push(`/myteams?promotion=${option.value}`)
        
+    }
+
+    const handleCanSoutenir = async (e)=>{
+
+       
+        try{
+            e.preventDefault();
+            if(!selectedTeam) {
+                toastsRef.current.addMessage({mode:'Error',text:"Ops...Erreur"})
+                return;
+
+            }
+            await canSoutenir({teamId:selectedTeam.id})
+            await getTeamsTeacherResponsibleForWithMembers(promotion)
+            toastsRef.current.addMessage({mode:'Alert',text:"c'est fait!!"})
+            setOpenCanSoutenir(false)
+
+        }catch(err){
+            console.log(err)
+            toastsRef.current.addMessage({mode:'Error',text:"Ops...Erreur"})
+        }
     }
 
     useEffect(async()=>{
@@ -93,6 +118,9 @@ const MyTeams = props => {
                                         <div className="w-full flex justify-center">
                                             <button onClick={()=>router.push('/myteams/'+el.id)} className="bg-blue-300 hover:bg-blue-400 rounded-full shadow-lg h-[30px] w-[180px]">Voir les documents</button>
                                         </div>
+                                      { !el.peutSoutenir&& <div className="w-full flex justify-center">
+                                            <button onClick={()=>{setSelectedTeam(el);setOpenCanSoutenir(true)}} className="bg-blue-300 hover:bg-blue-400 rounded-full shadow-lg h-[30px] w-[180px]">peut soutenir</button>
+                                        </div>}
                                     </div>
                                 </div>
                             )
@@ -100,6 +128,21 @@ const MyTeams = props => {
                     }
                 </div>
             </div>
+
+            <ModalPortal
+                open={openCanSoutenir}
+                handleClose = {setOpenCanSoutenir}
+                
+            >
+                <div className="flex flex-col space-y-2">
+                    <div>Etes vous sur de Permettre a l{"'"}equipe {selectedTeam?.nickName} de soutenir </div>
+                    <div className="flex justify-center space-x-2 w-full">
+                        <button onClick={handleCanSoutenir} className="bg-blue-300 w-fit px-2 py-1">Oui</button>
+                        <button onClick={()=>setOpenCanSoutenir(false)} className="bg-blue-300 w-fit px-2 py-1">Non</button>
+                    </div>
+                </div>
+
+            </ModalPortal>
         </div>
     )
 }
