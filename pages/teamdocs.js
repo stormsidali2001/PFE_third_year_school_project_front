@@ -129,9 +129,9 @@ const TeamDocs = ({toastsRef})=>{
        
     }
     return(
-<div className="h-[200vh] bg-background min-h-screen   border-2  pl-[60px]">
-       
-     <div  className="h-[80vh]   flex lg:flex-row flex-col-reverse    text-[#1A2562]  font-xyz mt-[120px]    bg-white shadow-lg p-4 mx-[50px] ">
+<div className="bg-background min-h-screen w-screen">
+       <div className="pt-[100px] pl-[100px] h-full w-full">
+       <div  className="h-[80vh]   flex lg:flex-row flex-col-reverse    text-[#1A2562]  font-xyz mt-[120px]    bg-white shadow-lg p-4 mx-[50px] ">
          <div className="lg:w-[80%] w-full h-full flex flex-col ">
                 <div 
                 className="w-full h-full   grid  grid-cols-[repeat(auto-fit,minmax(100px,_1fr))] gap-[20px] px-4 py-4 justify-items-center  items-center overflow-y-auto"> {/*The team docs lays here */}
@@ -142,9 +142,6 @@ const TeamDocs = ({toastsRef})=>{
                                        <div 
                                          className="relative w-[100px] h-[100px] flex flex-col   cursor-pointer "
                                          onClick={(e)=>handleSelectFiles(doc)}
-
-                                        
-                                   
                                    >
                                        <div className={`absolute bottom-[40px] right-[40px] w-[15px] h-[15px] rounded-full ${selectedFiles[doc.id]?'bg-blue-400':'bg-blue-200'}  border-2`}></div>
                                    <div 
@@ -328,7 +325,7 @@ const TeamDocs = ({toastsRef})=>{
             </form>
         </ModalPortal>
         
-
+       </div>
 </div>
     )
 }

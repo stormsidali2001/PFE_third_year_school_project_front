@@ -111,13 +111,11 @@ const listesoutenance = props => {
 
 
     return (
-        <div>
-            <HorisontalNavbar/>
-            <AdminVerticalNavbar/>
-            <div className="h-screen pt-36 w-screen bg-background font-xyz text-textcolor flex flex-col items-center justify-center p-24 space-y-12">
+        <div className='min-h-screen h-fit w-screen bg-background'>
+            <div className="pt-[100px] sm:pl-[100px]font-xyz text-textcolor flex flex-col items-center justify-center p-24 space-y-12">
                 <div className="text-[32px]">Liste des soutenances</div>
                 <div className='flex flex-row items-center justify-center space-x-6'>
-                    <div className='text-[20px]'>Choisir une promotion :</div>
+                    <div className='text-[20px] md:flex hidden'>Choisir une promotion :</div>
                     <Select
                         placeholder="Promotion..." 
                         className="z-50 h-[40px] w-[230px] rounded-lg bg-slate-200 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
@@ -127,7 +125,7 @@ const listesoutenance = props => {
                         styles = {{menuPortal:base=>({...base,zIndex:500})}}
                     />
                 </div>
-                <div className="flex flew-wrap gap-24">
+                <div className="flex flex-wrap gap-24">
                     {
                         soutenances.map((el , index) => {
                             return (
