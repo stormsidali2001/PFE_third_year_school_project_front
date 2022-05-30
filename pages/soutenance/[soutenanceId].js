@@ -53,7 +53,7 @@ const soutenanceId = props => {
                             {
                                 jury.map((el , index) => {
                                     return(
-                                        <button className=" bg-blue-300 hover:bg-blue-400 rounded-md shadow-xl h-fit w-fit px-3 p-1">
+                                        <button className=" bg-blue-500 rounded-full hover:bg-blue-600 text-white shadow-xl h-fit w-fit px-3 p-1">
                                             <div>#{el.firstName} {el.lastName}</div>
                                             
                                         </button>
