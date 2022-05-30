@@ -4,9 +4,11 @@ import { action, Action, thunk, Thunk } from "easy-peasy"
 
 export interface SoutenanceStates{
     soutenances:[],
+    soutenance:{}
 }
 export interface SoutenanceActions{
     setSoutenances:Action<this,[]>
+    setSoutenance:Action<this,{}>
 
 }
 
@@ -22,6 +24,8 @@ export interface SoutenanceThunks{
     createSoutenance:Thunk<this,SoutenancePayload,undefined,undefined>;
     canSoutenir:Thunk<this,{teamId:string},undefined,undefined>;
     getSoutenances:Thunk<this,string,undefined,undefined>;
+    getSoutenance:Thunk<this,string,undefined,undefined>;
+    
 }
 
 export interface SoutenanceModel extends SoutenanceStates,SoutenanceActions,SoutenanceThunks{
@@ -31,8 +35,12 @@ export interface SoutenanceModel extends SoutenanceStates,SoutenanceActions,Sout
 
 export const soutenanceModel:SoutenanceModel = {
     soutenances:[],
+    soutenance:{},
     setSoutenances:action((state,payload)=>{
         state.soutenances = payload;
+    }),
+    setSoutenance:action((state,payload)=>{
+        state.soutenance = payload;
     }),
     createSoutenance:thunk(async(actions,payload)=>{
       
@@ -51,6 +59,13 @@ export const soutenanceModel:SoutenanceModel = {
               withCredentials:true
           })
           actions.setSoutenances(res.data)
-      })
+      }),
+    getSoutenance:thunk(async(actions,payload)=>{
+        const res = await  axios.get(`http://localhost:8080/getSoutenance/${payload}`,{
+              withCredentials:true
+          })
+          actions.setSoutenance(res.data)
+    })
+      
 
 }
