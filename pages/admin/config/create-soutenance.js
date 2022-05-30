@@ -2,15 +2,15 @@ import {useEffect, useState} from 'react'
 import Select from 'react-select'
 import ModalPortal from '../../../components/ModalPortal'
 import {useStoreActions, useStoreState} from '../../../store/hooks'
-const creerSoutenance = props => {
-
-    const [title , setTitle] = useState(null)
-    const [description , setDescription] = useState(null)
-    const [date , setDate] = useState(null)
-    const [team , setTeam] = useState(null)
-    const [jury , setJury] = useState([])
+import { useRouter } from 'next/router'
+const creerSoutenance = ({toastsRef}) => {
+    const router = useRouter()
+    const [title , setTitle] = useState('')
+    const [description , setDescription] = useState('')
+    const [date , setDate] = useState('')
+    const [duration , setDuration] = useState(null)
+  
     const [choosenSalle , setChoosenSalle] = useState(null)
-    const [created , setCreated] = useState(false)
     const [openPortalModelJury,setOpenPortalModelJury] = useState(false)
     const [openPortalModelTeam,setOpenPortalModelTeam] = useState(false)
 
@@ -24,9 +24,10 @@ const creerSoutenance = props => {
     const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
     const {getTeamsWithThemes} = useStoreActions(store=>store.teamListModel)
     const {teamsList:teams} = useStoreState(store=>store.teamListModel)
-
+    const {createSoutenance} = useStoreActions(store=>store.soutenanceModel)
     const {getTeachers} = useStoreActions(store=>store.teacherListModel)
     const {teachers} = useStoreState(store=>store.teacherListModel)
+
 
     const [selectedTeachers,setSelectedTeachers] = useState({})
   
@@ -76,6 +77,41 @@ const creerSoutenance = props => {
         }
        
     }
+    const handleCreateSoutenance = async e=>{
+        try{
+            e.preventDefault();
+
+            const arr = duration?.split(':')
+            const m = arr[0];
+            const h = arr[1];
+            const dr =( parseInt(m)*60 + parseInt(h)*60*60)*1000; // in ms
+            
+
+            await createSoutenance({
+                teamId:selectedTeam.value,
+                jurysIds:Object.keys(selectedTeachers),
+                salleId:choosenSalle.value,
+                date,
+                title,
+                description,
+                duration:dr
+    
+            })
+            toastsRef.current.addMessage({text:"c'est fait...",mode:'Alert'})
+            setTimeout(()=>{
+                router.reload()
+
+            },2000)
+           
+            
+        }catch(err){
+            console.log(err)
+            toastsRef.current.addMessage({text:'Ops...',mode:'error'})
+
+
+        }
+    
+    }
     console.log(teachers,'pssssssssssss')
     return (
         <div className='h-screen w-screen bg-background'>
@@ -104,6 +140,16 @@ const creerSoutenance = props => {
                             type='datetime-local' 
                             onChange={(e) => setDate(e.target.value)} 
                             value={date}
+                            className = 'bg-transparent outline-none'
+                        />
+                    </div>
+
+                    <div className='flex flex-row space-x-4 items-center'>
+                        <div>Duration :</div>
+                        <input 
+                            type='time' 
+                            onChange={(e) => setDuration(e.target.value)} 
+                            value={duration}
                             className = 'bg-transparent outline-none'
                         />
                     </div>
@@ -163,7 +209,7 @@ const creerSoutenance = props => {
                         />
                     </div>
                     <div className='w-full flex items-center justify-center pt-3'>
-                        <button className='h-[35px] w-[150px] bg-blue-300 hover:bg-blue-400 rounded-full shadow-lg text-center'>Créer</button>
+                        <button onClick={handleCreateSoutenance} className='h-[35px] w-[150px] bg-blue-300 hover:bg-blue-400 rounded-full shadow-lg text-center'>Créer</button>
                     </div>
                 </div>
                 <ModalPortal
