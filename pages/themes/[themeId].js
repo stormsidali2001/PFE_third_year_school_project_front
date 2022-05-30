@@ -111,25 +111,21 @@ const Theme = ({toastsRef}) => {
     }
     return (
         <div>
-          
             <div className="bg-background h-screen w-screen px-[80px] relative flex flex-col items-center pt-[100px] font-xyz text-textcolor justify-center">
                 <div className="bg-white shadow-lg w-[50vw] h-fit py-4 space-y-2 rounded-[10px] flex flex-col items-start px-4 text-textcolor">
                     <div className="text-[24px] w-full text-center">Theme</div>
                     <div className="flex space-x-2 text-[20px] mt-4 w-full">
-                        
                         <div className="font-medium">Title:</div>
                         <div className="bg-gray-200 px-2 rounded-[5px]  font-normal text-[18px] w-full flex items-center">
                             PFE
                         </div>
                     </div>
                     <div className="flex flex-col space-x-2 text-[20px] mt-4 w-full">
-                        
                         <div className="font-medium">Description:</div>
                         <div className="bg-gray-200 px-2 rounded-[5px]  font-normal text-[15px] w-full flex break-all h-[80px] overflow-y-auto">
                             faskjfsajasfkjasfkljafskjlafslkjfskjlkjafsl fasjfaslafsjkfsakjfaskjl fasjksafjklsaflkjfa
                         </div>
                     </div>
-
                 <div className="flex flex-col space-x-2 text-[20px] mt-4 w-full">
                         
                         <div className="font-medium">Equipes:</div>
@@ -152,14 +148,14 @@ const Theme = ({toastsRef}) => {
                                               <div className="flex space-x-2">
                                                     <div className="bg-blue-300 rounded-[10px] w-fit h-fit  px-2 py-1">#{firstName+' '+lastName}</div>
                                                     
-                                                    <div className="flex space-x-2 cursor-pointer"
+                                                    <div 
+                                                        className="flex space-x-2 cursor-pointer"
                                                         onClick={async (e)=>{e.preventDefault();await handleOpenModalTeam(teacherId,firstName,lastName)}}
                                                     >
                                                             <AddIcon
                                                                 className = 'w-6 h-6 text-textcolor/90 group-hover:text-textcolor'
                                                                 />
                                                             <div className="text-[15px]">ajouter equipe</div>
-
                                                     </div>
                                               </div>
                                            <div className="pl-4 flex  flex-wrap gap-4">
@@ -167,7 +163,7 @@ const Theme = ({toastsRef}) => {
                                                 teacher?.teamsInCharge.map(({id,team})=>{
                                                     return (
                                                         <div id={id} className="bg-blue-300 rounded-[10px] w-fit h-fit  px-2 py-1">
-                                                {team?.nickName}
+                                                            {team?.nickName}
                                                         </div>
 
                                                     )
@@ -178,8 +174,7 @@ const Theme = ({toastsRef}) => {
                                         </div>
                                     )
                                 })
-                            }
-                               
+                            }   
                         </div>
                         <div className="flex space-x-2 group cursor-pointer items-center"
                             onClick={handleOpenModal}
@@ -188,16 +183,9 @@ const Theme = ({toastsRef}) => {
                                 className = 'w-6 h-6 text-textcolor/90 group-hover:text-textcolor'
                             />
                             <div>Ajouter un Encadreur</div>
-                        </div>
-
-                      
-                      
-                        
-                    
-                    
+                        </div>  
+                    </div>  
                 </div>  
-                </div>  
-
             </div>
             <ModalPortal
                 open={open}
@@ -207,22 +195,15 @@ const Theme = ({toastsRef}) => {
                     <div className="text-center text-[20px]">Ajouter un Encadreur</div>
                     <div className="px-4">choisir un encadreur parmis la liste des ensiegnant</div>
                     <Select
-                                    placeholder="Enseignants..." 
-                                        onChange={(option)=>{setChoosenTeacher(option)}}
-                                        options={teachers.map(el=>{return {value:el.id,label:el.firstName+' '+el.lastName}})}
-                                        isLoading = {!teachers}
-                                        value={chosenTeacher}
-                                        styles = {{menuPortal:base=>({...base,zIndex:100,width:'100px',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
-                                        
-
-                                    />
-
-                    <div>
-                        
-                    </div>
+                        placeholder="Enseignants..." 
+                        onChange={(option)=>{setChoosenTeacher(option)}}
+                        options={teachers.map(el=>{return {value:el.id,label:el.firstName+' '+el.lastName}})}
+                        isLoading = {!teachers}
+                        value={chosenTeacher}
+                        styles = {{menuPortal:base=>({...base,zIndex:100,width:'100px',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
+                    />
                     <button onClick={handleEncadrerTheme} className="bg-blue-300 w-fit px-2 py-1  mx-auto rounded-[10px]">Valider</button>
                 </form>
-
             </ModalPortal>
             <ModalPortal
                 open={openAddTeam}
@@ -232,39 +213,30 @@ const Theme = ({toastsRef}) => {
                     <div className="text-center text-[20px]">Encadrer equipe</div>
                     <div className="px-4">choisir une Equipe a encadrer parmis les equipe de theme <stron className='font-semibold'>{theme?.title}</stron></div>
                     <div className="flex space-x-2 items-center mx-auto">
-                            <div>Enseignant:</div>
-                            <Select
-                                        placeholder="Enseignant..." 
-                                        onChange={(option)=>{setAddTeamChosenTeacher(option)}}
-                                        options={theme?.encadrement?.map(el=>{return {value:el?.teacher?.id,label:el.teacher?.firstName+' '+el?.teacher?.lastName}})}
-                                        isLoading = {!theme?.encadrement}
-                                        value={addTeamChosenTeacher}
-                                        styles = {{menuPortal:base=>({...base,zIndex:100,width:'100px',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
-                                        
-                            />
+                        <div>Enseignant:</div>
+                        <Select
+                            placeholder="Enseignant..." 
+                            onChange={(option)=>{setAddTeamChosenTeacher(option)}}
+                            options={theme?.encadrement?.map(el=>{return {value:el?.teacher?.id,label:el.teacher?.firstName+' '+el?.teacher?.lastName}})}
+                            isLoading = {!theme?.encadrement}
+                            value={addTeamChosenTeacher}
+                            styles = {{menuPortal:base=>({...base,zIndex:100,width:'100px',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
+                        />
                     </div>
                     <div className="flex space-x-2 items-center mx-auto">
-                            <div>Equipe:</div>
-                            <Select
-                                        placeholder="Equipes..." 
-                                        onChange={(option)=>{setAddTeamChosenTeam(option)}}
-                                        options={theme?.teams?.map(({id,nickName})=>{return {value:id,label:nickName}})}
-                                        isMulti
-                                        isLoading = {!theme?.teams}
-                                        value={addTeamChosenTeam}
-                                        styles = {{menuPortal:base=>({...base,zIndex:100,width:'100px',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
-                                        
-                            />
-                    </div>
-                   
-                     
-
-                    <div>
-                        
+                        <div>Equipe:</div>
+                        <Select
+                            placeholder="Equipes..." 
+                            onChange={(option)=>{setAddTeamChosenTeam(option)}}
+                            options={theme?.teams?.map(({id,nickName})=>{return {value:id,label:nickName}})}
+                            isMulti
+                            isLoading = {!theme?.teams}
+                            value={addTeamChosenTeam}
+                            styles = {{menuPortal:base=>({...base,zIndex:100,width:'100px',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
+                        />
                     </div>
                     <button onClick={handleSubmitAssignTeamsToTeacher} className="bg-blue-300 w-fit px-2 py-1  mx-auto rounded-[10px]">Valider</button>
                 </form>
-
             </ModalPortal>
         </div>
     )
