@@ -1,0 +1,95 @@
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+
+\usepackage{makeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{chart des documents}
+\begingroup
+\thispagestyle{empty}
+\centering
+\vspace*{5cm}
+\par\normalfont\fontsize{35}{35}\sffamily\selectfont
+\textbf{charte des nommage}\\
+{\LARGE gestion des projets de fin d'etudes}\par % Book title
+\vspace*{2cm}
+\raggedright
+{\Huge team members \\}
+\vspace*{0.5cm}
+{\huge 
+Assoul sidali \\
+Debza Houda\\
+Touati Amel\\
+Larouci Ghezala\\}\par % Author name
+\endgroup
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+%----------------------chapter 01----------------%
+\chapter{charte de nommage}
+\section{Definition}
+La notion de conventions de nommage désigne un ensemble de règles pour nommer l’ensemble des fichiers partager par les membres d’un projet logiciel Dans notre cas ce fichier est partagé entre tous les membre de l’entreprise ItExperts
+\section{Objectif}
+Décrire les règles de nommage de fichiers pour garantir l'accessibilité des documents, éviter les problèmes techniques et faciliter la recherche et assurer une bonne gestion des documents
+\section{Règles de nommage}
+\subsection{Règles generales}
+\begin{itemize}
+    \item Ne pas utiliser les signes diacritiques 
+    \item Pas d'accents ni de tréma (é, è, ê, ä)
+    \item Pas de cédille (ç)
+    \item Ne pas utiliser les caractères spéciaux et les espaces (à l'exception du tiret -) : , ; . : ! ? / \ " # [ ] > <  * @ = &  ( )
+    \item Utiliser un tiret (-) pour séparer les mots.
+    \item Choisir un nom court et significatif.
+    \item Ne pas utiliser le prénom ou le nom d'un collaborateur pour le nommage d'un fichier.
+    \item Quand une date est utilisée adopter le format date AAAAMMJJ 
+(2022-06-16) (norme ISO 8601)
+\end{itemize}
+
+\subsection{Règles de nommage spécifiques aux chartes}
+ Les noms des chartes doivent respecter la syntaxe suivante :
+\begin{quote}
+    [ItExperts-charte-de-NomDeCharte]
+\end{quote}
+\subsection{Règles de nommage spécifiques aux répertoires}
+ Le répertoire principal contenant tous les sous-répertoires concernant un 
+projet est nommé comme suit : 
+\begin{quote}
+    [ItExperts-NomProjet] \\
+\end{quote}
+ Chaque sous-répertoire regroupant des fichiers concernant un domaine de type précis if faut respectant la forme :
+\begin{quote}
+    [NomProjet-TypeDesDocument]
+\end{quote}
+
+\end{document}
