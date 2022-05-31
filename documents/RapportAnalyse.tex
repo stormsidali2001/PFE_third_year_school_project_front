@@ -35,14 +35,14 @@
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
 
 \begin{document}
-\title{Cahier de charges}
+\title{Rapport d'analyse}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 %---------------------
 \begingroup
-\ThisLRCornerWallPaper{1.0}{Pictures/cover page.png}
+\ThisLRCornerWallPaper{1.0}{Pictures/analyse cover.png}
 \endgroup
 
 %----------------------------------------------------------------------------------------
@@ -121,8 +121,13 @@ Ils se concentrent sur la description du flux de messages au sein d'un système,
 \newpage
 \subsubsection{Diagramme de Séquence de Création d’un 
 Compte ‘Enseignant’, ‘Etudiant’, ou ‘Entreprise’}
-
-
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Sequence ajouter un utilisateur.png}
+    \caption{Diagramme de Séquence de Création d’un 
+Compte ‘Enseignant’, ‘Etudiant’, ou ‘Entreprise’}
+    \label{fig:pca}
+\end{figure}
 \newpage
 \subsubsection{ Diagramme de Séquence de ‘Mot de Passe Oublié’}
 \begin{figure}[h]
@@ -190,10 +195,11 @@ de transitions, de conditions, d’effets et d’activités.
 \chapter{Diagrammes de gestion des equipes}
 \section{Diagrammes d'interactions}
 \subsection{Diagrammes des sequences}
+\newpage
 \subsubsection{diagramme de sequence de creation d'un equipe}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/creation d'un equipe.drawio(1).png}
+    \includegraphics[width=1\textwidth]{Pictures/Sequence creation d'une equipe.png}
     \caption{diagramme de sequence de creation d'un equipe}
     \label{fig:pca}
 \end{figure}
@@ -214,14 +220,8 @@ de transitions, de conditions, d’effets et d’activités.
     \label{fig:pca}
 \end{figure}
 \newpage
-\subsubsection{diagramme de sequence d'envoyer une invitation de jointure}
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\textwidth]{Pictures/demande de joindre-Page-8.jpg}
-    \caption{diagramme d'envoyer une invitation de jointure}
-    \label{fig:pca}
-\end{figure}
-\newpage
+
+%--------\subsubsection{diagramme de sequence d'envoyer une invitation de jointure}\begin{figure}[h]  \centering \includegraphics[width=1\textwidth]{Pictures/demande de joindre-Page-8.jpg}\caption{diagramme d'envoyer une invitation de jointure}\label{fig:pca}\end{figure} \newpage ------%
 \subsubsection{diagramme de sequence de quitter une equipe}
 \begin{figure}[h]
     \centering
@@ -232,27 +232,20 @@ de transitions, de conditions, d’effets et d’activités.
 \newpage
 \section{Diagrammes Comportementaux}
 \subsection{Diagrammes d’Activité}
-\subsubsection{Diagramme d'activité de creation d'une equipe}
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
-    \label{fig:pca}
-\end{figure}
-\newpage
+
 \subsubsection{Diagramme d'activité de validation d'une equipe}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \includegraphics[width=1\textwidth]{Pictures/Activity valider une equipe.png}
+    \caption{Diagramme d'activité de validation d'une equipe}
     \label{fig:pca}
 \end{figure}
 \newpage
 \subsection{Diagramme d'activité de quitter une equipe}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \includegraphics[width=1\textwidth]{Pictures/Activity quitter l'equipe.png}
+    \caption{Diagramme d'activité de quitter une equipe}
     \label{fig:pca}
 \end{figure}
 \newpage
@@ -366,7 +359,7 @@ de transitions, de conditions, d’effets et d’activités.
 \subsubsection{Diagramme de sequence de fournir un document}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/fournir un document-Page-8.jpg}
+    \includegraphics[width=1\textwidth]{Pictures/Activity fournir un document.png}
     \caption{Diagramme de sequence de fournir un document}
     \label{fig:pca}
 \end{figure}
@@ -376,24 +369,24 @@ de transitions, de conditions, d’effets et d’activités.
 \subsubsection{Diagramme d’Activité d'ajouter un document}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \includegraphics[width=1\textwidth]{Pictures/Activity ajouter un document.png}
+    \caption{Diagramme d’Activité d'ajouter un document}
     \label{fig:pca}
 \end{figure}
 \newpage
 \subsubsection{Diagramme d’Activité de manipulation d'un document}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \includegraphics[width=1\textwidth]{Pictures/Activity supprimer un document.png}
+    \caption{Diagramme d’Activité de manipulation d'un document}
     \label{fig:pca}
 \end{figure}
 \newpage
 \subsubsection{Diagramme d’Activité de fournir un document}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \includegraphics[width=1\textwidth]{Pictures/Activity fournir un document.png}
+    \caption{Diagramme d’Activité de fournir un document}
     \label{fig:pca}
 \end{figure}
 \newpage
@@ -440,16 +433,16 @@ de transitions, de conditions, d’effets et d’activités.
 \subsubsection{Diagramme d’Activité d'echanger }
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \includegraphics[width=1\textwidth]{Pictures/Activity echanger avec son equipe.png}
+    \caption{Diagramme d’Activité d'echanger}
     \label{fig:pca}
 \end{figure}
 \newpage
 \subsubsection{Diagramme d’Activité d'evaluation d'un document}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \includegraphics[width=1\textwidth]{Pictures/Activity evaluer un document.png}
+    \caption{Diagramme d’Activité d'evaluation d'un document}
     \label{fig:pca}
 \end{figure}
 \newpage
@@ -504,24 +497,24 @@ de transitions, de conditions, d’effets et d’activités.
 \subsubsection{Diagramme d'Activité d'autorisation de soutenance}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \includegraphics[width=1\textwidth]{Pictures/Activity autorisation de soutenance.png}
+    \caption{Diagramme d'Activité d'autorisation de soutenance}
     \label{fig:pca}
 \end{figure}
 \newpage
 \subsection{Diagramme d'Activité de preciser la jury}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \includegraphics[width=1\textwidth]{Pictures/Activity preciser la jury.png}
+    \caption{Diagramme d'Activité de preciser la jury}
     \label{fig:pca}
 \end{figure}
 \newpage
 \subsubsection{Diagramme d'Activité de saisir le PV de soutenance}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
-    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \includegraphics[width=1\textwidth]{Pictures/Activity saisir le Pv de soutenance.png}
+    \caption{Diagramme d'Activité de saisir le PV de soutenance}
     \label{fig:pca}
 \end{figure}
 \chapter{Conclusion}
