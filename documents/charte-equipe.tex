@@ -1,0 +1,118 @@
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+\usepackage{makeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{chart d'equipe}
+\begingroup
+\thispagestyle{empty}
+\centering
+\vspace*{5cm}
+\par\normalfont\fontsize{35}{35}\sffamily\selectfont
+\textbf{Profile d'equipe}\\
+{\LARGE gestion des projets de fin d'etudes}\par % Book title
+\vspace*{2cm}
+\raggedright
+{\Huge team members \\}
+\vspace*{0.5cm}
+{\huge 
+Assoul sidali \\
+Debza Houda\\
+Touati Amel\\
+Larouci Ghezala\\}\par % Author name
+\endgroup
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+%----------------------chapter 01----------------%
+\chapter{profile d'equipe}
+\section{introduction}
+Une charte d'équipe est un document qui décrit le but et les objectifs de votre équipe, ainsi que les mesures que vous prendrez pour atteindre vos objectifs. La charte d'équipe illustre l'orientation et la direction de tous les membres de l'équipe. Lorsqu'elle est créée en collaboration, la charte d'équipe est un excellent moyen pour les individus de se sentir encore plus connectés les uns aux autres au sein d'un groupe.
+\newline
+\newline
+\section{objectif}
+L’objectif de ce document est de donner une description générale sur les rôles de chaque membre de l’équipe de l’entreprise ITExperts qui est charger de ce projet et d’affecter à chaque-un d’entre eux un rôle bien précis
+\newline
+\newline
+
+\section{organigramme de l'equipe}
+L'organigramme est mis en place afin de fournir des informations sur la relation entre les acteurs existants, donc c’est un outil de communication indispensable pour spécifier les liaisons coopératives, fonctionnelles ou hiérarchiques entre les services d'une société ou entreprise.\\
+Ci-dessous l’organigramme \\
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/organigramme(1).jpg}
+\end{figure}
+\section{description des roles}
+\subsection{role du chef d'equipe}
+\begin{itemize}
+    \item Organiser et piloter l’avancement du projet.
+    \item Structurer et planifier le projet.
+    \item Manager l’équipe de projet.
+   \item Gérer le bon déroulement du projet.
+   \item Distribuer les tâches aux membres et assurer la coordination entre eux. 
+   \item Participer au développement des solutions.
+   \item Valider et représenter le résultat
+\end{itemize}
+\subsection{role du gestionnaire de qualite}
+\begin{itemize}
+    \item  Garantir que les livrables répandent aux besoins attendus.
+    \item  Assumer le bon suivi de la méthodologie.
+    \item  Participer au développement des solutions.
+\end{itemize}
+\subsection{role des Développeurs}
+\begin{itemize}
+    \item  Réaliser les tâches affectées par le chef de projet.
+    \item  Participer au développement des solutions.
+    \item  Répandre aux exigences du cahier de charge.
+
+\end{itemize}
+\newline
+\newline
+\section{affectation des roles}
+\begin{itemize}
+    \item \textbf{chef d'equipe}
+    \begin{itemize}
+        \item Assoul Sidali
+    \end{itemize}
+    \item \textbf{gestionnaire de qualite}
+    \begin{itemize}
+        \item Debza Houda
+    \end{itemize}
+    \item \textbf{Développeurs}
+    \begin{itemize}
+        \item Touati Amel
+        \item Larouci Ghezala
+    \end{itemize}
+\end{itemize}
+\end{document}
