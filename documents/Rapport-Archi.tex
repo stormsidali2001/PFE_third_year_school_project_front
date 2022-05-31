@@ -1,0 +1,180 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{wallpaper}
+\usepackage{mdframed}
+\usepackage[top=2cm, bottom=2cm, outer=0cm, inner=0cm]{geometry}
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Computer Modern fonts
+\graphicspath{ {figures/} }
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{Rapport d'architecture}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+%---------------------
+\begingroup
+\ThisLRCornerWallPaper{1.0}{Pictures/rapport-archi.PNG}
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 1
+%----------------------------------------------------------------------------------------
+
+\chapter{Rapport d'architecture}
+\section{Introduction}
+L’architecture de n’importe quel système, simple ou complexe, est une étape primordiale à ne pas négligé car elle permet de décrire la structure en utilisant des 
+diagrammes de composants ou connecteurs, donc c’est une description d’abstraction 
+de haut niveau.\\
+Tout cela pour faciliter la communication entre les développeurs et concepteurs.\\
+Ce document permettra de définir l’architecture logicielle de notre système en utilisant divers schémas pour mieux visualiser les fonctionnalités et les acteurs incluent.
+\section{Schéma global}
+\subsection{les ateurs de systeme}
+nous avons 4 acteurs dans notre systeme: Administrateur, Enseignant, Entreprise, Etudiant
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Acteurs.PNG}
+    \caption{les acteurs de systeme}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\subsection{le schéma global de systeme}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/fonctionnement-sys.PNG}
+    \caption{schéma global du système}
+    \label{fig:pca}
+\end{figure}
+\newpage
+\section{Schémas détaillés de chaque module}
+\subsection{gestion des comptes}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/fonctio-compte.PNG}
+        \caption{schéma du module gestion des comptes}
+\end{figure}
+\newpage
+\subsection{gestion des equipes}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/fonctio-equipe.PNG}
+        \caption{schéma du module gestion des equipes}
+\end{figure}
+\newpage
+\subsection{gestion des themes}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/fonctio-theme.PNG}
+        \caption{schéma du module gestion des themes}
+\end{figure}
+\newpage
+\subsection{gestion des documents}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/fonctio-document.PNG}
+        \caption{schéma du module gestion des documents}
+\end{figure}
+\newpage
+\subsection{gestion d'encadrement}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/fonctio-encadrement.PNG}
+        \caption{schéma du module gestion d'encadrement}
+\end{figure}
+\newpage
+\subsection{gestion de soutenance}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/fonctio-soutenance.PNG}
+        \caption{schéma du module gestion de soutenance}
+\end{figure}
+\newpage
+\section{Architecture utilisée}
+\subsection{architecture d'application web}
+\subsubsection{definition}
+L'architecture Modèle/Vue/Contrôleur (MVC) est une façon d'organiser une interface graphique d'un programme. Elle consiste à distinguer trois entités distinctes qui sont, le modèle, la vue et le contrôleur ayant chacun un rôle précis dans l'interface
+\subsubsection{avantages du MVC}
+\begin{itemize}
+    \item La Séparation des tâches, séparer la logique métier, l’interface utilisateur et la dynamique du système.
+    \item La Spécialisation, une définition claire des zones d'intervention des développeurs. Les développeurs de l’UI peuvent se concentrer exclusivement sur l’interface, sans être gênés par le reste de l'application. De même pour les développeurs de la logique métier ou dynamique du système.
+    \item Le Développement, les CI(continuous Integration), CD(continuous development) en parallèle, la possibilité pour les développeurs de travailler en parallèle, en même temps sans se marcher dessus.
+\end{itemize}
+\subsection{L’architecture MVC comment ça marche ?}
+\subsubsection{Le Modèle}
+Élément qui contient les données ainsi que de la logique en rapport avec les données : validation, lecture et enregistrement. Il peut, dans sa forme la plus simple, contenir uniquement une simple valeur, ou une structure de données plus complexe. Le modèle représente l'univers dans lequel s'inscrit l'application. Par exemple pour une application de banque, le modèle représente des comptes, des clients, ainsi que les opérations telles que dépôt et retraits, et vérifie que les retraits ne dépassent pas la limite de crédit
+\subsubsection{La vue}
+Partie visible d'une interface graphique. La vue se sert du modèle, et peut être un diagramme, un formulaire, des boutons, etc. Une vue contient des éléments visuels ainsi que la logique nécessaire pour afficher les données
+\subsubsection{Le Contrôleur}
+Module qui traite les actions de l'utilisateur, modifie les données du modèle et de la vue
+ provenant du modèle
+ \newpage
+\section{Diagramme de déploiement}
+\vspace{5em}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/diagramme de deploiment.jpg}
+        \caption{schéma représentant le diagramme de déploiement}
+\end{figure}
+\newpage
+\section{ Diagramme de composants}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/commposant Diagram.png}
+    \caption{schéma représentant le diagramme de composants}
+\end{figure}
+\section{conclusion}
+Ce document a permis de montrer l’architecture utilisée pour la réalisation du projet "project101" qui assure une sécurité, fiabilité, sûreté, sérénité et qui est convenable pour notre solution. Ainsi offrant une facilité d’utilisation aux utilisateurs de l’application
+
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\end{document}
