@@ -6,11 +6,13 @@ import NotificationIcon from "../icons/NotificationIcon";
 import Profil from "../icons/Profil";
 import LastMessages from "./LastMessages";
 import Notification from "./Notification";
-import {useStoreState} from '../store/hooks';
+import {useStoreActions, useStoreState} from '../store/hooks';
 import Link from 'next/link'
+import { useRouter } from "next/router";
 
 
 const HorisontalNavbar = ({toastsRef}) => {
+    const router = useRouter()
     const countRef = useRef(null)
   
     const notificationRef =useRef(null);
@@ -24,6 +26,8 @@ const HorisontalNavbar = ({toastsRef}) => {
     const {open:openlastMessages,setOpen:setOpenLastMessages} = useOutSideContainer({ref:notificationRef});
 
     const {totalNotificationCount} = useStoreState(store=>store.notificationService)
+
+    const {logoutThunk} = useStoreActions(store=>store.user)
 
     
     return ( 
@@ -41,11 +45,12 @@ const HorisontalNavbar = ({toastsRef}) => {
           />
 
                         <div className="flex flex-row space-x-2">
-                               <Link href='/userprofil'>
+                            
                                 <Profil
                                             className='cursor-pointer'
+                                            onClick={async()=>{await logoutThunk();router.push('/login')}}
                                     />
-                               </Link> 
+                              
                                {
                                    userType === 'entreprise' ?(
                                     <div>{entity?.name}</div>

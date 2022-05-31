@@ -42,6 +42,7 @@ export interface LoginPayload{
 export interface UserThunks{
     // signin:Thunk<this,LoginPayload,undefined,Model>;
     loginThunk:Thunk<this,LoginPayload,undefined,any>;
+    logoutThunk:Thunk<this,undefined,undefined,undefined>;
     getUserInfo:Thunk<this,undefined,undefined,any>;
     logout:Thunk<this,undefined,undefined,undefined>;
     uploadFileThunk:Thunk<this,any,undefined,any>;
@@ -148,6 +149,10 @@ export const userModel:UserModel | null={
         
         })
        
+    }),
+    logoutThunk:thunk(async(actions)=>{
+        await axios.post('http://localhost:8080/logout',{},{withCredentials:true})
+        actions.setUser({})
     })
 
     

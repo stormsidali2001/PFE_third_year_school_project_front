@@ -7,7 +7,7 @@ import Select from 'react-select'
 
 
 const AssignTeamsToThemes = ({toastsRef}) => {
-  const [open,setOpen] = useState(true)
+  const [open,setOpen] = useState(false)
   const [chosenPromotion,setChoosenPromotion] = useState(null)
   const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
   const {promotions} = useStoreState(store=>store.promotionsModel)
@@ -56,6 +56,7 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                 })
         })
         toastsRef.current.addMessage({text:"c'est fait !!",mode:'Alert'})
+        setOpen(false)
 
     }catch(err){
         console.log(err)

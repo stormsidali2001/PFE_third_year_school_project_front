@@ -8,6 +8,11 @@ import AttachFileIcon from "../icons/AttachFileIcon";
 import DocumentIcon from "../icons/documentIcon";
 import Select from "react-select";
 import { useRouter } from "next/router";
+import AddDocumentIcon from "../icons/AddDocumentIcon";
+import EditIcon from "../icons/EditIcon";
+import Trash from "../icons/Trash";
+import TrashIcon from "../icons/TrashIcon";
+import CommitIcon from "../icons/CommitIcon";
 const TeamDocs = ({toastsRef})=>{
     const router = useRouter()
     const [newDocModal,setNewDocModal] = useState(false)
@@ -129,9 +134,9 @@ const TeamDocs = ({toastsRef})=>{
        
     }
     return(
-<div className="bg-background min-h-screen w-screen">
+<div className="bg-background min-h-[200vh] w-screen">
        <div className="pt-[100px] pl-[100px] h-full w-full">
-       <div  className="h-[80vh]   flex lg:flex-row flex-col-reverse    text-[#1A2562]  font-xyz mt-[120px]    bg-white shadow-lg p-4 mx-[50px] ">
+       <div  className="h-[80vh]   flex lg:flex-row flex-col-reverse    text-[#1A2562]  font-xyz mt-[100px]  bg-textcolor/10 shadow-lg p-4 mx-[50px] ">
          <div className="lg:w-[80%] w-full h-full flex flex-col ">
                 <div 
                 className="w-full h-full   grid  grid-cols-[repeat(auto-fit,minmax(100px,_1fr))] gap-[20px] px-4 py-4 justify-items-center  items-center overflow-y-auto"> {/*The team docs lays here */}
@@ -140,12 +145,12 @@ const TeamDocs = ({toastsRef})=>{
                                 return (
                                  
                                        <div 
-                                         className="relative w-[100px] h-[100px] flex flex-col   cursor-pointer "
+                                         className="relative w-[100px] h-[100px] flex flex-col   cursor-pointer  "
                                          onClick={(e)=>handleSelectFiles(doc)}
                                    >
-                                       <div className={`absolute bottom-[40px] right-[40px] w-[15px] h-[15px] rounded-full ${selectedFiles[doc.id]?'bg-blue-400':'bg-blue-200'}  border-2`}></div>
+                                       <div className={`absolute bottom-[40px] right-[40px] w-[15px] h-[15px] rounded-full ${selectedFiles[doc.id]?'bg-textcolor':'bg-textcolor/10'}  border-2`}></div>
                                    <div 
-                                     className=" bg-gray-100 flex justify-center items-center p-4 w-fit"
+                                     className=" bg-textcolor/10 rounded-[10px] backdrop-blur-sm flex justify-center items-center p-4 w-fit"
                                    >
                                       
                                       <DocumentIcon
@@ -159,54 +164,80 @@ const TeamDocs = ({toastsRef})=>{
                             })
                       }
                 </div>
-                <div className="flex w-[95%] justify-between h-[60px] bg-white   shadow-lg mx-auto"> {/* options menu */}
+                <div className="flex w-[95%] justify-between h-[60px]     mx-auto bg-textcolor/10 backdrop-blur-sm"> {/* options menu */}
                             <div 
-                                    className="h-full border-2 border-gray-200 w-1/4 justify-center flex items-center cursor-pointer"
+                                    className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
                                     onClick={(e)=>setNewDocModal(m=>!m)}
                             >
-                                        New
+                                <AddDocumentIcon
+                                    className='w-8 text-textcolor rounded-[10px]  shadow-textcolor group-hover:shadow-lg group-hover:scale-110 group-hover:bg-textcolor/20 '
+
+                                />
+                                <span className="text-textcolor font-semibold bg-white shadow-md  rounded-[10px] absolute  top-0 translate-y-[-90%] group-hover:block transition-all ease-in hidden shadow-textcolor px-2 py-1">Ajouter</span>
+                                       
                             </div>
-                           { Object.keys(selectedFiles).length ===1  &&<div 
-                                    className="h-full border-2 border-gray-200 w-1/4 justify-center flex items-center cursor-pointer"
+                           { Object.keys(selectedFiles).length ===1  && <div 
+                                    className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
+                                    onClick={(e)=>setNewDocModal(m=>!m)}
                             >
-                                        Edit
+                                <EditIcon
+                                    className='w-8 text-textcolor group-hover:bg-textcolor/20 shadow-textcolor rounded-[10px] group-hover:shadow-lg group-hover:scale-110'
+
+                                />
+                                <span className="text-textcolor font-semibold bg-white  shadow-md  rounded-[10px] absolute  top-0 translate-y-[-90%] group-hover:block transition-all ease-in hidden shadow-textcolor px-2 py-1">Modifier</span>
+                                       
                             </div>}
                           {  Object.keys(selectedFiles).length >=1 &&<div 
-                                    className="h-full border-2 border-gray-200 w-1/4 justify-center flex items-center cursor-pointer"
-                                    onClick={handleDeleteDocs}
+                                    className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
+                                    onClick={(e)=>setNewDocModal(m=>!m)}
                             >
-                                        Delete
+                                <TrashIcon
+                                    className='w-8 text-textcolor shadow-textcolor rounded-[10px] group-hover:shadow-lg group-hover:scale-110 group-hover:bg-textcolor/20'
+
+                                />
+                                <span className="text-textcolor font-semibold bg-white shadow-md  rounded-[10px] absolute  top-0 translate-y-[-90%] group-hover:block transition-all ease-in hidden shadow-textcolor px-2 py-1">Supprimer</span>
+                                       
                             </div>}
+                            
                            { Object.keys(selectedFiles).length >=1 &&<div 
-                                    className="h-full border-2 border-gray-200 w-1/4 justify-center flex items-center cursor-pointer"
-                                    onClick = {()=>setOpenCommitModel(c=>!c)}
+                                    className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
+                                    onClick={(e)=>setNewDocModal(m=>!m)}
                             >
-                                        Commit
+                                <CommitIcon
+                                    className='w-8 text-textcolor shadow-textcolor rounded-[10px] group-hover:shadow-lg group-hover:scale-110 group-hover:bg-textcolor/20'
+
+                                />
+                                <span className="text-textcolor font-semibold bg-white shadow-md  rounded-[10px] absolute  top-0 translate-y-[-90%] group-hover:block transition-all ease-in hidden shadow-textcolor px-2 py-1">Commit</span>
+                                       
                             </div>}
                        
                 </div>
           </div>
-          <div className=" lg:w-[20%] overflow-auto w-full lg:h-full h-[20%] flex flex-col shadow-lg px-2"> {/*document information */}
+          <div className=" lg:w-[20%] overflow-auto w-full lg:h-full h-[20%] flex flex-col shadow-lg px-2 text-black bg-textcolor/10 backdrop-blur-sm"> {/*document information */}
                 {
                     <>
                         
                        { Object.keys(selectedFiles).length=== 1 &&(
                            <>
-                            <div className="w-full  text-center font-medium text-xl">Document Infos:</div>
-                            <div className="text-textcolor/90 "><span className="">Name: </span><span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].name}</span></div>
-                            <div>Type: <span className="text-sm">{ selectedFiles[Object.keys(selectedFiles)[0]].type.name}</span></div>
-                            <div  onClick={()=>router.push('http://localhost:8080/'+selectedFiles[Object.keys(selectedFiles)[0]].url?.slice(2))}  className="text-textcolor/90 cursor-pointer hover:underline">Url: <span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].url}</span> </div>
-                            <div  className="text-textcolor/90">Owner: </div>
-                            <div className="flex w-full flex-col pl-5 text-textcolor/90">
-                            <div>Name: <span className="text-sm">{selectedFiles[Object.keys(selectedFiles)[0]].owner.firstName+' '+selectedFiles[Object.keys(selectedFiles)[0]].owner.lastName}</span></div>
+                            <div className="w-full  text-center font-semibold text-xl">Document Infos:</div>
+
+                            <div className=" font-mono"><span className="text-xl font-medium">Name: </span><span className="text-md">{selectedFiles[Object.keys(selectedFiles)[0]].name}</span></div>
+
+                            <div className="font-mono"><span className="font-medium text-xl ">Type:</span> <span className="text-md">{ selectedFiles[Object.keys(selectedFiles)[0]].type.name}</span></div>
+
+                            <div   onClick={()=>router.push('http://localhost:8080/'+selectedFiles[Object.keys(selectedFiles)[0]].url?.slice(2))}  className=" cursor-pointer hover:underline font-mono"><span className="text-xl font-medium">Url:</span> <span className="text-md">{selectedFiles[Object.keys(selectedFiles)[0]].url}</span> </div>
+
+                            <div  className="font-mono text-xl">Owner: </div>
+                            <div className="flex w-full flex-col pl-5 ">
+                            <div className="font-mono"><span className="text-xl">Name:</span> <span className="text-md">{selectedFiles[Object.keys(selectedFiles)[0]].owner.firstName+' '+selectedFiles[Object.keys(selectedFiles)[0]].owner.lastName}</span></div>
                            
                             
                            
                            
                            
                             </div>
-                            <div  className="text-textcolor/90">Description: </div>
-                            <div className="w-full py-1 px-2 text-textcolor/90 bg-gray-200/30 text-justify backdrop-blur-md break-words">
+                            <div  className="font-mono text-xl">Description: </div>
+                            <div className="w-full py-1 px-2 font-mono bg-textcolor/5 rounded-[5px] text-justify backdrop-blur-md break-words">
                                 {selectedFiles[Object.keys(selectedFiles)[0]].description}
                             </div>
                            
@@ -282,6 +313,8 @@ const TeamDocs = ({toastsRef})=>{
         <ModalPortal
             open={openCommitModal}
             handleClose ={setOpenCommitModel}
+            className=''
+
         >
             <form className="flex flex-col w-[400px] items-center space-y-4 text-textcolor">
             <h1 className=" text-2xl text-textcolor font-semibold">Commit</h1>

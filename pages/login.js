@@ -9,6 +9,7 @@ const Login = ({toastsRef}) => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [loading,setLoading] = useState(false)
+   const user = useStoreState(store=>store.user)
  
 
     const {loginThunk} = useStoreActions(actions=>actions.user)
@@ -51,7 +52,13 @@ const Login = ({toastsRef}) => {
            
         }
     }
-   
+    if(user && user.userType){
+        setTimeout(()=>{
+
+            router.push(`${user.userType}dashboard`)
+        },0)
+        return 'permission denied'
+   }
     
     return(
         <div className="flex h-fit py-12 lg:py-0 lg:h-[100vh] w-[100vw] items-center justify-center" id="login">

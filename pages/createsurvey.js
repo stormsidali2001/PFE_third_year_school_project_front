@@ -1,4 +1,4 @@
-import { useStoreActions } from "../store/hooks";
+import { useStoreActions ,useStoreState} from "../store/hooks";
 import { useState ,useEffect} from "react"
 import { useRouter } from "next/router";
 
@@ -13,6 +13,7 @@ const CreerSondage = ({toastsRef}) => {
     const {createSurveyThunk} = useStoreActions(store=>store.surveysModel);
     const [loading,setLoading] = useState(false)
     const router = useRouter();
+    const user = useStoreState(store=>store.user)
    
 
 
@@ -66,6 +67,8 @@ const CreerSondage = ({toastsRef}) => {
       
 
     }
+
+    
 
     return(
         <div className="bg-background min-h-screen min-w-screen">
