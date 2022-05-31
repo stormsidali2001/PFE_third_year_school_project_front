@@ -1,0 +1,1493 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{wallpaper}
+\usepackage{mdframed}
+\usepackage[top=2cm, bottom=2cm, outer=0cm, inner=0cm]{geometry}
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Computer Modern fonts
+\graphicspath{ {figures/} }
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{Cahier de charges}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+%---------------------
+\begingroup
+\ThisLRCornerWallPaper{1.0}{Pictures/cover page.png}
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 1
+%----------------------------------------------------------------------------------------
+
+
+\chapter{Introduction}
+\section{Introduction}
+
+Ce document constitue le cahier des charges pour le projet pluridisciplinaire portantsur la gestion des projets de fin d’études. \\
+Ce projet est réalisé par une équipe de 4 étudiants et encadré par M. AMAR 
+BENSABER Djamel et M. MALKI Abdelhamid. \\
+Ce projet a pour objectif de faire une analyse, conception et réalisation d’une
+application Full Web de gestion des projets de fin d’études. \\
+Elle permettra d’une part à l’administration de l’école de gérer le déroulement des phases des projets du dépôt des thèmes par les enseignants ou entreprises aux résultats des PVs des soutenances.\\
+D’autre part elle permettra aussi aux étudiants qui auront des projets 
+pluridisciplinaires à partir de la 2ème année aux classes préparatoires jusqu’à la 3ème année au cycle supérieur (PFE) de trouver des outils plus faciles afin de gérer leurs projets dès la composition des groupes, le choix du thème, la répartition des projets, le déroulement des soutenances, ainsi que les résultats obtenus\\
+
+
+\section{Objectifs}\index{Objectifs}
+Project101 est censé servir de plate-forme commune où la gestion des différentes sessions lors de la réalisation des projets peut être effectuée de manière pratique. Notre objectif est de développer un remplacement informatisé de la méthode de gestion utilisé dans notre école en le rendant plus convivial ainsi que promouvoir le réseautage académique entre les utilisateurs. \\
+Et cet appui consiste en :
+\begin{itemize}
+    \item Permettre aux administrateurs de gérer les comptes.
+    \item permettre aux Enseignant de diposer un thème, suivi ses equipes, autoriser la soutenance.
+    \item Permettre aux Entreprise de diposer des thémes.
+      \item permettre aux etudiants de créer une equipe, consulter et choisir un thème, echanger avec les membres d'equipe, manipuler et fournir des documents.
+\end{itemize}
+
+\section{Portées}\index{Portées}
+Comme c’est déjà mentionné que le thème du projet est la réalisation 
+d’une application Full Web de la gestion des PFE a ESI-SBA. Le 
+processus de la réalisation se fait en trois parties. La partie d’Analyse, 
+la conception, l’implémentation et les tests. Cette 
+application web cible les utilisateurs ; l’Admin, l'entreprise l’enseignant et l’étudiant afin d’améliorer les interactions entre eux en automatisant 
+les fonctions décrites au troisieme chapitre.
+
+\section{Définitions and abréviations}
+
+\subsection{Définitions}\index{Définitions}
+\begin{itemize}
+    \item \textbf{Cahier des charges} : est un document contractuel à respecter lors d'un projet. Il permet au maître d'ouvrage de faire savoir au maître d'oeuvre ce qu'il attend de lui lors de la réalisation du projet, Il décrit précisément les besoins auxquels le prestataire ou le soumissionnaire doit répondre, et organise la relation entre les différents acteurs tout au long du projet.
+    \item \textbf{Le projet de fin d'études} : est un projet complet en situation professionnelle qui marque la fin des études dans une école d'ingénieurs. 
+    \item \textbf{Projet pluridisciplinaire} : est un dispositif pédagogique qui consiste à faire acquérir des savoirs et/ou des savoir-faire à partir d'une réalisation concrète, c'est-à-dire un projet, liée à des situations professionnelles.
+    \item  \textbf{Étude préalable} : vise à approfondir l'analyse de dimensions innovantes d'un projet, alors que ce projet est en cours d'élaboration et en vue de préparer sa mise en œuvre, en mettant en point le cahier des charges.
+    \item  \textbf{Conception} : correspond à l'une des premières phases dans le cycle de vie d'une initiative, au cours de laquelle les idées, processus, ressources et résultats attendus sont planifiés.
+    \item \textbf{UML} : est un langage de modélisation graphique à base de pictogrammes conçu comme une méthode normalisée de visualisation dans les domaines du développement logiciel et en conception orientée objet. 
+    \item \textbf{Diagramme de cas d’utilisation} : ce sont des diagrammes UML utilisés pour une représentation du comportement fonctionnel d'un système logiciel.
+    \item \textbf{Diagramme de séquence} : permet de montrer les interactions d'objets dans le cadre d'un scénario d'un Diagramme des cas d'utilisation
+    \item \textbf{Diagramme d'activité} : est un diagramme comportemental d'UML, permettant de représenter le déclenchement d'événements en fonction des états du système et de modéliser des comportements parallélisables
+\end{itemize}
+
+\subsection{abréviations}\index{abréviations}
+\begin{itemize}
+    \item \textbf{PFE} : projet de fin d'études.
+    \item \textbf{ESI} : École Supérieure d'Informatique.
+    \item \textbf{SBA} : Sidi Bel Abbes.
+    \item \textbf{IEEE} : Institute for Electrical and Electronics Engineers Academic & Science » Electronics. 
+    \item \textbf{URL} : Uniform Resource Locator
+    \item \textbf{CU} : Cas d’Utilisation.
+    \item \textbf{IHM} : Interface Homme/Machine
+    \item \textbf{CP} : Classes Préparatoires.
+    \item \textbf{CS} : Classes Supérieures.
+    \item \textbf{ISI} : Ingénierie des systèmes informatiques.
+    \item \textbf{SIW} : Systèmes d'information et Web.
+
+\end{itemize}
+\section{References}\index{References}
+\begin{itemize}
+    \item  \href{https://ieeexplore.ieee.org/document/720574}{IEEE/ANSI 830-1998}
+    \item \href{https://asana.com/fr/resources/project-design}{La conception de projet en 7 étapes}
+    \item \href{https://www.esi-sba.dz/fr/}{École Supérieure d'Informatique}
+    \item \href{https://fr.wikipedia.org/wiki/UML_(informatique)}{Le Langage de Modélisation Unifié-wikipedia}
+\end{itemize}
+
+\section{Aperçu}\index{Aperçu}
+Ce document est présenté dans un style modifié IEEE/ANSI 830-1998. Les 
+informations suivantes sont entamées dans ce document :
+\begin{itemize}
+    \item  Présentation du projet. 
+    \item Présentation de la boîte de développement. 
+    \item Étude de l’Existant 
+    \item Expression des Besoins. 
+    \item Spécifications fonctionnelles. 
+    \item Spécifications non-fonctionnelles. 
+    \item Les cas d’utilisations. 
+\end{itemize}
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 2
+%----------------------------------------------------------------------------------------
+\chapter{Description générale}
+\section{Perspective}\index{Perspective}
+L’Ecole Supérieure en Informatique 08 mai 1945 de Sidi Bel Abbes est un 
+établissement universitaire public, placé sous la tutelle du Ministère de 
+l'Enseignement Supérieur et de la Recherche Scientifique, créé par le décret exécutif n° 14-232 du 25 août 2014. \\
+L'école décerne le double diplôme d'ingénieur d’état et de master en informatique après une formation de cinq ans. Deux années préparatoires, une année de tronc commun et deux années de spécialisation. \\
+Deux spécialités sont actuellement habilitées : 
+\begin{itemize}
+    \item Systèmes d'information et Web (SIW).
+    \item Ingénierie des systèmes informatiques (ISI).
+\end{itemize}
+Notre projet consiste à gérer les projets de fin d’études effectué au niveau de cette école.
+\section{Comité de la maîtrise d’ouvrage}
+Notre client est l’administration de l’ESI de Sidi Bel Abbes et ses représentants sont :
+\begin{center}
+\begin{tabularx}{0.8\textwidth} { | p{5cm} | >{\raggedright\arraybackslash}X |  }
+   \hline
+ Nom et Prenom & Email  \\
+ \hline
+ Pr AMAR BENSABER Djamel  &  d.amarbensaber@esi-sba.dz  \\
+  \hline
+ MALKI Abdelhamid  & a.malki@esi-sba.dz   \\
+  \hline
+  \end{tabularx}
+    \captionof{table}{Comité de la maîtrise d’ouvrage}\label{tbl:nicetablelesstable}
+\end{center}
+\subsection{situation professionnelle}
+\begin{itemize}
+    \item  M. AMAR BENSABER Djamel est rattaché à la structure « École Supérieure en Informatique – 08 Mai 1945- Sidi Bel Abbes » avec sa fonction de directeur Adjoint chargé des enseignements de cette dernière. Son grade actuel est : Professeur. 
+    \item M. MALKI Abdelhamid est rattaché à la structure « École Supérieure en Informatique – 08 Mai 1945- Sidi Bel Abbes » avec sa fonction d’enseignant dans cette dernière. Son grade actuel est: Doctorat. 
+\end{itemize}
+
+\section{Présentation de l’Entreprise}
+\subsection{Produits et services vendus}
+\subsection{ Les éléments différenciant notre activité}
+\begin{itemize}
+    \item Une solution économique et concurrentielle.
+     \item Meilleur rapport entre qualité et prix.
+     \item Assistance et maintenance après-vente. 
+     \item Mise à jour de votre solution suit aux évolutions de l’environnement
+\end{itemize}
+\subsection{ notre positionnement de gamme}
+\textbf{ItExperts} se focalise à vous fournir un service de haute qualité et cela en orientant ses services vers la création des applications sur mesure et aussi des applications prêtent à être utiliser. 
+\subsection{Comité de la maîtrise d’œuvre}
+\begin{center}
+    
+
+\begin{tabularx}{0.9\textwidth} { | p{5cm} | >{\raggedright\arraybackslash}X | x | >{\raggedright\arraybackslash} | }
+   \hline
+ Nom et Prenom & Fonction & Email  \\
+ \hline
+ Assoul SidAli &  Chef d'equipe & s.assoul@esi-sba.dz  \\
+  \hline
+  Debza Houda & Responsable de qualité & h.debza@esi-sba.dz
+   \\
+  \hline
+   Touati Amel  & Développeur  & am.touati@esi-sba.dz \\
+  \hline
+   Larouci Ghezala  & Développeur & g.larouci@esi-sba.dz  \\
+  \hline
+  \end{tabularx}
+  \captionof{table}{Comité de la maîtrise d’œuvre}\label{tbl:nicetablelesstable}
+
+\end{center}
+
+
+
+\section{Fonctionnalités du produit}\index{Fonctionnalités}
+\subsection{cote administrateur} \index{Aministrateur}
+\begin{enumerate}
+    \item Gestion des comptes et droits d’acces.
+    \item Mise a jour des differentes entites(Etudiant,Enseignant).
+    \begin{itemize}
+        \item Ajouter les étudiant d’une promotion précise.
+        \item Supprimer un étudient:
+        \item Ajouter un / plusieurs enseignants.
+        \item Supprimer un enseignant.
+    \end{itemize}
+    \item Consulter les sujet proposée par les enseignants / étudiants.
+    \item Valider et envoi les thèmes PFE :
+    \begin{itemize}
+        \item Valider les thèmes proposés par les enseignants / les équipes d’etudiants.
+        \item Envoyer la fiche de voeux(parmi les th`emes validés des enseignats) et le max d’équipes par th`eme (Hors 5ème).
+        \item S’assurer de l’unicité des thèmes de thèse.
+    \end{itemize}
+     \item Valider les PFE (le projet fait) :
+     \begin{itemize}
+         \item Passer par le contrôle  de plagia(pour thème thèse).
+         \item S’assurer que deux équipes ou plus avec le même   thème n’ont pas fait des copies l’un de l’autre.
+     \end{itemize}
+     \item Preciser les jurys de soutenance.
+     \begin{itemize}
+         \item S’assurer de la disponibilitée de tout les jurys.
+         \item Controler si la spécialiter du jury colle avec le sujet du projet.    
+     \end{itemize}
+     \item Saisir le Pv soutenance.
+\end{enumerate}
+
+\subsection{cote enseignant}\index{Enseignant}
+\begin{enumerate}
+    \item Consulter la listes des themes.
+    \item depot des P.F.E.
+    \item Suivit et evaluation de l’equipe de projet.
+    \begin{itemize}
+    
+    \item commenter sur le livrable (finale ou non finale).
+    \item noter chaque reunion (entre etudiants et co-encadreur).
+    \item consulter la liste des reunion-pv.
+    \end{itemize}
+    \item echanger avec les differents equipes .
+    \item consulter les differents documents de l’equipe.
+    \item consulter l’historique de modification de chaque equipe.
+\end{enumerate}
+
+\subsection{cote Entreprise}\index{Entreprise}
+\begin{enumerate}
+    \item ajouter un theme
+\end{enumerate}
+
+\subsection{cote etudiant} \index{Etudiant}
+\begin{enumerate}
+    \item . Manipuler (ajouter/consulter) un document \index{document}
+    \item consulter la liste des equipes \index{equipe} crées
+    \item envoyer une demmande d’inscription dans un equipe.
+    \item participer au sandage organiser par le chef de l’equipe.
+    \item echanger avec les membres de l’equipe(team-chat,private-chat).
+    \item accepter/refuser une invitation (option:raison).
+    \item quiter l’equipe si l’equipe n’est pas encore valider par l’administration 
+    \item consulter l’historique(actions) de modification de l’equipe.
+    \item Consulter la listes des themes.
+    \item Consulter tout les announcements de chef d’equipe.
+    \item consulter la liste des reunion-pv.
+
+\end{enumerate}
+
+\subsubsection{cote chef d'equipe}\index{chef d'equipe}
+\begin{enumerate}
+    \item creer une equipe
+    \item envoyer une invitation a un Etudiant dans la promos
+    \item organiser des sondages.
+    \item rendre la fiche de voeux.
+    \item organiser une reunion habituelle (la notification de la reunion sera envoy´ee periodiquement).
+    \begin{itemize}
+        \item ajouter une nouvel reunion habituelle.
+        \item modifier la date-heure-min de la reunion.
+        \item supprimer la reunion.
+    \end{itemize}
+    \item organiser une reunion urgente(la notification sera envoyer une fois seulement apres la date precis´ee (la reunion sera supprimer automatiquement).
+    \item faire un announcement qui sera transmis comme notif vers tout les membre de l’equipes.
+    \item Fournir les documents de l’espace de travail de l’equipe vers l’espace visible par les encadreurs.
+    \item rediger un pv de reunion.
+    \begin{itemize}
+        \item reunion avec l’encadreur
+        \item les membres d’equipe
+    \end{itemize}
+\end{enumerate}
+\subsubsection{ Gestionnaire de la qualite}
+\begin{enumerate}
+    \item  evaluer un document/livrable dans l’espace de travail de l’equipe
+\end{enumerate}
+\section{contraintes generales} \index{contraintes}
+Chaque projet a des limites et risques, qui doivent être pris en compte et gérés afin 
+d'assurer la réussite finale du projet. Les trois principales contraintes qui doivent être 
+pris en compte sont la durée, la portée et le coût. Elles sont souvent appelées triple 
+contrainte ou triangle de la gestion de projet. Chaque contrainte est liée aux deux 
+autres. Ainsi, l'augmentation de la portée du projet demandera plus de temps et 
+d'argent, tandis qu'une accélération du calendrier peut diminuer les coûts, mais 
+également la portée.
+\subsection{Qualité}
+La qualité est la conformité par rapport aux attentes ou aux exigences définies pour le 
+projet au départ, et le logiciel doit pouvoir être utilisés avec le maximum de confort, de 
+sécurité et d’efficacité par le plus grand nombre d’utilisateurs.
+\subsection{Délai}
+Temps accordé pour l'accomplissement du projet.
+\begin{itemize}
+    \item Du 13-03-2022 jusqu’au 16-06-2022.
+    \item Les livrables doivent être donnés le jour de la soutenance.
+\end{itemize}
+\subsection{Budget}
+Un budget fait état des dépenses prévisionnelles planifiées pour ce projet. Donc c’est un outil incontournable pour la boîte de développement qui l'utilisent à des fins de pilotage, de prévision et de contrôle des activités, ainsi pour les clients pour qu’ils sachent s’ils sont prêts a dépensé une telle somme.
+%----------------------------------------------------------------------------------------
+%	CHAPTER 3
+%----------------------------------------------------------------------------------------
+\chapter{Spécifications des exigences}
+\section{Exigences fonctionnelles}\index{Exigences fonctionnelles}
+Les besoins fonctionnels représentent les actions que le système doit exécuter, il ne devient opérationnel que s’il les satisfait. L’application à réaliser doit couvrir principalement les besoins fonctionnels qui sont cités ci-dessous.
+\subsection{gestion des comptes}\index{compte}
+\subsubsection{definition}
+Les droits d’accès aux différents services proposés par notre système ‘Project101’ sont accordés en fonction du profil auquel appartient l’utilisateur. Donc chaque type d’utilisateur devra disposer d’un compte pour pouvoir s’authentifier et contribuer à notre système d’information
+\subsubsection{les acteurs impliqués}
+\textbf{acteurs principales: } Administrateur \\
+ \textbf{acteurs secondaires: } Etudiant - Enseignant - Entreprise\\
+\subsubsection{déroulement}
+
+\hspace{0.5cm}\textbf{creation de compte}\\
+Création des compte etudiant, enseignant, entreprise \\
+Ces types de comptes sont accompli par l’administrateur. Pour pouvoir réaliser ce processus, l’administrateur doit disposer de leurs informations personnelles :
+Création des compte etudiant, enseignant, entreprise \\
+Ces types de comptes sont accompli par l’administrateur. Pour pouvoir réaliser ce processus, l’administrateur doit disposer de leurs informations personnelles :Création des compte etudiant, enseignant, entreprise \\
+
+\begin{itemize}
+    \item Etudiant : nom, prenom, cycle, année,spécialité, moyen, email 
+    \item Enseignant :nom, prenom, email, module
+    \item Entreprise : nom, spécialité, email, numero de telephone, lieu 
+\end{itemize}
+%\hspace{0.5cm}\textbf{Récupération des Comptes}\\
+%Le processus de récupération d’un compte de n’importe quel type est réalisé par l’acteur lui-même.
+\subsubsection{Diagramme de cas d’utilisation de la gestion 
+des comptes}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion des comptes.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de compte}
+    \label{fig:pca}
+\end{figure}
+
+%---------------fonctionnalitees------------------------------------------------------%
+\subsubsection{Creation d'un compte}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{Creation d'un compte} \\
+ \hline
+ ID & 1  \\
+ \hline
+ Description  & Créer un compte pour un nouveau Etudiant, Enseignant, Entreprise. \\
+  \hline
+ Acteurs  & Administrateur   \\
+  \hline
+ Pre-conditions  & Authentification  \\
+  \hline
+ Scenario principal  & 
+ \begin{itemize}
+     \item choisir l'utilisateur desiree a ajouter(Etudiant, Enseignant, Entreprise)
+     \item Cliquer sur le bouton ’ajouter un Utilisateur’.
+     \item choisir s'il veut ajouter manuellemnt ou plusieurs Utilisatuers par un fichier excel
+     \begin{itemize}
+         \item Dans le cas d' "ajouter à la fois, remplir tout les champs spéecial à un étudiant (matricule, nom, prénom,...)
+     \end{itemize}
+          \begin{itemize}
+         \item Dans le cas de' "plusieurs ",cliquer sur "import fichier excel", choisir le fichier désirée
+     \end{itemize}
+       \item Cliquer sur le bouton ’valider’
+
+ \end{itemize}\\
+  \hline
+ post conditions  & un nouveau compte compte  est créé et ajouté au liste des utilisateurs \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Creation d'un compte}\label{tbl:nicetablelesstable}
+\end{center}
+
+%---------------fonctionnalitees------------------------------------------------------%
+\subsubsection{suppression d'un utilisateur}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{supprimer un utilisateur} \\
+ \hline
+ ID & 2  \\
+ \hline
+ Description  & Supprimer un compte pour un Etudiant, Enseignant, Entreprise existant.   \\
+  \hline
+ Acteurs  & Administrateur   \\
+  \hline
+ Pre-conditions  & Authentification  \\
+  \hline
+ Scenario principal  & 
+ \begin{itemize}
+     \item choisir le type de utilisateur a supprimer
+     \item  Accéder à la table de tout les utilisateur.
+      \item Cliquer sur l’utilisateur qu’on veut supprimer.
+      \item Cliquer sur l’icone supprimer.
+      \item Remplir le champs mot de passe (de l’administrateur pour s’assurer que ce n’est pas une faute ou un malfaiteur).
+      \item Valider le mot de passe.
+       \item Cliquer sur le bouton supprimer
+ \end{itemize}\\
+  \hline
+ post conditions  & Cet utilisateur disparait de la table des utilisateurs de son type  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Supprission d'un utilisateur}\label{tbl:nicetablelesstable}
+\end{center}
+
+%---------------fonctionnalitees------------------------------------------------------%
+\subsubsection{authentifier d'un compte}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{authentifier d'un compte} \\
+ \hline
+ ID & 3  \\
+ \hline
+ Description  & Authentification d’un utilisateur pour pouvoir utiliser la 
+plateforme et avoir des droits d’accès dépendant de son rôle.   \\
+  \hline
+ Acteurs  & Etudiant, Enseignant, Entreprise,Administrateur   \\
+  \hline
+ Pre-conditions  & -Les comptes Etudiants, Enseignants, Entreprises doivent être créer par un administrateur\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Accéder à l'interface d’authentification 
+      \item Entrer les informations du compte adresse e-mail et mot 
+de passe . 
+      \item Cliquez sur le bouton “Se Connecter”.
+ \end{itemize}\\
+  \hline
+ post conditions  & un utilisateur connecté.  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Authentification d'un compte}\label{tbl:nicetablelesstable}
+\end{center}
+%---------------fonctionnalitees------------------------------------------------------%
+
+\subsubsection{Récupérer des comptes}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{CU : Récupération d’un compte} \\
+ \hline
+ ID & 4  \\
+ \hline
+ Description  &  La récupération d’un compte peut être effectué par n’importe quel acteur tant qu’il est concerné.   \\
+  \hline
+ Acteurs  & Etudiant, Enseignant, Entreprise,Administrateur   \\
+  \hline   \\
+ Pre-conditions  & Les comptes sont déjà créés.  \\
+  \hline
+ Scenario principal  & 
+ \begin{itemize}
+     \item Accéder à l'interface d’authentification 
+     \item cliquer sur "oublier mot de passe"
+     \item Entrer les informations demandées.
+     \item Cliquer sur le bouton ‘confirmer’.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Un compte récupéré.  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Recuperation d'un compte}\label{tbl:nicetablelesstable}
+\end{center}
+%---------------fonctionnalitees------------------------------------------------------%
+%-----------------gesttion deux --------------%
+\subsection{gestion equipe}\index{equipe}
+
+\subsubsection{definition}
+
+\subsubsection{les acteurs impliqués}
+\textbf{Acteurs principales: }Etudiant \\
+\textbf{Acteurs secondaires: }Administrateur
+\subsubsection{déroulement}
+\hspace{0.5cm}\textbf{creation  d'une equipe}\\
+\hspace{0.5cm}\textbf{repondre à une invitation}\\
+\hspace{0.5cm}\textbf{valider une équipe}\\
+
+
+\subsubsection{Diagramme de cas d’utilisation de la gestion 
+d'affectation et themes}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion des equipes.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion des equipes}
+    \label{fig:pca}
+\end{figure}
+%----------------------------creation d'un compte -----------%
+\subsubsection{creation  d'une equipe}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{CU : creation  d'une equipe} \\
+ \hline
+ ID & 1  \\
+ \hline
+ Description  & créer une nouveau équipe  \\
+  \hline
+ Acteurs  & Etudiant \\
+  \hline   \\
+ Pre-conditions  & Authentification.  \\
+  \hline
+ Scenario principal  & 
+ \begin{itemize}
+     \item  consulter la liste des Etudiants sans Equipe.
+     \item cliquer sur le boutton ’Envoyer’ devant l’Etudiant choisis.
+     \item optionnelement: ajouter un message descrivant la raison de l’invitation.
+ \end{itemize}\\
+  \hline
+ post conditions  &  un mail et une notification sera envoyer au membres d’equipe et au(x) l’Etudiant(s) invite(s)  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Creation d'une equipe}\label{tbl:nicetablelesstable}
+\end{center}
+%---------------------------------------------------------------------------------------------------------------------%
+\subsubsection{envoyer une invitation de jointure a une equipe}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{envoyer une invitation de jointure à une equipe} \\
+ \hline
+ ID & 2  \\
+ \hline
+ Description  &  étudiant faire une demande de jointure à une équipe  \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & L'equipe n'est pas complet\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Consulter la liste des équipe.
+     \item Cliquer sur le bouton demander de joindre cette équipe.
+     \item Un champs Indiquer la raison de la demande apparait.
+     \item Remplir le champs.
+     \item Un bouton valider la demande
+ \end{itemize}\\
+  \hline
+ post conditions  &  Une foi l’invitation validée un notification apparait au chef de l’équipe précise  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU envoyer une invitation de jointure a une equipe}\label{tbl:nicetablelesstable}
+\end{center}
+%--------------------------------------------------------------------------------------------------------------------------------%
+\subsubsection{accepter une invitation}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{accepter une invitation} \\
+ \hline
+ ID & 3  \\
+ \hline
+ Description  & l'etudiant accepte une invitation de jointure à une equipe   \\
+  \hline
+ Acteurs  & Etudiant (chef d'équipe)  \\
+  \hline
+ Pre-conditions  & L'equipe n'est pas complet\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item  Cliquer sur les notification ou sur l’icone invitation.
+     \item Clique sur le bouton valider.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  L’étudiant est affecter à cet équipe.  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Accepter une invitation}\label{tbl:nicetablelesstable}
+\end{center}
+%-------------------------------------------------------------------------------------------------------%
+\subsubsection{refuser une invitation}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{refuser une invitation} \\
+ \hline
+ ID & 4  \\
+ \hline
+ Description  & l'etudiant refuse une invitation de jointure à une equipe \\
+  \hline
+ Acteurs  & Etudiant (chef d'équipe)  \\
+  \hline
+ Pre-conditions  & invitation existe\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item  Cliquer sur les notification ou sur l’icone invitation.
+     \item Clique sur le bouton Refuser.
+     \item  Indiquer la raison de refus.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  l’invitation `a expirer  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Refuser une invitation}\label{tbl:nicetablelesstable}
+\end{center}
+%-------------------------------------------------------------------------------------------------------%
+\subsubsection{consulter la liste des equipes}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{consulter la liste des equipes} \\
+ \hline
+ ID & 5  \\
+ \hline
+ Description  & voir la liste des equipes crées \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Cliquer sur la page des équipes dans l'accueil .
+     \item L’utilisateur peut voir tout les équipes existantes.
+     \itemc cliquer sur une équipe precis pour avoir plus de details.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Avoir une idée sur les equipes de meme promotion  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU consulter la liste des equipes}\label{tbl:nicetablelesstable}
+\end{center}
+
+%-------------------------------------------------------------------------------------------------------%
+\subsubsection{quitter une equipe}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{quitter une equipe} \\
+ \hline
+ ID & 5  \\
+ \hline
+ Description  & un membre quite son groupe actuelle \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & etudiant est un membre d'equipe\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item  Accéder a la page acceuil.
+     \item Cliquer sur le bouton quitter.
+     \item Un champs indiquer la raison s’affiche, et un bouton etes vous sur.
+     \item Remplir le champs.
+     \item Cliquer sur la bouton de sureté.
+ \end{itemize}\\
+  \hline
+ post conditions  &   L’´etudiant s’affiche dans la liste des ´etudiants sans groupe  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Quitter une equipe}\label{tbl:nicetablelesstable}
+\end{center}
+%-------------------------------------------------------------------------------------------------------%
+%-----------------gesttion trois --------------%
+
+
+\subsection{gestion affectation et themes }\index{themes}
+\subsubsection{definition}
+\subsubsection{les acteurs impliqués}
+\subsubsection{déroulement}
+\subsubsection{Diagramme de cas d’utilisation de la gestion 
+d'affectation et themes}
+
+%-------------------------------------------------------------%
+
+\subsubsection{depot d'un theme}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{proposer un theme} \\
+ \hline
+ ID & 1  \\
+ \hline
+ Description  & Enseignant ou Entreprise propose un thème pour les etudiants \\
+  \hline
+ Acteurs  & Enseignant, Entreprise   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item  Acceder a l’interface.
+     \item Remplir la case de titre, description
+     \item Optionnelement: ajouter une description, un document (peut etre un texte, image ...).
+     \item Valider les choix en pressant sur un button ’Valider’.
+ \end{itemize}\\
+  \hline
+ post conditions  &   Le theme s’envoie aux administrateur pour validation  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Proposer un theme}\label{tbl:nicetablelesstable}
+\end{center}
+%-------------------------------------------------------------%
+\subsubsection{valider un theme}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{valider un theme} \\
+ \hline
+ ID & 2  \\
+ \hline
+ Description  &   l'admin valide un thème propsé par un enseignant ou entreprise \\
+  \hline
+ Acteurs  & Administrateur   \\
+  \hline
+ Pre-conditions  & Authentification, theme existe\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item accéder aux page des thèmes proposées
+     \item Cliquer sur le bouton valider pour un thème précis.
+ \end{itemize}\\
+  \hline
+ post conditions  &   Le thème s'affiche dans la page des thèmes proposées  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU valider un theme}\label{tbl:nicetablelesstable}
+\end{center}
+%-------------------------------------------------------------------------------------------%
+\subsubsection{envoyer la fiche de voeux}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{envoyer la fiche de voeux} \\
+ \hline
+ ID & 3  \\
+ \hline
+ Description  & l'administeur envoie la fiche de voeux contenant tous les thèmes proposés et validés \\
+  \hline
+ Acteurs  & Administrateur   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Cliquer sur créer une fiche de voeux.
+     \item Ajouter le titre du thème.
+     \item Ajouter le lien d’un document descriptif.
+     \item Valider la fiche des veux.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Une notification s’envoie à tout les étudiants d’une promotion précise  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU envoyer la fiche de voeux}\label{tbl:nicetablelesstable}
+\end{center}
+%--------------------------------------------------------------------%
+\subsubsection{rendre la fiche de voeux}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{rendre la fiche de voeux} \\
+ \hline
+ ID & 4  \\
+ \hline
+ Description  & le chef d'equipe rendre la fiche de voeux aux l'administration   \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & Authentification, fiche de voeux est envoyée\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Presser sur le boutton fiche de voeux dans l’interface de chef d’equipe .
+     \item consulter la fiche de voeux.
+     \item le chef d’equipe doit ordonner les theme selon les voeux de son equipe
+     \item le chef d’equipe valide son choix en pressant sur un boutton envoyer.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Une notification s’envoie à les membres d'equipe  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU rendre la fiche de voeux}\label{tbl:nicetablelesstable}
+\end{center}
+%-----------------------------------------------------------------------------%
+\subsubsection{affectation des themes}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{affectation des themes} \\
+ \hline
+ ID & 5  \\
+ \hline
+ Description  & associer un thème à une equipe \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & Authentification, fiche de voeux est envoyée\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Presser sur le boutton fiche de voeux dans l’interface de chef d’equipe .
+     \item consulter la fiche de voeux.
+     \item le chef d’equipe doit ordonner les theme selon les voeux de son equipe
+     \item le chef d’equipe valide son choix en pressant sur un boutton envoyer.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Une notification s’envoie à les equipes  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU affectation des themes}\label{tbl:nicetablelesstable}
+\end{center}
+%-------------------------------------------------------------------------%
+\subsubsection{affectation des encadreurs}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{affectation des encadreurs} \\
+ \hline
+ ID & 6  \\
+ \hline
+ Description  & associer un enseignant comme un encadreur à une équipe \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & Authentification, Enseignant et equipe existe\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Acceder aux l'interface d'affectation d'un encadreur
+     \item choisir une equipe 
+     \item choisir l'encadreur(s) a affecter au cet equipe
+     \item presser sur valider 
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Une notification s’envoie à les membres d'equipe et l'encadreur \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU affectation des encadreurs}\label{tbl:nicetablelesstable}
+\end{center}
+%----------------------------------------------------------------------------------------%
+
+\subsubsection{consulter la liste des themes}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{consulter la liste des themes} \\
+ \hline
+ ID & 7  \\
+ \hline
+ Description  & voir tous les thèmes validés par l'administration \\
+  \hline
+ Acteurs  & Etudiant, Enseignant, Entreprise   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Cliquer sur la page des thèmes dans l'accueil .
+     \item L’utilisateur peut voir tout les thèmes proposées qu'etant validée.
+     \itemc cliquer sur un thème precis pour avoir plus de details.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Avoir une idée sur les thèmes  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU consulter la liste des thèmes}\label{tbl:nicetablelesstable}
+\end{center}
+
+
+%-----------------gesttion 4 --------------%
+
+\subsection{gestion documents}\index{documents}
+\subsubsection{definition}
+pour que l'etudiant peut diposer un document et le manipuler afin qu'il etre visualiser par l'encadreur, cette gestion, gestion des documents assure ce fonctionnement. \\
+
+\subsubsection{les acteurs impliqués}
+\textbf{Acteurs principales:}Etudiant \\
+\textbf{Acteurs Secondaires:}Enseignant
+\subsubsection{déroulement}
+
+
+\subsubsection{Diagramme de cas d’utilisation de la gestion 
+des documents}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion_des_documents.PNG.png}
+    \caption{Diagramme de cas d'utilisation de gestion des documents}
+    \label{fig:pca}
+\end{figure}
+\subsubsection{Ajouter un document}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{Ajouter un document} \\
+ \hline
+ ID & 1  \\
+ \hline
+ Description  & ajouter un nouveau document au l'espace de travail d'equipe \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Cliquer sur le boutton ’ajouter un document' 
+     \item Une fenetre avec tout les document stocker sur l’appareil s’affiche.
+     \item Choisir le bon document `a joindre.
+     \item Un bouton valider se document s’affiche si clique le document s’ajoute `a la liste des document
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Document est ajouté aux espace de travail d'equipe  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Ajouter un document}\label{tbl:nicetablelesstable}
+\end{center}
+%--------------------------------------------------------------------------------------------------------%
+\subsubsection{Supprimer un document}
+
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{Supprimer un document} \\
+ \hline
+ ID & 2  \\
+ \hline
+ Description  & supprimer un docuemt existant d'espace de travail d'equipe \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & Authentification, document existe\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Presser sur le boutton fiche de voeux dans l’interface de chef d’equipe .
+     \item consulter la fiche de voeux.
+     \item le chef d’equipe doit ordonner les theme selon les voeux de son equipe
+     \item le chef d’equipe valide son choix en pressant sur un boutton envoyer.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Une notification s’envoie à les membres d'equipe  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Supprimer un document}\label{tbl:nicetablelesstable}
+\end{center}
+%-------------------------------------------------------------------------------------------------%
+\subsubsection{fournir un document}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{fournir un document} \\
+ \hline
+ ID & 3  \\
+ \hline
+ Description  &  transformer docuemnt de l'espace de travail au l'espace visible par l'encadreur  \\
+  \hline
+ Acteurs  & Etudiant (chef d'equipe)  \\
+  \hline
+ Pre-conditions  & Authentification, docuemnent existe\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item aller a l’espace de travail de l’equipe
+     \item selectionner les documents qu’il a l’intention de transferer de l’espace de travail de l’equipe vers l’espace visible (par
+l’encadreur).
+      \item presser sur le boutton ’Fournir documents’ pour valider son choix.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Une notification s’envoie à l'encadreur  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU fournir un document}\label{tbl:nicetablelesstable}
+\end{center}
+%-----------------------------------------------------------------------------------------------------------%
+\subsubsection{evaluation d'un document}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{evaluation  d'un document} \\
+ \hline
+ ID & 4  \\
+ \hline
+ Description  &  ajouter un commentaire sur un document commité d'une equipe pricis  \\
+  \hline
+ Acteurs  & Enseignant  \\
+  \hline
+ Pre-conditions  & Authentification, docuemnent existe\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item aller a la page des documents d'une equipe precis
+     \item consulter les documents ajoutés 
+      \item choisir le document à evaluer
+      \item cliquer sur "ajouter un commenataire" et remplir les champs
+      \item presser "valider"
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Une notification s’envoie à les membres d'equipe  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU evaluation  d'un document}\label{tbl:nicetablelesstable}
+\end{center}
+%-------------------------------------------------------------------------%
+\subsubsection{Consulter les documents}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{consulter un document} \\
+ \hline
+ ID & 5  \\
+ \hline
+ Description  &  ajouter un commentaire sur un document commité d'une equipe pricis  \\
+  \hline
+ Acteurs  & Etudiant, enseignant   \\
+  \hline
+ Pre-conditions  & \begin{itemize}
+     \item Authentification
+     \item etudiant est membre d'equipe
+     \item document est comité dans le cas de consultation par encadreur
+ \end{itemize}\\
+ \hline
+ Scenario principal  &  
+\begin{itemize}
+     \item Cliquer sur le document souaité.
+     \item Ce document s’ouvre sur la page.
+     \item L’étudiant peut voir tout le contenu du document.
+     \item Une fois la lecture terminé l’étudiant clique sur l’icone pour le fermer.
+
+ \end{itemize}\\
+  \hline
+ post conditions  &  Avoir une idée sur les docuements de group  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU consulter un document}\label{tbl:nicetablelesstable}
+\end{center}
+
+
+\subsubsection{rediger un pv-reunion}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{rediger un pv-reunion} \\
+ \hline
+ ID & 6  \\
+ \hline
+ Description  &  ajouter un pv pour une reunion dans l'espace de travail d'equipe  \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+      \item Presser sur le boutton ’ajouter un pv de reunion’.
+     \item saisir le nom de Pv et date de reunion associée 
+     \item cliquer sur ajouter un document pour choisir un document specifis 
+     \item valider le choix en pressant sur le botton ’valider’ .
+ \end{itemize}\\
+  \hline
+ post conditions  & un pv d'une reunion a été ajouté  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU rediger un pv-reunion}\label{tbl:nicetablelesstable}
+\end{center}
+%-----------------gesttion 5 --------------%
+
+\subsection{gestion encadrement}\index{encadrement}
+
+\subsubsection{definition}
+\subsubsection{les acteurs impliqués}
+\textbf{Acteurs Principales:} Etudiant, Enseignant\\
+\textbf{Acteurs Secondaires:} /
+\subsubsection{déroulement}
+\subsubsection{Diagramme de cas d’utilisation de la gestion 
+d'encadrement}
+
+\subsubsection{echanger entre les membres d'equipe}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{echanger entre les membres d'equipe/ encadreur} \\
+ \hline
+ ID & 1  \\
+ \hline
+ Description  &   \begin{itemize}
+     \item l'etudiant peut consulter et echanger avec les membres de son equipe
+     \item l'enseignant peut consulter et echanger avec les equipes qu'il encadrer
+ \end{itemize}
+ \\
+  \hline
+ Acteurs  & Etudiant, Enseignant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Cliquer sur l’icone des chat.
+     \item Avoir une vu sur l’ensemble des groupes dont il est membre.
+     \item Consulter les messages de chaque groupe en cliquant sur ce groupe.
+     \item Décider d’envoyer un message au membre d’un groupe précis.
+     \item Rédiger un message.
+     \item Cliquer sur l’icone envoyer.
+ \end{itemize}\\
+  \hline
+ post conditions  & le message apparait dans le chat de tout les membre du groupe  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Echanger}\label{tbl:nicetablelesstable}
+\end{center}
+
+%--------------------------------------------------------------------------------------------%
+\subsubsection{organiser une reunion}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{organiser une reunion} \\
+ \hline
+ ID & 2  \\
+ \hline
+ Description  & ajouter une nouveau reunion pour son equipe a une date precis \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+      \item A. Presser sur le boutton ’organiser Reunion’ dans l’interface de chef d’equipe.
+      \item Choisir le type de la reunion (habituelle,urgente).
+      \item saisir les information: jour-heure-min.
+      \item indiquer la raison de la reunion.
+      \item presser sur le boutton valider.
+
+ \end{itemize}\\
+  \hline
+ post conditions  & une notification sera envoyée au les membres d'equipe  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU organiser une reunion}\label{tbl:nicetablelesstable}
+\end{center}
+
+%---------------------------------------------------------------------------------%
+
+%---------------------------------------------------------------------------------%
+\subsubsection{consulter la liste des PVs}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{consulter la liste des PVs} \\
+ \hline
+ ID & 1  \\
+ \hline
+ Description  &  
+ \begin{itemize}
+     \item l'etudiant peut voir tous les pv des reunions de son groupe
+     \item l'enseignant peut voir les pv des reunions des equipe qu'il encadrer
+ \end{itemize}
+ \\
+  \hline
+ Acteurs  & Etudiant, Enseignant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item presser sur le boutton ’Reunion-pv’.
+     \item la liste sera affichier.
+     \item appliquer des options de filtrage.
+     \item consulter un pv de reunion specifique.
+ \end{itemize}\\
+  \hline
+ post conditions  & avoir une idée sur les reunions d'equipe  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU consulter la liste des PVs}\label{tbl:nicetablelesstable}
+\end{center}
+%---------------------------------------------------------------------------------%
+\subsubsection{Ajouter un announcement}
+
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{Ajouter un announcement} \\
+ \hline
+ ID & 3  \\
+ \hline
+ Description  &  ajouter un nouveau announcement au l'espace de travail d'equipe  \\
+  \hline
+ Acteurs  & Etudiant, Enseignant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Presser sur le boutton ’announcement’ dans l’interface de chef d’equipe.
+     \item Saisir les informations naicessaire: titre, description, document(facultatif).
+     \item confirmer le choix en pressant sur un boutton ’Difuser’.
+ \end{itemize}\\
+  \hline
+ post conditions  & une notification sera envoyer aux membre d’equipe .  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Echanger}\label{tbl:nicetablelesstable}
+\end{center}
+%--------------------------------------------------------------------------%
+\subsubsection{créer un sondage}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{créer un sondage} \\
+ \hline
+ ID & 3  \\
+ \hline
+ Description  &  ajouter un nouveau sondage dans l'espace de travail d'equipe  \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item Presser le boutton ’Sondage’.
+     \item remplir le chapms description et ajouter les options(les reponse possible).
+     \item publier le sondage en pressant sur le boutton ’Valider’.
+ \end{itemize}\\
+  \hline
+ post conditions  & une notification sera envoyer aux membre d’equipe . \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU créer un sondage}\label{tbl:nicetablelesstable}
+\end{center}
+%--------------------------------------------------------------------------%
+\subsubsection{participer au sondage}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{participer au sondage} \\
+ \hline
+ ID & 3  \\
+ \hline
+ Description  & l'etudiant particpe au sondage en choisir un des options   \\
+  \hline
+ Acteurs  & Etudiant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item  Cliquer sur la notification (qui apparait dès qu’un sondage est créer) / Cliquer sur l’icone ou le bouton sondage.
+     \item L’étudiant est redirigé vers la page des sondages.
+     \item Tout les sondages dans l’´etudiant n’as pas participé s’affiche / à participé mais la date limité du sondage n’est pas arriver.
+     \item L’etudiant valide l’un des choix proposé via checbox.
+
+ \end{itemize}\\
+  \hline
+ post conditions  & etudiant particpe aux sondage \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU participer au sondage}\label{tbl:nicetablelesstable}
+\end{center}
+%-----------------gesttion 6 --------------%
+
+\subsection{gestion soutnance} \index{soutnance}
+
+\subsubsection{definition}
+\subsubsection{les acteurs impliqués}
+\textbf{Acteurs Principales:} Administrateur\\
+\textbf{Acteurs Secondaires:} Etudiant
+\subsubsection{déroulement}
+\subsubsection{Diagramme de cas d’utilisation de la gestion 
+de soutnance}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \caption{Diagramme de cas d'utilisation de gestion de soutenance}
+    \label{fig:pca}
+\end{figure}
+%-----------------------------------------------------------------------%
+\subsubsection{Dépôt  de PFE}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{Dépôt de PFE} \\
+ \hline
+ ID & 1  \\
+ \hline
+ Description  & l'enseignant coisit des livrables pour la soutenance   \\
+  \hline
+ Acteurs  & Enseignant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item  Acceder au l'interface des equipes il encdre 
+     \item  Acceder au l'interface des documents commitées par les membres d'equipe
+     \item choisir les documents pour soutance
+     \item presser "valider" 
+     
+ \end{itemize}\\
+  \hline
+ post conditions  & notification s'envoie au les membres d'equipe  \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Dépôt de PFE}\label{tbl:nicetablelesstable}
+\end{center}
+%-----------------------------------------------------------------%
+\subsubsection{Dépôt de l’autorisation de soutenance}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{Dépôt de l’autorisation de soutenance} \\
+ \hline
+ ID & 2  \\
+ \hline
+ Description  & Encadreur autorise ses equipes pour sountener ses projets   \\
+  \hline
+ Acteurs  & Enseignant   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item  Acceder au liste des equipes il encadre
+     \item choisir un equipe pricis
+     \item cliquer sur "autoriser la soutenance"
+
+ \end{itemize}\\
+  \hline
+ post conditions  & notification s'envoie au les membres d'equipe et l'administrateur \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU Dépôt de l’autorisation de soutenance}\label{tbl:nicetablelesstable}
+\end{center}
+%-----------------------------------------------------------------%
+\subsubsection{preciser la jury}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{preciser la jury} \\
+ \hline
+ ID & 3  \\
+ \hline
+ Description  & associer une jury à une equipe pour la soutenance   \\
+  \hline
+ Acteurs  & Administrateur   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item  Consulter la liste des jury possible.
+     \item choisir des jury dans le l’emploi du temps coincident.
+     \item les affecter `a une th`ese pr´ecise
+
+ \end{itemize}\\
+  \hline
+ post conditions  & jury est affectee a une these \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU preciser la jury}\label{tbl:nicetablelesstable}
+\end{center}
+%-------------------------------------------------------------------------------------%
+\subsubsection{saisir pv de soutnance}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{saisir pv de soutnance} \\
+ \hline
+ ID & 4  \\
+ \hline
+ Description  & ajouter un pv de soutnance pour une equipe specifiée   \\
+  \hline
+ Acteurs  & Administrateur   \\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item  Acceder au l'interface 
+     \item ajouter un titre et associer avec l'equipe precis
+     \item joindre le document (pv de soutnance)
+     \item presser valider pour ajouter le pv
+
+ \end{itemize}\\
+  \hline
+ post conditions  & jury est affectee a une these \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU saisir pv de soutnance}\label{tbl:nicetablelesstable}
+\end{center}
+%------------------------------------------------------------------------------------%
+\subsubsection{consulter la liste de jury}
+\begin{center}
+\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
+  \hline
+  \multicolumn{2}{|c|}{consulter la liste de jury} \\
+ \hline
+ ID & 5  \\
+ \hline
+ Description  &  l'etudiant peut voir la jury associée a son équipe.  \\
+  \hline
+ Acteurs  & Etudiant\\
+  \hline
+ Pre-conditions  & Authentification\\
+ \hline
+ Scenario principal  &  
+ \begin{itemize}
+     \item  Acceder au l'interface des jury 
+     \item consulter la page
+ \end{itemize}\\
+  \hline
+ post conditions  & avoir une idée sur la jury d'un equipe pricis \\
+  \hline
+\end{tabularx}
+\captionof{table}{ CU consulter la liste de jury}\label{tbl:nicetablelesstable}
+\end{center}
+
+%---------------end of besoins foncitonnelles-------------%
+
+\section{Exigences non fonctionnelles}\index{Exigences non fonctionnelles}
+\subsection{Exigences de securite}\index{securite}
+Accès aux informations n'est possible qu'après une vérification des droits d'accès et des 
+privilèges.
+\subsection{Exigences de performance}\index{performance}
+L’application mobile doit être performante c'est-à-dire à travers ses fonctionnalités, répond 
+à toutes les exigences d’une manière optimale.  
+\subsection{Exigences de fiabilité}\index{fiabilité}
+L’application doit fonctionner de façon cohérente sans erreurs et doit être satisfaisante.
+    
+\subsection{Exigences d’accessibilité}\index{accessibilité}
+Plusieurs utilisateurs utilisent notre système simultanément.
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 4
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 5
+%----------------------------------------------------------------------------------------%
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\listoftables
+\printindex
+\end{document}
