@@ -6,32 +6,6 @@ const soutenanceId = props => {
     const router = useRouter()
     const {soutenanceId} = router.query;
 
-    const title = "Soutenace équipe 55"
-    const description = "description de la soutenance numéro N-1 de l'équipe p-2 description de la soutenance numéro N-1 de l'équipe p-2 description de la soutenance numéro N-1 de l'équipe p-2 description de la soutenance numéro N-1 de l'équipe p-2 description de la soutenance numéro N-1 de l'équipe p-2 description de la soutenance numéro N-1 de l'équipe p-2 description de la soutenance numéro N-1 de l'équipe p-2 description de la soutenance numéro N-1 de l'équipe p-2 description de la soutenance numéro N-1 de l'équipe p-2"
-    const date = "25/04/2012 à 10:55"
-    const team = "team5"
-    const jury = [
-        {
-            id : 1,
-            firstName : "jury1",
-            lastName : "jury2" 
-        },
-        {
-            id : 1,
-            firstName : "jury1",
-            lastName : "jury2" 
-        },
-        {
-            id : 1,
-            firstName : "jury1",
-            lastName : "jury2" 
-        },
-        {
-            id : 1,
-            firstName : "jury1",
-            lastName : "jury2" 
-        },
-    ]
     
     const {getSoutenance} = useStoreActions(store=>store.soutenanceModel)
     const {soutenance} = useStoreState(store=>store.soutenanceModel)
