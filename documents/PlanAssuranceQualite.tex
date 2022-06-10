@@ -1,0 +1,238 @@
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{wallpaper}
+\usepackage{mdframed}
+\usepackage[top=2cm, bottom=2cm, outer=0cm, inner=0cm]{geometry}
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Computer Modern fonts
+\graphicspath{ {figures/} }
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{Backlogs}
+
+%----------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------
+\begingroup
+\ThisLRCornerWallPaper{1.0}{Pictures/cover page.png}
+\endgroup
+
+%----------------------------------------Version page ---------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+%-------------------	TABLE OF CONTENTS
+
+\pagestyle{empty} % No headers
+
+\tableofcontents
+
+\pagestyle{fancy} % Print headers again
+
+%------------------------------------------------------------------------%
+\chapter{Environnement}
+\section{Introduction}
+Le Plan d’Assurance Qualité de Projet est un document décrivant comment mettre en œuvre les moyens permettant d’obtenir la qualité nécessaire à la bonne réalisation d’un projet. Il précise également les dispositions relatives à la conception et à la maitrise de la qualité pour l’ensemble du cycle de vie d’un système. 
+\section{Présentation et But du Projet}
+L’Ecole Supérieure en Informatique 08 mai 1945 de Sidi Bel Abbes est un établissement universitaire public, placé sous la tutelle du Ministère de l'Enseignement Supérieur et de la Recherche Scientifique, créé par le décret exécutif n° 14-232 du 25 août 2014. \\
+L'école décerne le double diplôme d'ingénieur d’état et de master en informatique après une formation de cinq ans. Deux années préparatoires, une année de tronc commun et deux années de spécialisation. \\
+Deux spécialités sont actuellement habilitées : 
+\begin{itemize}
+    \item Systèmes d'information et Web (SIW).
+    \item Ingénierie des systèmes informatiques (ISI).
+\end{itemize}
+Notre projet consiste à gérer les projets de fin d’études effectué au niveau de cette école.
+\newpage
+\section{Equipe et Clients}
+\newpage
+\section{Rôles des Membres d’Équipe}
+\newpage
+\section{Objectifs du Document}
+\begin{itemize}
+    \item La structuration globale du projet et son plan de développement détaillé.
+    \item Définition du plan de gestion du projet.
+    \item La distribution des responsabilités entre les membres dans la structure, les plans de développement et de gestion du projet. 
+    \tem Définition des barrières imposées au projet.
+\end{itemize}
+\section{ Procédure d’Évaluation du PAQ}
+Créée au début du projet, le PAQL est un document évolutif, un outil de suivi et de gestion, il peut subir diverses modifications car il est utilisé tout au long du projet avec intégration des nouvelles données donc Il doit être flexible pour permettre un ajustement constant dépendant des circonstances ajustées en fonction des circonstances.\\
+Chaque modification sera indiquée dans la table de l’historique.
+\chapter{Pilotage du projet}
+\section{les phases du projet}
+\subsection{ Phase d’initialisation}
+\subsubsection{Durée}
+De 06-03-2022 jusqu’à 13-03-2022
+\subsubsection{Objectifs}
+\begin{itemize}
+    \item  Déterminer les choix techniques pour résoudre la problématique.
+    \item  Proposer une maquette globale du système.
+    \item  Préciser l’objectif de projet, et identifier les acteurs.
+\end{itemize}
+\subsubsection{Difficulté rencontrés}
+\begin{itemize}
+    \item  S’habituer aux membres de l’équipe.
+\end{itemize}
+\subsubsection{Livrables et responsabilités }
+\begin{itemize}
+    \item Profils de l’équipe
+    \item Brochure
+    \item Charte de codage
+    \item Charte de nommage
+    \item Charte de document
+    \item Plan Assurance Qualité
+    \item Workflow de validation
+    \item Planning Prévisionnel
+\end{itemize}
+
+\subsection{Phase de développement}
+\subsubsection{Durée}
+De 15-03-2022 jusqu’à 30-05-2022
+\subsubsection{Objectifs}
+\begin{itemize}
+    \item Définir les besoins dans un cahier de charges.
+    \item Etude analytique et conceptuelle du système.
+    \item Définir l’architecture du système
+    \item Développer un prototype on lui effectuant des tests
+    \item  Définir les plans de test. 
+\end{itemize}
+\subsubsection{Difficulté rencontrés}
+\begin{itemize}
+    \item  Dépendance entre les livrables. 
+\end{itemize}
+\subsubsection{Livrables et responsabilités}
+\begin{itemize}
+    \item Cahier de charges
+    \item Rapport d’architecture
+    \item Rapport d’analyse
+    \item Rapport de conception
+    \item Plan de test initial
+    \item Code Source
+    \item Manuels
+    \item Plan de tests final
+    \item Rapports de tests
+\end{itemize}
+
+
+\subsection{Phase de bilan}
+\subsubsection{Durée}
+De 9-06-2022 jusqu’à 14-06-2022
+\subsubsection{Objectifs}
+\begin{itemize}
+    \item  Evaluer le déroulement du projet.
+\end{itemize}
+\subsubsection{Difficultés rencontrées}
+\begin{itemize}
+    \item 
+\end{itemize}
+\subsubsection{Livrables et responsabilités}
+\begin{itemize}
+    \item Compte rendu global sur le projet.
+\end{itemize}
+
+
+\subsection{ Suivi des Tâches}
+\subsubsection{Durée}
+Périodiquement (chaque semaine ou deux semaines).
+ \subsubsection{Objectifs}
+\begin{itemize}
+    \item  Voir l’état d’avancement de projet
+\end{itemize}
+\subsubsection{Difficultés rencontrées}
+\begin{itemize}
+    \item 
+\end{itemize}
+\subsubsection{Livrables et responsabilités}
+\begin{itemize}
+    \item Comptes rendus des réunions 
+    \item  Suivi des tâches
+    \item Suivi du moral 
+\end{itemize}
+
+\section{Organisation des Réunions}
+Le contrôle global du projet est à la charge des différentes structures du projet. Il est organisé dans le cadre des réunions périodiques entre les membres de l’équipe “ ItExperts“.\\ 
+Chaque réunion de structure fait l’objet d’un ordre du jour (qui peut être implicite) et d’un compte-rendu qui contient les informations nécessaire de la réunion (présence, les tache a faire pour la prochain réunion,…).
+\section{Procédure de Validation des Documents de 
+Projet}
+Le cycle de vie de validation de nos documents de projet est de passer en premier au 
+chef de qualité qui les vérifier puis les envoyer au chef de projet qui lui aussi vérifier 
+ces documents et les valider. \\
+En cas de petit remarques les chefs essayent de les corrigées, sinon ils les renvoient au 
+rédacteur pour les corrigées dans un délai de un jour \\
+La validation du document est discutée en comité de pilotage, en cas de : 
+\begin{itemize}
+    \item  dépassement de délais par le rédacteur
+    \item  refus des remarques
+    \item  refus des corrections
+\end{itemize}
+La validation est effective en cas de : 
+\begin{itemize}
+    \item accord du client
+    \item dépassement des délais par le destinataire
+\end{itemize}
+\section{ Missions et Responsabilités}
+Les missions et les responsabilités du comité de l’équipe projet portent sur les éléments suivants :
+\begin{itemize}
+    \item Contrôle de l’utilisation des ressources allouées.
+    \item Suivi du consommé et comparaison avec la planification, analyse des écarts.
+    \item Présentation des problèmes (techniques, organisationnels, de planning), évaluation des glissements temporels, résolution des problèmes ponctuels.
+    \item Coordination de l’équipe projet (pour des actions interdépendantes).
+    \item Planning détaillé pour la période proche à venir (identification des tâches,définition précise, ordonnancement).
+    \item Recensement des informations nécessitant la décision au niveau du pilotage du projet.
+\end{itemize}
+
+
+\chapter{ Qualité et Tests}
+\section{Normalisation du Code Source}
+Le code source doit obligatoirement respecter l'ensemble des règles qui sont définie dans la charte de codage pour uniformiser les pratiques de développement logiciel, diffuser les bonnes pratiques de développement et éviter les erreurs au sein d’un groupe.
+\section{Tests des sources}
+L’évaluation de chaque composant de logiciel pour déterminer s'ils satisfont la spécification élaborée lors de la phase d'analyse passe par des tests qui sont définie dans le plan de test.
+\begin{itemize}
+    \item Les tests se feront à la fin de chaque module. 
+    \item Chacun des développeurs devra vérifier d’abord lui-même la validité de ses sources avant de les 
+    soumettre à l’équipe.
+    \item Les sources qui ne conviendraient pas au plan de test seront retournées aux développeurs par le  responsable des tests afin d’apporter une correction.
+    \item Les tests réalisés seront indiqués dans un document de type plan de test.
+\end{itemize}
+
+\chapter{Format des documents}
+\section{Comptes-rendus de réunions}
+Pour toute réunion, un compte rendu écrit et succinct sera rédigé et approuvé par chaque partie. \\
+En cas d’absence de validation écrite du compte-rendu par les parties, le document est considéré comme approuvé définitivement après un délai d’une semaine à dater de la remise du document aux parties:
+Le contenu du compte-rendu :
+\begin{itemize}
+    \item  La date et heure de la réunion.
+    \item  Les noms des membres absents et présents.
+    \item  Les points discutés dans cette réunion.
+    \item  Les taches à réaliser pour la prochaine réunion.
+    \item  La date approximative de la prochaine réunion.
+\end{itemize}
+\section{ Droit de Modification du PAQ}
+Tout membre appartenant à la structure, peut, après validation des autres membres, modifier le Plan Qualité de Projet. Cette modification sera alors rapportée dans le 
+compte-rendu de la réunion et aussi insérée dans la table des versions du document traité. 
+
+\end{document}
