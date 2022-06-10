@@ -194,7 +194,6 @@ Notre client est l’administration de l’ESI de Sidi Bel Abbes et ses représe
 \end{itemize}
 
 \section{Présentation de l’Entreprise}
-\subsection{Produits et services vendus}
 \subsection{ Les éléments différenciant notre activité}
 \begin{itemize}
     \item Une solution économique et concurrentielle.
@@ -507,33 +506,41 @@ de passe .
 \end{center}
 %---------------fonctionnalitees------------------------------------------------------%
 %-----------------gesttion deux --------------%
-\subsection{gestion equipe}\index{equipe}
+\newpage
+\subsection{gestion équipe}\index{équipe}
 
 \subsubsection{definition}
-
+avant de commencer à travailler sur un projet, un étudiant a besoin d'une équipe avec qui travailler avec , il peut soit créer une équipe, soit en rejoindre une existante \\
+gestion des équipes assure ce fonctionnement fondamental et autres qui ont des relation avec gestion d'une équipe de travail
 \subsubsection{les acteurs impliqués}
 \textbf{Acteurs principales: }Etudiant \\
 \textbf{Acteurs secondaires: }Administrateur
 \subsubsection{déroulement}
-\hspace{0.5cm}\textbf{creation  d'une equipe}\\
-\hspace{0.5cm}\textbf{repondre à une invitation}\\
-\hspace{0.5cm}\textbf{valider une équipe}\\
+\begin{enumerate}
+    \item \textbf{creation  d'une equipe}:\\
+    l'étudiant envoie une invitation a un ou des autres étudiants pour que créer une nouvelle équipe
+    \item \textbf{repondre à une invitation}\\
+    une fois l'étudiant recevoir une invitation, il peut soit l'accepter et rejoindre l'équipe soit le refuser
+    \textbf{valider une équipe}:\\
+    ce fonctionnement est disponible seulement pour un admin, pour les équipes qui répondent aux des critères, il les accepte comme des équipes validées pour commencer de travailler sur un projet
+\end{enumerate}
 
 
-\subsubsection{Diagramme de cas d’utilisation de la gestion 
-d'affectation et themes}
+
+
+\subsubsection{Diagramme de cas d’utilisation de la gestion des équipes}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion des equipes.PNG}
+    \includegraphics[width=1\textwidth]{Pictures/UseCase equipe.png}
     \caption{Diagramme de cas d'utilisation de gestion des equipes}
     \label{fig:pca}
 \end{figure}
 %----------------------------creation d'un compte -----------%
-\subsubsection{creation  d'une equipe}
+\subsubsection{creation  d'une équipe}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
   \hline
-  \multicolumn{2}{|c|}{CU : creation  d'une equipe} \\
+  \multicolumn{2}{|c|}{CU : creation  d'une équipe} \\
  \hline
  ID & 1  \\
  \hline
@@ -640,15 +647,15 @@ d'affectation et themes}
 \captionof{table}{ CU Refuser une invitation}\label{tbl:nicetablelesstable}
 \end{center}
 %-------------------------------------------------------------------------------------------------------%
-\subsubsection{consulter la liste des equipes}
+\subsubsection{consulter la liste des équipes}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
   \hline
-  \multicolumn{2}{|c|}{consulter la liste des equipes} \\
+  \multicolumn{2}{|c|}{consulter la liste des équipes} \\
  \hline
  ID & 5  \\
  \hline
- Description  & voir la liste des equipes crées \\
+ Description  & voir la liste des équipes crées \\
   \hline
  Acteurs  & Etudiant   \\
   \hline
@@ -662,26 +669,26 @@ d'affectation et themes}
 
  \end{itemize}\\
   \hline
- post conditions  &  Avoir une idée sur les equipes de meme promotion  \\
+ post conditions  &  Avoir une idée sur les équipes de meme promotion  \\
   \hline
 \end{tabularx}
-\captionof{table}{ CU consulter la liste des equipes}\label{tbl:nicetablelesstable}
+\captionof{table}{ CU consulter la liste des équipes}\label{tbl:nicetablelesstable}
 \end{center}
 
 %-------------------------------------------------------------------------------------------------------%
-\subsubsection{quitter une equipe}
+\subsubsection{quitter une équipe}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
   \hline
-  \multicolumn{2}{|c|}{quitter une equipe} \\
+  \multicolumn{2}{|c|}{quitter une équipe} \\
  \hline
- ID & 5  \\
+ ID & 6  \\
  \hline
- Description  & un membre quite son groupe actuelle \\
+ Description  & un membre quitte son groupe actuelle\\
   \hline
  Acteurs  & Etudiant   \\
   \hline
- Pre-conditions  & etudiant est un membre d'equipe\\
+ Pre-conditions  & etudiant est un membre d'équipe\\
  \hline
  Scenario principal  &  
  \begin{itemize}
@@ -692,29 +699,43 @@ d'affectation et themes}
      \item Cliquer sur la bouton de sureté.
  \end{itemize}\\
   \hline
- post conditions  &   L’´etudiant s’affiche dans la liste des ´etudiants sans groupe  \\
+ post conditions  &   L’étudiant s’affiche dans la liste des étudiants sans groupe  \\
   \hline
 \end{tabularx}
-\captionof{table}{ CU Quitter une equipe}\label{tbl:nicetablelesstable}
+\captionof{table}{ CU Quitter une équipe}\label{tbl:nicetablelesstable}
 \end{center}
 %-------------------------------------------------------------------------------------------------------%
 %-----------------gesttion trois --------------%
 
-
-\subsection{gestion affectation et themes }\index{themes}
-\subsubsection{definition}
+\newpage
+\subsection{gestion affectation et thèmes }\index{thèmes}
+\subsubsection{définition}
+cette gestion prend en charge la gestion des thèmes de suggérer un thème à le valider et envoyer et rendre une fiche de voeux, et après l'affectation des thèmes et encadreurs aux des équipes.
 \subsubsection{les acteurs impliqués}
+\textbf{Acteurs Primaires:} Entreprise, Enseignant, Administrateur \\
+\textbf{Acteurs Secondaires:} Etudiant
 \subsubsection{déroulement}
-\subsubsection{Diagramme de cas d’utilisation de la gestion 
-d'affectation et themes}
+\begin{enumerate}
+    \item \textbf{Proposer un thème}:\\ l'enseignant ou l'entreprise doit être capable d'ajouter un thème qui qui sera validé ou refusé par l'administration
+    \item \textbf{envoyer la fiche de voeux}:\\
+    - le chef d'equipe va ordonner cette fiche selon la priorité des thèmes.
+    \item \textbf{affectation des thèmes et encadreurs aux des équipes}:\\ l'admin assure ce fonctionnalité afin de donner pour chaque équipe un thème pour le projet et un encadreur de les suivi.
+\end{enumerate}
+\subsubsection{Diagramme de cas d’utilisation de la gestion d'affectation et thèmes}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/UseCase themes.png}
+    \caption{Diagramme de cas d’utilisation de la gestion d'affectation et thèmes}
+    \label{fig:pca}
+\end{figure}
 
 %-------------------------------------------------------------%
 
-\subsubsection{depot d'un theme}
+\subsubsection{dépôt d'un thème}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
   \hline
-  \multicolumn{2}{|c|}{proposer un theme} \\
+  \multicolumn{2}{|c|}{proposer un thème} \\
  \hline
  ID & 1  \\
  \hline
@@ -728,21 +749,21 @@ d'affectation et themes}
  \begin{itemize}
      \item  Acceder a l’interface.
      \item Remplir la case de titre, description
-     \item Optionnelement: ajouter une description, un document (peut etre un texte, image ...).
+     \item Optionnelement: ajouter un document (peut etre un texte, image ...).
      \item Valider les choix en pressant sur un button ’Valider’.
  \end{itemize}\\
   \hline
- post conditions  &   Le theme s’envoie aux administrateur pour validation  \\
+ post conditions  &   Le thème s’envoie aux administrateur pour validation  \\
   \hline
 \end{tabularx}
-\captionof{table}{ CU Proposer un theme}\label{tbl:nicetablelesstable}
+\captionof{table}{ CU Proposer un thème}\label{tbl:nicetablelesstable}
 \end{center}
 %-------------------------------------------------------------%
-\subsubsection{valider un theme}
+\subsubsection{valider un thème}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
   \hline
-  \multicolumn{2}{|c|}{valider un theme} \\
+  \multicolumn{2}{|c|}{valider un thème} \\
  \hline
  ID & 2  \\
  \hline
@@ -750,7 +771,7 @@ d'affectation et themes}
   \hline
  Acteurs  & Administrateur   \\
   \hline
- Pre-conditions  & Authentification, theme existe\\
+ Pre-conditions  & Authentification, thème existe\\
  \hline
  Scenario principal  &  
  \begin{itemize}
@@ -761,7 +782,7 @@ d'affectation et themes}
  post conditions  &   Le thème s'affiche dans la page des thèmes proposées  \\
   \hline
 \end{tabularx}
-\captionof{table}{ CU valider un theme}\label{tbl:nicetablelesstable}
+\captionof{table}{ CU valider un thème}\label{tbl:nicetablelesstable}
 \end{center}
 %-------------------------------------------------------------------------------------------%
 \subsubsection{envoyer la fiche de voeux}
@@ -881,11 +902,11 @@ d'affectation et themes}
 \end{center}
 %----------------------------------------------------------------------------------------%
 
-\subsubsection{consulter la liste des themes}
+\subsubsection{consulter la liste des thèmes}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
   \hline
-  \multicolumn{2}{|c|}{consulter la liste des themes} \\
+  \multicolumn{2}{|c|}{consulter la liste des thèmes} \\
  \hline
  ID & 7  \\
  \hline
@@ -911,22 +932,26 @@ d'affectation et themes}
 
 
 %-----------------gesttion 4 --------------%
-
+\newpage
 \subsection{gestion documents}\index{documents}
 \subsubsection{definition}
-pour que l'etudiant peut diposer un document et le manipuler afin qu'il etre visualiser par l'encadreur, cette gestion, gestion des documents assure ce fonctionnement. \\
+pour que l'etudiant peut diposer un document et le manipuler afin qu'il etre visualiser par l'encadreur.\\ cette gestion, gestion des documents assure ce fonctionnement.
 
 \subsubsection{les acteurs impliqués}
 \textbf{Acteurs principales:}Etudiant \\
 \textbf{Acteurs Secondaires:}Enseignant
 \subsubsection{déroulement}
-
-
+\begin{enumerate}
+    \item \textbf{ajouter un document}:\\ l'étudiant doit ajouter un document dans l'espace de travail de son équipe et preciser le type de ce document \\
+   \hspace{2cm} -l'etudiant peut aussi supprimer le document qu'il a été ajouté.
+    \item \textbf{fournir un document}:\\
+    une fonctionnalité disponible seulement pour le chef d'équipe, elle s'agit de passer un document d'espace de travail à un autre éspace visible par l'encadreur.
+\end{enumerate}
 \subsubsection{Diagramme de cas d’utilisation de la gestion 
 des documents}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion_des_documents.PNG.png}
+    \includegraphics[width=1\textwidth]{Pictures/UseCase document.png}
     \caption{Diagramme de cas d'utilisation de gestion des documents}
     \label{fig:pca}
 \end{figure}
@@ -1018,36 +1043,7 @@ l’encadreur).
 \captionof{table}{ CU fournir un document}\label{tbl:nicetablelesstable}
 \end{center}
 %-----------------------------------------------------------------------------------------------------------%
-\subsubsection{evaluation d'un document}
-\begin{center}
-\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
-  \hline
-  \multicolumn{2}{|c|}{evaluation  d'un document} \\
- \hline
- ID & 4  \\
- \hline
- Description  &  ajouter un commentaire sur un document commité d'une equipe pricis  \\
-  \hline
- Acteurs  & Enseignant  \\
-  \hline
- Pre-conditions  & Authentification, docuemnent existe\\
- \hline
- Scenario principal  &  
- \begin{itemize}
-     \item aller a la page des documents d'une equipe precis
-     \item consulter les documents ajoutés 
-      \item choisir le document à evaluer
-      \item cliquer sur "ajouter un commenataire" et remplir les champs
-      \item presser "valider"
 
- \end{itemize}\\
-  \hline
- post conditions  &  Une notification s’envoie à les membres d'equipe  \\
-  \hline
-\end{tabularx}
-\captionof{table}{ CU evaluation  d'un document}\label{tbl:nicetablelesstable}
-\end{center}
-%-------------------------------------------------------------------------%
 \subsubsection{Consulter les documents}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
@@ -1081,47 +1077,36 @@ l’encadreur).
 \captionof{table}{ CU consulter un document}\label{tbl:nicetablelesstable}
 \end{center}
 
-
-\subsubsection{rediger un pv-reunion}
-\begin{center}
-\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
-  \hline
-  \multicolumn{2}{|c|}{rediger un pv-reunion} \\
- \hline
- ID & 6  \\
- \hline
- Description  &  ajouter un pv pour une reunion dans l'espace de travail d'equipe  \\
-  \hline
- Acteurs  & Etudiant   \\
-  \hline
- Pre-conditions  & Authentification\\
- \hline
- Scenario principal  &  
- \begin{itemize}
-      \item Presser sur le boutton ’ajouter un pv de reunion’.
-     \item saisir le nom de Pv et date de reunion associée 
-     \item cliquer sur ajouter un document pour choisir un document specifis 
-     \item valider le choix en pressant sur le botton ’valider’ .
- \end{itemize}\\
-  \hline
- post conditions  & un pv d'une reunion a été ajouté  \\
-  \hline
-\end{tabularx}
-\captionof{table}{ CU rediger un pv-reunion}\label{tbl:nicetablelesstable}
-\end{center}
 %-----------------gesttion 5 --------------%
-
+\newpage
 \subsection{gestion encadrement}\index{encadrement}
 
 \subsubsection{definition}
+cetter gestion prend en charge l'echange entre les membres d'equipe et avec l'encadreur, et pout l'enseignant qui encadre une équipe de suivi et evaluer leur livrables.
 \subsubsection{les acteurs impliqués}
 \textbf{Acteurs Principales:} Etudiant, Enseignant\\
 \textbf{Acteurs Secondaires:} /
 \subsubsection{déroulement}
-\subsubsection{Diagramme de cas d’utilisation de la gestion 
-d'encadrement}
+\begin{enumerate}
+    \item \textbf{echanger entre les membres d'équipe}: \\
+    permit les etudiants de meme equipe d'echanger entre eux suivant  un système de chat qui autoriser consultation et l'envoi des messages
+     \item \textbf{echanger avec l'encadreur}: \\
+    permit les etudiants d'une équipe d'echanger avec l'encadreur suivant  un système de chat qui autoriser consultation et l'envoi des messages, et l'encadreur de consulter les messages envoyées et s'envoyer.
+    \item \textbf{evaluer un document}: \\
+    permit l'encadreur d'un equipe precis de consulter les documents commités par ses équipes et les evaluer.
+    
+\end{enumerate}
+\newpage
+\subsubsection{Diagramme de cas d’utilisation de la gestion d'encadrement}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/UseCase encadrement.png}
+    \caption{Diagramme de cas d’utilisation de la gestion d'encadrement}
+    \label{fig:pca}
+\end{figure}
 
-\subsubsection{echanger entre les membres d'equipe}
+\newpage
+\subsubsection{echanger entre les membres d'equipe / encadreur}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
   \hline
@@ -1149,78 +1134,43 @@ d'encadrement}
      \item Cliquer sur l’icone envoyer.
  \end{itemize}\\
   \hline
- post conditions  & le message apparait dans le chat de tout les membre du groupe  \\
+ post conditions  & le message apparait dans le chat de tout les membres du groupe  \\
   \hline
 \end{tabularx}
 \captionof{table}{ CU Echanger}\label{tbl:nicetablelesstable}
 \end{center}
 
 %--------------------------------------------------------------------------------------------%
-\subsubsection{organiser une reunion}
+\subsubsection{evaluation d'un document}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
   \hline
-  \multicolumn{2}{|c|}{organiser une reunion} \\
+  \multicolumn{2}{|c|}{evaluation  d'un document} \\
  \hline
  ID & 2  \\
  \hline
- Description  & ajouter une nouveau reunion pour son equipe a une date precis \\
+ Description  &  ajouter un commentaire sur un document commité d'une equipe pricis  \\
   \hline
- Acteurs  & Etudiant   \\
+ Acteurs  & Enseignant  \\
   \hline
- Pre-conditions  & Authentification\\
+ Pre-conditions  & Authentification, docuemnent existe\\
  \hline
  Scenario principal  &  
  \begin{itemize}
-      \item A. Presser sur le boutton ’organiser Reunion’ dans l’interface de chef d’equipe.
-      \item Choisir le type de la reunion (habituelle,urgente).
-      \item saisir les information: jour-heure-min.
-      \item indiquer la raison de la reunion.
-      \item presser sur le boutton valider.
+     \item aller a la page des documents d'une equipe precis
+     \item consulter les documents commités par une équipe il encadre.
+      \item choisir le document à evaluer.
+      \item cliquer sur "ajouter un commenataire" et remplir les champs.
+      \item presser "valider".
 
  \end{itemize}\\
   \hline
- post conditions  & une notification sera envoyée au les membres d'equipe  \\
+ post conditions  &  Une notification s’envoie à les membres d'equipe  \\
   \hline
 \end{tabularx}
-\captionof{table}{ CU organiser une reunion}\label{tbl:nicetablelesstable}
+\captionof{table}{ CU evaluation  d'un document}\label{tbl:nicetablelesstable}
 \end{center}
 
-%---------------------------------------------------------------------------------%
-
-%---------------------------------------------------------------------------------%
-\subsubsection{consulter la liste des PVs}
-\begin{center}
-\begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
-  \hline
-  \multicolumn{2}{|c|}{consulter la liste des PVs} \\
- \hline
- ID & 1  \\
- \hline
- Description  &  
- \begin{itemize}
-     \item l'etudiant peut voir tous les pv des reunions de son groupe
-     \item l'enseignant peut voir les pv des reunions des equipe qu'il encadrer
- \end{itemize}
- \\
-  \hline
- Acteurs  & Etudiant, Enseignant   \\
-  \hline
- Pre-conditions  & Authentification\\
- \hline
- Scenario principal  &  
- \begin{itemize}
-     \item presser sur le boutton ’Reunion-pv’.
-     \item la liste sera affichier.
-     \item appliquer des options de filtrage.
-     \item consulter un pv de reunion specifique.
- \end{itemize}\\
-  \hline
- post conditions  & avoir une idée sur les reunions d'equipe  \\
-  \hline
-\end{tabularx}
-\captionof{table}{ CU consulter la liste des PVs}\label{tbl:nicetablelesstable}
-\end{center}
 %---------------------------------------------------------------------------------%
 \subsubsection{Ajouter un announcement}
 
@@ -1256,7 +1206,7 @@ d'encadrement}
   \hline
   \multicolumn{2}{|c|}{créer un sondage} \\
  \hline
- ID & 3  \\
+ ID & 4  \\
  \hline
  Description  &  ajouter un nouveau sondage dans l'espace de travail d'equipe  \\
   \hline
@@ -1283,13 +1233,16 @@ d'encadrement}
   \hline
   \multicolumn{2}{|c|}{participer au sondage} \\
  \hline
- ID & 3  \\
+ ID & 5  \\
  \hline
  Description  & l'etudiant particpe au sondage en choisir un des options   \\
   \hline
  Acteurs  & Etudiant   \\
   \hline
- Pre-conditions  & Authentification\\
+ Pre-conditions  & \begin{itemize}
+     \item authentification
+     \item sondage existe
+ \end{itemize}\\
  \hline
  Scenario principal  &  
  \begin{itemize}
@@ -1306,24 +1259,34 @@ d'encadrement}
 \captionof{table}{ CU participer au sondage}\label{tbl:nicetablelesstable}
 \end{center}
 %-----------------gesttion 6 --------------%
-
+\newpage
 \subsection{gestion soutnance} \index{soutnance}
 
 \subsubsection{definition}
+cette gestion est la derniere phase de gestion des projets, elle prend à charge le depot des livrable a soutenir, l'autorisation de soutenance, préciser la jury pour les equipes existées
 \subsubsection{les acteurs impliqués}
-\textbf{Acteurs Principales:} Administrateur\\
+\textbf{Acteurs Principales:} Administrateur, Enseignant\\
 \textbf{Acteurs Secondaires:} Etudiant
 \subsubsection{déroulement}
+
+\begin{enumerate}
+    \item \textbf{Dépôt  de PFE}:\\ cette fonctionnalité est possible pour l'enseignant qui encadre l'equipe, cetter fonctionnalité a comme un but le passage de livrables diposées par un contrôle de plagiat pour l'autrisation de soutenance après.
+    \item \textbf{autorisatin de soutenance}:\\ 
+     cette fonctionnalité est aussi possible seulement pour l'enseignant qui encadre l'équipe, après la phase d'encadrement, l'encadreur judge si une équipe peut soutenir ou pas.
+    \item \textbf{préciser la jury}:\\ quand une équipe est autorisée pour la soutenance, l'admin affecte des enseignants comme une jury pour cette équipe pour la jour de soutenance aux côtés de classe et la date.
+\end{enumerate}
+\newpage
 \subsubsection{Diagramme de cas d’utilisation de la gestion 
 de soutnance}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{Pictures/gestion de soutenance.PNG}
+    \includegraphics[width=1\textwidth]{Pictures/UseCase soutenance.png}
     \caption{Diagramme de cas d'utilisation de gestion de soutenance}
     \label{fig:pca}
 \end{figure}
 %-----------------------------------------------------------------------%
+\newpage
 \subsubsection{Dépôt  de PFE}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
@@ -1342,12 +1305,12 @@ de soutnance}
  \begin{itemize}
      \item  Acceder au l'interface des equipes il encdre 
      \item  Acceder au l'interface des documents commitées par les membres d'equipe
-     \item choisir les documents pour soutance
+     \item choisir les documents pour soutenance
      \item presser "valider" 
      
  \end{itemize}\\
   \hline
- post conditions  & notification s'envoie au les membres d'equipe  \\
+ post conditions  & notification s'envoie aux les membres d'equipe et l'administrateur \\
   \hline
 \end{tabularx}
 \captionof{table}{ CU Dépôt de PFE}\label{tbl:nicetablelesstable}
@@ -1357,11 +1320,11 @@ de soutnance}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
   \hline
-  \multicolumn{2}{|c|}{Dépôt de l’autorisation de soutenance} \\
+  \multicolumn{2}{|c|}{l’autorisation de soutenance} \\
  \hline
  ID & 2  \\
  \hline
- Description  & Encadreur autorise ses equipes pour sountener ses projets   \\
+ Description  & Encadreur autorise ses equipes pour sountenir ses projets   \\
   \hline
  Acteurs  & Enseignant   \\
   \hline
@@ -1378,14 +1341,14 @@ de soutnance}
  post conditions  & notification s'envoie au les membres d'equipe et l'administrateur \\
   \hline
 \end{tabularx}
-\captionof{table}{ CU Dépôt de l’autorisation de soutenance}\label{tbl:nicetablelesstable}
+\captionof{table}{ CU l’autorisation de soutenance}\label{tbl:nicetablelesstable}
 \end{center}
 %-----------------------------------------------------------------%
-\subsubsection{preciser la jury}
+\subsubsection{préciser la jury}
 \begin{center}
 \begin{tabularx}{1\textwidth} { | p{4cm} | >{\raggedright\arraybackslash}X |  }
   \hline
-  \multicolumn{2}{|c|}{preciser la jury} \\
+  \multicolumn{2}{|c|}{préciser la jury} \\
  \hline
  ID & 3  \\
  \hline
@@ -1399,14 +1362,14 @@ de soutnance}
  \begin{itemize}
      \item  Consulter la liste des jury possible.
      \item choisir des jury dans le l’emploi du temps coincident.
-     \item les affecter `a une th`ese pr´ecise
+     \item les affecter a une équipe précise
 
  \end{itemize}\\
   \hline
- post conditions  & jury est affectee a une these \\
+ post conditions  & jury est affectée à une équipe \\
   \hline
 \end{tabularx}
-\captionof{table}{ CU preciser la jury}\label{tbl:nicetablelesstable}
+\captionof{table}{ CU préciser la jury}\label{tbl:nicetablelesstable}
 \end{center}
 %-------------------------------------------------------------------------------------%
 \subsubsection{saisir pv de soutnance}
@@ -1426,13 +1389,13 @@ de soutnance}
  Scenario principal  &  
  \begin{itemize}
      \item  Acceder au l'interface 
-     \item ajouter un titre et associer avec l'equipe precis
+     \item ajouter une note et description et associer avec l'equipe precis
      \item joindre le document (pv de soutnance)
      \item presser valider pour ajouter le pv
 
  \end{itemize}\\
   \hline
- post conditions  & jury est affectee a une these \\
+ post conditions  & une notification s'envoie aux les membres d'equipe precis \\
   \hline
 \end{tabularx}
 \captionof{table}{ CU saisir pv de soutnance}\label{tbl:nicetablelesstable}
@@ -1458,7 +1421,7 @@ de soutnance}
      \item consulter la page
  \end{itemize}\\
   \hline
- post conditions  & avoir une idée sur la jury d'un equipe pricis \\
+ post conditions  & avoir une idée sur la jury d'une equipe pricise \\
   \hline
 \end{tabularx}
 \captionof{table}{ CU consulter la liste de jury}\label{tbl:nicetablelesstable}
