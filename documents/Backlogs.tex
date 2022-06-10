@@ -1,0 +1,123 @@
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{wallpaper}
+\usepackage{mdframed}
+\usepackage[top=2cm, bottom=2cm, outer=0cm, inner=0cm]{geometry}
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Computer Modern fonts
+\graphicspath{ {figures/} }
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{Backlogs}
+
+%----------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------
+\begingroup
+\ThisLRCornerWallPaper{1.0}{Pictures/cover page.png}
+\endgroup
+
+%----------------------------------------Version page ---------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+%-------------------	TABLE OF CONTENTS
+
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+
+%------------------------------------------------------------------------%
+\chapter{Backlogs}
+\section{Gestion des Comptes}
+\begin{itemize}
+    \item Authentification des comptes
+    \item Espace réservé pour chaque compte
+    \item Module d’ajout de comptes Etudiant, Enseignant, Entreprise.
+    \item Module de suppression de comptes Etudiant, Enseignant, Entreprise.
+    \item Module de Récupérer un compte
+    \item Module d'affichage la liste des Etudiants, Enseignant, Entreprises. \\
+\end{itemize}
+
+
+\section{Gestion d'équipe}
+\begin{itemize}
+    \item Module de création d'une équipe.
+    \item Module de répondre au (accepter/ refuser) invitation.
+    \item Module de quitter une équipe.
+    \item Module de validation d'une équipe.
+    \item Module d'affichage la liste des équipes. \\
+\end{itemize}
+
+
+\section{Gestion des Thèmes et affectation}
+\begin{itemize}
+    \item Module de dépôt des P.F.E .
+    \item Module de validation des thèmes
+    \item Module d'affichage la liste des thèmes
+    \item Module d'envoi et rendre la fiche des voeux
+    \item Module d'affectation d'un thème et encadreur à une équipe\\
+\end{itemize}
+
+
+\section{Gestion des Documents}
+\begin{itemize}
+    \item Module de	Dépôt de livrables
+    \item Module de suppression d'un livrable
+    \item Module d'affichage les livrable ajoutés par les membres d'équipe.
+    \item Module de fournir les documents\\
+\end{itemize}
+
+
+\section{Gestion d'encadrement}
+\begin{itemize}
+    \item Module d'echanger entre les membres d'une équipe
+    \item Module d'echanger entre l'encadreur et les membres d'une équipe.
+    \item Module d'affichage les livrable fournis par ses équipes.
+    \item Module d'evaluation d'un livrable
+    \item Module d'ajouter et participer dans les sondages.
+    \item Module d'ajout d'un announcement
+    \item Module d'affichage la liste des announcements\\
+\end{itemize}
+
+
+\section{Gestion de soutenance}
+\begin{itemize}
+     \item Module de Dépôt les livrables par l'encadreur.
+    \item Module de Dépôt de l’autorisation de soutenance
+    \item Module de Précision les jurys de soutenance
+    \item Module d'affichage la liste des jurys
+    \item Module de saisie le PV de soutenance.
+    \item Module d'affichage le PV de soutenance.\\
+\end{itemize}
+
+\end{document}
