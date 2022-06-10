@@ -1,0 +1,177 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{wallpaper}
+\usepackage{mdframed}
+\usepackage[normalem]{ulem} 
+\usepackage[top=2cm, bottom=2cm, outer=0cm, inner=0cm]{geometry}
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Computer Modern fonts
+\graphicspath{ {figures/} }
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{Rapport de conception}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+%---------------------
+\begingroup
+\ThisLRCornerWallPaper{1.0}{Pictures/rapp-conc.PNG}
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 1
+%----------------------------------------------------------------------------------------
+
+\chapter{Rapport de conception}
+\section{Introduction}
+La conception d’un projet est une étape cruciale car son but premier est de permettre de créer un système ou un processus répondant aux besoins en tenant compte des contraintes. Le système en question doit être suffisamment défini pour pouvoir être installé, fabriqué, construit et être fonctionnel, et pour répondre aux besoins du client. \\
+À travers ce rapport, la conception de notre projet sera entamée en utilisant l’outil UML dans l’intention de préparer son implémentation et rendre le travail des développeurs plus précis. \\
+On verra dans ce qui suit : les outils utilisés pour réaliser notre conception, la réalisation du diagramme de classes de conception et modèle relationnel associé.
+\section{ Les Outils de Modélisation}
+\subsection{Astah}
+Anciennement appelé Jude (Java and UML Developers’ 
+Environment, prononcée judo), est un outil de modélisation UML créé par la compagnie japonaise ‘ChangeVision’.**
+Il est facile et simple à manipuler et offre plusieurs possibilités et formes nécessaire pour la conception des diagrammes UML qui vont être le sujet de ce rapport.
+\section{Le Diagramme Conceptuel}
+Un diagramme conceptuel de données fournit une représentation graphique de la structure conceptuelle d'un système d'information, il aide également à identifier les principales entités à représenter, leurs attributs et les relations entre ces entités. \\
+\subsection{Diagramme de Classes de Conception}
+Les diagrammes de classes sont l'un des types de diagrammes UML les plus utiles, car 
+ils décrivent clairement la structure d'un système particulier en modélisant ses classes, 
+ses attributs, ses opérations et les relations entre ses objets.
+Ci-dessous la Figure  représentant notre diagramme de classes de conception du projet: 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/Class Diagram0.png}
+    \caption{Diagramme de Classe de Conception}
+    \label{fig:pca}
+\end{figure}
+\subsection{ Modèle Relationnelle }
+Le modèle relationnel est une manière de modéliser les relations existantes entre plusieurs informations, et de les ordonner entre elles. C’est un résultat obtenu à travers diagramme de classe permettant de créer les tables utilisées dans notre futur base de données.\\
+Voici les tables résultantes pour notre système :
+\subsubsection{table promotion}
+\hspace{3em}\textbf{Promotion}(\underline{IdPromotion}, name)
+\subsubsection{table User}
+\hspace{3em}\textbf{User}(\underline{IdUser}, email, password, typeUser)
+\subsubsection{table Etdudiant}
+\hspace{3em}\textbf{Etdudiant}(\underline{IdStudent},lastname, firstname, dateofbirth, moyen, \#IdUser, \#IdPromotion)
+\subsubsection{table Enseignant}
+\hspace{3em}\textbf{Enseignant}(\underline{IdEnseignant},lastname, firstname, dateofbirth, module, \#IdUser)
+\subsubsection{table Entreprise}
+\hspace{3em}\textbf{Entreprise}(\underline{IdEntreprise}, name, place, \#IdUser)
+\subsubsection{table Admin}
+\hspace{3em}\textbf{Admin}(\underline{IdAdmin}, lastname, firstname, \#IdUser)
+
+\subsubsection{table notification}
+\hspace{3em}\textbf{Admin}(\underline{IdNotification}, titre, createdAt, \#IdUser)
+
+\subsubsection{table thème}
+\hspace{3em}\textbf{thème}(\underline{IdTheme},title, description, \#IdTeacher, \#IdPromotion) \hspace{3em}      ou  \hspace{3em}\textbf{thème}(\underline{IdTheme},title, description, \#IdEntreprise, \#IdPromotion)
+\subsubsection{table thème-document}
+\hspace{3em}\textbf{thème-document}(\underline{IdThemeDocument},title, description, \#IdTheme)
+\subsubsection{table team}
+\hspace{3em}\textbf{team}(\underline{IdTeam},Nickname, description, rules, \#IdStudent)
+\subsubsection{table invitation}
+\hspace{3em}\textbf{invitation}(\underline{IdInvitation},description, Accepted, \#IdStudent)
+\subsubsection{survey}
+\hspace{3em}\textbf{table survey} (\underline{IdSurvey},title, description, \#IdTeam)
+\subsubsection{table options}
+\hspace{3em}\textbf{options}(\underline{IdOption}, description, \#IdSurvey)
+\subsubsection{table partcipate}
+\hspace{3em}\textbf{partcipate}(argument, \#IdSurvey, \#IdStudent)
+\subsubsection{table announcement}
+\hspace{3em}\textbf{announcement}(\underline{IdAnnouncement}, titre, description,createdAt, \#IdTeam)
+\subsubsection{table announcement-document}
+\hspace{3em}\textbf{announcement-document}(\underline{IdAnnouncement-document}, name, Url, \#IdAnnouncement)
+
+\subsubsection{table team-chat}
+\hspace{3em}\textbf{team-chat}(\underline{IdTeam-chat}, message, createdAt, \#IdTeam, \#IdStudent)
+\subsubsection{table team-teacher-chat}
+\hspace{3em}\textbf{team-teacher-chat}(\underline{IdTeam-teacher-chat}, message, createdAt, \#IdTeam, \#IdStudent, \#IdTeacher)
+
+\subsubsection{table document-type}
+\hspace{3em}\textbf{team-document-type}(\underline{IdDocument-type}, name)
+
+\subsubsection{table team-documents}
+\hspace{3em}\textbf{team-documents}(\underline{Idteam-documents}, titre, delete, Url,createdAt, \#IdTeam, \#document-type)
+
+\subsubsection{table evaluation}
+\hspace{3em}\textbf{evaluation}(\underline{IdEvaluation}, titre, description,createdAt, \#Idteam-document, \#IdStudent)
+
+\subsubsection{table commit}
+\hspace{3em}\textbf{commit}(\underline{IdCommit}, titre, description,createdAt, \#IdTeam)
+\subsubsection{table commit-document}
+\hspace{3em}\textbf{commit-document}(\underline{IdCommit-document}, name, Url,createdAt, validated, \#IdTeam-docuement, \#document-type)
+\subsubsection{table review}
+\hspace{3em}\textbf{review}(\underline{IdReview}, description,createdAt, \#IdCommit, \#IdTeacher)
+
+\subsubsection{table salle}
+\hspace{3em}\textbf{salle}(\underline{IdSalle}, type, numero)
+
+\subsubsection{table soutenance}
+\hspace{3em}\textbf{soutenance}(\underline{IdSoutenance}, titre, description,date, \#Idsalle, \#IdTeam, \#IdPromotion)
+
+\subsubsection{table pv-soutenance}
+\hspace{3em}\textbf{pv-soutenance}(\underline{IdPvSoutenance}, note, description,createdAt, \#IdTeam)
+\subsubsection{table pv-soutenance-document}
+\hspace{3em}\textbf{pv-soutenance-document}(\underline{IdPvSoutenanceDocument}, name, url, \#IdPvSoutenance)
+
+\subsubsection{table encadrement}
+\hspace{3em}\textbf{commit}(\underline{Idencadrement}, \#Idtheme, IdTeacher)
+
+\subsubsection{table responsible}
+\hspace{3em}\textbf{commit}(\underline{Idresponsible},  \#IdTeam, \#IdTeacher)
+
+\subsubsection{table vouex}
+\hspace{3em}\textbf{commit}(\underline{Idvouex}, order,  \#IdTeam, \#IdTheme)
+
+\end{document}
