@@ -1,0 +1,140 @@
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{wallpaper}
+\usepackage{mdframed}
+\usepackage[top=2cm, bottom=2cm, outer=0cm, inner=0cm]{geometry}
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Computer Modern fonts
+\graphicspath{ {figures/} }
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{Workflow de Validation}
+
+%----------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------
+\begingroup
+\ThisLRCornerWallPaper{1.0}{Pictures/cover page.png}
+\endgroup
+
+%----------------------------------------Version page ---------
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+%-------------------	TABLE OF CONTENTS
+\pagestyle{empty} % No headers
+\tableofcontents
+\pagestyle{fancy} % Print headers again
+
+%---------------------------------
+\chapter{Planning Previsionnel}
+\section{Introduction}
+Notre projet "Project101" passe par 6 phases :
+\begin{itemize}
+    \item Phase d’initialisation
+    \item Phase d’analyse
+    \item Phase de conception
+    \item Phase de développement
+    \item Phase de tests
+    \item Phase de bilan
+\end{itemize}
+
+\section{Phase d’initialisation}
+Dans cette phase qui dure une semaine De 06-03-2022 jusqu’à 13-03-202 la realisation de :
+\begin{itemize}
+    \item Les chartes : 06/03/2022 jusqu'à 09/03/2022
+        \item Les fiches : 10/03/2022 jusqu'à 11/03/2022
+    \item Les plans : après la réalisation de chartes et des fiches de 12/03/2022 jusqu'à 13/03/2022
+\end{itemize}
+
+
+\section{Phase d'analyse}
+Dans cette phase qui dure une semaine De 15-03-2022 jusqu’à 21-03-2022 :
+\begin{itemize}
+    \item \textbf{Analyse des besoins :}De 15-03-2022 jusqu’à 19-03-2022 
+    \item \textbf{Cahier de charges :}après l’analyse des besoins jusqu'à la fin de la phase
+\end{itemize}
+
+
+\section{Phase de conception}
+Dans cette phase qui dure De 22-03-2022 jusqu’à 09-04-2022:
+\begin{itemize}
+    \item \textbf{L’étude analytique: } 22/03 jusqu'à 01/04
+    \item \textbf{L’architecture de système: } 02/04 jusqu'à 05/04
+    \item \textbf{La conception de la Base De Données: } 06/04 jusqu'à 09/04
+\end{itemize}
+
+
+\section{Phase de développement}
+Cette phase dure un peut plus long De 10-04-2022 jusqu’à 30-05-2022
+\begin{itemize}
+    \item  L’implémentation de la Base De Données
+    \item La création des interfaces
+    \item La création des modules 
+    \item  L’intégration des modules 
+\end{itemize}
+
+
+\section{Phase de tests}
+Cette phase commence le 14/04 et dure jusqu'à 31/05 contient :
+\begin{itemize}
+    \item  Les tests unitaires
+    \item Après les tests d’intégration
+    \item  Et finalement les tests de validations
+\end{itemize}
+
+
+\section{Phase de Bilan}
+C’est la dernière phase dure de 9-06-2022 jusqu’à 14-06-2022 dans laquelle il y a l’évaluation de projet.
+\\
+\\
+\\
+\textbf{En Plus}
+\begin{itemize}
+    \item \textbf{les ressources: } toute l’équipe (6 personnes)
+    \item \textbf{La durée: } De 06-03-2022 jusqu'à 14/06 :100 j.
+    \item \textbf{Les rôles: }
+    \begin{itemize}
+        \item  chef de projet (chef d’équipe)
+        \item  développeur (tous)
+        \item éditeur des docs (tous)
+        \item testeur (membre)
+        \item analyste (responsable de la qualité)
+        \item designer web (tous)
+    \end{itemize}
+\end{itemize}
+
+\newpage
+\section{Diagramme de GANTT}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/gantt.PNG}
+    \caption{Diagramme de GANTT}
+    \label{fig:pca}
+\end{figure}
+
+\end{document}
