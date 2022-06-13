@@ -5,7 +5,6 @@ import HorisontalNavbar from "../../../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../../../components/StudentVerticalNavbar";
 import DownIcon from "../../../icons/DownIcon"
 import ArrowIcon from "../../../icons/ArrowIcon";
-import ValiderEquipes from "./ValiderEquipes";
 import AffecterTheme from "./AffecterTheme";
 import AdminVerticalNavbar from "../../../components/AdminVerticalNavbar";
 
