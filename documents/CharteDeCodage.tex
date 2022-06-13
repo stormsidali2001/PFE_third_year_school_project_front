@@ -1,0 +1,163 @@
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Com­puter Modern fonts
+\usepackage{makeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{charte de Codage}
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+
+\chapter{Charte de Codage}
+\section{ Définition d’une Charte de Codage}
+La notion de conventions de codage (coding'style) désigne un ensemble de règles et de conseils adoptés par les membres d’un projet logiciel pour écrire et mettre en forme du code.
+\section{Objectifs}
+Les normes de codage aident à développer des logiciels moins complexes et donc cela implique une réduction des erreurs. Si les normes de codage sont respectées, le code est cohérent et peut-être facilement maintenu. En effet, tout le monde peut le comprendre et le modifier à tout moment.
+\section{ Les Avantages d’une Charte de Codage}
+\begin{itemize}
+    \item Efficacité améliorée. 
+    \item  Le risque d'échec du projet est réduit.
+    \item limiter les ambiguïtés
+    \item  Facile à maintenir.
+\end{itemize}
+\section{les langages utilisées}
+Les langages de programmation, frameworks et SGBD qui vont être utilisé sont les suivants :
+\begin{itemize}
+    \item \textbf{Front-end: } ReactJs, Tailwind CSS
+    \item \textbf{Back-end: }Nest.js
+    \item \textbf{SGBD: }Sql (MySql)
+\end{itemize}
+\section{Règles Générales}
+Ces règles s’appliquent dans tout langage et toute activité confondus, il s’agit des bonnes pratiques pour bien coder
+\subsection{ La Taille Limite des Fonctions et Modules}
+Ecrire des fonctions, modules courts et simples résulte un code lisible et compréhensible, c’est pour cela que la taille des fonctions et des modules ou des fonctions est limitée. \\
+Si une fonction ou un module devient trop long, on doit découper la fonction en sous fonctions plus simples, ou on découpe le module en plusieurs modules plus simples, cela permet de clarifier le rôle de chaque fonction ou module. \\
+Ci-dessous les règles posées :
+\begin{itemize}
+    \item  pas plus de 100 lignes de code pour une fonction.
+    \item  pas plus de 500 lignes pour le fichier source d’un module.
+\end{itemize}
+\subsection{Indentation du code}
+Une bonne indentation du code permet une meilleur lisibilité et donc d'éviter les erreurs.\\
+Bien que le style d'indentation puisse légèrement varier, il existe des conventions populaires :\\
+\begin{itemize}
+    \item     Utiliser des espaces (qui espaceront de manière identique partout) plutôt que des tabulations (qui pourront rendre un résultat différent selon les environnements).
+    \item Utiliser deux espaces pour l'indentation.
+    \item     À chaque fois qu'un bloc est imbriqué dans un autre, l'indenter avec les 2 espaces supplémentaires.
+    \item     Ne pas sauter plusieurs lignes entre des instructions.
+\end{itemize}
+
+
+\subsection{Accolades}
+ Il existe deux façons pour placer les accolades.\\
+ Soit de les placez après le nom de la fonction, soit de les placez en dessous.\\
+ La deuxième solution est recommandée pour des raisons de clarté.
+
+\subsection{Interlignes}
+ Aérer le code avec des espaces blancs améliore sa structure et permet de savoir à quelle 
+correspond le commentaire.
+\subsection{Espaces Blancs}
+Veillez à toujours bien espacer entre les opérateurs.
+
+
+\subsection{ Nombre de Caractères par Ligne}
+ Il faut limiter le nombre de caractères par lignes. Un choix très courant est de les limité à 100 caractères maximum.
+ 
+ 
+\subsection{Commentaires du Code}
+ Un code non commenté ou un code trop commenté, devient non compréhensible ou non signifiant.
+\begin{itemize}
+    \item Commenter le code pendant l’écriture du code et non après, car les idées ne seront plus les mêmes et ça sera trop tard.
+    \item Ajouter un commentaire avant chaque fonction précisant le rôle de la fonction.
+    \item Indiquer dans les commentaires ce que fait le code, pas comment il a été réalisé.
+\end{itemize}
+\subsection{La langue utilisée}
+ Veillez à ne coder qu'en une seule langue. C'est-à-dire qu'il faut éviter de mélanger français et 
+anglais (par exemple). \\
+ L’anglais est recommandé car c'est la langue universelle utilisée par les développeurs. Toutes 
+les fonctions prédéfinies sont écrites en anglais et n’utilise pas les accents.\\
+ Et en cas d’utilisation du français il est recommandé de ne pas utiliser les accents, et d’éviter de l’utiliser pour les noms de variables (exemple d’ambiguïté entre « trouve » et « trouvé »).
+ 
+ 
+ \section{Dénominations des Variables, Constantes, 
+Fonctions et Classes}
+\subsection{convention d’écriture des variables / constantes}
+\begin{itemize}
+    \item Ecrire les variables en minuscule seulement et séparer les mots par des sous-tirets.
+    \item Eviter les noms de variables trop long (plus de trois mots) et les noms non significatifs.
+    \item Utiliser des noms de variables pluriels pour les conteneurs (liste, tableau…). 
+\end{itemize}
+\subsection{convention d’écriture des langages de 
+programmation orienté objet }
+\subsubsection{package}
+\begin{itemize}
+    \item Tout en minuscule
+    \item Utiliser uniquement [a-z][0-9] et le point.
+    \item Tout package doit avoir comme root : com, edu, gov, mil, net, org ou les deux lettres identifiants un pays (code ISO).
+\end{itemize}
+\subsubsection{Classe}
+\begin{itemize}
+    \item Première lettre en majuscule
+    \item Mélange de minuscule, majuscule avec la première lettre de chaque mot en majuscule
+    \item Donner des noms simples et descriptifs
+    \item Eviter les acronymes hormis les communs (Xml, Url, Html)
+    \item N'utiliser que des lettres [a-z][A-Z] et [0-9]
+    \item Ne pas utiliser de verbe pour nommer les classes
+\end{itemize}
+\subsection{Convention d’écriture des fonctions}
+\begin{itemize}
+    \item N’utiliser que des lettres minuscules.
+    \item Précéder les noms par « my » pour les différencier des fonctions standards
+\end{itemize}
+
+\section{Langage SQL}
+\subsection{Pour les tables}
+\begin{itemize}
+    \item  Le nom d’une table doit reprendre le corps du nom de l'entité, ou le nom de la relation si cette dernière est nommée.
+    \item  Ne jamais donner à une table le même nom qu'une de ses colonnes et vice versa.
+    \item  Éviter de concaténer deux noms de table pour créer le nom d'une table de relations.
+    \item  Ne pas préfixer avec ‘tbl’ ou tout autre préfixe descriptif.
+
+\end{itemize}
+\subsection{Pour les attributs}
+\begin{itemize}
+    \item Le nom d'un attribut doit signifier la nature du type de données qu'il représente.
+    \item  Utiliser toujours le nom singulier.
+    \item  Éviter l'utilisation simple de ‘id’ comme identifiant principal de la table.
+    \item   Ne pas ajouter une colonne portant le même nom que sa table
+\end{itemize}
+\subsection{Colonne d’une Table}
+L'ordre de création et de description des colonnes devra répondre aux règles 
+suivantes :
+\begin{itemize}
+    \item  Les colonnes composantes la clé primaire de la table devront être les premières colonnes décrites de la table.
+    \item  Les colonnes composantes les clés étrangères devront être en dernier.
+\end{itemize}
+
+\end{document}

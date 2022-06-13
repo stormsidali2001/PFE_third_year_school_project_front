@@ -114,15 +114,15 @@ const addTeacher = ({toastsRef}) => {
          
             <div className="bg-background h-screen w-screen relative flex items-center justify-center font-xyz text-textcolor">
                 <img src="/addStudent.jpg" className="h-full w-full object-contain mix-blend-darken absolute"/>
-                <div className={`h-[200px] w-[450px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
+                <div className={`min-h-[200px] w-[450px] bg-white/70 pt-[100px] pl-[100px] backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
                     <div className="text-[23px] text-center px-10">Vous voulez ajouter un ou plusieur enseignants ?</div>
-                    <div className="space-x-6">
+                    <div className="sm:flex-row flex-col gap-6 flex">
                         <button className="h-[35px] w-[160px] rounded-full bg-[#32AFF5] text-white" onClick={()=> setOneClick(true)}>Un seul</button>
                         <button className="h-[35px] w-[160px] rounded-full bg-[#8FD4FB]" onClick={()=> setManyClick(true)}>Plusieurs</button>
                     </div>
                 </div>
                 <form 
-                    className = {`h-[550px] w-[650px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[23px] ${oneclick === true ? "flex" : "hidden"}`}
+                    className = {`h-[550px] w-[650px] pt-[100px] pl-[100px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[23px] ${oneclick === true ? "flex" : "hidden"}`}
                     onSubmit = {handleAddSingleTeacher}
                 
                 >

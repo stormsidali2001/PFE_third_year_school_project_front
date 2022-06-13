@@ -38,7 +38,7 @@ const Offer = props => {
                         )
                     })}
                 </div>
-                <div className="text-[32px] text-textcolor font-bold">Et beaucoup d’autre , connectez-vous rapidement pour y profiter de toutes les options.</div>
+                <div className="text-[20px] text-textcolor font-bold">Et beaucoup d’autre , connectez-vous rapidement pour y profiter de toutes les options.</div>
         </div>
     )
 }
