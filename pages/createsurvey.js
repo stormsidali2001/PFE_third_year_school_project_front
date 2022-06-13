@@ -61,6 +61,7 @@ const CreerSondage = ({toastsRef}) => {
          }catch(err){
              console.log(err);
              toastsRef.current.addMessage({text:"probleme!!!",mode:'Error'})
+             setLoading(false)
 
 
          }

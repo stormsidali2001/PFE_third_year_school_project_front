@@ -34,7 +34,7 @@ const Layout = ({toastsRef,children,HorisontalNavbar,StudentVerticalNavbar,Teach
        
        
   
-   if(!socket.hasListeners("new_notification") && runOnce ===false)  {
+   if( runOnce ===false)  {
     setRunOnce(true)
     console.log("zzzzzzzzzzz",socket,socket.hasListeners("new_notification"))
 
@@ -43,9 +43,15 @@ const Layout = ({toastsRef,children,HorisontalNavbar,StudentVerticalNavbar,Teach
         toastsRef.current.addMessage({text:notfication.description,mode:'Alert'})
         setNotification(notfication)
     })
+    socket.on("refresh", () =>{
+                  
+        router.reload();
+    })
+
 
     return ()=>{
         socket.removeAllListeners("new_notification");
+        socket.removeAllListeners("refresh")
     }
 }   
 

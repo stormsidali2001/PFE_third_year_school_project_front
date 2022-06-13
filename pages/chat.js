@@ -51,10 +51,12 @@ const chat = props => {
     },[messages])
     useEffect(async()=>{
     
+
         socket?.on("teamMessageToClient",payload=>{
           
             setDiscussion(discussion=>[...discussion,{id : 1 , chatId : 1 , createdAt : new Date().toLocaleDateString(), sender : payload.sender, message : payload.txt}]);
         })
+        
        
     },[socket])
      if(userType !== 'student'){

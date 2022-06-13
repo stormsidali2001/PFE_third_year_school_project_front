@@ -21,12 +21,14 @@ const TeamDocs = ({toastsRef})=>{
     const [selectedFiles,setSelectedFiles] = useState({})
     const {createTeamDocument,getTeamDocuments,deleteTeamDocs,getPromotionDocumentTypes,commitDocs} = useStoreActions(store=>store.teamDocumentModel)
     const {documents,documentTypes} = useStoreState(store=>store.teamDocumentModel)
+    const {socket} = useStoreState(store=>store.socketModel)
     const [chosenDocType,setChosenDocType] = useState(null)
    
     const  {uploadFileThunk} = useStoreActions(store=>store.user)
     const [openCommitModal,setOpenCommitModel] = useState(false)
     const [commitTitle,setCommitTitle] = useState('')
     const [commitDescription,setCommitDescription] = useState('')
+    const [runOnce,setRunOnce] = useState(false)
     useEffect(async()=>{
         try{
 
@@ -39,6 +41,22 @@ const TeamDocs = ({toastsRef})=>{
 
         }
     },[])
+
+    useEffect(()=>{
+        if(!socket) return;
+        console.log(socket,"teamDocs")
+        if(!runOnce){
+         socket?.on("team-documents-alltered",async()=>{
+                    await getTeamDocuments();
+                 
+            })
+            setRunOnce(true)
+        }
+
+        return ()=>{
+            socket?.removeAllListeners("team-documents-alltered");
+        }
+    },[socket])
     const handleNewDoc = async e =>{
         e.preventDefault();
         try{
@@ -66,7 +84,7 @@ const TeamDocs = ({toastsRef})=>{
             setNewDocModal(false)
          
 
-               await getTeamDocuments()
+          
            
 
             
@@ -89,6 +107,7 @@ const TeamDocs = ({toastsRef})=>{
             setSelectedFiles({})
          
                 await getTeamDocuments()
+                
          
 
 
@@ -189,7 +208,7 @@ const TeamDocs = ({toastsRef})=>{
                             </div>}
                           {  Object.keys(selectedFiles).length >=1 &&<div 
                                     className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
-                                    onClick={(e)=>setNewDocModal(m=>!m)}
+                                    onClick={(e)=>handleDeleteDocs(e)}
                             >
                                 <TrashIcon
                                     className='w-8 text-textcolor shadow-textcolor rounded-[10px] group-hover:shadow-lg group-hover:scale-110 group-hover:bg-textcolor/20'

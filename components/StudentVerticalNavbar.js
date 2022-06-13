@@ -38,7 +38,7 @@ const StudentVerticalNavbar = () => {
                 Vous voulez consulter la liste des announcement ou bien vous voulez creer un nouveau ?
             </div>
             <div className="flex space-x-4 w-fit mx-auto">
-                <div className="bg-blue-400 text-white px-2 py-1 rounded-[5px]  cursor-pointer hover:bg-blue-300"><Link href='/addannouncement'>creer</Link></div>
+              { isTeamLeader&& <div className="bg-blue-400 text-white px-2 py-1 rounded-[5px]  cursor-pointer hover:bg-blue-300"><Link href='/addannouncement'>creer</Link></div>}
                 <div className="bg-blue-400 text-white px-2 py-1 rounded-[5px] cursor-pointer hover:bg-blue-300"><Link href='/announcementlist'>naviguer</Link></div>
             </div>
         </div>
@@ -55,7 +55,7 @@ const StudentVerticalNavbar = () => {
                 Vous voulez consulter la liste des sondages ou bien vous voulez creer un nouveau ?
             </div>
             <div className="flex space-x-4 w-fit mx-auto">
-                <div className="bg-blue-400 text-white px-2 py-1 rounded-[5px]  cursor-pointer hover:bg-blue-300"><Link href='/createsurvey'>creer</Link></div>
+              { isTeamLeader&& <div className="bg-blue-400 text-white px-2 py-1 rounded-[5px]  cursor-pointer hover:bg-blue-300"><Link href='/createsurvey'>creer</Link></div>}
                 <div className="bg-blue-400 text-white px-2 py-1 rounded-[5px] cursor-pointer hover:bg-blue-300"><Link href='/surveys'>naviguer</Link></div>
             </div>
         </div>
