@@ -3,11 +3,11 @@ import HorisontalNavbar from "../components/HorisontalNavbar";
 
 const adminDashboard = props => {
    return(
-       <div>
-            <div>
+      
+            <div className="min-w-[100vw] min-h-[100vh] flex bg-background">
                 <AcceuilEntreprise/>
             </div>
-       </div>
+      
    )
 }
 export default adminDashboard;
