@@ -35,9 +35,12 @@ const StudentList = ({toastsRef})=>{
 
 
         })
+        setModalOpen(false)
+
         console.log(res,'///////////////////////////...')
  if(res.status === 'Success'){
    
+    
     toastsRef.current.addMessage({mode:'Alert',text:res.message})
  }else if( res.status === 'Error'){
     toastsRef.current.addMessage({mode:'Error',text:res.message})

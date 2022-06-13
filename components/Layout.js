@@ -1,12 +1,15 @@
 import { useRouter } from "next/router"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { Socket } from "socket.io-client"
 import { useStoreActions, useStoreState } from "../store/hooks"
 const Layout = ({toastsRef,children,HorisontalNavbar,StudentVerticalNavbar,TeacherVerticalNavbar,AdminVerticalNavbar})=>{
     const {getUserInfo} = useStoreActions(store=>store.user)
     const user = useStoreState(store=>store.user)
-    const {getLastNotificationsThunk,getNewNotificationThunk} = useStoreActions(store=>store.notificationService)
+    const {getLastNotificationsThunk,getNewNotificationThunk,setNotification} = useStoreActions(store=>store.notificationService)
     const {socket} = useStoreState(store=>store.socketModel)
     const router = useRouter();
+
+    const [runOnce,setRunOnce] = useState(false)
 
    
     const currentRoute = router?.route?.split('/')?.slice(1);
@@ -17,20 +20,36 @@ const Layout = ({toastsRef,children,HorisontalNavbar,StudentVerticalNavbar,Teach
   
    
     const {userType} = user;
-    console.log(userType,'kakarouto')
+  
     useEffect(async()=>{
         await getUserInfo()
         await getLastNotificationsThunk();
     },[])
 
     useEffect(async ()=>{
-        if(!socket) {
-            console.log("socket not initialized yet");
+        if(!socket ) {
+            console.log("zzzzzzzzzzz socket not initialized yet");
             return;
         }
        
-        console.log("zzzzzzzzzzzzzzzzzz",socket)
-        await getNewNotificationThunk(toastsRef) 
+       
+  
+   if(!socket.hasListeners("new_notification") && runOnce ===false)  {
+    setRunOnce(true)
+    console.log("zzzzzzzzzzz",socket,socket.hasListeners("new_notification"))
+
+    socket.on("new_notification", notfication =>{
+                  
+        toastsRef.current.addMessage({text:notfication.description,mode:'Alert'})
+        setNotification(notfication)
+    })
+
+    return ()=>{
+        socket.removeAllListeners("new_notification");
+    }
+}   
+
+    
       
      
     },[socket])

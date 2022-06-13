@@ -36,7 +36,6 @@ const Login = ({toastsRef}) => {
             setLoading(true)
             const user = await loginThunk({email,password});
             toastsRef.current.addMessage({text:`Bienvenue ${user[user.userType].firstName} ${user[user.userType].lastName}`,mode:'Alert'})
-         
             router.push(`${user.userType}dashboard`)
           
             

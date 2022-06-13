@@ -44,7 +44,7 @@ export interface UserThunks{
     loginThunk:Thunk<this,LoginPayload,undefined,any>;
     logoutThunk:Thunk<this,undefined,undefined,undefined>;
     getUserInfo:Thunk<this,undefined,undefined,any>;
-    logout:Thunk<this,undefined,undefined,undefined>;
+    logout:Thunk<this,undefined,undefined,any>;
     uploadFileThunk:Thunk<this,any,undefined,any>;
     uploadFilesThunk:Thunk<this,any,undefined,any>;
     getFileThunk:Thunk<this,string,undefined,undefined>;
@@ -80,7 +80,8 @@ export const userModel:UserModel | null={
             }
             )
          const user = await actions.getUserInfo();
-      
+         //@ts-ignore
+         await getStoreActions().notificationService.getLastNotificationsThunk()
             console.log(res,user)
          
       return  user;
@@ -150,9 +151,11 @@ export const userModel:UserModel | null={
         })
        
     }),
-    logoutThunk:thunk(async(actions)=>{
+    logoutThunk:thunk(async(actions,payload,{getStoreActions})=>{
         await axios.post('http://localhost:8080/logout',{},{withCredentials:true})
         actions.setUser({})
+        //@ts-ignore
+        getStoreActions().notificationService.setNotifications([]);
     })
 
     
