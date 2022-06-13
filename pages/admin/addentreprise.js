@@ -90,22 +90,22 @@ const addEntreprise = ({toastsRef}) => {
     
     }
     return (
-       <div className="bg-background min-h-screen min-w-screen">
+       <div className="bg-background min-h-screen min-w-screen ">
 
-            <div className="bg-background h-screen w-screen relative flex items-center justify-center font-xyz text-textcolor">
+            <div className="bg-background pt-[100px] pl-[100px] min-h-screen min-w-screen relative flex items-center justify-center font-xyz text-textcolor">
                 <img src="/addStudent.jpg" className="h-full w-full object-contain mix-blend-darken absolute"/>
-                <div className={`h-[200px] w-[450px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
+                <div className={`min-h-[200px] py-6 w-[450px] h-fit bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
                     <div className="text-[23px] text-center px-10">Vous voulez ajouter une ou plusieur entreprise ?</div>
-                    <div className="space-x-6">
+                    <div className="sm:flex-row flex-col gap-6 flex">
                         <button className="h-[35px] w-[160px] rounded-full bg-[#32AFF5] text-white" onClick={()=> setOneClick(true)}>Un seul</button>
                         <button className="h-[35px] w-[160px] rounded-full bg-[#8FD4FB]" onClick={()=> setManyClick(true)}>Plusieurs</button>
                     </div>
                 </div>
-                <form className = {`h-[550px] w-[650px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[23px] ${oneclick === true ? "flex" : "hidden"}`} onSubmit={handleAddSingleStudent}>
-                    <div className="text-[35px]">Ajouter une entreprise</div>
+                <form className = {`min-h-[550px] h-fit before:pt-[100px] pl-[100px] w-[650px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[20px] ${oneclick === true ? "flex" : "hidden"}`} onSubmit={handleAddSingleStudent}>
+                    <div className="text-[30px] text-center">Ajouter une entreprise</div>
                     <table>
                         <tr className="">
-                            <td className="py-2">Code :</td>
+                            <td className="py-2 hidden sm:flex">Code :</td>
                             <td>
                                 <input
                                      className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Code..." 
@@ -115,7 +115,7 @@ const addEntreprise = ({toastsRef}) => {
                             </td>
                         </tr>
                         <tr className="">
-                            <td className="py-2">Email :</td>
+                            <td className="py-2 hidden sm:flex">Email :</td>
                             <td>
                                 <input className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" placeholder="E-mail..." onChange={(e)=>{setEmail(e.target.value)}}
                                  value={email}
@@ -123,7 +123,7 @@ const addEntreprise = ({toastsRef}) => {
                             </td>
                         </tr>
                         <tr className="">
-                            <td className="py-2">Nom :</td>
+                            <td className="py-2 hidden sm:flex">Nom :</td>
                             <td>
                                 <input className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" placeholder="Nom de l'entreprise..." onChange={(e)=>{setEntrepriseName(e.target.value)}}
                                 value={entrepriseName}

@@ -124,22 +124,22 @@ const addStudent = ({toastsRef}) => {
        <div className="bg-background min-h-screen min-w-screen">
             <div className="bg-background h-screen w-screen relative flex items-center justify-center font-xyz text-textcolor">
                 <img src="/addStudent.jpg" className="h-full w-full object-contain mix-blend-darken absolute"/>
-                <div className={`h-[200px] w-[450px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
+                <div className={`min-h-[200px] w-[450px] pt-[100px] pl-[100px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
                     <div className="sm:text-[23px] text-[17px] text-center px-10">Vous voulez ajouter un ou plusieur étudiant ?</div>
                     <div className="space-x-6 flex flex-row">
                         <button className="h-[35px] sm:w-[160px] w-[100px] rounded-full bg-[#32AFF5] text-white" onClick={()=> setOneClick(true)}>Un seul</button>
                         <button className="h-[35px] sm:w-[160px] w-[120px] rounded-full bg-[#8FD4FB]" onClick={()=> setManyClick(true)}>Plusieurs</button>
                     </div>
                 </div>
-                <form className = {`h-[500px] md:w-[650px] w-fit px-10 py-10 bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center relative text-[18px] ${oneclick === true ? "flex" : "hidden"} mt-[100px]`} onSubmit={handleAddSingleStudent}>
+                <form className = {`h-[500px] md:w-[650px] pt-[100px] pl-[100px] w-fit  bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center relative text-[18px] ${oneclick === true ? "flex" : "hidden"} mt-[100px]`} onSubmit={handleAddSingleStudent}>
                     <div className="sm:text-[26px] text-[22px]">Ajouter un étudiant</div>
                     <table>
-                    <tr className="">
+                    <tr className="sm:flex-row flex-col gap-6 flex">
                             <td className="py-1 hidden sm:flex">Promotion :</td>
                             <td >
                                 <Select
                                     placeholder="Promotion..." 
-                                    className="z-50 h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
+                                    className="z-50  h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
                                      onChange={(option)=>{setChoosenPromotion(option)}}
                                      options={promotions.map(el=>{return {value:el.id,label:el.name}})}
                                      isLoading = {!promotions}
