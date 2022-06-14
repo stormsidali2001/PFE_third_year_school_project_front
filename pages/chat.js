@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HorisontalNavbar from "../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import ArrowIcon from "../icons/ArrowIcon";
@@ -31,11 +31,28 @@ const chat = props => {
     const {userType } = user;
    
     const {student} = user;
+    const [runOnce,setRunOnce] = useState(false)
+    const messageBoxRef = useRef()
+    
  
     useEffect(async()=>{
         await getMessages();
        
     },[])
+    useEffect(async()=>{
+       if(!socket) return;
+
+       if(!runOnce){
+        socket?.on("teamMessageToClient",payload=>{
+          
+            setDiscussion(discussion=>[...discussion,{id : 1 , chatId : 1 , createdAt : new Date().toLocaleDateString(), sender : payload.sender, message : payload.txt}]);
+           
+        })
+        setRunOnce(true)
+
+       }
+       
+    },[socket])
     useEffect(async=>{
         setDiscussion(messages.map(msg=>{
 
@@ -49,27 +66,23 @@ const chat = props => {
             }
         }))
     },[messages])
-    useEffect(async()=>{
-    
-
-        socket?.on("teamMessageToClient",payload=>{
-          
-            setDiscussion(discussion=>[...discussion,{id : 1 , chatId : 1 , createdAt : new Date().toLocaleDateString(), sender : payload.sender, message : payload.txt}]);
-        })
-        
-       
-    },[socket])
+  
      if(userType !== 'student'){
         return "not a student";
     }
 
     const handleSubmitMessage = async() => {
+        
         if (newMessage !== "") {
-            await sendMessage({
+             socket?.emit("teamMessageToServer",{
                 txt:newMessage,
                 sender:student
             })
             setNewMessage('')
+           
+            const msgBox =   messageBoxRef.current
+            console.log(msgBox,messageBoxRef)
+            messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight-300;
          
 
         }
@@ -103,16 +116,16 @@ const chat = props => {
                 }}
                 >
                     <div className={`flex flex-col h-[450px] w-full space-y-10 items-center justify-center absolute top-0 z-40 ${discussionOuverte === true ? " p-2 md:p-12 bg-white/90 backdrop-blur-sm shadow-xl rounded-xl scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 overflow-x-hidden" : ""}`}
-                   
+                   ref={messageBoxRef}
                     >
                     
                         <div className={`text-[25px] font-thin absolute bottom-4 ${discussionOuverte === true ? "hidden" : "md:flex hidden "}`}>Cliquer sur un groupe pour afficher les messages</div>
-                        <div className={`flex-col h-full w-full space-y-10`}>
+                        <div className={`flex-col h-full w-full space-y-10`} >
                             
                                 <div>
                                 {
                                     discussion.map((element) => {
-                                        console.log(element,student)
+                                    
                                         return (
                                             <div className={`flex-col  flex h-full w-full space-y-10 ${student?.id === element?.sender?.id ? "items-end" : "items-start"}`}
                                            >

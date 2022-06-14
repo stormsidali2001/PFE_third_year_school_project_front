@@ -13,6 +13,7 @@ import EditIcon from "../icons/EditIcon";
 import Trash from "../icons/Trash";
 import TrashIcon from "../icons/TrashIcon";
 import CommitIcon from "../icons/CommitIcon";
+import { readSheetNames } from "read-excel-file";
 const TeamDocs = ({toastsRef})=>{
     const router = useRouter()
     const [newDocModal,setNewDocModal] = useState(false)
@@ -26,8 +27,10 @@ const TeamDocs = ({toastsRef})=>{
    
     const  {uploadFileThunk} = useStoreActions(store=>store.user)
     const [openCommitModal,setOpenCommitModel] = useState(false)
+    const [openModificationModal,setOpenModificationModal] = useState(false)
     const [commitTitle,setCommitTitle] = useState('')
     const [commitDescription,setCommitDescription] = useState('')
+    const [name,setName] = useState('');
     const [runOnce,setRunOnce] = useState(false)
     useEffect(async()=>{
         try{
@@ -77,7 +80,7 @@ const TeamDocs = ({toastsRef})=>{
             const {filename,destination,originalname} = res.data;
             console.log(res.data)
             const url = destination+'/'+filename;
-            await createTeamDocument({name:originalname,url,description,typeDocId:chosenDocType.value})
+            await createTeamDocument({name,url,description,typeDocId:chosenDocType.value})
             toastsRef.current.addMessage({text:"document ajouté avec success",mode:'Alert'})
             setDescription('')
             setFile(null)
@@ -93,6 +96,9 @@ const TeamDocs = ({toastsRef})=>{
             toastsRef.current.addMessage({text:"Probleme",mode:'Error'})
             console.log(err)
         }
+
+
+
 
 
 
@@ -136,6 +142,10 @@ const TeamDocs = ({toastsRef})=>{
     }
     function handleChange(e) {
         setFile(e.target.files[0])
+        const getNameWithoutExtension = (name)=>{
+           return name.substring(0,name.lastIndexOf("."))
+        }
+        setName(getNameWithoutExtension(e.target.files[0].name))
       };
     const handleSelectFiles = file=>{
         if(selectedFiles[file.id]){
@@ -151,6 +161,18 @@ const TeamDocs = ({toastsRef})=>{
             })
         }
        
+    }
+
+    const handleShowModificationModal = ()=>{
+        const sFiles = Object.keys(selectedFiles);
+        if(Object.keys(selectedFiles).length !== 1 && documentTypes.length!==0 ) return;
+        const selectedFile = selectedFiles[sFiles[0]];
+        setDescription(selectedFile.description)
+        const chosenType = documentTypes.find(el=>el.id === selectedFile.type.id)
+        setChosenDocType({label:chosenType.name,value:chosenType.id});
+        setName(selectedFile.name)
+        setOpenModificationModal(true)
+
     }
     return(
 <div className="bg-background min-h-[200vh] w-screen">
@@ -197,7 +219,7 @@ const TeamDocs = ({toastsRef})=>{
                             </div>
                            { Object.keys(selectedFiles).length ===1  && <div 
                                     className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
-                                    onClick={(e)=>setNewDocModal(m=>!m)}
+                                    onClick={(e)=>handleShowModificationModal()}
                             >
                                 <EditIcon
                                     className='w-8 text-textcolor group-hover:bg-textcolor/20 shadow-textcolor rounded-[10px] group-hover:shadow-lg group-hover:scale-110'
@@ -220,7 +242,7 @@ const TeamDocs = ({toastsRef})=>{
                             
                            { Object.keys(selectedFiles).length >=1 &&<div 
                                     className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
-                                    onClick={(e)=>setNewDocModal(m=>!m)}
+                                    onClick={()=>setOpenCommitModel(true)}
                             >
                                 <CommitIcon
                                     className='w-8 text-textcolor shadow-textcolor rounded-[10px] group-hover:shadow-lg group-hover:scale-110 group-hover:bg-textcolor/20'
@@ -277,6 +299,7 @@ const TeamDocs = ({toastsRef})=>{
             <form className="w-full h-full flex flex-col items-center space-y-4" onSubmit={handleNewDoc}>
                 <h1 className=" text-2xl text-textcolor font-semibold">Nouveau fichier</h1>
                 <div className="w-[90%] text-center text-sm">Inserer un nouveau fichier dans l'espace de travail de votre equipe</div>
+                
                   <div className="flex space-x-2 items-center mx-auto">
                           <div>Type:</div>
                             <Select
@@ -289,6 +312,16 @@ const TeamDocs = ({toastsRef})=>{
                                         
                             />
                     </div>
+                    
+                   {     file&&<div className="flex space-x-2 items-center mx-auto">
+                            <div>File name:</div>
+                            <input
+                                    value={name}
+                                    onChange = {(e)=>setName(e.target.value)}
+                                    className = 'bg-gray-200 px-2 py-1 rounded-[5px]'
+                            />
+                         </div>
+                }
                { 
                         file?(
                             <>
@@ -374,6 +407,55 @@ const TeamDocs = ({toastsRef})=>{
 
                 </div>
                
+            </form>
+        </ModalPortal>
+
+        <ModalPortal
+            handleClose={setOpenModificationModal}
+            open={openModificationModal}
+            styles = ''
+        >
+            
+            <form className="w-full h-full flex flex-col items-center space-y-4" onSubmit={handleNewDoc}>
+                <h1 className=" text-2xl text-textcolor font-semibold">Modifier le document</h1>
+             
+                <div className="flex space-x-2 items-center mx-auto">
+                          <div>Name:</div>
+                           <input
+                                value={name}
+                                onChange = {(e)=>setName(e.target.value)}
+                                className = 'bg-gray-200 px-2 py-1 rounded-[5px]'
+                           />
+                    </div>
+                  <div className="flex space-x-2 items-center mx-auto">
+                          <div>Type:</div>
+                            <Select
+                                        placeholder="type de document..." 
+                                        onChange={(option)=>{setChosenDocType(option)}}
+                                        options={documentTypes.map(el=>{return {value:el.id,label:el.name}})}
+                                        isLoading = {!documentTypes}
+                                        value={chosenDocType}
+                                        styles = {{menuPortal:base=>({...base,zIndex:100,width:'100px',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
+                                        
+                            />
+                    </div>
+
+
+            
+                <textarea 
+                        value={description}
+                        onChange={(e)=>setDescription(e.target.value)}
+                        className='shadow-lg  placeholder-black rounded-[5px] px-2 text-black p-1 h-[60px] resize-none scroll-none w-[90%] bg-gray-200'
+                        placeholder="description..."
+                        
+                />
+
+               <button 
+                    type="submit"  
+                    className="bg-[#5375E2]/80 backdrop-blur-[8px]   font-semibold  px-4 border-2 border-white hover:bg-[#5375E2]/60 rounded-full text-white ease-in transition-colors tracking-wider">
+                        
+                            Submit
+                    </button>
             </form>
         </ModalPortal>
         
