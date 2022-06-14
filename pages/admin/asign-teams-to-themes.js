@@ -91,7 +91,7 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                    <form
                     className="w-[450px]"
                    >
-                   {  step===0 &&<div className="w-full py-2 flex flex-col space-y-2 items-center">
+                   {  step===0 &&<div className="w-full py-2 flex flex-col space-y-4 items-center">
                        <div className="mx-auto text-textcolor text-[24px]">Affectation</div>
                         <Select
                             placeholder="Promotion..." 
@@ -103,7 +103,7 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                             styles = {{menuPortal:base=>({...base,zIndex:500,width:'100%'})}}
                         />
                       <div className="mx-auto text-textcolor text-[22px]">Methode d{"'"}affectation</div>
-                      <div className="w-[80%] h-fit py-2 border-2 flex flex-col items-center">
+                      <div className="w-[80%] h-fit gap-4 flex flex-wrap  items-center">
                          { 
                          choices.map((el,index)=>{
                                  return(
@@ -117,19 +117,16 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                        
                         
                       </div>
-                      <button className="bg-blue-300 px-2 py-1 rounded-[5px]" onClick={handleAsignThemesToTeams}>suivant</button>
+                      <button className="bg-blue-300 px-2 py-1 text-[18px] rounded-[5px]" onClick={handleAsignThemesToTeams}>Suivant</button>
 
                        </div>
                      }
                     
                     {
-//**   Step 1 */
+                    //**   Step 1 */
                     }
         {  step===1 &&<div className="w-full py-2 flex flex-col space-y-2 items-center">
-                       <div className="mx-auto text-textcolor text-[24px]">Affectation</div>
-                     
-
-                     
+                       <div className="mx-auto text-textcolor text-[24px]">Affectation</div>                     
                       <div className="mx-auto text-textcolor text-[22px]">Resultats</div>
                       <div className="w-[80%] h-[100px] py-2 border-2 flex flex-col items-center overflow-y-auto px-2">
                          { 
@@ -170,15 +167,7 @@ const handleApplyThemesToTeamsAssignements = async e=>{
 
                        </div>
                      }
-                    
-                    {
-                        
-                    }
-
-                  
-
                    </form>
-
                </ModalPortal>
        </div>
    )
