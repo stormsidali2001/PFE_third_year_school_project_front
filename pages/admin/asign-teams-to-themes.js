@@ -77,7 +77,7 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                         Les équipes non renvoyantes la fiche de voeux seront affécter automatiquement
                     </div>
                     <button 
-                        className="h-[35px] w-[250px] rounded-full shadow-lg bg-blue-200 hover:bg-blue-300 text-[18px]"
+                        className="h-[35px] w-[250px] rounded-full shadow-lg border-blue-400 border-2 hover:border-blue-600 text-[18px]"
                         onClick={(e) => setOpen(true)}
                     >
                         Affecter les thèmes
@@ -125,19 +125,18 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                     {
                     //**   Step 1 */
                     }
-        {  step===1 &&<div className="w-full py-2 flex flex-col space-y-2 items-center">
-                       <div className="mx-auto text-textcolor text-[24px]">Affectation</div>                     
+        {  step===1 &&<div className="w-full py-2 flex flex-col space-y-6 items-center">                     
                       <div className="mx-auto text-textcolor text-[22px]">Resultats</div>
-                      <div className="w-[80%] h-[100px] py-2 border-2 flex flex-col items-center overflow-y-auto px-2">
+                      <div className="w-[90%] h-[200px]  space-y-6 flex flex-col items-center  scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 overflow-x-hidden overflow-y-auto px-2">
                          { 
                             results.map(({theme,teams})=>{
                                 return (
-                                    <div className="flex flex-col w-full text-textcolor">
-                                        <div className="flex space-x-2 justify-start  ">
+                                    <div className="flex flex-col space-y-4 w-full text-textcolor">
+                                        <div className="flex space-x-4 justify-start  ">
                                             <div className="font-medium">Theme:</div>
                                             <div>{theme.title}</div>
                                         </div>
-                                        <div className="flex flex-wrap gap-2  px-4">
+                                        <div className="flex flex-wrap gap-3 px-4">
                                             {
                                                 teams.map(({nickName})=>{
                                                     return (
@@ -153,11 +152,11 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                        
                         
                       </div>
-                      <div className="flex space-x-2">
-                          <button className="bg-blue-300 px-2 py-1 rounded-[5px]" 
+                      <div className="flex space-x-8">
+                          <button className="border-blue-300 border-2 text-slate-700 hover:border-blue-400 w-[120px] py-1 rounded-[999999px] shadow-sm" 
                               onClick={()=>setStep(0)}
                           >Back</button>
-                        <button className="bg-blue-300 px-2 py-1 rounded-[5px]" 
+                        <button className="border-blue-300 border-2 text-white/80 text-slate-700  w-[120px] hover:border-blue-400 px-2 py-1 rounded-[555555px] shadow-sm" 
                             onClick={handleApplyThemesToTeamsAssignements}
                         >Confirmer</button>
 
