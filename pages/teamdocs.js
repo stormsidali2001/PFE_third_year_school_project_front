@@ -249,7 +249,7 @@ const TeamDocs = ({toastsRef})=>{
                             })
                       }
                 </div>
-                <div className="flex w-[95%] justify-between h-[60px]     mx-auto bg-textcolor/10 backdrop-blur-sm"> {/* options menu */}
+                <div className="flex w-[95%] justify-between h-[60px]  mx-auto bg-textcolor/10 backdrop-blur-sm"> {/* options menu */}
                             <div 
                                     className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
                                     onClick={(e)=>setNewDocModal(m=>!m)}

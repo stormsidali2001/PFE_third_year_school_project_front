@@ -114,11 +114,11 @@ const creerSoutenance = ({toastsRef}) => {
     }
     console.log(teachers,'pssssssssssss')
     return (
-        <div className='h-screen w-screen bg-background'>
+        <div className='min-h-screen h-fit py-12 min-w-screen bg-background'>
             <div className=' flex relative flex-col space-y-6  pt-[100px] pl-[100px] items-center justify-start font-xyz text-black text-[17px]'>
                 <div className='text-[26px] underline italic'>Créer une soutenace</div>
                 <img src='/createSoutenace.webp' className='absolute h-[500px] opacity-80 mix-blend-darken object-contain'/>
-                <div className='h-[440px] py-6 px-12 w-[600px] bg-white/50 backdrop-blur-sm shadow-lg rounded-xl flex flex-col space-y-2'>
+                <div className='h-fit py-6 px-12 w-[600px] bg-white/50 backdrop-blur-sm shadow-lg rounded-xl flex flex-col space-y-2'>
                     <div className='flex flex-row space-x-4 items-center'>
                         <div>Titre </div>
                         <input 
@@ -161,7 +161,7 @@ const creerSoutenance = ({toastsRef}) => {
                             </span>}
                         </div>
                         <button 
-                            className='text-[28px] rounded-full h-[32px] flex items-center justify-center w-[32px] bg-blue-300 hover:bg-blue-400'
+                            className='text-[28px] shadow-md backdrop-blur-sm rounded-full h-[32px] flex items-center justify-center w-[32px] bg-white/20 border-2 border-slate-200 hover:border-slate-400'
                             onClick={handleShowEquipeModel}
                         >
                             +
@@ -170,7 +170,7 @@ const creerSoutenance = ({toastsRef}) => {
                     <div className='flex flex-row space-x-4 items-center'>
                         <div>Jury :</div>
                         <button 
-                            className='text-[28px] rounded-full h-[32px] flex items-center justify-center w-[32px] bg-blue-300 hover:bg-blue-400'
+                            className='text-[28px] backdrop-blur-sm shadow-md rounded-full h-[32px] flex items-center justify-center w-[32px] bg-white/20 border-2 border-slate-200 hover:border-slate-400'
                             onClick={(e) => {setOpenPortalModelJury(true)}}
                         >
                             +
@@ -209,7 +209,7 @@ const creerSoutenance = ({toastsRef}) => {
                         />
                     </div>
                     <div className='w-full flex items-center justify-center pt-3'>
-                        <button onClick={handleCreateSoutenance} className='h-[35px] w-[150px] bg-blue-300 hover:bg-blue-400 rounded-full shadow-lg text-center'>Créer</button>
+                        <button onClick={handleCreateSoutenance} className='h-[35px] w-[150px]  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg text-center'>Créer</button>
                     </div>
                 </div>
                 <ModalPortal
