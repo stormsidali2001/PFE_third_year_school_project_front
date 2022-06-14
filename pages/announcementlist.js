@@ -28,21 +28,21 @@ const AnnouncementList = ({toastsRef}) => {
         <>
         <div className="min-h-[200vh] bg-background h-fit  items-center  flex flex-col   ">
            
-            <div className="bg-white w-[70vw] min-h-[100vh] mt-[100px] shadow-lg flex flex-col items-center text-textcolor pt-2">
-                <div className="text-[30px] flex space-x-4 "> 
+            <div className="bg-white overflow-y-scroll scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 overflow-x-hidden relative w-[70vw] h-[70vh] mt-[100px] shadow-lg flex flex-col justify-center items-center text-textcolor pt-2">
+                <div className="text-[30px] flex space-x-4 absolute top-4"> 
                         <SpeakerIcon className=' w-12 text-[#5375E2]  text-3xl'/>
                         <span className="">Announcemnt</span>
                     
                 </div>
                 <img
                     src='/announcement-background.jpg'
-                    className="h-[500px]  object-contain opacity-80"
+                    className="h-[500px]  object-contain opacity-20"
                 />
-               <div className="flex-col space-y-4 p-4 w-full">
+               <div className="flex-col items-center justify-center absolute top-16 space-y-4 p-4 w-full">
                     {
                         announcements.map(({title,description,documents})=>{
                             return(
-                                <div className="w-[95%] shadow-lg rounded-[20px] flex flex-col space-y-2 py-2 px-4">
+                                <div className="w-[95%] bg-white/50 h-[140px]  overflow-y-scroll scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 overflow-x-hidden backdrop-blur-sm shadow-lg rounded-[20px] flex flex-col space-y-2  px-4">
                                     <div className="text-textcolor text-xl font-medium">{title}</div>
                                     <div className="break-words">
                                         {description}
@@ -51,10 +51,12 @@ const AnnouncementList = ({toastsRef}) => {
                                             {
                                                 documents.map(doc=>{
                                                     return (
-                                                        <Document
-                                                            file={doc}
-                                                            onClick={(e)=>handleClick(doc)}
-                                                        />
+                                                        <div className="w-[80px] break-all">
+                                                            <Document
+                                                                file={doc}
+                                                                onClick={(e)=>handleClick(doc)}
+                                                            />
+                                                        </div>
 
                                                     )
                                                 })
