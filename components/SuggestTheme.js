@@ -98,27 +98,27 @@ const SuggestTheme = ({toastsRef}) => {
                 <div className="flex-row flex items-center space-x-6">
                     <div> Promotion</div>
                     <Select
-                    className="h-[40px] w-[300px] bg-white/50 shadow-md rounded-md border-2 border-slate-200 backdrop-blur-sm"
+                    className="h-[40px] w-[300px] bg-white/50 shadow-md rounded-md border-2 border-slate-200 backdrop-blur-sm z-[500]"
                         placeholder="Promotion..." 
                         onChange={(option)=>{setChoosenPromotion(option)}}
                         options={promotions.map(el=>{return {value:el.id,label:el.name}})}
                         isLoading = {!promotions}
                         value={chosenPromotion}
-                        styles = {{menuPortal:base=>({...base,zIndex:100,width:'80%',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
+                        styles = {{menuPortal:base=>({...base,zIndex:500,width:'80%',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
                     />
                 </div>   
                 
-                <div className="flex-row flex items-center space-x-6">
+                <div className="flex-row z-0 flex items-center space-x-6">
                     <div>Titre</div>
                     <input 
                         placeholder='Titre...'
                         value={title}
-                        className=" border-2 border-slate-200  outline-none h-[40px] w-[350px] px-3 bg-white/60 backdrop-blur-sm shadow-md rounded-md  text-black" 
+                        className=" border-2 border-slate-200 z-0  outline-none h-[40px] w-[350px] px-3 bg-white/60 backdrop-blur-sm shadow-md rounded-md  text-black" 
                         onChange={(e)=>setTitle(e.target.value)}
                     />
                 </div>   
     
-                <div className="flex-1 space-y-3 space-x-6">
+                <div className="flex-1 space-y-3 z-2 space-x-6">
                     <div> Description</div> 
                         <textarea 
                             placeholder='Description...'
