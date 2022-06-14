@@ -44,7 +44,7 @@ export const teamAnnouncementsModel:TeamAnnouncementsModel = {
     getAnnouncementsThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
    
         try{
-           const res =  await axios.get('http://localhost:8080/getAnnouncement',{
+           const res =  await axios.get('http://localhost:8080/getAnnouncements',{
            
                 withCredentials:true
             

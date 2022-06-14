@@ -100,7 +100,7 @@ const FicheVoeux = ({toastsRef}) => {
         <div >
             <HorisontalNavbar/>
             <div className="h-[200vh] bg-background min-h-screen items-center px-4 pt-[100px] flex flex-col  py-8 ">
-                <AdminVerticalNavbar/>
+             
                 <div className="flex flex-col h-screen w-[90%] bg-white  text-textcolor  font-mono"> {/* list wrapper */}
                     <div className="w-full text-center text-[26px]">La fiche des voeux</div>
                 

@@ -7,6 +7,12 @@ export interface TeamDocumentPayload{
     ownerId:string;
     typeDocId:string;
 }
+export interface UpdateTeamDocPayload{
+    name:string;
+    description:string;
+    documentId:string;
+    documentTypeId:string;
+}
 
 export interface CommitPaylaod{
     title:string;
@@ -34,6 +40,7 @@ export interface TeamDocumentsThunks{
     createTeamDocument:Thunk<this,TeamDocumentPayload,undefined,undefined>;
     getTeamDocuments:Thunk<this,undefined,undefined,undefined>;
     deleteTeamDocs:Thunk<this,DeleteDocumentPayload,undefined,undefined>;
+    updateTeamDocument:Thunk<this,UpdateTeamDocPayload,undefined,undefined>;
     getPromotionDocumentTypes:Thunk<this,undefined,undefined,undefined>;
     commitDocs:Thunk<this,CommitPaylaod,undefined,undefined>;
 }
@@ -91,6 +98,17 @@ export const teamDocumentModel:TeamDocumentModel = {
             })
            
         }),
+    updateTeamDocument:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
+        await axios.post('http://localhost:8080/updateDocument',
+        {
+            ...payload
+        }
+        , 
+         {
+             withCredentials:true
+         })
+        
+     }),
      
       
 }
