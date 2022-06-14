@@ -20,11 +20,11 @@ const TeamDocs = ({toastsRef})=>{
     const [description,setDescription] = useState('');
     const [file,setFile] = useState(null);
     const [selectedFiles,setSelectedFiles] = useState({})
-    const {createTeamDocument,getTeamDocuments,deleteTeamDocs,getPromotionDocumentTypes,commitDocs} = useStoreActions(store=>store.teamDocumentModel)
+    const {createTeamDocument,getTeamDocuments,deleteTeamDocs,getPromotionDocumentTypes,commitDocs,updateTeamDocument} = useStoreActions(store=>store.teamDocumentModel)
     const {documents,documentTypes} = useStoreState(store=>store.teamDocumentModel)
     const {socket} = useStoreState(store=>store.socketModel)
     const [chosenDocType,setChosenDocType] = useState(null)
-   
+    
     const  {uploadFileThunk} = useStoreActions(store=>store.user)
     const [openCommitModal,setOpenCommitModel] = useState(false)
     const [openModificationModal,setOpenModificationModal] = useState(false)
@@ -32,6 +32,9 @@ const TeamDocs = ({toastsRef})=>{
     const [commitDescription,setCommitDescription] = useState('')
     const [name,setName] = useState('');
     const [runOnce,setRunOnce] = useState(false)
+    const user = useStoreState(store=>store.user);
+  
+ 
     useEffect(async()=>{
         try{
 
@@ -174,6 +177,47 @@ const TeamDocs = ({toastsRef})=>{
         setOpenModificationModal(true)
 
     }
+    const handleUpdateDocument = async e=>{
+        try{
+            e.preventDefault();
+            const selected = Object.keys(selectedFiles);
+            if(selected.length !==1) return;
+            console.log(selected)
+            await updateTeamDocument({
+                name,
+                description,
+                documentId:selectedFiles[selected[0]].id,
+                documentTypeId:selectedFiles[selected[0]].type.id
+            })
+            toastsRef.current.addMessage({text:"C'est fait!!!",mode:"Alert"})
+            setOpenModificationModal(false)
+        }catch(err){
+            toastsRef.current.addMessage({text:"Ops...Error",mode:"Error"})
+            setOpenModificationModal(false)
+            console.log(err)
+        }
+   
+    }
+    if(user.userType !== 'student'){
+        return "permission denied"
+    }
+  
+    const hasTeam = user.student.team;
+    if(!hasTeam){
+        return "permission denied"
+    }
+    const isTeamLeader =hasTeam &&( user.student?.team?.teamLeader?.id === user.student?.id);
+    const canModifyDoc = ()=>{
+        const selected = Object.keys(selectedFiles);
+      
+        if(selected.length !==1) return false;
+      
+        const owner = selectedFiles[selected[0]].owner;
+        
+
+        return !!isTeamLeader || owner.id === user.student.id;
+        
+    }
     return(
 <div className="bg-background min-h-[200vh] w-screen">
        <div className="pt-[100px] pl-[100px] h-full w-full">
@@ -217,7 +261,7 @@ const TeamDocs = ({toastsRef})=>{
                                 <span className="text-textcolor font-semibold bg-white shadow-md  rounded-[10px] absolute  top-0 translate-y-[-90%] group-hover:block transition-all ease-in hidden shadow-textcolor px-2 py-1">Ajouter</span>
                                        
                             </div>
-                           { Object.keys(selectedFiles).length ===1  && <div 
+                           { canModifyDoc()&&Object.keys(selectedFiles).length ===1  && <div 
                                     className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
                                     onClick={(e)=>handleShowModificationModal()}
                             >
@@ -228,7 +272,7 @@ const TeamDocs = ({toastsRef})=>{
                                 <span className="text-textcolor font-semibold bg-white  shadow-md  rounded-[10px] absolute  top-0 translate-y-[-90%] group-hover:block transition-all ease-in hidden shadow-textcolor px-2 py-1">Modifier</span>
                                        
                             </div>}
-                          {  Object.keys(selectedFiles).length >=1 &&<div 
+                          {  canModifyDoc() &&Object.keys(selectedFiles).length >=1 &&<div 
                                     className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
                                     onClick={(e)=>handleDeleteDocs(e)}
                             >
@@ -240,7 +284,7 @@ const TeamDocs = ({toastsRef})=>{
                                        
                             </div>}
                             
-                           { Object.keys(selectedFiles).length >=1 &&<div 
+                           { isTeamLeader && Object.keys(selectedFiles).length >=1 &&<div 
                                     className="h-full  w-1/4 justify-center flex items-center cursor-pointer relative group"
                                     onClick={()=>setOpenCommitModel(true)}
                             >
@@ -416,7 +460,7 @@ const TeamDocs = ({toastsRef})=>{
             styles = ''
         >
             
-            <form className="w-full h-full flex flex-col items-center space-y-4" onSubmit={handleNewDoc}>
+            <form className="w-full h-full flex flex-col items-center space-y-4" onSubmit={handleUpdateDocument}>
                 <h1 className=" text-2xl text-textcolor font-semibold">Modifier le document</h1>
              
                 <div className="flex space-x-2 items-center mx-auto">

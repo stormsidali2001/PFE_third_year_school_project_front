@@ -99,7 +99,7 @@ export const teamDocumentModel:TeamDocumentModel = {
            
         }),
     updateTeamDocument:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
-        await axios.post('http://localhost:8080/updateDocument',
+        await axios.post('http://localhost:8080/updateTeamDocument',
         {
             ...payload
         }
