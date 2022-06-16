@@ -1,1 +1,73 @@
-<mxfile host="app.diagrams.net" modified="2022-06-16T21:46:52.914Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" version="20.0.1" etag="82yDpOgIn2vN8_GUYa3V" type="github"><diagram id="XAaIQzrAx3Bj0g_JQBcu">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-06-16T21:58:35.817Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="58HSjrj-x2XICsKYuSQa" version="20.0.1" type="github">
+  <diagram id="XAaIQzrAx3Bj0g_JQBcu" name="Page-1">
+    <mxGraphModel dx="1210" dy="575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-1" value="&amp;lt;&amp;lt;Device&amp;gt;&amp;gt;&lt;br&gt;&amp;nbsp; navigateur web" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-2" value="&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;lt;&amp;lt;server&amp;gt;&amp;gt;&lt;br&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26amp%3Blt%3B%26amp%3Blt%3BDevice%26amp%3Bgt%3B%26amp%3Bgt%3B%26lt%3Bbr%26gt%3Bnavigateur%20web%22%20style%3D%22verticalAlign%3Dtop%3Balign%3Dleft%3BspacingTop%3D8%3BspacingLeft%3D2%3BspacingRight%3D12%3Bshape%3Dcube%3Bsize%3D10%3Bdirection%3Dsouth%3BfontStyle%3D4%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%2280%22%20y%3D%2210%22%20width%3D%22120%22%20height%3D%22120%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="190" width="300" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-3" value="&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;lt;&amp;lt;execution envirenemment&amp;gt;&amp;gt;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;Node js" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="230" width="260" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-4" value="&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;lt;&amp;lt;application&amp;gt;&amp;gt;&lt;br&gt;nest js instance&amp;nbsp;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="290" width="215" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-5" value="&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;lt;&amp;lt;application&amp;gt;&amp;gt;&lt;br&gt;express js" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="350" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-6" value="&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;nbsp;&amp;lt;&amp;lt;SGBD&amp;gt;&amp;gt;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;/span&gt;MYSQL" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="630" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-8" value="&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;lt;&amp;lt;server&amp;gt;&amp;gt;&lt;br&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26amp%3Blt%3B%26amp%3Blt%3BDevice%26amp%3Bgt%3B%26amp%3Bgt%3B%26lt%3Bbr%26gt%3Bnavigateur%20web%22%20style%3D%22verticalAlign%3Dtop%3Balign%3Dleft%3BspacingTop%3D8%3BspacingLeft%3D2%3BspacingRight%3D12%3Bshape%3Dcube%3Bsize%3D10%3Bdirection%3Dsouth%3BfontStyle%3D4%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%2280%22%20y%3D%2210%22%20width%3D%22120%22%20height%3D%22120%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="190" width="300" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-9" value="&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;lt;&amp;lt;execution envirenemment&amp;gt;&amp;gt;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;Node js" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="235" width="260" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-10" value="&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&amp;lt;&amp;lt;application&amp;gt;&amp;gt;&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;Next js&lt;br&gt;" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="290" width="215" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-11" value="&amp;lt;&amp;lt;application&amp;gt;&amp;gt;&lt;br&gt;React js" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="360" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-14" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="UePIZ-D-Svci4xvVsSKF-6" target="UePIZ-D-Svci4xvVsSKF-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="60" y="680" as="sourcePoint" />
+            <mxPoint x="110" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-15" value="tcp/ip" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="UePIZ-D-Svci4xvVsSKF-14">
+          <mxGeometry x="-0.2354" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-16" value="" style="endArrow=none;html=1;rounded=0;exitX=0.833;exitY=-0.008;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="UePIZ-D-Svci4xvVsSKF-8" target="UePIZ-D-Svci4xvVsSKF-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="500" as="sourcePoint" />
+            <mxPoint x="446.6666666666665" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-19" value="http/tcp ip" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="UePIZ-D-Svci4xvVsSKF-16">
+          <mxGeometry x="-0.2292" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-20" value="" style="endArrow=none;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=145;exitPerimeter=0;" edge="1" parent="1" source="UePIZ-D-Svci4xvVsSKF-8" target="UePIZ-D-Svci4xvVsSKF-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400.0000000000001" y="245.37" as="sourcePoint" />
+            <mxPoint x="517.6" y="200.00434977578482" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UePIZ-D-Svci4xvVsSKF-21" value="http/tcp ip" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="UePIZ-D-Svci4xvVsSKF-20">
+          <mxGeometry x="-0.2292" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
