@@ -16,12 +16,15 @@ const Themes = ({toastsRef}) => {
     const {promotion} = router.query;
     renders?.current++
 
+  
+
    
     const {getThemesThunk} = useStoreActions(store=>store.themesModel)
     const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
     const {promotions} = useStoreState(store=>store.promotionsModel)
     const {themes:themesData} = useStoreState(store=>store.themesModel)
     const [chosenPromotion,setChoosenPromotion] = useState(null)
+
       useEffect(async()=>{
       
         

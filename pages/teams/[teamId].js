@@ -17,6 +17,7 @@ const Team = props => {
    const [validated,setValidated] = useState(false)
    const [promotion,setPromotion] = useState({})
    const [teamLeader,setTeamLeader] = useState({})
+   const [peutSoutenir,setPeutSoutenir] = useState(null)
  
    
 
@@ -41,6 +42,7 @@ const Team = props => {
         setValidated(team?.validated)
         setPromotion(team?.promotion)
         setTeamLeader(team?.teamLeader)
+        setPeutSoutenir(team?.peut_soutenir)
 
 
     },[teamId])
@@ -50,9 +52,9 @@ const Team = props => {
         <div>
            
             <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor justify-center">
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center ">
                     <img src="/themeStudent.png" className="mix-blend-darken absolute"/>
-                    <div className={`p-10 justify-center flex-col space-y-8 h-[500px] w-[650px] px-10 bg-white/70 backdrop-blur-sm shadow-lg rounded-xl text-[16px] `}>
+                    <div className={`p-10 justify-center flex-col space-y-8 h-fit w-[650px] px-10 bg-white/70 backdrop-blur-sm shadow-lg rounded-xl text-[16px] `}>
                     <div className="flex flex-row items-center space-x-4 text-[26px]">
                             <div className={`text-center w-full`}>
                                {promotion?.name}
@@ -72,7 +74,11 @@ const Team = props => {
                         </div>
                         <div className="flex items-center flex-row space-x-4">
                             <div className="text-[19px]">Validee :</div>
-                            <div className={``}>{validated?"true":"false"}</div>
+                            <div className={``}>{validated?"oui":"non"}</div>
+                        </div>
+                        <div className="flex items-center flex-row space-x-4">
+                            <div className="text-[19px]">Peut soutenir :</div>
+                            <div className={``}>{peutSoutenir?"oui":"non"}</div>
                         </div>
                         {/* <div className="flex flex-row items-center flex-wrap space-x-4">
                             <div className="text-[19px]">Encadreur(s) :</div>
@@ -105,9 +111,7 @@ const Team = props => {
                                 
                                 {/* <Link href="/"><button className={`h-[30px] w-[100px] text-[18px] flex items-center justify-center bg-blue-300 hover:bg-blue-400 rounded-full ${modifier === true ? "flex" : "hidden"}`}>Ajouter</button></Link> */}
                             </div>
-                        <div className="flex items-center justify-center">
-                        <button className="h-[40px] w-[120px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full " onClick={(e)=>setModifier(true)}>Modifier</button>
-                        </div>
+                     
                     </div>
                 </div>
             </div>

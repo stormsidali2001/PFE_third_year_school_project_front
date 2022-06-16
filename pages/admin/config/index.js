@@ -29,20 +29,20 @@ const config = props => {
             lien : "/"
         },
         {
-            nomOption : "Valider Suggestions",
-            lien : "/"
+            nomOption : "les suggestion de theme",
+            lien : "/suggestions"
         },
         {
-            nomOption : "Fiche Voeux",
-            lien : "/admin/fichevoeux"
+            nomOption : "les themes(suggestion validé)",
+            lien : "/themes"
         },
         {
             nomOption : "Affecter Thèmes au Etudiants",
             lien : "/admin/asign-teams-to-themes"
         },
         {
-            nomOption : "Affecter Thèmes au Enseignants",
-            lien : "/"
+            nomOption : "liste des equipes",
+            lien : "/teams"
         },
         {
             nomOption : "Affecter Equipes à Enseignant",
@@ -51,6 +51,10 @@ const config = props => {
         {
             nomOption : "Créer Soutenances",
             lien : "/admin/config/create-soutenance"
+        },
+        {
+            nomOption : "Liste de soutenance",
+            lien : "/soutenances"
         },
         {
             nomOption : "Documents Déposées",

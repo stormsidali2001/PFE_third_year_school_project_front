@@ -57,16 +57,22 @@ const TeamList = props => {
                     <tbody className="">
                         {
                             teamsList.map(row=>{
+                              
                                 return(
-                                    <tr  className=" bg-white/60  rounded-[10px] border-red  border-b-2">
+                                    <tr  className=" bg-white/60  rounded-[10px] border-red  border-b-2 hover:opacity-80 cursor-pointer">
                                         {
                                             Object.keys(teamsList[0]).filter(el=>el!=='id').map(col=>{
+                                                let value = "";
+                                                if(col === 'validée' ||  col === 'peut_soutenir'){
+                                                    value = row[col]?'oui':'non';
+                                                }else {
+                                                    value = row[col]?row[col]:'___'
+                
+                                                }
                                                 return(
                                                     <td className="text-center truncate h-[36px] ">
                                                         {
-                                                        col === 'validated'?( row[col]?'true':'false')
-                                                        :( row[col]?row[col]:'___')
-                                                        
+                                                          value
                                                         
                                                         }
                                                     </td>
@@ -75,7 +81,7 @@ const TeamList = props => {
                                             })
                                         }
                                       <td className="flex items-center space-x-4 justify-center">
-                                            <Link href={`/team/${row.id}`}><button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button></Link>
+                                            <Link href={`/teams/${row.id}`}><button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button></Link>
                                         </td>
                                     </tr>
                                 )

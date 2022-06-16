@@ -4,6 +4,7 @@ export interface Promotion{
     id:string;
     name:string;
 }
+
 export interface PromotionsState{
         promotions:Promotion[];
 }

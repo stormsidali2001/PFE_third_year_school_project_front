@@ -7,6 +7,7 @@ import { useStoreActions, useStoreState } from "../../store/hooks"
 import AddIcon from "../../icons/AddIcon"
 import ModalPortal from "../../components/ModalPortal"
 import Select from 'react-select'
+import OutLinedButton from "../../components/utils/outlinedButton"
 
 
 const Theme = ({toastsRef}) => {
@@ -22,6 +23,8 @@ const Theme = ({toastsRef}) => {
     const [chosenTeacher,setChoosenTeacher] = useState(null)
     const [addTeamChosenTeacher,setAddTeamChosenTeacher] = useState(null)
     const [addTeamChosenTeam,setAddTeamChosenTeam] = useState(null)
+    const user = useStoreState(store=>store.user)
+    const isAdmin = user.userType === 'admin';
 
     useEffect(async ()=>{
         if(!themeId) return;
@@ -123,8 +126,7 @@ const Theme = ({toastsRef}) => {
                     <img src="/description.webp" className="h-full object-contain mix-blend-darken opacity-50"/>
                 <div className="flex flex-col space-y-2 p-4 absolute top-0 backdrop-blur-sm scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 bg-white/50 shadow-xl h-full w-full rounded-xl text-[20px]">
                     <div className="font-medium">Description:</div>
-                    <div className="px-2 rounded-[5px]  font-normal text-[15px]">
-                        lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum
+                    <div className="px-2 rounded-[5px]  font-normal text-[15px] font-mono">
                         {theme?.description}
                     </div>
                 </div>
@@ -134,37 +136,37 @@ const Theme = ({toastsRef}) => {
                     <img src='/themeTeacher.webp' className="h-full object-contain mix-blend-darken opacity-50"/>
                 <div className="flex flex-col space-y-2 p-4 absolute top-0 backdrop-blur-sm scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500  hover:scrollbar-track-blue-200 bg-white/50 shadow-xl w-[90vw] md:w-[35vw] h-fit py-6 rounded-xl text-[20px]">
                     <div className="font-medium">Encadreurs :</div>
-                    <div className="flex flex-col  text-[15px] pl-10 space-y-1">
-                    <div>team team</div>
-                    <div>team team</div>
-                    <div>team team</div>
-                    <div>team team</div>
-                </div>
-                        <div className=" text-[15px]">
+                
+                        <div className=" text-[15px] flex flex-col space-y-4 border-l-2 pl-2 ">
                             {
                                 theme?.encadrement?.map(({id,teacher})=>{
                                     const {firstName,lastName,id:teacherId} = teacher;
                                     return(
                                         <div key={id} className=" flex space-y-2  flex-col " >
                                                 <div className="flex space-x-2">
-                                                    <div className="bg-blue-300 rounded-[10px] w-fit h-fit  px-2 py-1">#{firstName+' '+lastName}</div>
+                                                    <div className="h-[35px] w-fit  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center  cursor-pointer   px-2 py-1">#{firstName+' '+lastName}</div>
                                                     
-                                                    <div 
-                                                        className="flex space-x-2 cursor-pointer"
+                                                {   isAdmin&& <div 
+                                                        className="flex space-x-2 cursor-pointer items-center"
                                                         onClick={async (e)=>{e.preventDefault();await handleOpenModalTeam(teacherId,firstName,lastName)}}
                                                     >
-                                                            <AddIcon
-                                                                className = 'w-6 h-6 text-textcolor/90 group-hover:text-textcolor'
-                                                                />
+                                                                     <button 
+                                                                        className='text-[22px] shadow-md backdrop-blur-sm rounded-full h-[23px] flex items-center justify-center w-[23px] bg-white/20 border-2 border-slate-200 hover:border-slate-400'
+                                                                    
+                                                                    >
+                                                                        +
+                                                                    </button>
                                                             <div className="text-[15px]">ajouter equipe</div>
-                                                    </div>
+                                                
+                                                    </div>}
+                                                    
                                                 </div>
-                                            <div className="pl-4 flex  flex-wrap gap-4">
+                                            <div className="pl-4 flex  flex-wrap gap-4  ">
                                             {
                                                 teacher?.teamsInCharge.map(({id,team})=>{
                                                     return (
-                                                        <div id={id} className="bg-blue-300 rounded-[10px] w-fit h-fit  px-2 py-1">
-                                                            {team?.nickName}
+                                                        <div onClick={()=>router.push(`/teams/${id}`)} id={id} className="h-[35px] w-fit px-2 py-1  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center cursor-pointer">
+                                                            #{team?.nickName}
                                                         </div>
 
                                                     )
@@ -186,36 +188,32 @@ const Theme = ({toastsRef}) => {
                    <img src="/teamStudent.jpg" className="h-full object-contain mix-blend-darken opacity-50"/>
                <div className="bg-white/50 scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 p-3 shadow-xl rounded-xl text-[20px] backdrop-blur-sm h-full w-full absolute top-0">
                <div className="font-medium">Equipes:</div>
-                <div className="flex flex-col  text-[15px] pl-10 space-y-1">
-                    <div>team team</div>
-                    <div>team team</div>
-                    <div>team team</div>
-                    <div>team team</div>
-                    <div>team team</div>
-                    <div>team team</div>
-                </div>
-                    <div className=" text-[15px]">
+            
+                    <div className=" text-[15px] flex gap-3 mt-4 flex-wrap ">
                             {
                                 theme?.teams?.map(({nickName,id})=>{
                                     return(
-                                        <div key={id} className=" bg-blue-300 rounded-[10px] w-fit h-fit  px-2 py-1 cursor-pointer" onClick={()=>router.push(`/team/${id}`)}> #{nickName}</div>
+                                        <div key={id} className=" h-[35px] w-fit px-2 py-1  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center justify-center cursor-pointer" onClick={()=>router.push(`/teams/${id}`)}> #{nickName}</div>
                                     )
                                 })
                             }
                     </div>
                </div>
                 </div>
-                <div className="flex space-x-2 group w-full justify-center cursor-pointer items-center"
+            {  isAdmin&&  <div className="flex space-x-2 group w-full justify-center cursor-pointer items-center"
                             onClick={handleOpenModal}
                         >
-                            <AddIcon
-                                className = 'w-6 h-6 text-textcolor/90 hover:text-blue-500 text-blue-500'
-                            />
+                              <button 
+                            className='text-[28px] shadow-md backdrop-blur-sm rounded-full h-[32px] flex items-center justify-center w-[32px] bg-white/20 border-2 border-slate-200 hover:border-slate-400'
+                         
+                           >
+                            +
+                            </button>
                             <div>Ajouter un Encadreur</div>
-                        </div>  
+                 </div>  }
                   
-            </div>
-               </div>
+                  </div>
+                       </div>
                
                 </div>
                
@@ -223,7 +221,7 @@ const Theme = ({toastsRef}) => {
                 open={open}
                 handleClose = {setOpen}
             >
-                <form className="flex flex-col w-[50vw] h-fit py-4 px-2 text-textcolor space-y-3">
+                <form className="flex flex-col w-[450px] h-fit py-4 px-2 text-textcolor space-y-3">
                     <div className="text-center text-[20px]">Ajouter un Encadreur</div>
                     <div className="px-4">choisir un encadreur parmis la liste des ensiegnant</div>
                     <Select
@@ -234,7 +232,7 @@ const Theme = ({toastsRef}) => {
                         value={chosenTeacher}
                         styles = {{menuPortal:base=>({...base,zIndex:100,width:'100px',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
                     />
-                    <button onClick={handleEncadrerTheme} className="bg-blue-300 w-fit px-2 py-1  mx-auto rounded-[10px]">Valider</button>
+                    <OutLinedButton onClick={handleEncadrerTheme} className='mx-auto' >Valider</OutLinedButton>
                 </form>
             </ModalPortal>
             <ModalPortal

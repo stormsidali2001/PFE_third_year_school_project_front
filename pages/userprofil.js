@@ -22,6 +22,8 @@ const userProfil = props => {
         },[])
     
     if(!typeUtilisateur) return 'loading'
+
+    // return JSON.stringify(typeUtilisateur) 
        
     return (
         <div>
@@ -35,11 +37,11 @@ const userProfil = props => {
                         <div className="flex flex-col space-y-3">
                         <div className="flex flex-row space-x-4">
                                 <div>Nom :</div>
-                                <div>{typeUtilisateur.firstName}</div>
+                                <div>{typeUtilisateur?.firstName}</div>
                             </div>
                             <div className="flex flex-row space-x-4">
                                 <div>Prénom :</div>
-                                <div>{typeUtilisateur.lastName}</div>
+                                <div>{typeUtilisateur?.lastName}</div>
                             </div>
                             {/* <div className="flex flex-row space-x-4">
                                 <div>Pseudo :</div>
@@ -50,19 +52,19 @@ const userProfil = props => {
                                     onChange = {(e) => setPseudo(e.target.value)}
                                 />
                             </div> */}
-                            <div className="flex flex-row space-x-4">
+                       {    user.userType ==='student'&&   <div className="flex flex-row space-x-4">
                                 <div>Date de naissance :</div>
                                 <div>{typeUtilisateur.dob}</div>
-                            </div>
+                            </div>}
                             <div className="flex flex-row space-x-4">
                                 <div>Email :</div>
                                 <div>{data.email}</div>
                             </div>
-                            <div className={`flex flex-row space-x-4 ${data.userType === 'student' ? "flex" : "hidden"}`}>
+                       {  user.userType ==='student'&&   <div className={`flex flex-row space-x-4 ${data.userType === 'student' ? "flex" : "hidden"}`}>
                                 <div>Team :</div>
                                 {
                                     typeUtilisateur?.team?.id?(
-                                        <Link href={`/team/${typeUtilisateur?.team?.id}`}>{typeUtilisateur?.team?.nickName}</Link> 
+                                        <Link href={`/teams/${typeUtilisateur?.team?.id}`}>{typeUtilisateur?.team?.nickName}</Link> 
 
                                     ):(
                                         sssss
@@ -71,26 +73,9 @@ const userProfil = props => {
                                
                              
                               
-                            </div>
-                            <div className={`flex flex-row space-x-4 ${data.userType === 'teacher' ? "flex" : "hidden"}`}>
-                                <div>Equipes :</div>
-                                {/* <div className="flex flex-row items-center justify-center space-x-3">
-                                    {
-                                        data.teacher.encadre.map((el , index) => {
-                                            return (
-                                                <div className="h-[30px] w-fit px-3 rounded-full bg-blue-400 hover:bg-blue-300 shadow-blue-200 shadow-md ">{el.teamName}</div>
-                                            )
-                                        })
-                                    }
-                                </div> */}
-                            </div>
+                            </div>}
                         </div>
-                        <button 
-                            className={`h-[35px] w-[130px] bg-blue-300 hover:bg-blue-400 rounded-full items-center justify-center ${idUser === data.student.id ? "flex" : "hidden"}`}
-                            onClick = {(e) => {setModifier(!modifier)}}
-                        >
-                            {modifier === false ? "Modifier" : "Valider"}
-                        </button>
+                     
                     </div>
                 }
                 </div>

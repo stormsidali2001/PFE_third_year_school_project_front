@@ -100,10 +100,11 @@ const MyTeams = ({toastsRef}) => {
                                 <div className="flex flex-col space-y-3 bg-gradient-to-b from-blue-50 to-blue-100 hover:bg-gradient-to-t h-[300px] w-[250px] rounded-lg border-2 border-slate-300 shadow-lg p-6 text-[15px] relative">
                                     <img src="/teamStudent.jpg" className="h-full object-contain mix-blend-darken opacity-20"/>
                                     <div className="absolute top-2 flex flex-col space-y-2">
-                                        <div className="w-full text-center text-[17px]">{el.name}</div>
+                                        <div className="w-full text-center text-[17px]">{el.nickName}</div>
                                         {
                                             el.students.map((element) => {
                                                 return (
+                                                   
                                                     <div className="flex flex-row items-center space-x-2">
                                                         <Avatar firstName={element.firstName} lastName={element.lastName}/>
                                                         <div className="text-black">{element.firstName}</div>
