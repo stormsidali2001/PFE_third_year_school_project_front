@@ -137,8 +137,13 @@ const handleApplyTeamsCompletion = async e=>{
                                     </div>
                     }
                     
-                      <button className="border-blue-300 border-2 text-white/80 text-slate-700  w-[120px] hover:border-blue-400 px-2 py-1 rounded-[555555px] shadow-sm" onClick={handleCompleteTeams}>Suivant</button>
-
+                    {teamsStats?.allTeamsValidated?(
+                        <div className="text-red-700">Tout les equipes de cette promotion sont deja validées</div>
+                    ):(
+                        <button className="border-blue-300 border-2 text-white/80 text-slate-700  w-[120px] hover:border-blue-400 px-2 py-1 rounded-[555555px] shadow-sm" onClick={handleCompleteTeams}>Suivant</button>
+                    )
+                   
+}
                        </div>
                      }
                     

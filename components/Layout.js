@@ -35,6 +35,7 @@ const Layout = ({toastsRef,children,HorisontalNavbar,StudentVerticalNavbar,Teach
        
   
    if( runOnce ===false)  {
+   
     setRunOnce(true)
     console.log("zzzzzzzzzzz",socket,socket.hasListeners("new_notification"))
 
@@ -46,6 +47,7 @@ const Layout = ({toastsRef,children,HorisontalNavbar,StudentVerticalNavbar,Teach
     socket.on("refresh", () =>{
                   
         router.reload();
+       
     })
 
 

@@ -3,6 +3,7 @@ import Link from "next/link"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
 
+
 import { useStoreActions, useStoreState } from "../../store/hooks"
 import { useRouter } from "next/router"
 const Team = props => {
@@ -68,8 +69,15 @@ const Team = props => {
                         </div>
                         <div className="flex items-center flex-row space-x-4">
                             <div className="text-[19px]">Theme :</div>
-                            <div className={`${modifier === false ? "flex" : "hidden"}`}>{(theme?.title)?theme?.title
-                            :'__'}</div>
+                          
+                            {
+                                //   <Link href={"/themes/"+theme?.id} className='border-blue-300 border-2 text-white/80 text-slate-700  hover:border-blue-400 px-2 py-1 rounded-[10px] shadow-sm'>{'#'+theme?.title}</Link>
+                                theme?(
+                                    <Link href={"/themes/"+theme?.id} ><div className='w-fit px-2 py-1  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center cursor-pointer'>{'#'+theme?.title}</div></Link>
+                                ):(
+                                   <div>{'__'}</div> 
+                                )
+                            }
                      
                         </div>
                         <div className="flex items-center flex-row space-x-4">
