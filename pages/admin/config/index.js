@@ -60,6 +60,10 @@ const config = props => {
             nomOption : "Documents Déposées",
             lien : "/admin/teams-docs"
         },
+        {
+            nomOption : "Completer les  equipes",
+            lien : "/admin/complete-teams"
+        },
     ]
 
     return (

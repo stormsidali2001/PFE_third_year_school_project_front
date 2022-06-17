@@ -24,11 +24,12 @@ const Themes = ({toastsRef}) => {
     const {promotions} = useStoreState(store=>store.promotionsModel)
     const {themes:themesData} = useStoreState(store=>store.themesModel)
     const [chosenPromotion,setChoosenPromotion] = useState(null)
+    const user = useStoreState(store=>store.user)
 
       useEffect(async()=>{
       
         
-        
+       
         if(promotions?.length === 0) await getAllPromotionsThunk()
         
       

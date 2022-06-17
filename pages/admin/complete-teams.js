@@ -19,8 +19,6 @@ const AssignTeamsToThemes = ({toastsRef}) => {
 
   const [step,setStep] = useState(0)
 
-  const [chosenIndex,setChosenIndex] = useState(0)
-  const choices = [{label:'Random',value:'random'},{label:'FIFO',value:'time'},{label:'Moyenne',value:'moy'}];
   useEffect(async()=>{
      
     await getAllPromotionsThunk();
@@ -66,6 +64,7 @@ const handleApplyTeamsCompletion = async e=>{
             
         })
         toastsRef.current.addMessage({text:"c'est fait !!",mode:"Alert"})
+        setStep(0)
         setOpen(false)
     }catch(err){
         console.log(err)

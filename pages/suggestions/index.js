@@ -20,7 +20,9 @@ const Suggestions = ({toastsRef}) => {
     const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
     const {promotions} = useStoreState(store=>store.promotionsModel)
     const {themeSuggestions:themeSuggestionsData} = useStoreState(store=>store.themeSuggestionsModel)
-      const [chosenPromotion,setChoosenPromotion] = useState(null)
+    const [chosenPromotion,setChoosenPromotion] = useState(null)
+    const user = useStoreState(store=>store.user)
+    const isAdmin = user?.userType === 'admin';
        
      
    
@@ -175,7 +177,7 @@ const Suggestions = ({toastsRef}) => {
                                     }
                                     <td className="flex items-center justify-center space-x-4">
                                          <Link href={`/suggestions/${row['id']}`}><button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button></Link> 
-                                      {  !row['validated']&& <button 
+                                      {  !row['validated']&& isAdmin&&<button 
                                             className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full"
                                             onClick={(e)=>{e.preventDefault();hanldeValidateThemeSuggestion(row['id'])}}
                                         >Valider

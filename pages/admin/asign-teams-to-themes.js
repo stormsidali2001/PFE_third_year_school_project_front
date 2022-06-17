@@ -31,7 +31,7 @@ const handleAsignThemesToTeams = async e=>{
         return;
     }
     try{
-
+        
         await asignThemesToTeams({
             promotionId:chosenPromotion.value,
             method:choices[chosenIndex].value
@@ -60,7 +60,7 @@ const handleApplyThemesToTeamsAssignements = async e=>{
 
     }catch(err){
         console.log(err)
-        toastsRef.current.addMessage({text:'ops Erreur...',mode:'Error'})
+        toastsRef.current.addMessage({text:err.response.data.message,mode:'Error'})
     }
 
 
