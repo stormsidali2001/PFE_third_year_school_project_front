@@ -51,7 +51,7 @@ const ToastPortal = forwardRef(({p},ref)=>{
                         return(
                             <div 
                                 key={tst.id}
-                                className={`${modeToStyle[tst.mode]} space-x-4 border-l-2 border-l-white text-white w-[80vw] sm:w-[300px] h-[70px] flex items-center  font-semibold text-[20px] relative cursor-pointer transition-all px-1`}
+                                className={`${modeToStyle[tst.mode]} space-x-4 border-l-2 border-l-white text-white w-[80vw] sm:w-[300px] min-h-[70px] flex items-center  font-semibold text-[20px] relative cursor-pointer transition-all px-1`}
                                 onClick={(e)=>removeTost(tst.id)}
                             >
                                 <div className='absolute  right-[5px] top-[10px] text-white -translate-x-1/2  -translate-y-1/2 cursor-pointer'>x</div>

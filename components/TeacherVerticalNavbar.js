@@ -43,7 +43,7 @@ const TeacherVerticalNavbar = props => {
             </div>
             <div className='relative cursor-pointer group'>
                 <div className='absolute right-0 translate-x-[100%] top-0 text-textcolor bg-white rounded-80 font-semibold w-fit px-2 hidden group-hover:flex rounded-[10px] shadow-lg'>Themes</div>
-                <Link href="/commits">
+                <Link href="/themes">
                     <button><ThemesIcon className='hover:cursor-pointer w-[40px] h-[39px] text-textcolor'/></button>
                 </Link>
             </div>
@@ -59,6 +59,7 @@ const TeacherVerticalNavbar = props => {
                     <button><Theme className='hover:cursor-pointer'/></button>
                 </Link>
             </div>
+          
            
         </div>
         </>

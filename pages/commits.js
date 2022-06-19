@@ -1,16 +1,9 @@
 import { useEffect, useState } from "react"
-import Link  from "next/link"
-import HorisontalNavbar from "../components/HorisontalNavbar"
-import TeacherVerticalNavbar from "../components/TeacherVerticalNavbar"
 import { useStoreActions, useStoreState } from "../store/hooks"
 import {useRouter} from 'next/router'
 import Document from "../icons/Document"
 const commitDocumentTeacher = props => {
-
-   
-
-        const router = useRouter()
-
+        const router = useRouter();
         const [selectedTeam,setSelectedteam] = useState(null)
         const [selectedDoc,setSelectedDoc] = useState(null)
         const  {getTeamsTeacherResponsibleFor,getTeamCommits} = useStoreActions(store=>store.commitsModel)
@@ -124,6 +117,14 @@ const commitDocumentTeacher = props => {
                                 <div className="flex flex-col space-y-2">
                                     <div className="text-[18px] font-semibold">Description :</div>
                                     <div className="text-[16px]">{selectedDoc.description}</div>
+                                </div>
+                                <div className="flex flex-col space-y-2">
+                                    <div className="text-[18px] font-semibold">Type :</div>
+                                    <div className="text-[16px]">{selectedDoc.type.name}</div>
+                                </div>
+                                <div className="flex flex-col space-y-2">
+                                    <div className="text-[18px] font-semibold">validé :</div>
+                                    <div className="text-[16px]">{selectedDoc.type.validated?'oui':'non'}</div>
                                 </div>
                                 <div className="flex flex-col space-y-2">
                                     <div className="text-[18px] font-semibold">Lien :</div>

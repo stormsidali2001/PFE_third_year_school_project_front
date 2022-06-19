@@ -16,23 +16,27 @@ const Themes = ({toastsRef}) => {
     const {promotion} = router.query;
     renders?.current++
 
+  
+
    
     const {getThemesThunk} = useStoreActions(store=>store.themesModel)
     const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
     const {promotions} = useStoreState(store=>store.promotionsModel)
     const {themes:themesData} = useStoreState(store=>store.themesModel)
     const [chosenPromotion,setChoosenPromotion] = useState(null)
+    const user = useStoreState(store=>store.user)
+
       useEffect(async()=>{
       
         
-        
+       
         if(promotions?.length === 0) await getAllPromotionsThunk()
         
       
       
             if(!promotion || promotion?.length === 0) {
                
-                await getThemesThunk()
+                promotions?.length > 0 && await getThemesThunk()
                 return;
             }
             const label = promotions.find(el=>el.id=== promotion)?.name

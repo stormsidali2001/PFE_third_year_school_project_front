@@ -5,9 +5,9 @@ import {useStoreActions, useStoreState} from '../../../store/hooks'
 import { useRouter } from 'next/router'
 const creerSoutenance = ({toastsRef}) => {
     const router = useRouter()
-    const [title , setTitle] = useState('')
-    const [description , setDescription] = useState('')
-    const [date , setDate] = useState('')
+    const [title , setTitle] = useState(null)
+    const [description , setDescription] = useState(null)
+    const [date , setDate] = useState(null)
     const [duration , setDuration] = useState(null)
   
     const [choosenSalle , setChoosenSalle] = useState(null)
@@ -78,15 +78,21 @@ const creerSoutenance = ({toastsRef}) => {
        
     }
     const handleCreateSoutenance = async e=>{
-        try{
+     
             e.preventDefault();
+
+            if(!date || !description || !duration || !selectedTeachers || !selectedTeam){
+
+                toastsRef.current.addMessage({text:'Remplissez tout les champs',mode:'Error'})
+                return;
+            }
 
             const arr = duration?.split(':')
             const m = arr[0];
             const h = arr[1];
             const dr =( parseInt(m)*60 + parseInt(h)*60*60)*1000; // in ms
             
-
+           let noError = true;
             await createSoutenance({
                 teamId:selectedTeam.value,
                 jurysIds:Object.keys(selectedTeachers),
@@ -96,20 +102,24 @@ const creerSoutenance = ({toastsRef}) => {
                 description,
                 duration:dr
     
-            })
-            toastsRef.current.addMessage({text:"c'est fait...",mode:'Alert'})
-            setTimeout(()=>{
-                router.reload()
+            }).catch(err=>{
+            
+                toastsRef.current.addMessage({text:err.response.data.message,mode:'Error'})
+                noError = false;
+            }).then(()=>{
 
-            },2000)
+                if(noError){
+
+                    toastsRef.current.addMessage({text:"c'est fait...",mode:'Alert'})
+                    setTimeout(()=>{
+                        router.reload()
+        
+                    },2000)
+                }
+            })
            
             
-        }catch(err){
-            console.log(err)
-            toastsRef.current.addMessage({text:'Ops...',mode:'error'})
-
-
-        }
+     
     
     }
     console.log(teachers,'pssssssssssss')

@@ -31,7 +31,7 @@ const handleAsignThemesToTeams = async e=>{
         return;
     }
     try{
-
+        
         await asignThemesToTeams({
             promotionId:chosenPromotion.value,
             method:choices[chosenIndex].value
@@ -39,7 +39,7 @@ const handleAsignThemesToTeams = async e=>{
         setStep(step=>step+1)
         toastsRef.current.addMessage({text:"c'est fait !!",mode:'Alert'})
     }catch(err){
-        toastsRef.current.addMessage({text:'ops Erreur...',mode:'Error'})
+        toastsRef.current.addMessage({text:err.response.data.message,mode:'Error'})
         console.log(err)
     }
     
@@ -60,11 +60,16 @@ const handleApplyThemesToTeamsAssignements = async e=>{
 
     }catch(err){
         console.log(err)
-        toastsRef.current.addMessage({text:'ops Erreur...',mode:'Error'})
+        toastsRef.current.addMessage({text:err.response.data.message,mode:'Error'})
     }
 
 
 }
+   const isPromotionAssignedThemes = ()=>{
+        const promotionDetails =  promotions.find(el=>el.id === chosenPromotion?.value)
+        if(!promotionDetails) return false;
+        return promotionDetails.themesAssignedToTeams;
+   }
    return(
       
             <div className="h-screen w-screen pl-[100px] pt-[100px] bg-background font-xyz relative flex items-center justify-center">
@@ -102,24 +107,40 @@ const handleApplyThemesToTeamsAssignements = async e=>{
                             value={chosenPromotion}
                             styles = {{menuPortal:base=>({...base,zIndex:500,width:'100%'})}}
                         />
-                      <div className="mx-auto text-textcolor text-[22px]">Methode d{"'"}affectation</div>
-                      <div className="w-[80%] h-fit gap-4 flex flex-wrap  items-center">
-                         { 
-                         choices.map((el,index)=>{
-                                 return(
-                                 <div onClick={()=>setChosenIndex(index)} className="flex space-x-2 items-center w-[100px] cursor-pointer">
-                                     <div  className={`w-[15px] h-[15px] rounded-full cursor-pointer ${chosenIndex===index?'bg-blue-300':'bg-blue-100'} `}></div>
-                                     <div>{el.label}</div>
-                                 </div>
-                                 )
-                         })
-                         }
-                       
-                        
-                      </div>
-                      <button className="bg-blue-300 px-2 py-1 text-[18px] rounded-[5px]" onClick={handleAsignThemesToTeams}>Suivant</button>
+                       { !isPromotionAssignedThemes()?  
+                       (
+                                    <>
+                                            <div className="mx-auto text-textcolor text-[22px]">Methode d{"'"}affectation</div>
 
+                                                    <div className="w-[80%] h-fit gap-4 flex flex-wrap  items-center">
+                                                                { 
+                                                                choices.map((el,index)=>{
+                                                                        return(
+                                                                        <div onClick={()=>setChosenIndex(index)} className="flex space-x-2 items-center w-[100px] cursor-pointer">
+                                                                            <div  className={`w-[15px] h-[15px] rounded-full cursor-pointer ${chosenIndex===index?'bg-blue-300':'bg-blue-100'} `}></div>
+                                                                            <div>{el.label}</div>
+                                                                        </div>
+                                                                        )
+                                                                })
+                                                                }
+                                                    
+                                                        
+                                            </div>
+                                            <button className="bg-blue-300 px-2 py-1 text-[18px] rounded-[5px]" onClick={handleAsignThemesToTeams}>Suivant
+                                            </button>
+
+                                    </>
+                             )
+                             :(
+                                <div>Les themes ont etait deja affectés a  cette promotion</div>
+                             )
+                             
+                             }
+
+                               
+                               
                        </div>
+                     
                      }
                     
                     {

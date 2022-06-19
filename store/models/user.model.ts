@@ -48,6 +48,7 @@ export interface UserThunks{
     uploadFileThunk:Thunk<this,any,undefined,any>;
     uploadFilesThunk:Thunk<this,any,undefined,any>;
     getFileThunk:Thunk<this,string,undefined,undefined>;
+ 
 
 
 }
@@ -129,6 +130,8 @@ export const userModel:UserModel | null={
             },
             withCredentials:true
         
+        }).catch(err=>{
+            throw err;
         })
     }),
     uploadFilesThunk:thunk(async (actions,payload,{getStoreState,getStoreActions})=>{
@@ -156,7 +159,8 @@ export const userModel:UserModel | null={
         actions.setUser({})
         //@ts-ignore
         getStoreActions().notificationService.setNotifications([]);
-    })
+    }),
+   
 
     
 }

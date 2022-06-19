@@ -21,7 +21,7 @@ const soutenanceId = props => {
             <div  className="pt-[100px] sm:pl-[100px] text-[16px] text-black font-xyz flex items-center justify-center flex-col space-y-12 lg:flex-row lg:space-y-0 lg:space-x-16">
                 <img src="/detailsoutenace.jpg" className="w-[90vw] md:w-[70vw] lg:w-[45vw] object-contain mix-blend-darken"/>
                 <div className="h-[75vh] w-[90vw] md:w-[70vw] lg:w-[40vw] bg-white p-6 shadow-lg rounded-lg flex space-y-4 flex-col">
-                    <div className="text-[24px] w-full text-center underline font-semibold italic">{title}</div>
+                    <div className="text-[24px] w-full text-center underline font-semibold italic">{soutenance?.title}</div>
                     <div className="flex flex-row space-x-4">
                         <div className="font-semibold">Equipe</div>
                         <div>{soutenance?.team?.nickName}</div>

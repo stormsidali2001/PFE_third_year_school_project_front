@@ -60,12 +60,16 @@ export const teamDocumentModel:TeamDocumentModel = {
             ...payload
         },{
             withCredentials:true
+        }).catch(err=>{
+            throw err;
         })
     }),
     getTeamDocuments:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
       const res =    await axios.get('http://localhost:8080/getTeamDocuments',{
               withCredentials:true
-          })
+          }).catch(err=>{
+            throw err;
+        })
           actions.setDocuments(res.data)
       }),
     deleteTeamDocs:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
@@ -73,6 +77,8 @@ export const teamDocumentModel:TeamDocumentModel = {
           ...payload
       },{
                 withCredentials:true
+            }).catch(err=>{
+                throw err;
             })
            
         }),
@@ -80,6 +86,8 @@ export const teamDocumentModel:TeamDocumentModel = {
     getPromotionDocumentTypes:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
         const res =    await axios.get('http://localhost:8080/getPromotionDocumentTypes',{
                 withCredentials:true
+            }).catch(err=>{
+                throw err;
             })
             actions.setDocumentTypes(res.data)
         }),
@@ -95,6 +103,8 @@ export const teamDocumentModel:TeamDocumentModel = {
            , 
             {
                 withCredentials:true
+            }).catch(err=>{
+                throw err;
             })
            
         }),
@@ -106,7 +116,9 @@ export const teamDocumentModel:TeamDocumentModel = {
         , 
          {
              withCredentials:true
-         })
+         }).catch(err=>{
+            throw err;
+        })
         
      }),
      

@@ -1,10 +1,10 @@
 import { useEffect, useState ,useRef} from "react";
-import StudentVerticalNavbar from "../../components/StudentVerticalNavbar";
-import HorisontalNavbar from "../../components/HorisontalNavbar";
-import { useStoreActions } from "../../store/hooks";
+import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
+import HorisontalNavbar from "../components/HorisontalNavbar";
+import { useStoreActions } from "../store/hooks";
 
-import SortAscIcon from "../../icons/SortAsc";
-import AdminVerticalNavbar from "../../components/AdminVerticalNavbar";
+import SortAscIcon from "../icons/SortAsc";
+import AdminVerticalNavbar from "../components/AdminVerticalNavbar";
 import { useStoreState } from "easy-peasy";
 const FicheVoeux = ({toastsRef}) => {
   const {getThemesThunk} = useStoreActions(store=>store.themesModel)
@@ -91,7 +91,7 @@ const FicheVoeux = ({toastsRef}) => {
 
       }catch(err){
         console.log(err)
-        toastsRef.current.addMessage({mode:'Error',text:'ops...Erreur'})
+        toastsRef.current.addMessage({text:err.response.data.message,mode:'Error'})
       }
      
       

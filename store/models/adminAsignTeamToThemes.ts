@@ -33,7 +33,7 @@ export const adminAsignTeamsToThemesModel:AdminAsignTeamsToThemesModel = {
         state.results = payload
     }),
     asignThemesToTeams:thunk(async (actions,payload)=>{
-        try{
+  
             const res =  await axios.post('http://localhost:8080/asignThemesToTeams',{
             ...payload
             },
@@ -41,14 +41,14 @@ export const adminAsignTeamsToThemesModel:AdminAsignTeamsToThemesModel = {
                 withCredentials:true,
             },
            
-            )
+            ).catch(err=>{
+                throw err;
+            })
     
             actions.setResults(res.data)
             return res.data;
 
-        }catch(err){
-            console.log(err)
-        }
+    
      
     }),
     applyThemesToTeamsAssignements:thunk(async (actions,payload)=>{
@@ -60,7 +60,9 @@ export const adminAsignTeamsToThemesModel:AdminAsignTeamsToThemesModel = {
                 withCredentials:true,
             },
            
-            )
+            ).catch(err=>{
+                throw err;
+            })
     
             return res.data;
 

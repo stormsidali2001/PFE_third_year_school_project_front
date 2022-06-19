@@ -18,7 +18,7 @@ export interface CommitsActions {
 
 }
 export interface CommitsThunks {
-    getTeamsTeacherResponsibleFor:Thunk<this,undefined,undefined,undefined>;
+    getTeamsTeacherResponsibleFor:Thunk<this,string,undefined,undefined>;
     getTeamCommits:Thunk<this,{teamId:string},undefined,undefined>;
 
 }
@@ -36,7 +36,7 @@ export const commitsModel:CommitsModel = {
         state.commits = payload
     }),
     getTeamsTeacherResponsibleFor:thunk(async (actions,payload)=>{
-        const res = await axios.get('http://localhost:8080/getTeamsTeacherResponsibleFor',{
+        const res = await axios.get(`http://localhost:8080/getTeamsTeacherResponsibleFor/${payload?payload:'all'}`,{
             withCredentials:true
         })
 
