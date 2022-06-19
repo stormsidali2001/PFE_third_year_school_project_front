@@ -122,9 +122,9 @@ const addStudent = ({toastsRef}) => {
     }
     return (
        <div className="bg-background min-h-screen min-w-screen">
-            <div className="bg-background h-screen w-screen relative flex items-center justify-center font-xyz text-textcolor">
+            <div className="bg-background h-screen w-screen pt-[100px] pl-[100px] relative flex items-center justify-center font-xyz text-textcolor">
                 <img src="/addStudent.jpg" className="h-full w-full object-contain mix-blend-darken absolute"/>
-                <div className={`min-h-[200px] w-[450px] pt-[100px] pl-[100px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
+                <div className={`min-h-[200px] w-[450px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
                     <div className="sm:text-[23px] text-[17px] text-center px-10">Vous voulez ajouter un ou plusieur étudiant ?</div>
                     <div className="space-x-6 flex flex-row">
                         <button className="h-[35px] sm:w-[160px] w-[100px] rounded-full bg-[#32AFF5] text-white" onClick={()=> setOneClick(true)}>Un seul</button>
