@@ -60,7 +60,9 @@ export const adminAsignTeamsToThemesModel:AdminAsignTeamsToThemesModel = {
                 withCredentials:true,
             },
            
-            )
+            ).catch(err=>{
+                throw err;
+            })
     
             return res.data;
 

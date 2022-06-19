@@ -64,6 +64,10 @@ const config = props => {
             nomOption : "Completer les  equipes",
             lien : "/admin/complete-teams"
         },
+        {
+            nomOption : "Envoyer la fiche de voeux",
+            lien : "/admin/send-wish-list"
+        },
     ]
 
     return (

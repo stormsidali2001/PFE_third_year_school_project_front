@@ -4,9 +4,11 @@ import HorisontalNavbar from "../../components/HorisontalNavbar";
 import ModalPortal from "../../components/ModalPortal";
 import { useStoreActions,useStoreState } from "../../store/hooks";
 import Select from 'react-select'
+import { useRouter } from "next/router";
 
 
 const AssignTeamsToThemes = ({toastsRef}) => {
+    const router  = useRouter()
   const [open,setOpen] = useState(false)
   const [chosenPromotion,setChoosenPromotion] = useState(null)
   const {getAllPromotionsThunk} = useStoreActions(store=>store.promotionsModel)
@@ -50,7 +52,7 @@ const handleApplyTeamsCompletion = async e=>{
     try{
 
         e.preventDefault()
-        await applyTeamsCompletion({
+         await applyTeamsCompletion({
             addedStudents:results.studentAdded.map(el=>{return {studentId:el.student.id,teamId:el.team.id}}),
             deletedStudents:results.studentDeleted.map(el=>{return {studentId:el.student.id,teamId:el.team.id}}),
             newTeams:results.newTeams.map(el=>{return {
@@ -66,9 +68,10 @@ const handleApplyTeamsCompletion = async e=>{
         toastsRef.current.addMessage({text:"c'est fait !!",mode:"Alert"})
         setStep(0)
         setOpen(false)
+        router.reload()
     }catch(err){
         console.log(err)
-        toastsRef.current.addMessage({text:"Ops...Erreur",mode:"Error"})
+        toastsRef.current.addMessage({text:err.response.data.message,mode:"Error"})
     }
 }
 

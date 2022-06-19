@@ -39,7 +39,7 @@ const handleAsignThemesToTeams = async e=>{
         setStep(step=>step+1)
         toastsRef.current.addMessage({text:"c'est fait !!",mode:'Alert'})
     }catch(err){
-        toastsRef.current.addMessage({text:'ops Erreur...',mode:'Error'})
+        toastsRef.current.addMessage({text:err.response.data.message,mode:'Error'})
         console.log(err)
     }
     

@@ -1,7 +1,5 @@
 import { useStoreActions, useStoreState } from "../store/hooks";
 import { useEffect, useState } from "react";
-import HorisontalNavbar from "../components/HorisontalNavbar";
-import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
 import Link from 'next/link'
 
 const userProfil = props => {
@@ -13,7 +11,6 @@ const userProfil = props => {
         const user = useStoreState(store => store.user);
         const {getUserInfo} = useStoreActions(store => store.user);
         let data = user;
-        const [modifier , setModifier] = useState(false)
         const typeUtilisateur  =  (data.userType === 'student' ? data.student : (data.userType === "teacher" ? data.teacher : data.admin))
        
 

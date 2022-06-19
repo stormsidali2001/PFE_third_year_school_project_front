@@ -165,7 +165,7 @@ const Theme = ({toastsRef}) => {
                                             {
                                                 teacher?.teamsInCharge.map(({id,team})=>{
                                                     return (
-                                                        <div onClick={()=>router.push(`/teams/${id}`)} id={id} className="h-[35px] w-fit px-2 py-1  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center cursor-pointer">
+                                                        <div onClick={()=>router.push(`/teams/${team.id}`)} id={id} className="h-[35px] w-fit px-2 py-1  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center cursor-pointer">
                                                             #{team?.nickName}
                                                         </div>
 

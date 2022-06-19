@@ -16,17 +16,21 @@ export interface Student extends StudentPayload {
 }
 
 export interface AdminStudentListState{
-    students?:Student[]
+    students?:Student[],
+    student:{},
 }
 export interface AdminStudentListThunks{
     addSingleStudent:Thunk<this,StudentPayload,undefined,undefined>;
     addMultipleStudents:Thunk<this,StudentPayload[],undefined,undefined>;
     getStudents:Thunk<this,undefined,undefined,undefined>;
     deleteStudent:Thunk<this,string,undefined,undefined>;
+    getStudent:Thunk<this,string,undefined,undefined>;
+    
 
 }
 export interface AdminStudentListActions{
   setStudents:Action<this,Student[]>;
+  setStudent:Action<this,any>;
     
 }
 
@@ -37,6 +41,7 @@ export  interface AdminStudentListModel extends AdminStudentListState , AdminStu
 export const adminStudentListModel:AdminStudentListModel = {
     
     students:[],
+    student:{},
     addSingleStudent:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
         return await axios.post("http://localhost:8080/signup/student",payload,{
             withCredentials:true
@@ -62,6 +67,9 @@ export const adminStudentListModel:AdminStudentListModel = {
     setStudents:action((state,payload)=>{
         state.students = payload;
     }),
+    setStudent:action((state,payload)=>{
+        state.student = payload;
+    }),
     deleteStudent:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
      
              await axios.post("http://localhost:8080/deleteStudent",{
@@ -73,6 +81,19 @@ export const adminStudentListModel:AdminStudentListModel = {
             await actions.getStudents()
           
        
-    })
+    }),
+    getStudent:thunk(async(actions,payload,{getStoreActions})=>{
+        try{
+
+            const res =  await axios.get(`http://localhost:8080/studentsInfo/${payload}`,{withCredentials:true})
+              .catch(err=>{
+                  throw err;
+              })
+              actions.setStudent(res.data)
+        }catch(err){
+            console.log(err)
+        }
+        
+    }),
     
 }

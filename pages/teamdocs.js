@@ -10,10 +10,8 @@ import Select from "react-select";
 import { useRouter } from "next/router";
 import AddDocumentIcon from "../icons/AddDocumentIcon";
 import EditIcon from "../icons/EditIcon";
-import Trash from "../icons/Trash";
 import TrashIcon from "../icons/TrashIcon";
 import CommitIcon from "../icons/CommitIcon";
-import { readSheetNames } from "read-excel-file";
 const TeamDocs = ({toastsRef})=>{
     const router = useRouter()
     const [newDocModal,setNewDocModal] = useState(false)
@@ -96,7 +94,7 @@ const TeamDocs = ({toastsRef})=>{
             
 
         }catch(err){
-            toastsRef.current.addMessage({text:"Probleme",mode:'Error'})
+            toastsRef.current.addMessage({text:err.response.data.message,mode:'Error'})
             console.log(err)
         }
 
@@ -122,7 +120,7 @@ const TeamDocs = ({toastsRef})=>{
 
         }catch(err){
             console.log(err)
-            toastsRef.current.addMessage({text:"Probleme",mode:'Error'})
+            toastsRef.current.addMessage({text:err.response.data.message,mode:'Error'})
         }
        
 
@@ -139,7 +137,7 @@ const TeamDocs = ({toastsRef})=>{
             setOpenCommitModel(false)
         }catch(err){
             console.log(err)
-            toastsRef.current.addMessage({text:"ops ... erreur",mode:'Error'})
+            toastsRef.current.addMessage({text:err.response.data.message,mode:'Error'})
             setOpenCommitModel(false)
         }
     }
@@ -192,7 +190,7 @@ const TeamDocs = ({toastsRef})=>{
             toastsRef.current.addMessage({text:"C'est fait!!!",mode:"Alert"})
             setOpenModificationModal(false)
         }catch(err){
-            toastsRef.current.addMessage({text:"Ops...Error",mode:"Error"})
+            toastsRef.current.addMessage({text:err.response.data.message,mode:"Error"})
             setOpenModificationModal(false)
             console.log(err)
         }

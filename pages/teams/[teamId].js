@@ -15,16 +15,15 @@ const Team = props => {
    const [rules,setRules] = useState('')
    const [theme,setTheme] = useState('')
    const [membres,setMembres] = useState([])
-   const [validated,setValidated] = useState(false)
+   const [complete,setComplete] = useState(false)
    const [promotion,setPromotion] = useState({})
    const [teamLeader,setTeamLeader] = useState({})
    const [peutSoutenir,setPeutSoutenir] = useState(null)
+   const [moyenne,setMoyenne] = useState(0)
  
    
 
     
-    const [clickDownEquipe, setClickDownEquipe] = useState(false)
-    const [clickUpEquipe, setClickUpEquipe] = useState(false)
     const {getTeam} = useStoreActions(store=>store.teamListModel)
     const router = useRouter();
     const {teamId} = router.query;
@@ -40,10 +39,11 @@ const Team = props => {
         setRules(team?.rules)
         setTheme(team?.theme?team?.theme:{})
         setMembres(team?.members)
-        setValidated(team?.validated)
+        setComplete(team?.complete)
         setPromotion(team?.promotion)
         setTeamLeader(team?.teamLeader)
         setPeutSoutenir(team?.peut_soutenir)
+        setMoyenne(team?.moyenne)
 
 
     },[teamId])
@@ -81,12 +81,16 @@ const Team = props => {
                      
                         </div>
                         <div className="flex items-center flex-row space-x-4">
-                            <div className="text-[19px]">Validee :</div>
-                            <div className={``}>{validated?"oui":"non"}</div>
+                            <div className="text-[19px]">complete :</div>
+                            <div className={``}>{complete?"oui":"non"}</div>
                         </div>
                         <div className="flex items-center flex-row space-x-4">
                             <div className="text-[19px]">Peut soutenir :</div>
                             <div className={``}>{peutSoutenir?"oui":"non"}</div>
+                        </div>
+                        <div className="flex items-center flex-row space-x-4">
+                            <div className="text-[19px]">moyenne :</div>
+                            <div className={``}>{moyenne}</div>
                         </div>
                         {/* <div className="flex flex-row items-center flex-wrap space-x-4">
                             <div className="text-[19px]">Encadreur(s) :</div>
@@ -98,16 +102,17 @@ const Team = props => {
                       
                             <div className="flex flex-col  flex-wrap space-x-4">
                                 <div className="text-[19px]">Membres:</div>
-                                <div className="flex flex-col  space-y-2">
+                                <div className="flex flex-col  space-y-2 my-2">
                                     {
                                         membres?.map((el , index)=> {
                                             return(
-                                                
-                                                <button key={index} className=' bg-blue-300/40 backdrop-blur-lg rounded-full px-3 hover:text-blue-500 w-[200px]  flex flex-row space-x-2 items-center'>
+                                                <Link href={`/students/${el.id}`}>
+                                                <button key={index} className=' w-fit px-2   backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center cursor-pointer space-x-4'>
                                                     <div className=" w-4 h-4 rounded-full bg-blue-300 text-white text-[10px] flex items-center justify-center">{index+1}</div>
                                                    <span>{` ${el?.firstName} ${el?.lastName} ${teamLeader?.id === el.id?'(CF)':''}`}</span>
                                                     
                                                     </button>
+                                                    </Link>
                                                 
                                             
                                             )

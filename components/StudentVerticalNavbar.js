@@ -11,6 +11,7 @@ import TeamIcon from "../icons/TeamIcon";
 import { useStoreActions, useStoreState } from "../store/hooks";
 import ChatIcon from "../icons/ChatIcon";
 import { useRouter } from "next/router";
+import OrderIcon from "../icons/OrderIcon";
 
 
 const StudentVerticalNavbar = () => {
@@ -44,6 +45,9 @@ const StudentVerticalNavbar = () => {
     }
     
   }
+
+  const  wishListSent = user?.student.promotion.wishListSent
+  console.log('55555',wishListSent)
   return (
     <>
     <ModalPortal
@@ -142,15 +146,15 @@ const StudentVerticalNavbar = () => {
                     </Link>
 
                 </div>}
-                
-                
-               
-                
-                
-              
-              
-           
-        
+                {   hasTeam&& isTeamLeader&& wishListSent&&  <div className='relative cursor-pointer group'>
+                    <div className='absolute right-0 translate-x-[100%] top-0 text-textcolor bg-white rounded-80 font-semibold w-fit px-2 hidden group-hover:flex rounded-[10px] shadow-lg'>Fiche de voeux</div>
+                    <Link href="/fichevoeux" >
+                    
+                       <OrderIcon className='hover:cursor-pointer w-[39px] h-[40px] text-textcolor' />
+                    </Link>
+
+                </div>}
+                      
     </div>
     </>
   )

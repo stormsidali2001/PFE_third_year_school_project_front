@@ -91,7 +91,7 @@ const FicheVoeux = ({toastsRef}) => {
 
       }catch(err){
         console.log(err)
-        toastsRef.current.addMessage({mode:'Error',text:'ops...Erreur'})
+        toastsRef.current.addMessage({text:err.response.data.message,mode:'Error'})
       }
      
       

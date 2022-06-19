@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRef ,useEffect} from "react";
+import { useRef ,useEffect, useState} from "react";
 import { useOutSideContainer } from "../custom hooks/useOutSideContainer";
 import MessageIcon from "../icons/MessageIcon";
 import NotificationIcon from "../icons/NotificationIcon";
@@ -17,10 +17,11 @@ const HorisontalNavbar = ({toastsRef}) => {
   
     const notificationRef =useRef(null);
     const lastMessagesRef = useRef(null);
+    const profilRef = useRef(null)
     const user = useStoreState(store=>store.user)
     const{userType,student,teacher,entreprise,admin} = user;
     const entity =  user[userType] ;
-    
+    const [dowpdownOpen,setDropdownOpen] = useState(false)
   
     const {open:openNotifications,setOpen:setOpenNotifications} = useOutSideContainer({ref:notificationRef});
     const {open:openlastMessages,setOpen:setOpenLastMessages} = useOutSideContainer({ref:notificationRef});
@@ -46,10 +47,28 @@ const HorisontalNavbar = ({toastsRef}) => {
 
                         <div className="flex flex-row space-x-2">
                             
+                                <div className="relative "   >
                                 <Profil
+                                         
                                             className='cursor-pointer'
-                                            onClick={async()=>{await logoutThunk();router.push('/login')}}
+                                            onClick={()=>setDropdownOpen(v=>!v)}
                                     />
+                                    <div className={`absolute w-[200px] bg-white shadow-lg -bottom-[15px] translate-y-[100%] flex flex-col rounded-[10px] text-[19px] px-2 py-1 transition-all ease-in ${dowpdownOpen?'scale-100':'scale-0' }`}
+                                    ref={profilRef}
+                                        
+                                    >
+                                        <div 
+                                            className="cursor-pointer hover:bg-slate-100 rounded-[10px]"
+                                            onClick={()=>{setDropdownOpen(false);router.push(`/${user?.userType}s/${user[user?.userType].id}`)}}
+                                        >Profil</div>
+                                        <hr/>
+                                        <div
+                                            className="cursor-pointer hover:bg-slate-100 rounded-[10px]"
+                                            onClick={async()=>{setDropdownOpen(false);await logoutThunk();router.push('/login')}}
+                                         >deconnexion</div>
+
+                                    </div>
+                                </div>
                               
                                {
                                    userType === 'entreprise' ?(

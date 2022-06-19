@@ -56,6 +56,7 @@ export const teamListModel:TeamListModel = {
             const res =   await axios.get(`http://localhost:8080/getAllTeams/${payload?payload:'all'}`,{
                 withCredentials:true,
             })
+            
             actions.setTeamsList(res.data)
 
         }catch(err){
@@ -107,6 +108,9 @@ export const teamListModel:TeamListModel = {
                 promotionId,
             },{
                 withCredentials:true,
+            })
+            .catch(err=>{
+                throw err;
             })
         
             return res.data;
