@@ -14,18 +14,20 @@ export interface Teacher extends TeacherPayload {
 }
 
 export interface TeacherListState{
-    teachers?:Teacher[]
+    teachers?:Teacher[],
+    teacher:{}
 }
 export interface TeacherListThunks{
     addSingleTeacher:Thunk<this,TeacherPayload,undefined,undefined>;
     addMultipleTeachers:Thunk<this,TeacherPayload[],undefined,undefined>;
     getTeachers:Thunk<this,undefined,undefined,undefined>;
     deleteTeacher:Thunk<this,string,undefined,undefined>;
+    getTeacher:Thunk<this,string,undefined,undefined>;
 
 }
 export interface TeacherListActions{
   setTeachers:Action<this,Teacher[]>;
-    
+  setTeacher:Action<this,any>;
 }
 
 export  interface teacherListModel extends  TeacherListState ,  TeacherListThunks , TeacherListActions{
@@ -35,6 +37,7 @@ export  interface teacherListModel extends  TeacherListState ,  TeacherListThunk
 export const teacherListModel:teacherListModel = {
     
     teachers:[],
+    teacher:{},
     addSingleTeacher:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
         return await axios.post("http://localhost:8080/signup/teacher",payload,{
             withCredentials:true
@@ -60,6 +63,11 @@ export const teacherListModel:teacherListModel = {
     setTeachers:action((state,payload)=>{
         state.teachers = payload;
     }),
+    setTeacher:action((state,payload)=>{
+        state.teacher = payload;
+    })
+    ,
+
     deleteTeacher:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
      
              await axios.post("http://localhost:8080/deleteTeacher",{
@@ -71,6 +79,26 @@ export const teacherListModel:teacherListModel = {
             await actions.getTeachers()
           
        
-    })
+    }),
+    getTeacher:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
+     
+        try{
+            const res =  await axios.post(`http://localhost:8080/getTeacher/${payload}`,{
+                teacherId:payload
+            },{
+               withCredentials:true
+           })
+           actions.setTeacher(res.data)
+
+        }catch(err){
+            console.log(err)
+
+        }
+  
+
+       
+     
+  
+})
     
 }

@@ -19,8 +19,8 @@ const AdminVerticalNavbar = props => {
                 </Link>
             </div>
             <div className='relative cursor-pointer group'>
-                <div className='absolute right-0 translate-x-[100%] top-0 text-textcolor bg-white rounded-80 font-semibold w-fit px-2 hidden group-hover:flex rounded-[10px] shadow-lg'>Statistiques</div>
-                <Link href="/">
+                <div className='absolute right-0 translate-x-[100%] top-0 text-textcolor bg-white rounded-80 font-semibold w-fit px-2 hidden group-hover:flex rounded-[10px] shadow-lg'>Fiches voeux</div>
+                <Link href="/admin/wish-lists">
                     <button><StatIcon className='hover:cursor-pointer'/></button>
                 </Link>
             </div>
