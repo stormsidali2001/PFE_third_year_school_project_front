@@ -115,7 +115,7 @@ const addStudent = ({toastsRef}) => {
         const file = e.target.files[0];
        
          const rows = await readXlsxFile(file);
-         setFile(convertToArrayOfObjects(rows).map(el=>{return {...el,dob:new Date(el.dob).toJSON().slice(0,10)}}));
+         setFile(convertToArrayOfObjects(rows).map(el=>{return {...el,dob:new Date(el.dob).toJSON().slice(0,10),moy:parseFloat(el.moy)}}));
 
 
     
