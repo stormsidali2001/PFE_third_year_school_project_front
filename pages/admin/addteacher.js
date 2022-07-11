@@ -122,7 +122,7 @@ const addTeacher = ({toastsRef}) => {
                     </div>
                 </div>
                 <form 
-                    className = {`h-[550px] w-[650px] pt-[100px] pl-[100px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[23px] ${oneclick === true ? "flex" : "hidden"}`}
+                    className = {`h-[550px] w-[650px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[23px] ${oneclick === true ? "flex" : "hidden"}`}
                     onSubmit = {handleAddSingleTeacher}
                 
                 >

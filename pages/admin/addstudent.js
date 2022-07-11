@@ -131,7 +131,7 @@ const addStudent = ({toastsRef}) => {
                         <button className="h-[35px] sm:w-[160px] w-[120px] rounded-full bg-[#8FD4FB]" onClick={()=> setManyClick(true)}>Plusieurs</button>
                     </div>
                 </div>
-                <form className = {`h-[500px] md:w-[650px] pt-[100px] pl-[100px] w-fit  bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center relative text-[18px] ${oneclick === true ? "flex" : "hidden"} mt-[100px]`} onSubmit={handleAddSingleStudent}>
+                <form className = {`h-[500px] md:w-[650px] w-fit  bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center relative text-[18px] ${oneclick === true ? "flex" : "hidden"} mt-[100px]`} onSubmit={handleAddSingleStudent}>
                     <div className="sm:text-[26px] text-[22px]">Ajouter un étudiant</div>
                     <table>
                     <tr className="sm:flex-row flex-col gap-6 flex">
@@ -233,7 +233,7 @@ const addStudent = ({toastsRef}) => {
                             </label>
                         </div>
                         <img src = {extension === "csv" ? "/csv.jpg" : "/excel.png"} className={`h-[80px] w-[80px] object-contain opacity-40 ${file ? "flex" : "hidden"}`}/>
-                        <div className="w-full text-center break-words text-sm">{file?.name}</div>
+                        <div className="w-full text-center break-words text-sm">{file?"fichier ajoutee":""}</div>
                      </label>
                      <input id="file" className="hidden" type="file" multiple onChange={handleFileChange} optional/>
                     <button className="h-[40px] w-[120px] text-[18px] mb-6 bg-blue-300 hover:bg-blue-400 rounded-full" type="submit">Valider</button>
