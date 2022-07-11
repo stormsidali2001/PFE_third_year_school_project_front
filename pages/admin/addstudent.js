@@ -134,7 +134,7 @@ const addStudent = ({toastsRef}) => {
                 <form className = {`h-[500px] md:w-[650px] w-fit  bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center relative text-[18px] ${oneclick === true ? "flex" : "hidden"} mt-[100px]`} onSubmit={handleAddSingleStudent}>
                     <div className="sm:text-[26px] text-[22px]">Ajouter un étudiant</div>
                     <table>
-                    <tr className="sm:flex-row flex-col gap-6 flex">
+                    <tr className="">
                             <td className="py-1 hidden sm:flex">Promotion :</td>
                             <td >
                                 <Select
@@ -148,7 +148,7 @@ const addStudent = ({toastsRef}) => {
                                 />
                             </td>
                         </tr>
-                        <tr className="sm:flex-row flex-col gap-6 flex">
+                        <tr className="">
                             
                             <td className="py-1 hidden sm:flex">Matricule :</td>
                             <td>
@@ -159,7 +159,7 @@ const addStudent = ({toastsRef}) => {
                                 />
                             </td>
                         </tr>
-                        <tr className="sm:flex-row flex-col gap-6 flex">
+                        <tr className="">
                             <td className="py-1 hidden sm:flex">Moyenne :</td>
                             <td>
                                 <input
@@ -170,7 +170,7 @@ const addStudent = ({toastsRef}) => {
                             </td>
                         </tr>
                       
-                        <tr className="sm:flex-row flex-col gap-6 flex">
+                        <tr className="">
                             <td className="py-1 hidden sm:flex">Email :</td>
                             <td>
                                 <input className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" placeholder="E-mail..." onChange={(e)=>{setEmail(e.target.value)}}
@@ -178,7 +178,7 @@ const addStudent = ({toastsRef}) => {
                                 />
                             </td>
                         </tr>
-                        <tr className="sm:flex-row flex-col gap-6 flex">
+                        <tr className="">
                             <td className="py-1 hidden sm:flex">Nom :</td>
                             <td>
                                 <input className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" placeholder="Nom..." onChange={(e)=>{setFirstName(e.target.value)}}
@@ -186,7 +186,7 @@ const addStudent = ({toastsRef}) => {
                                 />
                             </td>
                         </tr>
-                       <tr className="sm:flex-row flex-col gap-6 flex">
+                       <tr className="">
                             <td className="py-1 hidden sm:flex">Prénom :</td>
                            <td>
                                 <input className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Prénom..." onChange={(e)=>{setLastName(e.target.value)}}
@@ -194,7 +194,7 @@ const addStudent = ({toastsRef}) => {
                                 />
                            </td>
                         </tr>
-                        <tr className="sm:flex-row flex-col gap-6 flex">
+                        <tr className="">
                             <td className="py-1 sm:pr-12 hidden sm:flex">Date de naissance:</td>
                             <td>
                                 <input type='date' className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin"  onChange={(e)=>{setDob(e.target.value)}}
