@@ -29,7 +29,7 @@ const HorisontalNavbar = ({toastsRef}) => {
     const {totalNotificationCount} = useStoreState(store=>store.notificationService)
 
     const {logoutThunk} = useStoreActions(store=>store.user)
-
+  
     
     return ( 
         <div className="fixed z-50 w-[80vw] left-[50%] -translate-x-1/2  ">

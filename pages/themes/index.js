@@ -167,7 +167,7 @@ const Themes = ({toastsRef}) => {
                       
                         <div className="text-[14px] break-all   px-2 mx-2 bg-background/10 transition-all ease-in group-hover:bg-background/30 backdrop-blur-sm w-[90%]   py-1 h-[30%] flex flex-col">
                             <span className="font-[500] font-mono text-[15px]">Description:</span>
-                            <span className=" h-[100%] break-all px-2 overflow-hidden ">{description}fsakfsjlfsajlfasj;lfasjl;fasjfsafsjfsfsj;fsaj;asfjfsajsfajkasfljsafkjsfakjlfsjklfaskjlasfkjsfjklfsaljksfajfsajfsakjllfksfajjfsfasjklfslakjfsjlksfjalkasfjlsafkjlkfslkljfsajksfalkjfsakjsfajlkfslkjfsakjsafjklfasjl;fsaj;</span>
+                            <span className=" h-[100%] break-all px-2 overflow-hidden ">{description}</span>
                         
                         </div>
                        
