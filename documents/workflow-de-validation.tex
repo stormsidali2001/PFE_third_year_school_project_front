@@ -1,0 +1,85 @@
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Page margins
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{52,177,201} % Define the orange color used for highlighting throughout the book
+\usepackage{wallpaper}
+\usepackage{mdframed}
+\usepackage[top=2cm, bottom=2cm, outer=0cm, inner=0cm]{geometry}
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\usepackage{mathptmx} % Use the Adobe Times Roman as the default text font together with math symbols from the Sym­bol, Chancery and Computer Modern fonts
+\graphicspath{ {figures/} }
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage{imakeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{hyperref}
+% Bibliography
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+\title{Assurance de Qualite}
+
+%----------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------
+\begingroup
+\ThisLRCornerWallPaper{1.0}{Pictures/cover page.png}
+\endgroup
+
+%----------------------------------------Version page ---------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+%-------------------	TABLE OF CONTENTS
+
+\pagestyle{empty} % No headers
+
+\tableofcontents
+
+\pagestyle{fancy} % Print headers again
+
+%----------------------------------------------------
+\chapter{Workflow de validation}
+\section{Définition}
+Un workflow ou circuit de validation permet de fluidifier la circulation de l’information et fiabiliser les processus internes. Donc c’est un ensemble d’étapes de niveaux d’approbation successifs, effectuées par différents intervenants.
+\section{Objectifs d’un Workflow de Validation}
+Le workflow de validation permet de :
+\begin{itemize}
+    \item Visualiser l’avancement en temps réel du document.
+    \item Garantir le suivi, la sécurisation et la crédibilité des documents.
+    \item Un meilleur contrôle de gestion de version des documents
+    \item Un moyen plus fiable et plus rapide d’exécution des processus.
+\end{itemize}
+\section{Description du Workflow de Validation}
+\begin{itemize}
+    \item Le chef de projet prend en charge la répartition des taches sur les membres de l’équipe.
+    \item Chaque tache doit être suivie d’une phase de validation (par toute l’équipe) et une vérification des normes (par le responsable de qualité).
+    \item Après la collection des résultats des taches une validation sera effectuée suivie d’une vérification finale par le responsable de la qualité.
+    \item Le chef de projet reçoit la version validée de document qui sera envoyée comme livrable final
+\end{itemize}
+\newpage
+\section{WorkFlow De Validation}
+Le schéma suivant résume ce workflow :
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Pictures/WorkFlow.jpg}
+    \caption{schéma du workflow de validation}
+    \label{fig:pca}
+\end{figure}
+\end{document}
