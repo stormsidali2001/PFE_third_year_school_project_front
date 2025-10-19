@@ -377,7 +377,7 @@ const TeamDocs = ({toastsRef})=>{
                             </>
                          ):(
                              <>
-                                <label for='file'  className="flex space-x-2 group cursor-pointer">
+                                <label htmlFor='file'  className="flex space-x-2 group cursor-pointer">
                                     <AttachFileIcon className='w-6 text-[#5375E2]/80 group-hover:text-[#5375E2]/60'/>
                                     <div> choisir un fichier</div>
                                 </label>

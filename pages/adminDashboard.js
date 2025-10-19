@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AcceuilAdmin from "../components/AcceuilAdmin";
 
 
-const adminDashboard = ({toastsRef}) => {
+const AdminDashboard = ({toastsRef}) => {
    
     
    return(
@@ -13,4 +13,4 @@ const adminDashboard = ({toastsRef}) => {
     </div>
    )
 }
-export default adminDashboard;
+export default AdminDashboard;

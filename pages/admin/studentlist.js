@@ -2,91 +2,23 @@ import Link from 'next/link'
 import { useEffect } from 'react';
 import AdminVerticalNavbar from '../../components/AdminVerticalNavbar';
 import HorisontalNavbar from "../../components/HorisontalNavbar";
-import StudentVerticalNavbar from "../../components/StudentVerticalNavbar";
-import ModificationIcon from '../../icons/modificationIcon';
-import Trash from '../../icons/Trash';
 import { useStoreActions, useStoreState } from '../../store/hooks';
+import { Edit2, Trash2, Plus, Search } from 'lucide-react';
 
 const studentList = ({toastsRef}) => {
-   const data = [
-       {
-           Matricule : 1234568,
-           Nom : "houda",
-           Prénom : "houda",
-           Email : "houda.hhh.jjj@esi-sba.dz",
-           Promotion : "1CS"
-       },
-       {
-        Matricule : 1234568,
-        Nom : "houda",
-        Prénom : "houda",
-        Email : "houda.hhh.jjj@esi-sba.dz",
-        Promotion : "1CS"
-    },
-    {
-        Matricule : 1234568,
-        Nom : "houda",
-        Prénom : "houda",
-        Email : "houda.hhh.jjj@esi-sba.dz",
-        Promotion : "1CS"
-    },
-    {
-        Matricule : 1234568,
-        Nom : "houda",
-        Prénom : "houda",
-        Email : "houda.hhh.jjj@esi-sba.dz",
-        Promotion : "1CS"
-    },
-    {
-        Matricule : 1234568,
-        Nom : "houda",
-        Prénom : "houda",
-        Email : "houda.hhh.jjj@esi-sba.dz",
-        Promotion : "1CS"
-    },
-    {
-        Matricule : 1234568,
-        Nom : "houda",
-        Prénom : "houda",
-        Email : "houda.hhh.jjj@esi-sba.dz",
-        Promotion : "1CS"
-    },
-    {
-        Matricule : 1234568,
-        Nom : "houda",
-        Prénom : "houda",
-        Email : "houda.hhh.jjj@esi-sba.dz",
-        Promotion : "1CS"
-    },
-    {
-        Matricule : 1234568,
-        Nom : "houda",
-        Prénom : "houda",
-        Email : "houda.hhh.jjj@esi-sba.dz",
-        Promotion : "1CS"
-    },
-    {
-        Matricule : 1234568,
-        Nom : "houda",
-        Prénom : "houda",
-        Email : "houda.hhh.jjj@esi-sba.dz",
-        Promotion : "1CS"
-    },
-   ]
    const {getStudents,deleteStudent} = useStoreActions(store=>store.adminStudentListModel)
    const {students:StudentsData} = useStoreState(store=>store.adminStudentListModel)
+   
    const handleDeleteStudent = async (id)=>{
        try{
-
-
            await deleteStudent(id);
-           toastsRef.current.addMessage({text:"Etudiants spprimé...",mode:'Alert'})
+           toastsRef.current.addMessage({text:"Étudiant supprimé...",mode:'Alert'})
        }catch(err){
            console.log(err);
-           toastsRef.current.addMessage({text:"Ops...Probleme",mode:'Error'})
+           toastsRef.current.addMessage({text:"Erreur...",mode:'Error'})
        }
-    
-}
+   }
+   
    useEffect(async ()=>{
         await getStudents();
    },[])
@@ -97,66 +29,83 @@ const studentList = ({toastsRef}) => {
            promotion:student.promotion.name,
        }
     })
-   if(students.length === 0) return <div>Aucune donnée</div>
+    
+   if(students.length === 0) return <div style={{color: '#000000'}} className="font-roboto text-center mt-32">Aucune donnée</div>
    const columns = [...Object.keys(students[0]).filter(el=>el!=='id')];
+   
     return (
-        <div >
+        <div>
             <HorisontalNavbar/>
             <AdminVerticalNavbar/>
-             <div className="w-full h-full  relative flex flex-col space-y-16 items-center justify-center font-xyz text-textcolor py-[100px] ">
-                <div className="text-[30px] mt-10">Liste des étudiants</div>
-                <div className="flex flex-row space-x-24">
-                     <div className="flex flex-rox space-x-4 items-center justify-center">
-                         <div className='text-[18px]'>Choisir une promotion :</div>
-                         <input className='h-[40px] w-[250px] rounded-full shadow-sm px-3' placeholder='Choisir une promotion ...'/>
+            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto">
+                <div className="px-4 sm:px-6 lg:px-8 ml-16 max-w-[calc(100vw-5rem)]">
+                    {/* Header */}
+                    <div className="mb-8 sm:mb-12 text-center">
+                        <h1 className="text-3xl sm:text-4xl font-bold mb-2" style={{color: '#1A2562'}}>
+                            Liste des Étudiants
+                        </h1>
+                        <div className="h-1 w-24 bg-boutton rounded-full mx-auto"></div>
                     </div>
-                    <Link href="/addstudent1"><button className="shadow-lg h-[40px] w-[220px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full">+ Ajouter étudiant </button></Link>
-                 </div>
-                <table className="bg-[#282873]/10 backdrop-blur-[8px] shadow-lg  leading-normal h-fit p-4   w-[80vw]">
-                    <thead>
-                        <tr  className="bg-white  rounded-[10px] h-[36px]  border-b-2 ">
-                            {
-                               
-                                columns.map(el=>{
-                                    return(
-                                        <th className="text-center">{el}</th>
-                                    )
-                                })
-                               
-                               
-                            }     
-                             <th className="text-center">Opérations</th>
-                        </tr>
-                    </thead>
-                    <tbody className=" ">
-                        {
-                            students.map(row=>{
-                                return(
-                                    <tr  className=" bg-white/60  rounded-[10px] border-red  border-b-2">
-                                        {
-                                            Object.keys(students[0]).filter(el=>el!=='id').map(col=>{
-                                                return(
-                                                    <td className="text-center  h-[36px] ">
-                                                        {row[col]}
-                                                    </td>
-                                                )
-                                            })
-                                        }
-                                        <td>
-                                           <div className='flex flex-row space-x-10 items-center justify-center'>
-                                                <ModificationIcon/>
-                                                <Trash
-                                                    onClick={e=>handleDeleteStudent(row.id)}
-                                                    className = 'cursor-pointer'
-                                                />
-                                            </div>
-                                        </td>
+
+                    {/* Filters and Actions */}
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 items-stretch sm:items-center justify-between">
+                        <div className="flex items-center gap-2 flex-1 min-w-0 max-w-md">
+                            <Search className="w-5 h-5 flex-shrink-0" style={{color: '#1A2562'}} />
+                            <input 
+                                className="h-11 w-full rounded-lg border border-gray-300 px-4 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors" 
+                                placeholder="Rechercher une promotion..." 
+                                style={{color: '#000000'}}
+                            />
+                        </div>
+                        <Link href="/admin/addstudent">
+                            <button className="px-4 sm:px-6 py-3 bg-boutton text-white rounded-lg font-medium hover:bg-blue-600 transition-all duration-200 shadow-md hover:shadow-lg flex items-center gap-2 justify-center whitespace-nowrap flex-shrink-0">
+                                <Plus className="w-5 h-5 flex-shrink-0" />
+                                <span className="hidden sm:inline text-sm">Ajouter Étudiant</span>
+                                <span className="sm:hidden text-sm">Ajouter</span>
+                            </button>
+                        </Link>
+                    </div>
+
+                    {/* Table */}
+                    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                        <div className="overflow-x-auto">
+                            <table className="w-full">
+                                <thead>
+                                    <tr style={{backgroundColor: '#FFFFFF'}}>
+                                        {columns.map(el => (
+                                            <th key={el} className="px-3 sm:px-6 py-3 sm:py-4 text-left font-semibold text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>
+                                                {el}
+                                            </th>
+                                        ))}
+                                        <th className="px-3 sm:px-6 py-3 sm:py-4 text-center font-semibold text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>Opérations</th>
                                     </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
+                                </thead>
+                                <tbody className="divide-y divide-gray-200">
+                                    {students.map((row, idx) => (
+                                        <tr key={idx} className="hover:bg-gray-50 transition-colors">
+                                            {Object.keys(students[0]).filter(el => el !== 'id').map(col => (
+                                                <td key={col} className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>
+                                                    <span className="block truncate">{row[col]}</span>
+                                                </td>
+                                            ))}
+                                            <td className="px-3 sm:px-6 py-3 sm:py-4 text-center">
+                                                <div className='flex flex-row gap-2 sm:gap-3 items-center justify-center'>
+                                                    <button 
+                                                        className="p-2 hover:bg-red-50 rounded-lg transition-colors flex-shrink-0"
+                                                        onClick={() => handleDeleteStudent(row.id)}
+                                                        title="Supprimer"
+                                                    >
+                                                        <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" style={{color: '#EF4444'}} strokeWidth={1.5} />
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

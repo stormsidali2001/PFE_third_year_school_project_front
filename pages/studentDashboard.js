@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AcceuilStudent from "../components/AcceuilStudent";
 import { useStoreActions } from "../store/hooks";
 
-const studentDashboard = ({toastsRef}) => {
+const StudentDashboard = ({toastsRef}) => {
 
     const {getUserInfo} = useStoreActions(store=>store.user)
     useEffect(async ()=>{
@@ -17,4 +17,4 @@ const studentDashboard = ({toastsRef}) => {
         </div>
     )
 }
-export default studentDashboard;
+export default StudentDashboard;

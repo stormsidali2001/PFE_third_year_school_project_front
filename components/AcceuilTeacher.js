@@ -1,19 +1,53 @@
 import Link from "next/link";
 import TeacherVerticalNavbar from "./TeacherVerticalNavbar";
+import HorisontalNavbar from "./HorisontalNavbar";
 
 const AcceuilTeacher = props => {
     return (
-        <div className="pl-[100px] pt-[100px] text-[#1A2562] font-xyz px-12 flex flex-col-reverse lg:flex-row space-y-3 py-10 h-fit w-[100vw] items-center justify-center">
-            <div className="flex flex-col space-y-8 items-center justify-center text-center">
-                <div className="text-[26px] font-bold">Bonjour ,</div>
-                <div className="text-[22px] font-semibold">Nous somme heureux de vous acceuil sur notre plateforme. On espère qul'elle vous aiderait a communiquer avec les équipes que vous encadrez et qu'elle vous faciliterait ce dernier.</div>
-                <div className="text-[22px] font-light">Cliquer sur l'un des boutons dessous et commencez votre expérience.</div>
-                <div className="text-[18px] flex flex-row space-x-6">
-                    <Link href='/myteams'><button className="bg-blue-200 rounded-full shadow-xl h-[35px] w-[150px] hover:bg-blue-300">Vos équipes</button></Link>
-                    <Link href='/chat'><button className="bg-blue-300 rounded-full shadow-xl h-[35px] w-[150px] hover:bg-blue-200">Chat</button></Link>
+        <div>
+            <HorisontalNavbar />
+            <TeacherVerticalNavbar />
+            <div className="fixed left-20 right-0 top-0 bottom-0 bg-gradient-to-br from-background via-background to-blue-50 font-roboto flex flex-col items-center justify-center pt-24">
+                {/* Title - Centered on entire page */}
+                <h1 className="text-5xl sm:text-6xl font-bold mb-20" style={{color: '#1A2562'}}>
+                    Bienvenue
+                </h1>
+
+                {/* Content - Below title */}
+                <div className="w-full px-4 sm:px-6 lg:px-8">
+                    <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-12">
+                        {/* Text Section */}
+                        <div className="flex flex-col space-y-6 items-center justify-center text-center flex-1">
+                            <p className="text-base sm:text-lg leading-relaxed" style={{color: '#000000'}}>
+                                Nous sommes heureux de vous accueillir sur notre plateforme. Cette dernière est conçue pour faciliter votre communication avec les équipes que vous encadrez et vous aider dans votre gestion pédagogique.
+                            </p>
+                            <p className="text-base sm:text-lg leading-relaxed" style={{color: '#000000'}}>
+                                Cliquez sur l'un des boutons ci-dessous pour commencer votre expérience.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                                <Link href='/myteams'>
+                                    <button className="px-8 py-3 bg-boutton text-white rounded-lg font-semibold hover:bg-blue-600 transition-all duration-200 shadow-md hover:shadow-lg">
+                                        Vos équipes
+                                    </button>
+                                </Link>
+                                <Link href='/chat'>
+                                    <button className="px-8 py-3 bg-boutton text-white rounded-lg font-semibold hover:bg-blue-600 transition-all duration-200 shadow-md hover:shadow-lg">
+                                        Chat
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+
+                        {/* Image Section */}
+                        <div className="flex-1 flex justify-center">
+                            <img 
+                                src="AcceuilTeacher.jpg" 
+                                className="h-64 sm:h-80 lg:h-96 w-auto object-contain"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
-            <img src="AcceuilTeacher.jpg" className="lg:h-[400px] w-full  object-contain mix-blend-darken"/>
         </div>
     )
 }

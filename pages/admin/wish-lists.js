@@ -1,5 +1,5 @@
 import Avatar from "../../components/Avatar"
-import TeacherVerticalNavbar from "../../components/TeacherVerticalNavbar"
+import AdminVerticalNavbar from "../../components/AdminVerticalNavbar"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import { useEffect, useState } from "react"
 import  Select  from "react-select"
@@ -59,7 +59,8 @@ const WishLists = ({toastsRef}) => {
 
     return(
         <div>
-            
+            <HorisontalNavbar />
+            <AdminVerticalNavbar />
             <div className=" w-screen bg-background text-black font-xyz flex flex-col space-y-10 items-center justify-center pl-[100px] py-[80px]">
             <div className="flex flex-row space-x-4">
                 <div className='text-[20px]'>Choisir une promotion :</div>

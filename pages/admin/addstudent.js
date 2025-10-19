@@ -7,7 +7,7 @@ import AttachFileIcon from "../../icons/AttachFileIcon";
 import readXlsxFile from 'read-excel-file'
 import Select from 'react-select'
 
-const addStudent = ({toastsRef}) => {
+const AddStudent = ({toastsRef}) => {
 
     const [oneclick , setOneClick] = useState(false)
     const [manyClick , setManyClick] = useState(false)
@@ -121,128 +121,221 @@ const addStudent = ({toastsRef}) => {
     
     }
     return (
-       <div className="bg-background min-h-screen min-w-screen">
-            <div className="bg-background h-screen w-screen pt-[100px] pl-[100px] relative flex items-center justify-center font-xyz text-textcolor">
-                <img src="/addStudent.jpg" className="h-full w-full object-contain mix-blend-darken absolute"/>
-                <div className={`min-h-[200px] w-[450px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center text-[18px] ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
-                    <div className="sm:text-[23px] text-[17px] text-center px-10">Vous voulez ajouter un ou plusieur étudiant ?</div>
-                    <div className="space-x-6 flex flex-row">
-                        <button className="h-[35px] sm:w-[160px] w-[100px] rounded-full bg-[#32AFF5] text-white" onClick={()=> setOneClick(true)}>Un seul</button>
-                        <button className="h-[35px] sm:w-[160px] w-[120px] rounded-full bg-[#8FD4FB]" onClick={()=> setManyClick(true)}>Plusieurs</button>
+       <div className="bg-background min-h-screen w-full font-roboto">
+            <div className="bg-background min-h-screen w-full pt-24 pb-12 px-6 flex items-center justify-center">
+                <div className={`max-w-md w-full bg-white shadow-lg rounded-2xl p-8 flex-col space-y-8 items-center justify-center ${oneclick || manyClick === true ? "hidden" : "flex"}`}>
+                    <div className="text-2xl font-bold text-center" style={{color: '#000000'}}>Ajouter des étudiants</div>
+                    <div className="text-base text-center" style={{color: '#000000'}}>Voulez-vous ajouter un ou plusieurs étudiants ?</div>
+                    <div className="flex flex-col sm:flex-row gap-4 w-full">
+                        <button 
+                            className="flex-1 py-3 rounded-lg bg-boutton text-white font-medium hover:bg-[#32AFF5] transition-all duration-200 shadow-md hover:shadow-lg" 
+                            onClick={()=> setOneClick(true)}
+                        >
+                            Un seul étudiant
+                        </button>
+                        <button 
+                            className="flex-1 py-3 rounded-lg bg-white border-2 border-boutton text-boutton font-medium hover:bg-boutton hover:text-white transition-all duration-200" 
+                            onClick={()=> setManyClick(true)}
+                        >
+                            Plusieurs étudiants
+                        </button>
                     </div>
                 </div>
-                <form className = {`h-[500px] md:w-[650px] w-fit  bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-6 items-center justify-center relative text-[18px] ${oneclick === true ? "flex" : "hidden"} mt-[100px]`} onSubmit={handleAddSingleStudent}>
-                    <div className="sm:text-[26px] text-[22px]">Ajouter un étudiant</div>
-                    <table>
-                    <tr className="">
-                            <td className="py-1 hidden sm:flex">Promotion :</td>
-                            <td >
-                                <Select
-                                    placeholder="Promotion..." 
-                                    className="z-50  h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
-                                     onChange={(option)=>{setChoosenPromotion(option)}}
-                                     options={promotions.map(el=>{return {value:el.id,label:el.name}})}
-                                     isLoading = {!promotions}
-                                     value={chosenPromotion}
-                                     styles = {{menuPortal:base=>({...base,zIndex:500})}}
-                                />
-                            </td>
-                        </tr>
-                        <tr className="">
-                            
-                            <td className="py-1 hidden sm:flex">Matricule :</td>
-                            <td>
-                                <input
-                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Matricule..." 
-                                     onChange={(e)=>{setMatricule(e.target.value)}}
-                                     value={matricule}
-                                />
-                            </td>
-                        </tr>
-                        <tr className="">
-                            <td className="py-1 hidden sm:flex">Moyenne :</td>
-                            <td>
-                                <input
-                                     className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Matricule..." 
-                                     onChange={(e)=>{setMoyenne(e.target.value)}}
-                                     value={moyenne}
-                                />
-                            </td>
-                        </tr>
-                      
-                        <tr className="">
-                            <td className="py-1 hidden sm:flex">Email :</td>
-                            <td>
-                                <input className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" placeholder="E-mail..." onChange={(e)=>{setEmail(e.target.value)}}
-                                 value={email}
-                                />
-                            </td>
-                        </tr>
-                        <tr className="">
-                            <td className="py-1 hidden sm:flex">Nom :</td>
-                            <td>
-                                <input className="h-[40px] w-[230px] rounded-lg bg-white/10 backdrop-blur-sm shadow-md outline-none px-3 text-[18px] font-thin" placeholder="Nom..." onChange={(e)=>{setFirstName(e.target.value)}}
+                <form className={`max-w-2xl w-full bg-white shadow-lg rounded-2xl p-8 flex-col space-y-6 ${oneclick === true ? "flex" : "hidden"}`} onSubmit={handleAddSingleStudent}>
+                    <div className="flex items-center justify-between">
+                        <button type="button" className="p-2 hover:bg-gray-100 rounded-lg transition-colors" onClick={() => {setOneClick(false)}}>
+                            <ArrowIcon/>
+                        </button>
+                        <div className="text-2xl font-bold" style={{color: '#000000'}}>Ajouter un étudiant</div>
+                        <div className="w-10"></div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="flex flex-col space-y-2">
+                            <label className="text-sm font-medium" style={{color: '#000000'}}>Promotion</label>
+                            <Select
+                                placeholder="Sélectionner..." 
+                                onChange={(option) => {setChoosenPromotion(option)}}
+                                options={promotions.map(el => {return {value: el.id, label: el.name}})}
+                                isLoading={!promotions}
+                                value={chosenPromotion}
+                                styles={{
+                                    control: (base) => ({
+                                        ...base,
+                                        minHeight: '44px',
+                                        borderRadius: '0.5rem',
+                                        borderColor: '#e5e7eb',
+                                    }),
+                                    menuPortal: base => ({...base, zIndex: 500})
+                                }}
+                            />
+                        </div>
+                        
+                        <div className="flex flex-col space-y-2">
+                            <label className="text-sm font-medium" style={{color: '#000000'}}>Matricule</label>
+                            <input
+                                className="h-11 rounded-lg border border-gray-300 px-3 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors" 
+                                placeholder="Matricule..." 
+                                style={{color: '#000000'}}
+                                onChange={(e) => {setMatricule(e.target.value)}}
+                                value={matricule}
+                            />
+                        </div>
+                        
+                        <div className="flex flex-col space-y-2">
+                            <label className="text-sm font-medium" style={{color: '#000000'}}>Nom</label>
+                            <input 
+                                className="h-11 rounded-lg border border-gray-300 px-3 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors" 
+                                placeholder="Nom..." 
+                                style={{color: '#000000'}}
+                                onChange={(e) => {setFirstName(e.target.value)}}
                                 value={firstName}
-                                />
-                            </td>
-                        </tr>
-                       <tr className="">
-                            <td className="py-1 hidden sm:flex">Prénom :</td>
-                           <td>
-                                <input className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin" placeholder="Prénom..." onChange={(e)=>{setLastName(e.target.value)}}
+                            />
+                        </div>
+                        
+                        <div className="flex flex-col space-y-2">
+                            <label className="text-sm font-medium" style={{color: '#000000'}}>Prénom</label>
+                            <input 
+                                className="h-11 rounded-lg border border-gray-300 px-3 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors" 
+                                placeholder="Prénom..." 
+                                style={{color: '#000000'}}
+                                onChange={(e) => {setLastName(e.target.value)}}
                                 value={lastName}
-                                />
-                           </td>
-                        </tr>
-                        <tr className="">
-                            <td className="py-1 sm:pr-12 hidden sm:flex">Date de naissance:</td>
-                            <td>
-                                <input type='date' className="h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none px-3 text-[18px] font-thin"  onChange={(e)=>{setDob(e.target.value)}}
+                            />
+                        </div>
+                        
+                        <div className="flex flex-col space-y-2">
+                            <label className="text-sm font-medium" style={{color: '#000000'}}>Email</label>
+                            <input 
+                                type="email"
+                                className="h-11 rounded-lg border border-gray-300 px-3 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors" 
+                                placeholder="exemple@esi-sba.dz..." 
+                                style={{color: '#000000'}}
+                                onChange={(e) => {setEmail(e.target.value)}}
+                                value={email}
+                            />
+                        </div>
+                        
+                        <div className="flex flex-col space-y-2">
+                            <label className="text-sm font-medium" style={{color: '#000000'}}>Moyenne</label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                min="0"
+                                max="20"
+                                className="h-11 rounded-lg border border-gray-300 px-3 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors" 
+                                placeholder="Moyenne..." 
+                                style={{color: '#000000'}}
+                                onChange={(e) => {setMoyenne(e.target.value)}}
+                                value={moyenne}
+                            />
+                        </div>
+                        
+                        <div className="flex flex-col space-y-2 md:col-span-2">
+                            <label className="text-sm font-medium" style={{color: '#000000'}}>Date de naissance</label>
+                            <input 
+                                type='date' 
+                                className="h-11 rounded-lg border border-gray-300 px-3 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors" 
+                                style={{colorScheme: 'light', color: '#000000'}}
+                                onChange={(e) => {setDob(e.target.value)}}
                                 value={dob}
-                                />
-                            </td>
-                        </tr>
-                    </table>
-                    {
-                         loading?(
-                            <svg role="status" class="h-[60px] lg:w-[360px] min-w-[250px] text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-<path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-</svg>
-                        ):(
-                            <button className="h-[40px] w-[120px] text-[20px] bg-blue-300 hover:bg-blue-400 rounded-full">Valider</button>
-                        )
-                    }
-                   
-                    <button className="absolute bottom-[35px] left-[20px]" onClick = {(e)=>{setOneClick(false);e.preventDefault()}}>
-                        <ArrowIcon/>
-                    </button>
+                            />
+                        </div>
+                    </div>
+                    
+                    <div className="flex justify-end pt-4">
+                        {loading ? (
+                            <div className="flex items-center justify-center py-3 px-8">
+                                <svg className="h-6 w-6 animate-spin text-boutton" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                                </svg>
+                            </div>
+                        ) : (
+                            <button 
+                                type="submit"
+                                className="py-3 px-8 bg-boutton text-white font-medium rounded-lg hover:bg-[#32AFF5] transition-all duration-200 shadow-md hover:shadow-lg"
+                            >
+                                Ajouter l'étudiant
+                            </button>
+                        )}
+                    </div>
                 </form>
                 <form 
-                    className = {`h-[550px] w-[550px] bg-white/70 backdrop-blur-sm shadow-lg rounded-xl flex-col space-y-10 items-center justify-center relative text-[20px] text-center px-12 ${manyClick === true ? "flex" : "hidden"}`}
+                    className={`max-w-2xl w-full bg-white shadow-lg rounded-2xl p-8 flex-col space-y-6 ${manyClick === true ? "flex" : "hidden"}`}
                     onSubmit={handleAddMultipleStudents}
-                
                 >
-                    <div className="md:text-[26px] text-[22px]">Ajouter plusieurs étudiant</div>
-                    <div className="text-[17px] font-thin">Ajouter un ficher contenant plusieurs étudiant en cliquant sur le lien ci dessous.</div>
-                    <label className=" w-fit p-8 flex items-center justify-center flex-col cursor-pointer transition-transform ease-in bg-white/10 backdrop-blur-3xl rounded-3xl" for = "file">
-                        <div className=" flex justify-center items-center p-4 w-fit">         
-                        <label for='file'  className="flex space-x-2 group cursor-pointer">
-                                <AttachFileIcon className='w-6 text-[#5375E2]/80 group-hover:text-[#5375E2]/60'/>
-                                <div> Joindre des fichiers </div>
-                            </label>
+                    <div className="flex items-center justify-between">
+                        <button type="button" className="p-2 hover:bg-gray-100 rounded-lg transition-colors" onClick={(e) => {setManyClick(false); e.preventDefault()}}>
+                            <ArrowIcon/>
+                        </button>
+                        <div className="text-2xl font-bold" style={{color: '#000000'}}>Ajouter plusieurs étudiants</div>
+                        <div className="w-10"></div>
+                    </div>
+                    
+                    <div className="text-base text-center" style={{color: '#000000'}}>
+                        Importez un fichier Excel contenant les informations des étudiants
+                    </div>
+                    
+                    <label 
+                        htmlFor="file" 
+                        className="flex flex-col items-center justify-center w-full p-12 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-boutton hover:bg-background/50 transition-all duration-200"
+                    >
+                        <div className="flex flex-col items-center justify-center space-y-4">
+                            <div className="p-4 bg-boutton/10 rounded-full">
+                                <AttachFileIcon className='w-8 h-8 text-boutton'/>
+                            </div>
+                            <div className="text-center space-y-2">
+                                <div className="text-base font-medium" style={{color: '#000000'}}>
+                                    Cliquez pour sélectionner un fichier
+                                </div>
+                                <div className="text-sm" style={{color: '#000000'}}>
+                                    Excel (.xlsx) ou CSV (.csv)
+                                </div>
+                            </div>
+                            {file && file.length > 0 && (
+                                <div className="flex items-center space-x-3 p-4 bg-green-50 rounded-lg">
+                                    <img 
+                                        src={extension === "csv" ? "/csv.jpg" : "/excel.png"} 
+                                        className="h-10 w-10 object-contain"
+                                        alt="file icon"
+                                    />
+                                    <div className="text-sm font-medium" style={{color: '#000000'}}>
+                                        {file.length} étudiant(s) détecté(s)
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                        <img src = {extension === "csv" ? "/csv.jpg" : "/excel.png"} className={`h-[80px] w-[80px] object-contain opacity-40 ${file ? "flex" : "hidden"}`}/>
-                        <div className="w-full text-center break-words text-sm">{file?"fichier ajoutee":""}</div>
-                     </label>
-                     <input id="file" className="hidden" type="file" multiple onChange={handleFileChange} optional/>
-                    <button className="h-[40px] w-[120px] text-[18px] mb-6 bg-blue-300 hover:bg-blue-400 rounded-full" type="submit">Valider</button>
-                    <button className="absolute bottom-[35px] left-[20px]" onClick = {(e)=>{setManyClick(false);e.preventDefault()}}>
-                        <ArrowIcon/>
-                    </button>
+                    </label>
+                    <input 
+                        id="file" 
+                        className="hidden" 
+                        type="file" 
+                        accept=".xlsx,.xls,.csv"
+                        onChange={handleFileChange}
+                    />
+                    
+                    <div className="flex justify-end pt-4">
+                        {loading ? (
+                            <div className="flex items-center justify-center py-3 px-8">
+                                <svg className="h-6 w-6 animate-spin text-boutton" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                                </svg>
+                            </div>
+                        ) : (
+                            <button 
+                                type="submit"
+                                disabled={!file || file.length === 0}
+                                className="py-3 px-8 bg-boutton text-white font-medium rounded-lg hover:bg-[#32AFF5] transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                Ajouter les étudiants
+                            </button>
+                        )}
+                    </div>
                 </form>
             </div>
        </div>
     )
 }
-export default addStudent;
+export default AddStudent;

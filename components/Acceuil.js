@@ -3,17 +3,46 @@ import Login from "../pages/login";
 
 const Acceuil = props => {
     return(
-        <div className="h-fit pt-32 pb-12 lg:h-screen w-[100vw] bg-background flex flex-col items-center justify-center gap-16 font-xyz" id="home">
-            <div className="lg:text-[48px] text-[38px] font-bold tracking-wider text-center text-textcolor">Mieux organiser vos projets</div>
-            <div className="flex flex-col-reverse lg:flex-row items-center justify-center h-full gap-12 px-10">
-                <div className="flex flex-col space-y-16 items-center justify-center">
-                    <div className="text-[25px] text-textcolor text-center font-bold">Créer votre équipe de projet, communiquer avec vos encadreur,  assurer la communication dans l’équipe et bien autre ...</div>
-                    <div className="flex flex-row space-x-8 text-[20px]">
-                       <Link to='what'spy={true} smooth={true}><a className="bg-[#8FD4FB] h-[40px] w-[120px] flex items-center justify-center hover:bg-[#32AFF5] text-textcolor rounded-full">Lire plus</a></Link>
-                       <a href = "../login" className="bg-[#32AFF5] h-[40px] w-[140px] hover:bg-[#8FD4FB] hover:text-textcolor text-white rounded-full flex items-center justify-center">Login</a>
+        <div className="min-h-screen w-full bg-gradient-to-br from-background via-background to-blue-50 flex items-center justify-center px-6 lg:px-16 pt-24 pb-16 font-roboto" id="home">
+            <div className="max-w-6xl w-full">
+                <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 lg:gap-16">
+                    <div className="flex-1 flex flex-col items-center lg:items-start space-y-6 max-w-xl">
+                        <div className="space-y-3">
+                            <h1 className="text-3xl md:text-4xl font-bold text-textcolor leading-tight text-center lg:text-left">
+                                Mieux organiser vos projets
+                            </h1>
+                            <div className="h-0.5 w-16 bg-boutton rounded-full lg:mx-0 mx-auto"></div>
+                        </div>
+                        
+                        <p className="text-base text-textcolor text-center lg:text-left leading-relaxed">
+                            Créer votre équipe de projet, communiquer avec vos encadreur, assurer la communication dans l'équipe et bien autre ...
+                        </p>
+                        
+                        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto pt-2">
+                            <Link to='what' spy={true} smooth={true}>
+                                <button className="px-6 py-3 bg-white border-2 border-boutton text-boutton rounded-lg font-medium text-sm hover:bg-boutton hover:text-white transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 w-full sm:w-auto">
+                                    Lire plus
+                                </button>
+                            </Link>
+                            <a href="../login">
+                                <button className="px-6 py-3 bg-boutton text-white rounded-lg font-medium text-sm hover:bg-[#32AFF5] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 w-full sm:w-auto">
+                                    Login
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div className="flex-1 max-w-lg">
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-boutton/10 rounded-3xl blur-3xl"></div>
+                            <img 
+                                src='Acceuil.jpg' 
+                                className="relative w-full h-auto object-contain mix-blend-darken" 
+                                alt="Project Management"
+                            />
+                        </div>
                     </div>
                 </div>
-                <img src='Acceuil.jpg' className="w-[710px] object-contain mix-blend-darken"/>
             </div>
         </div>
     )

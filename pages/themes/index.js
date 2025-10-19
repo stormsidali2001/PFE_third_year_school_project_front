@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { useEffect, useState,useRef } from "react"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
-import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
+import AdminVerticalNavbar from "../../components/AdminVerticalNavbar"
 import { useStoreActions, useStoreState } from "../../store/hooks"
 import Select from 'react-select'
 import { useRouter } from "next/router";
+import { BookOpen } from 'lucide-react'
 
 
 
@@ -96,95 +97,109 @@ const Themes = ({toastsRef}) => {
     if(!themes  ) return 'loading'
   
 
-  
-
 
     return (
         <div>
-   
-        <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor">
-            <img src="themeStudent.png"  className="object-contain mix-blend-darken absolute inset-1/4"/>
-            <div className="flex flex-row space-x-72 items-center justify-center pt-10">
-            <div className="text-[30px]">Liste des Themes </div>
-                
-            
-               
-             </div>
-             <div className="w-[300px]">
-                 {/* {renders?.current} */}
-                <Select
-                                    placeholder="Promotion" 
-                                        onChange={(option)=>{handleChange(option)}}
-                                        options={promotions.map(el=>{return {value:el.id,label:el.name}})}
-                                        isLoading = {!promotions}
-                                        value={chosenPromotion}
-                                        styles = {{menuPortal:base=>({...base,zIndex:100,width:'80%',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
-                                        
-
-                                    />
-
-                </div>
-           { themes?.length !== 0 &&  <div className="  h-fit p-4   w-[80vw] flex flex-wrap gap-4">
-                    {
-                        themes?.map(({title,description,suggestedByTeacher,suggestedByEntreprise,promotion,id})=>{
-                            return (
-                               <div 
-                        className="h-[300px]  w-[250px]  flex flex-col items-center bg-gradient-to-b from-blue-100 to-blue-300 hover:from-blue-100 hover:to-blue-200   rounded-lg shadow-lg relative text-textcolor cursor-pointer group"
-                        onClick={()=>id&&router.push(`/themes/${id}`)}
-                        
-                        
-                        >
-                    <div className="  h-full w-full"> 
-                        <img src ="vote.jpg" className="object-contain h-full w-full mix-blend-darken opacity-50"/>
+            <HorisontalNavbar />
+            <AdminVerticalNavbar />
+            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 max-w-[calc(100vw-5rem)]">
+                <div className="px-4 sm:px-6 lg:px-8">
+                    {/* Header */}
+                    <div className="mb-12 text-center">
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-4" style={{color: '#1A2562'}}>
+                            Liste des Thèmes
+                        </h1>
+                        <p className="text-lg mb-6" style={{color: '#000000'}}>
+                            Explorez tous les thèmes disponibles pour vos projets
+                        </p>
+                        <div className="h-1 w-24 bg-boutton rounded-full mx-auto"></div>
                     </div>
-                    <div className="absolute space-y-4  flex items-center justify-center flex-col w-full h-full">
-                        {
-                            promotion&&(
-                                <div className="text-[22px] w-[90%] mx-2  text-center">
-                                     {promotion}
-                                 </div>
 
-                            )
-                        }
-                   
-                    <div className="text-[22px] w-[90%] mx-2  text-center">
-                        {title}
-                    </div>
-                        <div className="text-[14px] break-all   px-2 mx-2 bg-background/10 transition-all ease-in group-hover:bg-background/30 backdrop-blur-sm w-[90%]   py-1 h-[20%] flex flex-col">
-                            <span className="font-[500] font-mono text-[15px]">Par{ suggestedBy === 'teacher'?" Enseignant":" Entreprise"}:</span>
-                        {
-
-                            suggestedBy === 'teacher'?(
-                                <span className="text-center">{suggestedByTeacher}</span>
-                            ):(
-
-                                <span className="text-center">{suggestedByEntreprise}</span>
-
-                            )
-                        }
-                        
+                    {/* Filter */}
+                    <div className="mb-12 flex justify-center">
+                        <div className="w-full max-w-xs">
+                            <label className="block text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Promotion</label>
+                            <Select
+                                className="w-full"
+                                placeholder="Sélectionner une promotion..." 
+                                onChange={(option)=>{handleChange(option)}}
+                                options={promotions.map(el=>{return {value:el.id,label:el.name}})}
+                                isLoading = {!promotions}
+                                value={chosenPromotion}
+                                styles = {{
+                                    control: (base) => ({
+                                        ...base,
+                                        backgroundColor: 'white',
+                                        borderColor: '#e5e7eb',
+                                        borderRadius: '0.5rem',
+                                        boxShadow: 'none',
+                                        '&:hover': {
+                                            borderColor: '#5375E2'
+                                        }
+                                    }),
+                                    option: (base, state) => ({
+                                        ...base,
+                                        backgroundColor: state.isSelected ? '#5375E2' : state.isFocused ? '#f0f0f0' : 'white',
+                                        color: state.isSelected ? 'white' : '#000000'
+                                    })
+                                }}
+                            />
                         </div>
-                      
-                        <div className="text-[14px] break-all   px-2 mx-2 bg-background/10 transition-all ease-in group-hover:bg-background/30 backdrop-blur-sm w-[90%]   py-1 h-[30%] flex flex-col">
-                            <span className="font-[500] font-mono text-[15px]">Description:</span>
-                            <span className=" h-[100%] break-all px-2 overflow-hidden ">{description}</span>
-                        
-                        </div>
-                       
-                            
-                       
                     </div>
+
+                    {/* Table */}
+                    {themes?.length !== 0 ? (
+                        <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                            <div className="overflow-x-auto">
+                                <table className="w-full">
+                                    <thead>
+                                        <tr style={{backgroundColor: '#FFFFFF'}}>
+                                            <th className="px-3 sm:px-6 py-3 sm:py-4 text-left font-semibold text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>Promotion</th>
+                                            <th className="px-3 sm:px-6 py-3 sm:py-4 text-left font-semibold text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>Titre</th>
+                                            <th className="px-3 sm:px-6 py-3 sm:py-4 text-left font-semibold text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>Description</th>
+                                            <th className="px-3 sm:px-6 py-3 sm:py-4 text-left font-semibold text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>Proposé par</th>
+                                            <th className="px-3 sm:px-6 py-3 sm:py-4 text-center font-semibold text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-200">
+                                        {themes?.map(({title,description,suggestedByTeacher,suggestedByEntreprise,promotion,id})=>{
+                                            return (
+                                                <tr key={id} className="hover:bg-gray-50 transition-colors cursor-pointer" onClick={()=>id&&router.push(`/themes/${id}`)}>
+                                                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>
+                                                        <span className="block truncate">{promotion}</span>
+                                                    </td>
+                                                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>
+                                                        <span className="block truncate">{title}</span>
+                                                    </td>
+                                                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm max-w-xs" style={{color: '#000000'}}>
+                                                        <span className="block truncate">{description}</span>
+                                                    </td>
+                                                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>
+                                                        <span className="block truncate">{suggestedByTeacher ? suggestedByTeacher : suggestedByEntreprise}</span>
+                                                    </td>
+                                                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-center">
+                                                        <button 
+                                                            className="px-3 py-1 bg-boutton text-white rounded-lg text-xs font-semibold hover:bg-blue-600 transition-all duration-200"
+                                                            onClick={(e)=>{e.stopPropagation(); router.push(`/themes/${id}`)}}
+                                                        >
+                                                            Voir
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="text-center py-12">
+                            <p className="text-lg" style={{color: '#000000'}}>Aucun thème disponible</p>
+                        </div>
+                    )}
                 </div>
-                
-                            )
-                            
-                        })
-                    }
-            </div>   }
-        
-       
+            </div>
         </div>
-   </div>
     )
 }
 export default Themes;

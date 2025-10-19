@@ -3,7 +3,9 @@ import Select from 'react-select'
 import ModalPortal from '../../../components/ModalPortal'
 import {useStoreActions, useStoreState} from '../../../store/hooks'
 import { useRouter } from 'next/router'
-const creerSoutenance = ({toastsRef}) => {
+import ArrowIcon from '../../../icons/ArrowIcon'
+
+const CreateSoutenance = ({toastsRef}) => {
     const router = useRouter()
     const [title , setTitle] = useState(null)
     const [description , setDescription] = useState(null)
@@ -38,7 +40,6 @@ const creerSoutenance = ({toastsRef}) => {
         await getTeachers()
     },[])
   
-
 
     const handleShowEquipeModel = async e=>{
         e.preventDefault();
@@ -83,7 +84,7 @@ const creerSoutenance = ({toastsRef}) => {
 
             if(!date || !description || !duration || !selectedTeachers || !selectedTeam){
 
-                toastsRef.current.addMessage({text:'Remplissez tout les champs',mode:'Error'})
+                toastsRef.current.addMessage({text:'Remplissez tous les champs',mode:'Error'})
                 return;
             }
 
@@ -110,7 +111,7 @@ const creerSoutenance = ({toastsRef}) => {
 
                 if(noError){
 
-                    toastsRef.current.addMessage({text:"c'est fait...",mode:'Alert'})
+                    toastsRef.current.addMessage({text:"Soutenance créée avec succès...",mode:'Alert'})
                     setTimeout(()=>{
                         router.reload()
         
@@ -122,175 +123,260 @@ const creerSoutenance = ({toastsRef}) => {
      
     
     }
-    console.log(teachers,'pssssssssssss')
+    
     return (
-        <div className='min-h-screen h-fit py-12 min-w-screen bg-background'>
-            <div className=' flex relative flex-col space-y-6  pt-[100px] pl-[100px] items-center justify-start font-xyz text-black text-[17px]'>
-                <div className='text-[26px] underline italic'>Créer une soutenace</div>
-                <img src='/createSoutenace.webp' className='absolute h-[500px] opacity-80 mix-blend-darken object-contain'/>
-                <div className='h-fit py-6 px-12 w-[600px] bg-white/50 backdrop-blur-sm shadow-lg rounded-xl flex flex-col space-y-2'>
-                    <div className='flex flex-row space-x-4 items-center'>
-                        <div>Titre </div>
-                        <input 
-                            placeholder='Titre...' 
-                            value={title} 
-                            className='h-[35px] w-[430px] px-3 bg-white/50 border-2 border-slate-200 rounded-md shadow-md' onChange={(e) => setTitle(e.target.value)}/>
+        <div className='min-h-screen h-fit py-12 min-w-screen bg-background font-roboto'>
+            <div className='flex flex-col max-w-4xl mx-auto px-6 space-y-8'>
+                <div className='text-center space-y-3'>
+                    <h1 className='text-4xl font-bold' style={{color: '#000000'}}>Créer une soutenance</h1>
+                    <div className="h-1 w-24 bg-boutton rounded-full mx-auto"></div>
+                </div>
+                
+                <div className='bg-white shadow-lg rounded-2xl p-8 space-y-6'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                        <div className='flex flex-col space-y-2'>
+                            <label className='text-sm font-medium' style={{color: '#000000'}}>Titre</label>
+                            <input 
+                                placeholder='Titre...' 
+                                value={title} 
+                                className='h-11 rounded-lg border border-gray-300 px-3 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors'
+                                style={{color: '#000000'}}
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
+                        </div>
+                        
+                        <div className='flex flex-col space-y-2'>
+                            <label className='text-sm font-medium' style={{color: '#000000'}}>Salle</label>
+                            <Select
+                                placeholder="Sélectionner une salle..." 
+                                onChange={(option)=>{setChoosenSalle(option)}}
+                                options={salles.map(el=>{return {value:el.id,label:el.name}})}
+                                value={choosenSalle}
+                                styles={{
+                                    control: (base) => ({
+                                        ...base,
+                                        minHeight: '44px',
+                                        borderRadius: '0.5rem',
+                                        borderColor: '#e5e7eb',
+                                    }),
+                                    menuPortal: base => ({...base, zIndex: 500})
+                                }}
+                            />
+                        </div>
                     </div>
+                    
                     <div className='flex flex-col space-y-2'>
-                        <div>Description </div>
+                        <label className='text-sm font-medium' style={{color: '#000000'}}>Description</label>
                         <textarea 
                             placeholder='Description...' 
-                            value={description} className='h-[60px] w-[500px] bg-white/50 rounded-md shadow-md border-2 border-slate-200 resize-none p-3' 
-                            onChange={(e) => setDescription(e.target.value)}/>
-                    </div>
-                
-                    <div className='flex flex-row space-x-4 items-center'>
-                        <div>Date :</div>
-                        <input 
-                            type='datetime-local' 
-                            onChange={(e) => setDate(e.target.value)} 
-                            value={date}
-                            className = 'bg-transparent outline-none'
+                            value={description}
+                            className='h-24 w-full bg-white rounded-lg shadow-sm border border-gray-300 resize-none p-3 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors'
+                            style={{color: '#000000'}}
+                            onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
 
-                    <div className='flex flex-row space-x-4 items-center'>
-                        <div>Duration :</div>
-                        <input 
-                            type='time' 
-                            onChange={(e) => setDuration(e.target.value)} 
-                            value={duration}
-                            className = 'bg-transparent outline-none'
-                        />
-                    </div>
-               
-                    <div className='flex flex-row space-x-4 items-center'>
-                        <div>Equipe : 
-                           { selectedTeam&&<span  className='bg-blue-200 px-2 py-1 rounded-[10px] cursor-pointer'>
-                            {selectedTeam?.label?'#'+selectedTeam.label:''}
-                            </span>}
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                        <div className='flex flex-col space-y-2'>
+                            <label className='text-sm font-medium' style={{color: '#000000'}}>Date et heure</label>
+                            <input 
+                                type='datetime-local' 
+                                onChange={(e) => setDate(e.target.value)} 
+                                value={date}
+                                className='h-11 rounded-lg border border-gray-300 px-3 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors'
+                                style={{colorScheme: 'light', color: '#000000'}}
+                            />
                         </div>
+
+                        <div className='flex flex-col space-y-2'>
+                            <label className='text-sm font-medium' style={{color: '#000000'}}>Durée</label>
+                            <input 
+                                type='time' 
+                                onChange={(e) => setDuration(e.target.value)} 
+                                value={duration}
+                                className='h-11 rounded-lg border border-gray-300 px-3 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors'
+                                style={{colorScheme: 'light', color: '#000000'}}
+                            />
+                        </div>
+                    </div>
+
+                    <div className='space-y-3'>
+                        <div className='flex items-center justify-between'>
+                            <label className='text-sm font-medium' style={{color: '#000000'}}>Équipe</label>
+                            <button 
+                                type='button'
+                                className='px-4 py-2 bg-boutton text-white rounded-lg hover:bg-[#32AFF5] transition-all duration-200 text-sm font-medium'
+                                onClick={handleShowEquipeModel}
+                            >
+                                Sélectionner une équipe
+                            </button>
+                        </div>
+                        {selectedTeam && (
+                            <div className='flex items-center space-x-2 p-3 bg-boutton/10 rounded-lg'>
+                                <div className='px-3 py-1 bg-boutton text-white rounded-full text-sm font-medium'>
+                                    {selectedTeam?.label}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className='space-y-3'>
+                        <div className='flex items-center justify-between'>
+                            <label className='text-sm font-medium' style={{color: '#000000'}}>Jury ({Object.keys(selectedTeachers).length} sélectionné(s))</label>
+                            <button 
+                                type='button'
+                                className='px-4 py-2 bg-boutton text-white rounded-lg hover:bg-[#32AFF5] transition-all duration-200 text-sm font-medium'
+                                onClick={(e) => {setOpenPortalModelJury(true)}}
+                            >
+                                Ajouter des jurés
+                            </button>
+                        </div>
+                        <div className='flex gap-2 flex-wrap'>
+                            {Object.keys(selectedTeachers).map(k=>{
+                                const teacher = selectedTeachers[k]
+                                return(
+                                    <div
+                                        key={k}
+                                        className='bg-boutton/20 border border-boutton px-3 py-1 rounded-full cursor-pointer flex items-center hover:bg-boutton/30 transition-colors text-sm'
+                                        onClick={()=>handleSelectJury(teacher)}
+                                        style={{color: '#000000'}}
+                                    >
+                                        <span>{teacher.firstName} {teacher.lastName}</span>
+                                        <span className='ml-2 font-bold'>×</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+
+                    <div className='flex justify-center pt-6'>
                         <button 
-                            className='text-[28px] shadow-md backdrop-blur-sm rounded-full h-[32px] flex items-center justify-center w-[32px] bg-white/20 border-2 border-slate-200 hover:border-slate-400'
-                            onClick={handleShowEquipeModel}
+                            onClick={handleCreateSoutenance}
+                            className='py-3 px-8 bg-boutton text-white font-medium rounded-lg hover:bg-[#32AFF5] transition-all duration-200 shadow-md hover:shadow-lg'
                         >
-                            +
+                            Créer la soutenance
                         </button>
-                    </div>
-                    <div className='flex flex-row space-x-4 items-center'>
-                        <div>Jury :</div>
-                        <button 
-                            className='text-[28px] backdrop-blur-sm shadow-md rounded-full h-[32px] flex items-center justify-center w-[32px] bg-white/20 border-2 border-slate-200 hover:border-slate-400'
-                            onClick={(e) => {setOpenPortalModelJury(true)}}
-                        >
-                            +
-                        </button>
-                        
-                    </div>
-                    <div className='flex gap-2 flex-wrap w-full p-2'>
-                                      
-                                      {Object.keys(selectedTeachers).map(k=>{
-                                          const teacher = selectedTeachers[k]
-                                          return(
-                                              <div
-                                              className='bg-blue-300 px-2 py-1 rounded-[10px] cursor-pointer flex  items-center'
-                                              onClick={()=>handleSelectJury(teacher)}
-                                            
-                                          >
-                                              <span>#{teacher.firstName+' '+teacher.lastName}</span>
-  
-                                             
-                                          </div>
-  
-                                          )
-                                         
-                                      })}
-  
-                                      </div>
-                    <div className='flex flex-row space-x-4 items-center'>
-                        <div>Salle :</div>
-                        <Select
-                            placeholder="Salle..." 
-                            className="z-50 h-[40px] w-[420px] rounded-md border-2 border-slate-200 bg-white/50 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
-                            onChange={(option)=>{setChoosenSalle(option)}}
-                            options={salles.map(el=>{return {value:el.id,label:el.name}})}
-                            value={choosenSalle}
-                            styles = {{menuPortal:base=>({...base,zIndex:500})}}
-                        />
-                    </div>
-                    <div className='w-full flex items-center justify-center pt-3'>
-                        <button onClick={handleCreateSoutenance} className='h-[35px] w-[150px]  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg text-center'>Créer</button>
                     </div>
                 </div>
+
                 <ModalPortal
                     open={openPortalModelJury}
                     handleClose={setOpenPortalModelJury}
                 >
-                    <div className='h-fit w-[600px] px-12 py-6  flex flex-col space-y-6'>
-                            <div>Liste des Jury</div>
-                              <div className='flex flex-col '>
-                                    <div>jurys : {Object.keys(selectedTeachers).length} selected</div>
-                                    <div className='flex gap-2 flex-wrap w-full p-2'>
-                                      
-                                    {teachers.map(teacher=>{
-                                        return(
-                                            <div
-                                            className='bg-blue-50 px-2 py-1 rounded-[10px] cursor-pointer flex space-x-2 items-center'
+                    <div className='h-fit w-fit max-w-xl px-8 py-6 flex flex-col space-y-6 bg-white rounded-2xl'>
+                        <div className='text-2xl font-bold text-center' style={{color: '#000000'}}>Sélectionner les jurés</div>
+                        
+                        <div className='space-y-3'>
+                            <div className='text-sm font-medium' style={{color: '#000000'}}>
+                                Jurés sélectionnés: {Object.keys(selectedTeachers).length}
+                            </div>
+                            <div className='flex gap-2 flex-wrap max-h-32 overflow-y-auto'>
+                                {Object.keys(selectedTeachers).map(k=>{
+                                    const teacher = selectedTeachers[k]
+                                    return(
+                                        <div
+                                            key={k}
+                                            className='bg-boutton text-white px-2 py-1 rounded-full text-sm flex items-center cursor-pointer hover:bg-[#32AFF5] transition-colors'
                                             onClick={()=>handleSelectJury(teacher)}
-                                          
                                         >
-                                            <span className={`${selectedTeachers[teacher.id]?'bg-blue-300':'bg-blue-200'} w-[15px] h-[15px] rounded-full border-2 `}></span>
-                                            <span>#{teacher.firstName+' '+teacher.lastName}</span>
-
-                                           
+                                            {teacher.firstName} {teacher.lastName}
                                         </div>
-
-                                        )
-                                       
-                                    })}
-
-                                    </div>
-                                  
-                                    <div className='bg-blue-200 px-2 py-1 rounded-[5px] w-fit mx-auto mt-2 cursor-pointer' onClick={()=>setOpenPortalModelJury(false)}>Ok</div>
-                             </div>
+                                    )
+                                })}
+                            </div>
                         </div>
+
+                        <div className='space-y-3'>
+                            <div className='text-sm font-medium' style={{color: '#000000'}}>Tous les enseignants</div>
+                            <div className='flex gap-2 flex-wrap max-h-64 overflow-y-auto'>
+                                {teachers.map(teacher=>{
+                                    const isSelected = selectedTeachers[teacher.id];
+                                    return(
+                                        <div
+                                            key={teacher.id}
+                                            className={`px-3 py-1 rounded-full cursor-pointer text-sm flex items-center space-x-2 transition-all border-2 ${
+                                                isSelected 
+                                                    ? 'bg-boutton text-white border-boutton' 
+                                                    : 'bg-gray-100 border-gray-300 hover:border-boutton'
+                                            }`}
+                                            style={{color: isSelected ? 'white' : '#000000'}}
+                                            onClick={()=>handleSelectJury(teacher)}
+                                        >
+                                            <span className={`w-3 h-3 rounded-full border-2 ${isSelected ? 'bg-white' : 'bg-gray-300'}`}></span>
+                                            <span>{teacher.firstName} {teacher.lastName}</span>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+
+                        <div className='flex justify-center pt-4'>
+                            <button 
+                                className='py-2 px-6 bg-boutton text-white font-medium rounded-lg hover:bg-[#32AFF5] transition-all duration-200'
+                                onClick={()=>setOpenPortalModelJury(false)}
+                            >
+                                Confirmer
+                            </button>
+                        </div>
+                    </div>
                 </ModalPortal>
+
                 <ModalPortal
                     open={openPortalModelTeam}
                     handleClose={setOpenPortalModelTeam}
                 >
-                    <div className='h-fit w-[600px] p-12  flex flex-col space-y-6'>
-                            <div className='text-center'>Liste des équipes</div>
-                            <div className='flex space-x-2 items-center'>
-                               <div className=''>Promotion:</div>
-                                <Select
-                                    placeholder="Poromotion..." 
-                                    className="z-50 h-[40px] w-[420px] rounded-md border-2 border-slate-200 bg-white/50 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
-                                    onChange={(option)=>{handlePromotionChange(option)}}
-                                    options={promotions.map(el=>{return {value:el.id,label:el.name}})}
-                                    value={chosenPromotion}
-                                    styles = {{menuPortal:base=>({...base,zIndex:500})}}
-                                />
-                            </div>
+                    <div className='h-fit w-fit max-w-2xl px-8 py-6 flex flex-col space-y-6 bg-white rounded-2xl'>
+                        <div className='text-2xl font-bold text-center' style={{color: '#000000'}}>Sélectionner une équipe</div>
+                        
+                        <div className='flex flex-col space-y-2'>
+                            <label className='text-sm font-medium' style={{color: '#000000'}}>Promotion</label>
+                            <Select
+                                placeholder="Sélectionner une promotion..." 
+                                onChange={(option)=>{handlePromotionChange(option)}}
+                                options={promotions.map(el=>{return {value:el.id,label:el.name}})}
+                                value={chosenPromotion}
+                                styles={{
+                                    control: (base) => ({
+                                        ...base,
+                                        minHeight: '44px',
+                                        borderRadius: '0.5rem',
+                                        borderColor: '#e5e7eb',
+                                    }),
+                                    menuPortal: base => ({...base, zIndex: 500})
+                                }}
+                            />
+                        </div>
 
-                            <div className='flex gap-2 flex-wrap'>
-                                    {
-                                        teams.map(team=>{
-                                            return(
-                                                <div
-                                                    className='bg-blue-200 px-2 py-1 rounded-[10px] cursor-pointer'
-                                                    onClick={()=>handleTeamSelection(team)}
-                                                >
-                                                    #{team.pseudo}
-                                                </div>
-                                            )
-                                        })
-                                    }
+                        <div className='space-y-3'>
+                            <div className='text-sm font-medium' style={{color: '#000000'}}>Équipes disponibles</div>
+                            <div className='flex gap-2 flex-wrap max-h-64 overflow-y-auto'>
+                                {teams.map(team=>{
+                                    return(
+                                        <div
+                                            key={team.id}
+                                            className='bg-boutton/20 border border-boutton px-3 py-2 rounded-lg cursor-pointer hover:bg-boutton/30 transition-all text-sm font-medium'
+                                            style={{color: '#000000'}}
+                                            onClick={()=>handleTeamSelection(team)}
+                                        >
+                                            {team.pseudo}
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </div>
+
+                        <div className='flex justify-center pt-4'>
+                            <button 
+                                className='py-2 px-6 bg-boutton text-white font-medium rounded-lg hover:bg-[#32AFF5] transition-all duration-200'
+                                onClick={()=>setOpenPortalModelTeam(false)}
+                            >
+                                Fermer
+                            </button>
+                        </div>
+                    </div>
                 </ModalPortal>
             </div>
         </div>
     )
 }
-export default creerSoutenance;
+export default CreateSoutenance;

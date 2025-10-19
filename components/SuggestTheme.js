@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react"
-import AttachFileIcon from "../icons/AttachFileIcon";
-import SpeakerIcon from "../icons/SpeakerIcon";
-import DocumentIcon from "../icons/documentIcon";
 import { useRouter } from "next/router";
 import {useStoreActions,useStoreState} from '../store/hooks';
 import Select from 'react-select'
+import { Upload, FileText, Loader } from 'lucide-react'
 
 
 const SuggestTheme = ({toastsRef}) => {
@@ -25,7 +23,6 @@ const SuggestTheme = ({toastsRef}) => {
 
     function handleChange(event) {
         const { files: fileLst } = event.target;
-        // setFiles(fileLst);
         console.log(fileLst,  [...fileLst].map(({name}) => {return {name}}));
         setFiles(event.target.files)
       };
@@ -37,7 +34,7 @@ const SuggestTheme = ({toastsRef}) => {
     const handleSubmit = async e=>{
         e.preventDefault();
         if(Empty([title,description]) && !chosenPromotion){
-            toastsRef.current.addMessage({text:"tout les champs doivent etre remplit",mode:'Error'})
+            toastsRef.current.addMessage({text:"Tous les champs doivent être remplis",mode:'Error'})
             return;
          }
        
@@ -58,7 +55,7 @@ const SuggestTheme = ({toastsRef}) => {
            const res =  await uploadFilesThunk(formData)
            console.log(res.data,"...")
            const savedFiles = res.data;
-           toastsRef.current.addMessage({text:"files uploaded",mode:'Alert'})
+           toastsRef.current.addMessage({text:"Fichiers téléchargés",mode:'Alert'})
            await createThemeSuggestionThunk({
                title,
                description,
@@ -71,7 +68,7 @@ const SuggestTheme = ({toastsRef}) => {
                }):[],
                promotionId:chosenPromotion.value
            })
-           toastsRef.current.addMessage({text:"la suggestion de theme a etee cree avec success!!",mode:'Alert'})
+           toastsRef.current.addMessage({text:"La suggestion de thème a été créée avec succès!",mode:'Alert'})
            setLoading(false);
            setDescription('')
            setTitle('')
@@ -80,107 +77,128 @@ const SuggestTheme = ({toastsRef}) => {
 
         }catch(err){
             console.log(err)
-            toastsRef.current.addMessage({text:"probleme",mode:'Error'})
+            toastsRef.current.addMessage({text:"Problème lors de la création",mode:'Error'})
             setLoading(false)
         }
         
-
 
     }
     return (
 
         <form 
-            className="h-fit  justify-center absolute top-0 flex flex-col space-y-8  text-[#1A2562]  font-xyz mt-[100px] mx-auto  items-center bg-white/40 backdrop-blur-sm shadow-2xl rounded-2xl p-2 lg:w-[40vw] w-[80vw]"
+            className="w-full max-w-xl bg-white rounded-xl shadow-lg p-6 border border-gray-100"
             onSubmit={handleSubmit}
         >    
-            <span className="text-[26px]">Suggerer un thème</span>
-            <div className='space-y-3 flex flex-col w-[95%]  px-8'>
-                <div className="flex-row flex items-center space-x-6">
-                    <div> Promotion</div>
+            <div className='space-y-6 flex flex-col w-full'>
+                {/* Promotion Select */}
+                <div className="space-y-2">
+                    <label className="block text-sm font-semibold" style={{color: '#1A2562'}}>Promotion</label>
                     <Select
-                    className="h-[40px] w-[300px] bg-white/50 shadow-md rounded-md border-2 border-slate-200 backdrop-blur-sm z-[500]"
-                        placeholder="Promotion..." 
+                        className="w-full"
+                        placeholder="Sélectionner une promotion..." 
                         onChange={(option)=>{setChoosenPromotion(option)}}
                         options={promotions.map(el=>{return {value:el.id,label:el.name}})}
                         isLoading = {!promotions}
                         value={chosenPromotion}
-                        styles = {{menuPortal:base=>({...base,zIndex:500,width:'80%',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
-                    />
-                </div>   
-                
-                <div className="flex-row z-0 flex items-center space-x-6">
-                    <div>Titre</div>
-                    <input 
-                        placeholder='Titre...'
-                        value={title}
-                        className=" border-2 border-slate-200 z-0  outline-none h-[40px] w-[350px] px-3 bg-white/60 backdrop-blur-sm shadow-md rounded-md  text-black" 
-                        onChange={(e)=>setTitle(e.target.value)}
-                    />
-                </div>   
-    
-                <div className="flex-1 space-y-3 z-2 space-x-6">
-                    <div> Description</div> 
-                        <textarea 
-                            placeholder='Description...'
-                            value={description}
-                            maxLength="250" 
-                            className=" resize-none border-2 border-slate-200  outline-none backdrop-blur-sm h-[130px] w-[390px] px-3 bg-white/50 shadow-md rounded-md text-black" 
-                            onChange={(e)=>setDescription(e.target.value)}
-                        />
-                </div>   
-               
-                <div className='flex flex-wrap -mx-3 mb-6 '>
-                    <div className="flex-1  space-x-6">
-                        <label for='file'  className="flex space-x-2 group cursor-pointer">
-                            <AttachFileIcon className='w-6 text-[#5375E2]/80 group-hover:text-[#5375E2]/60'/>
-                            <div> Joindre des fichiers </div>
-                        </label>
-                        
-                        <input id="file" className="hidden" type="file" multiple onChange={handleChange} optional/>
-                    </div>   
-                </div> 
-                    
-                   
-                  
-                    <div className="w-full grid lg:grid-cols-4  md:grid-cols-3 grid-cols-2 place-content-center content-center p-2 gap-4  rounded-[5px] ">
-                     
-                        {
-                    [...files].map((file,index)=>{
-                                return(
-                                    <label 
-                                    className=" w-fit flex flex-col hover:scale-105 cursor-pointer transition-transform ease-in"
-                                    key={index}
-                                
-                                >
-                                <div className=" bg-gray-100 flex justify-center items-center p-4 w-fit">
-                                   
-                                   <DocumentIcon
-                                       className='w-8'
-                                   />
-                                   
-                               </div>
-                               <div className="w-full  text-center  break-words text-sm">{file.name}</div>
-                           </label>
-
-                               
-                                   
-                                )
+                        styles = {{
+                            control: (base) => ({
+                                ...base,
+                                backgroundColor: 'white',
+                                borderColor: '#e5e7eb',
+                                borderRadius: '0.5rem',
+                                padding: '0.25rem',
+                                boxShadow: 'none',
+                                '&:hover': {
+                                    borderColor: '#5375E2'
+                                }
+                            }),
+                            option: (base, state) => ({
+                                ...base,
+                                backgroundColor: state.isSelected ? '#5375E2' : state.isFocused ? '#f0f0f0' : 'white',
+                                color: state.isSelected ? 'white' : '#000000'
                             })
-                        }
+                        }}
+                    />
+                </div>
+
+                {/* Title Input */}
+                <div className="space-y-2">
+                    <label className="block text-sm font-semibold" style={{color: '#1A2562'}}>Titre</label>
+                    <input 
+                        placeholder='Entrez le titre du thème...'
+                        value={title}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 font-roboto focus:border-boutton focus:ring-2 focus:ring-blue-200 transition-all" 
+                        onChange={(e)=>setTitle(e.target.value)}
+                        style={{color: '#000000'}}
+                    />
+                </div>
+
+                {/* Description Textarea */}
+                <div className="space-y-2">
+                    <label className="block text-sm font-semibold" style={{color: '#1A2562'}}>Description</label>
+                    <textarea 
+                        placeholder='Décrivez votre idée de thème (max 250 caractères)...'
+                        value={description}
+                        maxLength="250" 
+                        className="w-full resize-none border border-gray-300 rounded-lg px-4 py-3 font-roboto h-24 focus:border-boutton focus:ring-2 focus:ring-blue-200 transition-all" 
+                        onChange={(e)=>setDescription(e.target.value)}
+                        style={{color: '#000000'}}
+                    />
+                    <p className="text-xs" style={{color: '#666'}}>
+                        {description.length}/250 caractères
+                    </p>
+                </div>
+
+                {/* File Upload */}
+                <div className="space-y-2">
+                    <label className="block text-sm font-semibold mb-3" style={{color: '#1A2562'}}>Fichiers joints</label>
+                    <label htmlFor='file' className="flex flex-col items-center justify-center p-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-boutton hover:bg-blue-50 transition-all">
+                        <Upload className="w-8 h-8 mb-2" style={{color: '#5375E2'}} />
+                        <span className="font-semibold" style={{color: '#1A2562'}}>Cliquez pour ajouter des fichiers</span>
+                        <span className="text-xs" style={{color: '#666'}}>ou glissez-déposez</span>
+                    </label>
+                    <input id="file" className="hidden" type="file" multiple onChange={handleChange} />
+                </div>
+
+                {/* Files Display */}
+                {files.length > 0 && (
+                    <div className="space-y-2">
+                        <label className="text-sm font-semibold" style={{color: '#1A2562'}}>Fichiers sélectionnés ({files.length})</label>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {[...files].map((file,index)=>{
+                                return(
+                                    <div 
+                                        className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all border border-gray-200"
+                                        key={index}
+                                    >
+                                        <FileText className="w-8 h-8 mb-2" style={{color: '#5375E2'}} />
+                                        <p className="text-xs text-center break-words font-roboto" style={{color: '#000000'}}>
+                                            {file.name}
+                                        </p>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
-                    {
-                         loading?(
-                            <svg role="status" class="h-[60px] lg:w-[360px] min-w-[250px] text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-<path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-</svg>
-                        ):(
-                            <button type="submit" className="rounded-full bg-blue-200 hover:bg-blue-300 h-[35px] w-[120px] shadow-md ml-auto">Valider</button>
-                        )
-                    }
-                   
-                    
-                    
+                )}
+
+                {/* Submit Button */}
+                <div className="pt-4">
+                    <button 
+                        type="submit" 
+                        disabled={loading}
+                        className="w-full py-3 bg-boutton text-white rounded-lg font-semibold hover:bg-blue-600 transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                        {loading ? (
+                            <>
+                                <Loader className="w-5 h-5 animate-spin" />
+                                En cours...
+                            </>
+                        ) : (
+                            'Valider la suggestion'
+                        )}
+                    </button>
+                </div>
             </div>
      </form>
     )

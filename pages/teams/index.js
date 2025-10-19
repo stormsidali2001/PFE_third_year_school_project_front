@@ -3,6 +3,9 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Select from "react-select"
 import { useStoreActions, useStoreState } from "../../store/hooks"
+import HorisontalNavbar from "../../components/HorisontalNavbar"
+import AdminVerticalNavbar from "../../components/AdminVerticalNavbar"
+import { Eye } from 'lucide-react'
 
 const TeamList = props => {
     const router = useRouter();
@@ -62,108 +65,134 @@ const TeamList = props => {
     const columns = [...Object.keys(teamsList.length >0 &&teamsList[0])?.filter(el=>el !=='id')];
     return (
         <div>
-           
-            <div className="bg-background h-fit py-4 w-screen relative flex flex-col items-center space-y-6 font-xyz text-textcolor">
-            
-            <img src="themeStudent.png"  className="object-contain mix-blend-darken absolute inset-1/4"/>
-                
-                <div className="text-[30px] pt-10">Liste des Equipes</div>
-                <div className="bg-white/60 backdrop-blur-[2px] shadow-lg w-fit px-6 h-fit py-4 flex flex-col pl-4">
-                   <div className=" font-semibold">Les promotion dont tout les equipes sont validées:</div>
-                   <div className="flex space-x-4 w-full">
-                           {
-                                promotions.map(p=>{
-                                    return(
-                                        <div className="flex space-x-4 ">
-                                            {p.allTeamsValidated&& p.name}
-                                        </div>
-                                    ) 
-                                })
-                            }
-                   </div>
-                   <div className=" font-semibold">Les promotion dont tout les equipes sont non validées:</div>
-                   <div className="flex space-x-4">
-                           {
-                                promotions.map(p=>{
-                                    return(
-                                        <div className="flex space-x-4">
-                                            {!p.allTeamsValidated&& p.name}
-                                        </div>
-                                    ) 
-                                })
-                            }
-                   </div>
-                  
-                </div>
-                <div className="w-[300px]">
-                    <Select
-                                        placeholder="Promotion" 
-                                            onChange={(option)=>{handleChange(option)}}
-                                            options={promotions?.map(el=>{return {value:el.id,label:el.name}})}
-                                            isLoading = {!promotions}
-                                            value={choosenPromotion}
-                                            styles = {{menuPortal:base=>({...base,zIndex:100,width:'80%',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
-                                            
+            <HorisontalNavbar />
+            <AdminVerticalNavbar />
+            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 max-w-[calc(100vw-5rem)]">
+                <div className="px-4 sm:px-6 lg:px-8">
+                    {/* Header */}
+                    <div className="mb-12 text-center">
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-4" style={{color: '#1A2562'}}>
+                            Liste des Équipes
+                        </h1>
+                        <p className="text-lg mb-6" style={{color: '#000000'}}>
+                            Consultez toutes les équipes et leur statut de validation
+                        </p>
+                        <div className="h-1 w-24 bg-boutton rounded-full mx-auto"></div>
+                    </div>
 
-                                        />
+                    {/* Promotions Status */}
+                    <div className="mb-8 bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* Validated Promotions */}
+                            <div>
+                                <h3 className="font-semibold mb-3" style={{color: '#1A2562'}}>Promotions complètement validées:</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {promotions.filter(p => p.allTeamsValidated).map(p => (
+                                        <span key={p.id} className="px-3 py-1 bg-blue-50 rounded-full text-sm font-medium" style={{color: '#5375E2'}}>
+                                            {p.name}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
 
-                </div>
-              
-                    
-             { teamsList.length >0&&  <table className="bg-[#282873]/10 backdrop-blur-[8px] shadow-lg leading-normal h-fit p-4 w-[80vw]">
-                    <thead>
-                        <tr  className="bg-white  rounded-[10px] h-[36px]  border-b-2 ">
-                            {
-                               
-                                columns.map(el=>{
-                                    return(
-                                        <th className={`text-center`}>{el}</th>
-                                    )
-                                })
-                               
-                               
-                            }    
-                             <th className="text-center">Options</th>
-                        </tr>
-                    </thead>
-                    <tbody className="">
-                        {
-                            teamsList.map(row=>{
-                              
-                                return(
-                                    <tr  className=" bg-white/60  rounded-[10px] border-red  border-b-2 hover:opacity-80 cursor-pointer">
-                                        {
-                                            Object.keys(teamsList[0]).filter(el=>el!=='id').map(col=>{
-                                                let value = "";
-                                                if(col === 'complete' ||  col === 'peut_soutenir'){
-                                                    value = row[col]?'oui':'non';
-                                                }else {
-                                                    value = row[col]?row[col]:'___'
-                
-                                                }
-                                                return(
-                                                    <td className="text-center truncate h-[36px] ">
-                                                        {
-                                                          value
-                                                        
-                                                        }
-                                                    </td>
-                                                    
-                                                )
-                                            })
+                            {/* Non-Validated Promotions */}
+                            <div>
+                                <h3 className="font-semibold mb-3" style={{color: '#1A2562'}}>Promotions en attente de validation:</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {promotions.filter(p => !p.allTeamsValidated).map(p => (
+                                        <span key={p.id} className="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium" style={{color: '#1A2562'}}>
+                                            {p.name}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Filter */}
+                    <div className="mb-12 flex justify-center">
+                        <div className="w-full max-w-xs">
+                            <label className="block text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Promotion</label>
+                            <Select
+                                className="w-full"
+                                placeholder="Sélectionner une promotion..." 
+                                onChange={(option)=>{handleChange(option)}}
+                                options={promotions?.map(el=>{return {value:el.id,label:el.name}})}
+                                isLoading = {!promotions}
+                                value={choosenPromotion}
+                                styles = {{
+                                    control: (base) => ({
+                                        ...base,
+                                        backgroundColor: 'white',
+                                        borderColor: '#e5e7eb',
+                                        borderRadius: '0.5rem',
+                                        boxShadow: 'none',
+                                        '&:hover': {
+                                            borderColor: '#5375E2'
                                         }
-                                         
-                                      <td className="flex items-center space-x-4 justify-center">
-                                            <Link href={`/teams/${row.id}`}><button className="shadow-lg h-[25px] mt-1 w-[100px] text-[15px] bg-blue-300 hover:bg-blue-400 rounded-full">Voir plus</button></Link>
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>}
+                                    }),
+                                    option: (base, state) => ({
+                                        ...base,
+                                        backgroundColor: state.isSelected ? '#5375E2' : state.isFocused ? '#f0f0f0' : 'white',
+                                        color: state.isSelected ? 'white' : '#000000'
+                                    })
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Table */}
+                    {teamsList.length > 0 ? (
+                        <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                            <div className="overflow-x-auto">
+                                <table className="w-full">
+                                    <thead>
+                                        <tr style={{backgroundColor: '#FFFFFF'}}>
+                                            {columns.map(el=>(
+                                                <th key={el} className="px-3 sm:px-6 py-3 sm:py-4 text-left font-semibold text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>
+                                                    {el}
+                                                </th>
+                                            ))}    
+                                            <th className="px-3 sm:px-6 py-3 sm:py-4 text-center font-semibold text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-200">
+                                        {teamsList.map(row=>(
+                                            <tr key={row.id} className="hover:bg-gray-50 transition-colors">
+                                                {Object.keys(teamsList[0]).filter(el=>el!=='id').map(col=>{
+                                                    let value = "";
+                                                    if(col === 'complete' ||  col === 'peut_soutenir'){
+                                                        value = row[col]?'Oui':'Non';
+                                                    }else {
+                                                        value = row[col]?row[col]:'___'
+                                                    }
+                                                    return(
+                                                        <td key={`${row.id}-${col}`} className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm whitespace-nowrap" style={{color: '#000000'}}>
+                                                            <span className="block truncate">{value}</span>
+                                                        </td>
+                                                    )
+                                                })}
+                                                <td className="px-3 sm:px-6 py-3 sm:py-4 text-center">
+                                                    <Link href={`/teams/${row.id}`}>
+                                                        <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0 inline-flex" title="Voir plus">
+                                                            <Eye className="w-4 h-4 sm:w-5 sm:h-5" style={{color: '#5375E2'}} strokeWidth={1.5} />
+                                                        </button>
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="text-center py-12">
+                            <p className="text-lg" style={{color: '#000000'}}>Aucune équipe disponible</p>
+                        </div>
+                    )}
+                </div>
             </div>
-       </div>
+        </div>
     )
 }
 export default TeamList
