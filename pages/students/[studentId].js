@@ -17,51 +17,48 @@ const StudentInfos = props=>{
         <div>
        
         <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor justify-center">
-            <img src="/studentProfil.jpg" className="h-[550px] object-contain mix-blend-darken opacity-30"/>
-            <div className="text-[20px] h-[500px] w-[600px] shadow-lg rounded-xl bg-white/50 backdrop-blur-sm flex flex-col absolute text-textcolor font-mono px-8 space-y-4">
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col absolute text-textcolor font-roboto px-8 py-6 space-y-4 w-fit max-w-[1200px]">
              { student&& <>
-                <div className="font-bold text-[24px] underline mx-auto">Student Profil:</div>
-                <div className="flex space-x-2">
-                    <div className="font-semibold">promotion:</div>
-                    <div>{student.promotion?.name}</div>
+                <div className="text-2xl font-bold mb-4 pb-4 border-b-2" style={{color: '#1A2562', borderColor: '#5375E2'}}>Profil Étudiant</div>
+                <div className="flex justify-between items-center py-3 border-b border-gray-100 gap-12">
+                    <div className="font-semibold text-sm" style={{color: '#000000'}}>Promotion:</div>
+                    <div style={{color: '#000000'}}>{student.promotion?.name || '-'}</div>
                </div>
-                <div className="flex space-x-2">
-                    <div className="font-semibold">email:</div>
-                    <div>{student?.user?.email}</div>
+                <div className="flex justify-between items-center py-3 border-b border-gray-100 gap-12">
+                    <div className="font-semibold text-sm" style={{color: '#000000'}}>Email:</div>
+                    <div className="text-sm break-words text-right" style={{color: '#000000'}}>{student?.user?.email || '-'}</div>
                </div>
              
-               <div className="flex space-x-2">
-                    <div className="font-semibold">firstName:</div>
-                    <div>{student.firstName}</div>
+               <div className="flex justify-between items-center py-3 border-b border-gray-100 gap-12">
+                    <div className="font-semibold text-sm" style={{color: '#000000'}}>Prénom:</div>
+                    <div style={{color: '#000000'}}>{student.firstName || '-'}</div>
                </div>
-               <div className="flex space-x-2">
-                    <div className="font-semibold">lastName:</div>
-                    <div>{student.lastName}</div>
+               <div className="flex justify-between items-center py-3 border-b border-gray-100 gap-12">
+                    <div className="font-semibold text-sm" style={{color: '#000000'}}>Nom:</div>
+                    <div style={{color: '#000000'}}>{student.lastName || '-'}</div>
                </div>
-               <div className="flex space-x-2">
-                    <div className="font-semibold">moy:</div>
-                    <div>{student.moy}</div>
+               <div className="flex justify-between items-center py-3 border-b border-gray-100 gap-12">
+                    <div className="font-semibold text-sm" style={{color: '#000000'}}>Moyenne:</div>
+                    <div className="font-semibold" style={{color: '#000000'}}>{student.moy || '-'}</div>
                </div>
-               <div className="flex space-x-2">
-                    <div className="font-semibold">dob:</div>
-                    <div>{student.dob}</div>
+               <div className="flex justify-between items-center py-3 border-b border-gray-100 gap-12">
+                    <div className="font-semibold text-sm" style={{color: '#000000'}}>Date de naissance:</div>
+                    <div style={{color: '#000000'}}>{student.dob || '-'}</div>
                </div>
                
-               <div className="flex space-x-2">
-                    <div className="font-semibold">team:</div>
+               <div className="flex justify-between items-center py-3 gap-12">
+                    <div className="font-semibold text-sm" style={{color: '#000000'}}>Équipe:</div>
                     <>
                         {
                             student.team?(
-                                <div className=" w-fit px-2   backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center cursor-pointer">
-                                    <Link href={`/teams/${student?.team?.id}`}>
-                                    {
-                                        '#'+student.team.nickName
-                                    }
-                                    </Link>
-                                </div>
+                                <Link href={`/teams/${student?.team?.id}`}>
+                                    <a className="px-4 py-2 rounded-lg font-medium text-white transition-all hover:shadow-md" style={{backgroundColor: '#5375E2'}}>
+                                        #{student.team.nickName}
+                                    </a>
+                                </Link>
 
                             ):(
-                                <div className=" w-fit px-2   backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center cursor-pointer">sans equipe</div>
+                                <span style={{color: '#999999'}}>Aucune équipe</span>
                             )
                         }
                     </>

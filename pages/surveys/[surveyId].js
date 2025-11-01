@@ -102,130 +102,159 @@ const SingleSurvey = ({toastsRef})=>{
     }
     if(!pageLoaded) return "Loading..."
     return(
-        <div className="bg-background h-fit min-h-screen items-center flex flex-col">
-           <div className="pt-[100px] pl-[100px] relative items-center justify-center flex">
-               <img src = '/voterSondage.webp' className="h-full pt-[50px] opacity-50 object-contain mix-blend-darken"/>
-           <form 
-                className="h-fit py-6 w-[70vw] top-[100px] justify-center flex flex-col space-y-6  text-black font-xyz items-center bg-white/60 backdrop-blur-sm shadow-xl rounded-xl absolute"
-                onSubmit={handleSubmitAnswer}
-            >
-                <div className="text-[30px] flex space-x-4"> 
-                    <span className="font-semibold italic underline">Sondage</span>    
-                </div>
-        <div className='flex lg:flex-row flex-col space-y-4 lg:space-x-16'>
-            <div className="flex flex-col space-y-3">
-                <div className="flex flex-row space-x-4">
-                    <div className="font-semibold">Titre</div>
-                    <div>{title}</div>
-                </div> 
-                <div className="flex flex-row space-x-4">
-                    <div className="font-semibold">Duree</div> 
-                    <div>{duree/1000/3600/24}</div>
-                </div>
-                <div className="flex-1 space-y-2">
-                    <div className="font-semibold"> Description</div> 
-                    <div className="h-fit max-w-[250px] break-all">{description}</div>
-                </div>
-            </div>    
-            {
-                surveyClosed&&(
-                    <div className='flex flex-col space-y-2'>
-                        <div className="font-semibold">les options gagnants:</div>
-                        {
-                            winningOptions.map(op=>{
-                                return (
-                                    <div
-                                        className='flex space-y-1 items-center space-x-2 w-fit '
-                                    >
-                                        <div className={`w-[15px] h-[15px] rounded-full bg-blue-100 flex items-center justify-center text-[10px]`}>{op.answersCount}</div>
-                                        <div>{op.description}</div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-
-                )
-            }
-            <div className="flex flex-col space-y-3">
-                 {!surveyClosed&& <div className='flex flex-wrap -mx-3 mb-6 '>
-                            <div className="flex-1  space-x-6">
-                                <div className="font-semibold"> Argument</div> 
-                                    <textarea 
-                                        placeholder='Argument...'
-                                        value={argument}
-                                        maxLength="250" 
-                                        className=" resize-none border-2 border-slate-200 bg-white/20 shadow-md rounded-md outline-none h-[100px] w-[250px] px-3 text-black" 
-                                        onChange={(e)=>setArgument(e.target.value)}
-                                    />
-                            </div>   
-                        </div>}
-                {!surveyClosed&& <div className='flex flex-wrap -mx-3 mb-6 '>
-                            <div className="flex-1  space-x-6">
-                                <div className="font-semibold"> Options</div>
-                                <div>
-                                    {options?.map(({description,answersCount,id},index)=>{
-                                        return(
-                                            <div 
-                                                key={index} 
-                                                className='flex  items-center space-x-2 w-fit cursor-pointer'
-                                            >
-                                                <div className={`w-[15px] h-[15px] rounded-full bg-blue-100 flex items-center justify-center text-[10px] hover:scale-110 hover:font-bold`} onClick={()=>handleShowParticipants(id)}>{answersCount}</div>
-                                                <div className={`w-[15px] h-[15px] rounded-full ${chosenOption === index?"bg-blue-300":"bg-blue-100 cursor-pointer"} `}  onClick={(e)=>setChosenOption(index)}></div>
-                                                <div className=" cursor-pointer"  onClick={(e)=>setChosenOption(index)}>{description}</div>
-                                            </div>
-                                            
-                                        )
-                                    })}
-                                </div>
-                            </div>   
-                        </div> }
-                       
-                        {
-                            loading?(
-                                <svg role="status" className="h-[60px] lg:w-[360px] min-w-[250px] text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-        </svg>
-                            ):(
-                            !surveyClosed&&<button type='submit' className="bg-blue-200 hover:bg-blue-300 rounded-full shadow-md h-[35px] w-[120px]">Voter</button>
-
-                            )
-                        }
-            </div>
-            
-        </div>
-    </form>
-    <ModalPortal
-        open={showOptionDetails}
-        handleClose={()=>{setShowOptionDetails(false)}}
-    >
-        <div className="flex flex-col text-textcolor space-y-4 bg-white">
-            <div className="text-semibold text-[20px] text-center text-textcolor font-medium">{"Liste d'argument par participant"}</div>
-            <div className="px-4">
-                Une reponse de Sondage sans arguments est  comme un coffre sans clé.
-            </div>
-            <div className="flex flex-col mx-auto px-2 py-1 space-y-2 w-full items-center max-h-[50vh] overflow-y-auto">
-                {
-                    surveyParticipantsArguments.map(({id,student,argument})=>{
-                        return (
-                            <div 
-                                key={id} 
-                                className = 'bg-white shadow-lg flex flex-col space-y-1 w-[80%]  py-2 rounded-[10px]'
-                            >
-                                <div className='flex flex-col space-x-2'>
-                                    <div className="pl-1">Argument:</div>
-                                    <div className="bg-gray-200 h-[60px] text-textcolor rounded-[10px] px-2 break-all">{argument}</div>
-                                    <div className=" text-sm">By: {student.firstName + ' ' + student.lastName}</div>
-                                </div>
+        <div>
+            <HorisontalNavbar />
+            <StudentVerticalNavbar />
+            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto">
+                <div className="ml-16 px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-4xl mx-auto">
+                        <form 
+                            className="bg-white rounded-2xl shadow-2xl overflow-hidden"
+                            onSubmit={handleSubmitAnswer}
+                        >
+                            {/* Header */}
+                            <div className="bg-white p-8 border-b" style={{borderColor: '#f0f0f0'}}>
+                                <h1 className="text-2xl sm:text-3xl font-bold mb-3" style={{color: '#1A2562'}}>{title}</h1>
+                                <div className="h-1 w-20 rounded-full mb-3" style={{backgroundColor: '#5375E2'}}></div>
+                                <p className="text-xs sm:text-sm leading-relaxed max-w-2xl" style={{color: '#000000'}}>{description}</p>
                             </div>
-                        )
-                    })
-                }
+
+                            {/* Content */}
+                            <div className='flex lg:flex-row flex-col space-y-6 lg:space-y-0 lg:space-x-8 p-8'>
+                                {/* Left Column - Info */}
+                                <div className="flex-1 flex flex-col space-y-6">
+                                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                                        <div className="text-xs font-semibold mb-1" style={{color: '#1A2562'}}>Durée</div>
+                                        <div className="text-xl font-bold" style={{color: '#000000'}}>{duree/1000/3600/24} jours</div>
+                                    </div>
+
+                                    {surveyClosed && (
+                                        <div className="bg-gradient-to-br from-green-50 to-white rounded-xl p-4 border-2 border-green-200">
+                                            <div className="text-xs font-semibold mb-3" style={{color: '#1A2562'}}>Options gagnantes:</div>
+                                            <div className="space-y-2">
+                                                {winningOptions?.map(op=>(
+                                                    <div key={op.id} className='flex items-center space-x-3 bg-white p-3 rounded-lg border border-green-100'>
+                                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white`} style={{backgroundColor: '#5375E2'}}>{op.answersCount}</div>
+                                                        <div style={{color: '#000000'}}>{op.description}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Right Column - Voting */}
+                                {!surveyClosed && (
+                                    <div className="flex-1 flex flex-col space-y-6">
+                                        {/* Options Section */}
+                                        <div>
+                                            <div className="text-sm font-semibold mb-3" style={{color: '#1A2562'}}>Choisissez une option:</div>
+                                            <div className="space-y-2">
+                                                {options?.map(({description,answersCount,id},index)=>(
+                                                    <div 
+                                                        key={index} 
+                                                        className={`p-3 rounded-lg border-2 cursor-pointer transition-all flex items-center justify-between ${
+                                                            chosenOption === index 
+                                                                ? 'border-boutton bg-blue-50 shadow-md' 
+                                                                : 'border-gray-200 hover:border-gray-300 bg-white'
+                                                        }`}
+                                                        onClick={(e)=>setChosenOption(index)}
+                                                    >
+                                                        <div className="flex items-center space-x-3 flex-1">
+                                                            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                                                                chosenOption === index 
+                                                                    ? 'border-boutton bg-boutton' 
+                                                                    : 'border-gray-400'
+                                                            }`}>
+                                                                {chosenOption === index && <div className="w-2 h-2 bg-white rounded-full"></div>}
+                                                            </div>
+                                                            <span style={{color: '#000000'}} className="font-medium">{description}</span>
+                                                        </div>
+                                                        <button
+                                                            type="button"
+                                                            onClick={(e) => {e.stopPropagation(); handleShowParticipants(id)}}
+                                                            className="text-xs px-2 py-1 rounded-full bg-gray-100 hover:bg-gray-200 transition-all font-medium flex-shrink-0"
+                                                            style={{color: '#5375E2'}}
+                                                        >
+                                                            {answersCount}
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* Argument Section */}
+                                        <div>
+                                            <div className="text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Argument</div>
+                                            <textarea 
+                                                placeholder='Expliquez votre choix...'
+                                                value={argument || ''}
+                                                maxLength="250" 
+                                                className="w-full resize-none border-2 border-gray-200 bg-white rounded-lg outline-none p-3 text-sm h-24 focus:border-boutton focus:shadow-md transition-all" 
+                                                onChange={(e)=>setArgument(e.target.value)}
+                                                style={{color: '#000000'}}
+                                            />
+                                            <p className="text-xs mt-2 text-right" style={{color: '#999999'}}>{(argument || '').length}/250</p>
+                                        </div>
+
+                                        {/* Submit Button */}
+                                        <button 
+                                            type='submit' 
+                                            disabled={loading}
+                                            className="w-full py-3 rounded-xl font-semibold text-white transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                                            style={{backgroundColor: '#5375E2'}}
+                                        >
+                                            {loading ? (
+                                                <>
+                                                    <svg role="status" className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                    </svg>
+                                                    <span>Envoi...</span>
+                                                </>
+                                            ) : (
+                                                <span>Voter</span>
+                                            )}
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-    </ModalPortal>
-           </div>
+
+            {/* Modal */}
+            <ModalPortal
+                open={showOptionDetails}
+                handleClose={()=>{setShowOptionDetails(false)}}
+            >
+                <div className="w-full max-w-2xl p-6 rounded-2xl">
+                    <h2 className="text-2xl font-bold mb-2" style={{color: '#1A2562'}}>Arguments des participants</h2>
+                    <div className="space-y-3 max-h-96 overflow-y-auto">
+                        {surveyParticipantsArguments?.length > 0 ? (
+                            surveyParticipantsArguments.map(({id,student,argument: arg})=>(
+                                <div 
+                                    key={id} 
+                                    className='bg-gray-50 shadow-sm flex flex-col space-y-2 p-4 rounded-xl border border-gray-100'
+                                >
+                                    <div className='flex items-center space-x-2'>
+                                        <div className="w-8 h-8 rounded-full font-bold text-white flex items-center justify-center text-xs" style={{backgroundColor: '#5375E2'}}>
+                                            {student?.firstName?.charAt(0)}{student?.lastName?.charAt(0)}
+                                        </div>
+                                        <div className="font-semibold text-sm" style={{color: '#1A2562'}}>{student?.firstName} {student?.lastName}</div>
+                                    </div>
+                                    <div className="bg-white p-3 rounded-lg border border-gray-100 text-sm break-words" style={{color: '#000000'}}>
+                                        {arg}
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-center py-8 text-gray-500">Aucun argument</p>
+                        )}
+                    </div>
+                </div>
+            </ModalPortal>
         </div>
     )
 }

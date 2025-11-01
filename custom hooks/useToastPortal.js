@@ -4,24 +4,29 @@ import uniqid from 'uniqid'
 export const useToastPortal = ({isSm})=>{
     const [loaded,setLoaded] = useState(false)
     const [portalId,setPortalId] = useState(`Toast_portal_${uniqid()}`)
+    
     useEffect(()=>{
-       if(loaded){
-            const div =  document.getElementById(portalId);
-            div.style.cssText = `
-            position:fixed;
-            transform:translate(-50%,0);
-            top:70px;
-            z-index:50;
-           
-            ${isSm?'left:25vw;':'left:50vw;'} 
-           
-    `
-          !isSm && (div.style.transform = 'transform:translate(-50%,0);')
+       if(loaded && typeof document !== 'undefined'){
+            const div = document.getElementById(portalId);
+            if(div){
+                div.style.cssText = `
+                position:fixed;
+                transform:translate(-50%,0);
+                top:70px;
+                z-index:50;
+               
+                ${isSm?'left:25vw;':'left:50vw;'} 
+               
+        `
+              !isSm && (div.style.transform = 'transform:translate(-50%,0);')
+            }
        }
        
-    },[isSm])
+    },[isSm, loaded])
 
     useEffect(()=>{
+        if(typeof document === 'undefined') return;
+        
         const div = document.createElement('div');
         div.id = portalId;
         div.style.cssText = `
@@ -35,12 +40,18 @@ export const useToastPortal = ({isSm})=>{
 `
       !isSm && (div.style.transform = 'transform:translate(-50%,0);')
         
-        
         const body = document.getElementsByTagName('body')[0];
-        body.append(div);
+        if(body){
+            body.appendChild(div);
+        }
         setLoaded(true);
-        return ()=>body.remove(div)
-    },[portalId])
+        
+        return ()=>{
+            if(body && div.parentNode){
+                body.removeChild(div);
+            }
+        }
+    },[portalId, isSm])
 
     return {loaded , portalId};
 }

@@ -1,48 +1,59 @@
-import React, { forwardRef,useEffect } from "react";
-import DotsIcon from "../icons/DotsIcon";
-import ErrorIcon from "../icons/ErrorIcon";
-import { useStoreActions, useStoreState } from "../store/hooks";
+import React, { forwardRef } from "react";
+import { useStoreState } from "../store/hooks";
+import { Bell, Trash2 } from "lucide-react";
 
 
 const Notification = forwardRef(({open,toastsRef},ref)=>{
     const {notifications,totalNotificationCount} = useStoreState(store=>store.notificationService)
   
-
-  console.log('render')
     return(
-        <div ref={ref} className={`absolute font-roboto bg-white rounded-[10px] w-[400px] h-fit pt-2 pb-2 drop-shadow-[2px_5px_4px_rgba(0,0,0,0.25)] flex flex-col right-0 bottom-0 translate-y-[102%]  items-center space-y-2 ${open?'scale-100':'scale-0'} `}>
+        <div ref={ref} className={`absolute font-roboto bg-white rounded-xl w-96 h-fit shadow-2xl flex flex-col right-0 bottom-0 translate-y-[102%] transition-all duration-200 origin-top ${open?'scale-100 opacity-100 visible':'scale-95 opacity-0 invisible'} z-50 border border-gray-100`}>
           
-        <div className="absolute right-2 top-2 w-fit p-1 aspect-square rounded-full bg-[#CAEAFE] text-[12px] flex justify-center items-center font-medium">
-                +<span className="">{totalNotificationCount}</span>
-        </div>
-
-        <div className="text-[#1A2562] text-[24px] font-[400] flex space-x-2 items-center"><ErrorIcon className='w-[40px] text-[#1A2562]/20'/><span>Notifications:</span></div>
-        <div className="w-[100%] flex flex-col space-y-2 overflow-scroll max-h-[300px]">
-
-            {
-                notifications.map(({description,id,createdAt})=>{
-                    return(
-                        <div key={id} className="h-[60px] mx-auto w-[90%] rounded-[5px] bg-[#E4F1F9] text-[14px] px-2 py-2  font-normal flex flex-col ">
-                        <div className="h-[50px]"> {description}</div>      
-                        <div className="h-[10px] mb-[1px] text-[12px] text-[#1A2562]/60 ml-auto mb-0">at: {createdAt.toLocaleString()}</div>
+            {/* Header */}
+            <div className="px-6 py-4 border-b border-gray-100">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg" style={{backgroundColor: '#F4FCFF'}}>
+                            <Bell className="w-5 h-5" style={{color: '#5375E2'}} />
                         </div>
+                        <div>
+                            <h3 className="font-semibold text-base" style={{color: '#1A2562'}}>Notifications</h3>
+                            <p className="text-xs" style={{color: '#999999'}}>{totalNotificationCount} nouvelles</p>
+                        </div>
+                    </div>
+                    {totalNotificationCount > 0 && (
+                        <span className="text-white rounded-full w-6 h-6 flex justify-center items-center text-xs font-bold flex-shrink-0" style={{backgroundColor: '#5375E2'}}>
+                            {totalNotificationCount > 9 ? '9+' : totalNotificationCount}
+                        </span>
+                    )}
+                </div>
+            </div>
 
-                    )
-                })
-            }
+            {/* Notifications List */}
+            <div className="flex flex-col space-y-2 overflow-y-auto max-h-96 p-3">
+                {notifications.length > 0 ? (
+                    notifications.map(({description,id,createdAt})=>{
+                        return(
+                            <div key={id} className="p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer group">
+                                <p className="text-sm mb-1" style={{color: '#000000'}}>
+                                    {description}
+                                </p>
+                                <p className="text-xs" style={{color: '#999999'}}>
+                                    {new Date(createdAt).toLocaleString()}
+                                </p>
+                            </div>
+                        )
+                    })
+                ) : (
+                    <div className="py-8 text-center">
+                        <p style={{color: '#999999'}} className="text-sm">Aucune notification</p>
+                    </div>
+                )}
+            </div>
+
+            {/* Footer */}
+            
         </div>
-        <div className="flex text-[13px] items-center space-x-1 group">
-            <DotsIcon 
-                className='w-[28px] text-[#1A2562]/60 font-medium cursor-pointer group-hover:text-[#1A2562]/30 transition-all ease-in'
-
-            />
-           <span className="cursor-pointer group-hover:underline underline-offset-1 transition-all ease-in decoration-[#1A2562]/60">See all Notifications</span> 
-        </div>
-      
-       
-
-    </div>
     )
-}
-)
+})
 export default Notification;

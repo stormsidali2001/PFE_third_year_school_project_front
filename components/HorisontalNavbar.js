@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useOutSideContainer } from "../custom hooks/useOutSideContainer";
 import { Mail, Bell, User, LogOut, FileText } from "lucide-react";
 import LastMessages from "./LastMessages";
@@ -17,10 +17,10 @@ const HorisontalNavbar = ({toastsRef}) => {
     const user = useStoreState(store=>store.user)
     const {userType, student, teacher, entreprise, admin} = user;
     const entity = user[userType];
-    const [dowpdownOpen, setDropdownOpen] = useState(false)
   
     const {open:openNotifications, setOpen:setOpenNotifications} = useOutSideContainer({ref:notificationRef});
     const {open:openlastMessages, setOpen:setOpenLastMessages} = useOutSideContainer({ref:lastMessagesRef});
+    const {open:openProfileDropdown, setOpen:setOpenProfileDropdown} = useOutSideContainer({ref:profilRef});
 
     const {totalNotificationCount} = useStoreState(store=>store.notificationService)
     const {logoutThunk} = useStoreActions(store=>store.user)
@@ -44,13 +44,13 @@ const HorisontalNavbar = ({toastsRef}) => {
                     <div className="relative">
                         <button
                             className='w-10 h-10 rounded-full hover:bg-gray-100 transition-colors flex items-center justify-center'
-                            onClick={()=>setDropdownOpen(v=>!v)}
+                            onClick={()=>setOpenProfileDropdown(v=>!v)}
                         >
                             <User className='w-6 h-6' style={{color: '#1A2562'}} strokeWidth={1.5} />
                         </button>
                         
-                        <div className={`absolute top-14 right-0 w-56 bg-white rounded-xl shadow-xl overflow-hidden transition-all duration-200 origin-top ${
-                            dowpdownOpen ? 'scale-100 opacity-100 visible' : 'scale-95 opacity-0 invisible'
+                        <div className={`absolute top-14 left-0 w-56 bg-white rounded-xl shadow-xl overflow-hidden transition-all duration-200 z-50 ${
+                            openProfileDropdown ? 'scale-100 opacity-100 visible' : 'scale-95 opacity-0 invisible'
                         }`}
                             ref={profilRef}
                             style={{borderColor: '#5375E2', borderWidth: '1px'}}
@@ -61,7 +61,7 @@ const HorisontalNavbar = ({toastsRef}) => {
                             <div 
                                 className="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors text-sm flex items-center gap-2"
                                 style={{color: '#1A2562'}}
-                                onClick={()=>{setDropdownOpen(false);router.push(`/${user?.userType}s/${user[user?.userType].id}`)}}
+                                onClick={()=>{setOpenProfileDropdown(false);router.push(`/${user?.userType}s/${user[user?.userType].id}`)}}
                             >
                                 <FileText className='w-4 h-4' strokeWidth={1.5} />
                                 Profil
@@ -70,7 +70,7 @@ const HorisontalNavbar = ({toastsRef}) => {
                             <div
                                 className="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors text-sm flex items-center gap-2"
                                 style={{color: '#1A2562'}}
-                                onClick={async()=>{setDropdownOpen(false);await logoutThunk();router.push('/login')}}
+                                onClick={async()=>{setOpenProfileDropdown(false);await logoutThunk();router.push('/login')}}
                             >
                                 <LogOut className='w-4 h-4' strokeWidth={1.5} />
                                 Déconnexion

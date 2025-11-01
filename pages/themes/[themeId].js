@@ -8,6 +8,7 @@ import AddIcon from "../../icons/AddIcon"
 import ModalPortal from "../../components/ModalPortal"
 import Select from 'react-select'
 import OutLinedButton from "../../components/utils/outlinedButton"
+import { BookOpen, Users, Users2, Plus } from "lucide-react"
 
 
 const Theme = ({toastsRef}) => {
@@ -31,7 +32,6 @@ const Theme = ({toastsRef}) => {
         console.log(themeId,'1111111')
         await  getThemeThunk(themeId)
        
-    
 
     },[themeId])
 
@@ -113,110 +113,138 @@ const Theme = ({toastsRef}) => {
      
     }
     return (
-        <div className="bg-background h-fit min-h-screen w-fit md:w-screen">
-            <div className=" pt-[100px] space-y-10 flex flex-col items-center pb-4 pr-4 sm:pl-[100px] font-xyz text-textcolor justify-center">
-                <div className="text-[24px] flex flex-row space-x-2 w-full text-center">
-                    <div className="">Theme</div>
-                    <div>: PFE{theme?.title}</div>
-                </div>
-                
-                <div className="flex flex-col space-y-6 md:flex-row md:space-x-16">
-                <div className="flex flex-col space-y-8">
-                <div className="flex flex-col space-y-2 p-4 relative md:w-[35vw] w-[90vw] h-[30vh]">
-                    <img src="/description.webp" className="h-full object-contain mix-blend-darken opacity-50"/>
-                <div className="flex flex-col space-y-2 p-4 absolute top-0 backdrop-blur-sm scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 bg-white/50 shadow-xl h-full w-full rounded-xl text-[20px]">
-                    <div className="font-medium">Description:</div>
-                    <div className="px-2 rounded-[5px]  font-normal text-[15px] font-mono">
-                        {theme?.description}
-                    </div>
-                </div>
-                </div>
-
-                <div className="flex flex-col space-y-2 w-[90vw] md:w-[35vw] h-[30vh] relative  py-6 rounded-xl text-[20px]">
-                    <img src='/themeTeacher.webp' className="h-full object-contain mix-blend-darken opacity-50"/>
-                <div className="flex flex-col space-y-2 p-4 absolute top-0 backdrop-blur-sm scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500  hover:scrollbar-track-blue-200 bg-white/50 shadow-xl w-[90vw] md:w-[35vw] h-fit py-6 rounded-xl text-[20px]">
-                    <div className="font-medium">Encadreurs :</div>
-                
-                        <div className=" text-[15px] flex flex-col space-y-4 border-l-2 pl-2 ">
-                            {
-                                theme?.encadrement?.map(({id,teacher})=>{
-                                    const {firstName,lastName,id:teacherId} = teacher;
-                                    return(
-                                        <div key={id} className=" flex space-y-2  flex-col " >
-                                                <div className="flex space-x-2">
-                                                    <div className="h-[35px] w-fit  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center  cursor-pointer   px-2 py-1">#{firstName+' '+lastName}</div>
-                                                    
-                                                {   isAdmin&& <div 
-                                                        className="flex space-x-2 cursor-pointer items-center"
-                                                        onClick={async (e)=>{e.preventDefault();await handleOpenModalTeam(teacherId,firstName,lastName)}}
-                                                    >
-                                                                     <button 
-                                                                        className='text-[22px] shadow-md backdrop-blur-sm rounded-full h-[23px] flex items-center justify-center w-[23px] bg-white/20 border-2 border-slate-200 hover:border-slate-400'
-                                                                    
-                                                                    >
-                                                                        +
-                                                                    </button>
-                                                            <div className="text-[15px]">ajouter equipe</div>
-                                                
-                                                    </div>}
-                                                    
-                                                </div>
-                                            <div className="pl-4 flex  flex-wrap gap-4  ">
-                                            {
-                                                teacher?.teamsInCharge.map(({id,team})=>{
-                                                    return (
-                                                        <div onClick={()=>router.push(`/teams/${team.id}`)} id={id} className="h-[35px] w-fit px-2 py-1  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center cursor-pointer">
-                                                            #{team?.nickName}
-                                                        </div>
-
-                                                    )
-                                                })
-                                            }
-                                            </div>
-                                            
-                                        </div>
-                                    )
-                                })
-                            }   
-                        </div>
-                </div>
-                </div>
-                
-                </div>
-               <div className="flex flex-col space-y-12">
-               <div className="flex flex-col space-y-2 p-4 relative w-[90vw] md:w-[30vw] h-[45vh] ">
-                   <img src="/teamStudent.jpg" className="h-full object-contain mix-blend-darken opacity-50"/>
-               <div className="bg-white/50 scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 p-3 shadow-xl rounded-xl text-[20px] backdrop-blur-sm h-full w-full absolute top-0">
-               <div className="font-medium">Equipes:</div>
-            
-                    <div className=" text-[15px] flex gap-3 mt-4 flex-wrap ">
-                            {
-                                theme?.teams?.map(({nickName,id})=>{
-                                    return(
-                                        <div key={id} className=" h-[35px] w-fit px-2 py-1  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center justify-center cursor-pointer" onClick={()=>router.push(`/teams/${id}`)}> #{nickName}</div>
-                                    )
-                                })
-                            }
-                    </div>
-               </div>
-                </div>
-            {  isAdmin&&  <div className="flex space-x-2 group w-full justify-center cursor-pointer items-center"
-                            onClick={handleOpenModal}
+        <div>
+            <HorisontalNavbar />
+            <StudentVerticalNavbar />
+            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-4xl mx-auto">
+                    {/* Header */}
+                    <div className="mb-8">
+                        <button
+                            onClick={() => router.back()}
+                            className="mb-4 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors flex items-center gap-2"
+                            style={{color: '#5375E2'}}
                         >
-                              <button 
-                            className='text-[28px] shadow-md backdrop-blur-sm rounded-full h-[32px] flex items-center justify-center w-[32px] bg-white/20 border-2 border-slate-200 hover:border-slate-400'
-                         
-                           >
-                            +
-                            </button>
-                            <div>Ajouter un Encadreur</div>
-                 </div>  }
-                  
-                  </div>
-                       </div>
-               
+                            ← Retour
+                        </button>
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-3" style={{color: '#1A2562'}}>Thème</h1>
+                        <div className="h-1 w-20 rounded-full" style={{backgroundColor: '#5375E2'}}></div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="space-y-8">
+                        {/* Theme Description Card */}
+                        <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 p-8">
+                            <h2 className="text-3xl sm:text-4xl font-bold mb-6" style={{color: '#000000'}}>PFE {theme?.title || 'Chargement...'}</h2>
+                            <p style={{color: '#000000'}} className="text-base leading-relaxed">{theme?.description}</p>
+                        </div>
+
+                        {/* Two Column Layout for Teachers and Teams */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            {/* Teachers Card */}
+                            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 p-8">
+                                <h3 className="text-2xl font-bold mb-6" style={{color: '#000000'}}>Encadreurs</h3>
+                                {theme?.encadrement?.length > 0 ? (
+                                    <div className="space-y-4">
+                                        {
+                                            theme?.encadrement?.map(({id,teacher})=>{
+                                                const {firstName,lastName,id:teacherId} = teacher;
+                                                return(
+                                                    <div key={id} className="p-4 rounded-xl border border-gray-200 hover:shadow-md hover:border-boutton transition-all">
+                                                        <div className="flex items-center justify-between mb-4">
+                                                            <div className="font-semibold text-lg" style={{color: '#000000'}}>
+                                                                {firstName} {lastName}
+                                                            </div>
+                                                            {isAdmin && (
+                                                                <button 
+                                                                    onClick={async (e)=>{e.preventDefault();await handleOpenModalTeam(teacherId,firstName,lastName)}}
+                                                                    className="px-3 py-1.5 rounded-lg text-sm font-medium transition-all hover:bg-blue-100"
+                                                                    style={{backgroundColor: '#F4FCFF', color: '#5375E2'}}
+                                                                >
+                                                                    + Ajouter équipe
+                                                                </button>
+                                                            )}
+                                                        </div>
+                                                        {teacher?.teamsInCharge?.length > 0 ? (
+                                                            <div className="flex flex-wrap gap-2">
+                                                                {
+                                                                    teacher?.teamsInCharge.map(({id,team})=>{
+                                                                        return (
+                                                                            <button
+                                                                                key={id} 
+                                                                                onClick={()=>router.push(`/teams/${team.id}`)}
+                                                                                className="px-3 py-1.5 rounded-lg text-sm font-medium text-white transition-all hover:shadow-md"
+                                                                                style={{backgroundColor: '#5375E2'}}
+                                                                            >
+                                                                                #{team?.nickName}
+                                                                            </button>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </div>
+                                                        ) : (
+                                                            <p style={{color: '#999999'}} className="text-sm italic">Aucune équipe assignée</p>
+                                                        )}
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-12">
+                                        <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{backgroundColor: '#F4FCFF'}}>
+                                            <Users2 className="w-8 h-8" style={{color: '#5375E2'}} />
+                                        </div>
+                                        <p className="font-medium mb-2" style={{color: '#000000'}}>Aucun encadreur</p>
+                                        <p className="text-sm" style={{color: '#999999'}}>Les encadreurs assignés apparaîtront ici</p>
+                                    </div>
+                                )}
+                                {isAdmin && (
+                                    <button 
+                                        onClick={handleOpenModal}
+                                        className="w-full py-3 rounded-lg border-2 border-dashed font-semibold transition-all hover:bg-blue-50 mt-4"
+                                        style={{borderColor: '#5375E2', color: '#5375E2'}}
+                                    >
+                                        + Ajouter un Encadreur
+                                    </button>
+                                )}
+                            </div>
+
+                            {/* Teams Card */}
+                            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 p-8">
+                                <h3 className="text-2xl font-bold mb-6" style={{color: '#000000'}}>Équipes</h3>
+                                {theme?.teams?.length > 0 ? (
+                                    <div className="space-y-3">
+                                        {
+                                            theme?.teams?.map(({nickName,id})=>{
+                                                return(
+                                                    <button
+                                                        key={id} 
+                                                        onClick={()=>router.push(`/teams/${id}`)}
+                                                        className="w-full p-4 rounded-xl border border-gray-200 hover:shadow-md hover:border-boutton transition-all text-left font-medium"
+                                                        style={{color: '#000000'}}
+                                                    >
+                                                        #{nickName}
+                                                    </button>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-12">
+                                        <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{backgroundColor: '#F4FCFF'}}>
+                                            <Users className="w-8 h-8" style={{color: '#5375E2'}} />
+                                        </div>
+                                        <p className="font-medium mb-2" style={{color: '#000000'}}>Aucune équipe</p>
+                                        <p className="text-sm" style={{color: '#999999'}}>Les équipes assignées apparaîtront ici</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-               
+            </div>
+           
             <ModalPortal
                 open={open}
                 handleClose = {setOpen}

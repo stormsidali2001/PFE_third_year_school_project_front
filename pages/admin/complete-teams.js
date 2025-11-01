@@ -5,6 +5,7 @@ import ModalPortal from "../../components/ModalPortal";
 import { useStoreActions,useStoreState } from "../../store/hooks";
 import Select from 'react-select'
 import { useRouter } from "next/router";
+import { Users, ArrowRight, ArrowLeft, Check } from 'lucide-react';
 
 
 const AssignTeamsToThemes = ({toastsRef}) => {
@@ -29,7 +30,7 @@ const AssignTeamsToThemes = ({toastsRef}) => {
 const handleCompleteTeams = async e=>{
     e.preventDefault()
     if(!chosenPromotion ) {
-        toastsRef.current.addMessage({text:"Chose a promotion !!",mode:'Error'})
+        toastsRef.current.addMessage({text:"Veuillez sélectionner une promotion",mode:'Error'})
         return;
     }
     try{
@@ -41,9 +42,9 @@ const handleCompleteTeams = async e=>{
 
         setResults(data)                             
         setStep(step=>step+1)
-        toastsRef.current.addMessage({text:"c'est fait !!",mode:'Alert'})
+        toastsRef.current.addMessage({text:"Équipes complétées avec succès!",mode:'Alert'})
     }catch(err){
-        toastsRef.current.addMessage({text:'ops Erreur...',mode:'Error'})
+        toastsRef.current.addMessage({text:'Erreur lors de la complétion',mode:'Error'})
         console.log(err)
     }
     
@@ -65,7 +66,7 @@ const handleApplyTeamsCompletion = async e=>{
          
             
         })
-        toastsRef.current.addMessage({text:"c'est fait !!",mode:"Alert"})
+        toastsRef.current.addMessage({text:"Changements appliqués avec succès!",mode:"Alert"})
         setStep(0)
         setOpen(false)
         router.reload()
@@ -77,161 +78,210 @@ const handleApplyTeamsCompletion = async e=>{
 
  
    return(
-      
-            <div className="h-screen w-screen pl-[100px] pt-[100px] bg-background font-xyz relative flex items-center justify-center">
-                <img src="/teamToTheme.jpg" className="h-[550px] object-contain mix-blend-darken opacity-60"/>
-                <div className="absolute bg-white/80 shadow-xl text-center rounded-xl h-[450px] w-[700px] flex flex-col space-y-8 items-center justify-center p-6">
-                    <div className="text-[28px] font-semibold underline italic">Completer les Equipes</div>
-                    <div className="text-[20px] font-thin">Equilibrer les Equipe est une tache manuelle difficile qui prend beaucoup de temps , mais avec notre platforme cella ce fait en quelque click</div>
-                    <div className="text-[18px] font-thin flex-col space-y-2 italic">
-                        <div className="text-red-500 underline text-ellipsis">Remarque : </div>
-                       Les etudiants sans equipe seront affecter a des equipes non complete ou reunit dans des nouvelles equipes
+      <div>
+        <HorisontalNavbar />
+        <AdminVerticalNavbar />
+        <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 max-w-[calc(100vw-5rem)]">
+            <div className="px-4 sm:px-6 lg:px-8 flex items-center justify-center min-h-[calc(100vh-150px)]">
+                <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+                    {/* Header */}
+                    <div className="text-center mb-8">
+                        <h1 className="text-4xl font-bold mb-4" style={{color: '#1A2562'}}>
+                            Compléter les Équipes
+                        </h1>
+                        <p className="text-base" style={{color: '#000000'}}>
+                            Équilibrer les équipes est une tâche manuelle difficile, mais avec notre plateforme cela se fait en quelques clics
+                        </p>
                     </div>
+
+                    {/* Description Box */}
+                    <div className="bg-blue-50 rounded-lg p-4 mb-8 border-l-4" style={{borderColor: '#5375E2'}}>
+                        <p className="text-sm font-semibold mb-2" style={{color: '#5375E2'}}>Remarque importante:</p>
+                        <p className="text-sm" style={{color: '#000000'}}>
+                            Les étudiants sans équipe seront affectés à des équipes non complètes ou réunis dans de nouvelles équipes
+                        </p>
+                    </div>
+
+                    {/* Start Button */}
                     <button 
-                        className="h-[35px] w-[250px] rounded-full shadow-lg border-blue-400 border-2 hover:border-blue-600 text-[18px]"
+                        className="w-full py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                        style={{backgroundColor: '#5375E2', color: 'white'}}
                         onClick={()=>setOpen(true)}
                     >
-                       Completer les Equipes
+                        <Users className="w-5 h-5" />
+                        Compléter les Équipes
                     </button>
+               
+                    <ModalPortal
+                        open={open}
+                        handleClose={setOpen}
+                    >
+                        <div className="w-full max-w-2xl bg-white rounded-xl shadow-2xl p-8 border border-gray-100">
+                            <form>
+                                {/* Step 0: Selection */}
+                                {step === 0 && (
+                                    <div className="space-y-6">
+                                        <h2 className="text-2xl font-bold text-center" style={{color: '#1A2562'}}>Sélectionner une promotion</h2>
+                                        
+                                        <Select
+                                            placeholder="Sélectionner une promotion..." 
+                                            className="w-full"
+                                            onChange={async (option)=>{
+                                                setChoosenPromotion(option);
+                                                const data = await getTeamsStats({promotionId:option.value})
+                                                setTeamsStats(data)
+                                            }}
+                                            options={promotions.map(el=>{return {value:el.id,label:el.name}})}
+                                            isLoading={!promotions}
+                                            value={chosenPromotion}
+                                            styles={{
+                                                control: (base) => ({
+                                                    ...base,
+                                                    backgroundColor: 'white',
+                                                    borderColor: '#e5e7eb',
+                                                    borderRadius: '0.5rem',
+                                                    boxShadow: 'none',
+                                                    '&:hover': {
+                                                        borderColor: '#5375E2'
+                                                    }
+                                                }),
+                                                option: (base, state) => ({
+                                                    ...base,
+                                                    backgroundColor: state.isSelected ? '#5375E2' : state.isFocused ? '#f0f0f0' : 'white',
+                                                    color: state.isSelected ? 'white' : '#000000'
+                                                })
+                                            }}
+                                        />
+
+                                        {teamsStats && (
+                                            <div className="grid grid-cols-2 gap-4 bg-gray-50 rounded-lg p-4">
+                                                <div>
+                                                    <p className="text-sm font-semibold" style={{color: '#1A2562'}}>Étudiants sans équipe</p>
+                                                    <p className="text-2xl font-bold" style={{color: '#5375E2'}}>{teamsStats.studentsWithoutATeam}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm font-semibold" style={{color: '#1A2562'}}>Équipes incomplètes</p>
+                                                    <p className="text-2xl font-bold" style={{color: '#5375E2'}}>{teamsStats.notCompleteTeams}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm font-semibold" style={{color: '#1A2562'}}>Min par équipe</p>
+                                                    <p className="text-2xl font-bold" style={{color: '#5375E2'}}>{teamsStats.minMembersInTeam}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm font-semibold" style={{color: '#1A2562'}}>Max par équipe</p>
+                                                    <p className="text-2xl font-bold" style={{color: '#5375E2'}}>{teamsStats.maxMembersInTeam}</p>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {teamsStats?.allTeamsValidated ? (
+                                            <div className="bg-blue-50 rounded-lg p-4 text-center" style={{color: '#5375E2'}}>
+                                                ✓ Toutes les équipes de cette promotion sont déjà validées
+                                            </div>
+                                        ) : (
+                                            <div className="flex gap-3">
+                                                <button 
+                                                    type="button"
+                                                    onClick={() => setOpen(false)}
+                                                    className="flex-1 py-2 px-4 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-all"
+                                                    style={{color: '#1A2562'}}
+                                                >
+                                                    Annuler
+                                                </button>
+                                                <button 
+                                                    type="button"
+                                                    onClick={handleCompleteTeams}
+                                                    className="flex-1 py-2 px-4 rounded-lg font-medium text-white hover:opacity-90 transition-all flex items-center justify-center gap-2"
+                                                    style={{backgroundColor: '#5375E2'}}
+                                                >
+                                                    Suivant <ArrowRight className="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Step 1: Results */}
+                                {step === 1 && (
+                                    <div className="space-y-6 max-h-[600px] overflow-y-auto">
+                                        <h2 className="text-2xl font-bold text-center" style={{color: '#1A2562'}}>Résultats</h2>
+
+                                        {/* Deletions */}
+                                        {results?.studentDeleted?.length > 0 && (
+                                            <div>
+                                                <h3 className="font-semibold mb-3" style={{color: '#EF4444'}}>Suppressions ({results.studentDeleted.length})</h3>
+                                                <div className="space-y-2 bg-red-50 rounded-lg p-4">
+                                                    {results.studentDeleted.map(({student, team}, index) => (
+                                                        <p key={index} className="text-sm" style={{color: '#000000'}}>
+                                                            {index + 1}. <span className="font-semibold">{student.firstName} {student.lastName}</span> supprimé de <span className="font-semibold">#{team.nickName}</span>
+                                                        </p>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/* Additions */}
+                                        {results?.studentAdded?.length > 0 && (
+                                            <div>
+                                                <h3 className="font-semibold mb-3" style={{color: '#10B981'}}>Ajouts ({results.studentAdded.length})</h3>
+                                                <div className="space-y-2 bg-green-50 rounded-lg p-4">
+                                                    {results.studentAdded.map(({student, team}, index) => (
+                                                        <p key={index} className="text-sm" style={{color: '#000000'}}>
+                                                            {index + 1}. <span className="font-semibold">{student.firstName} {student.lastName}</span> ajouté à <span className="font-semibold">#{team.nickName}</span>
+                                                        </p>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/* New Teams */}
+                                        {results?.newTeams?.length > 0 && (
+                                            <div>
+                                                <h3 className="font-semibold mb-3" style={{color: '#5375E2'}}>Nouvelles équipes ({results.newTeams.length})</h3>
+                                                <div className="space-y-4 bg-blue-50 rounded-lg p-4">
+                                                    {results.newTeams.map(({students}, index) => (
+                                                        <div key={index} className="bg-white p-3 rounded-lg border border-blue-200">
+                                                            <p className="font-semibold mb-2" style={{color: '#5375E2'}}>Équipe {index + 1}</p>
+                                                            <div className="space-y-1 text-sm">
+                                                                {students.map((student, idx) => (
+                                                                    <p key={idx} style={{color: '#000000'}}>
+                                                                        {idx + 1}. {student.firstName} {student.lastName}
+                                                                    </p>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        <div className="flex gap-3 pt-4 border-t">
+                                            <button 
+                                                type="button"
+                                                onClick={() => setStep(0)}
+                                                className="flex-1 py-2 px-4 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+                                                style={{color: '#1A2562'}}
+                                            >
+                                                <ArrowLeft className="w-4 h-4" /> Retour
+                                            </button>
+                                            <button 
+                                                type="button"
+                                                onClick={handleApplyTeamsCompletion}
+                                                className="flex-1 py-2 px-4 rounded-lg font-medium text-white hover:opacity-90 transition-all flex items-center justify-center gap-2"
+                                                style={{backgroundColor: '#5375E2'}}
+                                            >
+                                                <Check className="w-4 h-4" /> Confirmer
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                            </form>
+                        </div>
+                    </ModalPortal>
                 </div>
-            
-               <ModalPortal
-                    open={open}
-                    handleClose = {setOpen}
-               >
-                   <form
-                    className="w-[450px]"
-                   >
-                   {  step===0 &&<div className="w-full py-2 flex flex-col space-y-4 items-center">
-                       <div className="mx-auto text-black text-[24px]">Completer</div>
-                        <Select
-                            placeholder="Promotion..." 
-                            className="z-50 h-[40px] w-[230px] rounded-lg bg-white/10 shadow-md backdrop-blur-sm outline-none  text-[18px] font-thin" 
-                            onChange={async (option)=>{
-                                setChoosenPromotion(option);
-                                const data = await getTeamsStats({promotionId:option.value})
-                                setTeamsStats(data)
-
-                            }}
-                            options={promotions.map(el=>{return {value:el.id,label:el.name}})}
-                            isLoading = {!promotions}
-                            value={chosenPromotion}
-                            styles = {{menuPortal:base=>({...base,zIndex:500,width:'100%'})}}
-                        />
-                    { teamsStats&& <div className="flex flex-col space-y-2">
-                                        <div className="flex space-x-2">
-                                            <div>Etudiants sans Equipes :</div>
-                                            <div>{teamsStats.studentsWithoutATeam}</div>
-                                        </div>
-                                        <div className="flex space-x-2">
-                                            <div>Equipes non complete :</div>
-                                            <div>{teamsStats.notCompleteTeams}</div>
-                                        </div>
-                                        <div className="flex space-x-2">
-                                            <div>min dans Equipe :</div>
-                                            <div>{teamsStats.minMembersInTeam}</div>
-                                        </div>
-                                        <div className="flex space-x-2">
-                                            <div>max dans Equipe :</div>
-                                            <div>{teamsStats.maxMembersInTeam}</div>
-                                        </div>
-                                       
-                                    </div>
-                    }
-                    
-                    {teamsStats?.allTeamsValidated?(
-                        <div className="text-red-700">Tout les equipes de cette promotion sont deja validées</div>
-                    ):(
-                        <button className="border-blue-300 border-2 text-white/80 text-slate-700  w-[120px] hover:border-blue-400 px-2 py-1 rounded-[555555px] shadow-sm" onClick={handleCompleteTeams}>Suivant</button>
-                    )
-                   
-}
-                       </div>
-                     }
-                    
-                    {
-                    //**   Step 1 */
-                    }
-        {  step===1 &&<div className="w-full py-2 flex flex-col space-y-1 items-center  scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 max-h-[500px] h-fit hover:scrollbar-track-blue-200 overflow-x-hidden overflow-y-auto">                     
-                      <div className="mx-auto font-semibold underline text-[22px]">Resultats:</div>
-                      <div className="font-semibold ">suppression :</div>
-                      <div className="w-[90%] h-fit  space-y-6 flex flex-col items-start  scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 overflow-x-hidden overflow-y-auto px-2">
-                      
-                        {
-                            results?.studentDeleted?.map(({student,team},index)=>{
-                                return (
-                                    <div className="flex space-x-2 ">
-                                        <div>{index+1}-</div>
-                                        <div className=" text-white/80 text-slate-700  hover:border-blue-400  cursor-pointer">#{student.firstName} {student.lastName}</div>
-                                        <div>  {` supprimé de l'equipe: `}</div>
-                                        <div className="text-white/80 text-slate-700  hover:border-blue-400 cursor-pointer">#{team.nickName}</div>
-                                      
-                                    </div>
-                                )
-                            })
-                        }
-                      </div>
-                      <div className="font-semibold ">Ajout :</div>
-                      <div className="w-[90%] h-fit  space-y-6 flex flex-col items-start  scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 overflow-x-hidden overflow-y-auto px-2">
-                      
-                        {
-                            results?.studentAdded?.map(({student,team},index)=>{
-                                return (
-                                    <div className="flex space-x-2 ">
-                                        <div>{index+1}-</div>
-                                        <div className=" text-white/80 text-slate-700  hover:border-blue-400  cursor-pointer">#{student.firstName} {student.lastName}</div>
-                                        <div>  {` ajouté a l'equipe: `}</div>
-                                        <div className="text-white/80 text-slate-700  hover:border-blue-400 cursor-pointer">#{team.nickName}</div>
-                                      
-                                    </div>
-                                )
-                            })
-                        }
-                      </div>
-                      <div className="font-semibold ">Nouvelle Equipe :</div>
-                      <div className="w-[90%] h-fit  space-y-6 flex flex-col items-start  scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 overflow-x-hidden overflow-y-auto px-2">
-                      
-                        {
-                            results?.newTeams?.map(({students},index)=>{
-                                return (
-                                    <div className="flex space-y-2 flex-col ">
-                                       <div >
-                                           Equipe {index+1}:
-                                       </div>
-                                       {
-                                        students.map((student,index1)=>{
-                                            return (
-                                                <div className="flex space-x-2  items-center">
-                                                    <div>{index1+1}-</div>
-                                                    <div className=" text-white/80 text-slate-700  hover:border-blue-400  cursor-pointer">#{student.firstName} {student.firstName}</div>
-                                                  </div>
-                                            )
-                                        })
-                                       }
-                                    </div>
-                                )
-                            })
-                        }
-                      </div>
-                      {/*************************************** */}
-                      <div className="flex space-x-8  ">
-                          <button className="border-blue-300 border-2 text-slate-700 hover:border-blue-400 w-[120px] py-1 rounded-[999999px] shadow-sm" 
-                              onClick={()=>setStep(0)}
-                          >Back</button>
-                        <button className="border-blue-300 border-2 text-white/80 text-slate-700  w-[120px] hover:border-blue-400 px-2 py-1 rounded-[555555px] shadow-sm" 
-                            onClick={handleApplyTeamsCompletion}
-
-                        >Confirmer</button>
-
-                      </div>
-                     
-
-
-                       </div>
-                     }
-                   </form>
-               </ModalPortal>
-       </div>
+            </div>
+        </div>
+      </div>
    )
 }
 export default AssignTeamsToThemes;

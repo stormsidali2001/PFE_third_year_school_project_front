@@ -1,64 +1,71 @@
 import { forwardRef } from "react";
-import DotedMessageIcon from "../icons/DotedMessageIcon";
-import DotsIcon from "../icons/DotsIcon";
+import { Mail } from "lucide-react";
 
 const LastMessages = forwardRef(({open},ref)=>{
   
     return(
-        <div ref={ref} className={`absolute font-roboto bg-white rounded-[10px] w-[400px] h-fit pt-2 pb-2 drop-shadow-[2px_5px_4px_rgba(0,0,0,0.25)] flex flex-col right-0 bottom-0 translate-y-[102%]   space-y-2 ${open?'scale-100':'scale-0'}`}>
+        <div ref={ref} className={`absolute font-roboto bg-white rounded-xl w-96 h-fit shadow-2xl flex flex-col right-0 bottom-0 translate-y-[102%] transition-all duration-200 origin-top ${open?'scale-100 opacity-100 visible':'scale-95 opacity-0 invisible'} z-50 border border-gray-100`}>
 
-        <div className="absolute right-2 top-2 w-fit p-1 aspect-square rounded-full bg-[#CAEAFE] text-[12px] flex justify-center items-center font-medium">
-                +<span className="">50</span>
+            {/* Header */}
+            <div className="px-6 py-4 border-b border-gray-100">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-lg" style={{backgroundColor: '#F4FCFF'}}>
+                            <Mail className="w-5 h-5" style={{color: '#5375E2'}} />
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-base" style={{color: '#1A2562'}}>Messages</h3>
+                            <p className="text-xs" style={{color: '#999999'}}>50 non lus</p>
+                        </div>
+                    </div>
+                    <span className="text-white rounded-full w-6 h-6 flex justify-center items-center text-xs font-bold flex-shrink-0" style={{backgroundColor: '#5375E2'}}>
+                        50
+                    </span>
+                </div>
+            </div>
+
+            {/* Messages List */}
+            <div className="flex flex-col space-y-2 overflow-y-auto max-h-96 p-3">
+                {/* Team Messages */}
+                <div className="border-b border-gray-100 pb-3">
+                    <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-semibold text-sm" style={{color: '#1A2562'}}>Équipe</h4>
+                        <span className="text-xs font-medium px-2 py-1 rounded-full" style={{backgroundColor: '#F4FCFF', color: '#5375E2'}}>
+                            +25
+                        </span>
+                    </div>
+                    <div className="p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer">
+                        <p className="text-sm mb-1" style={{color: '#000000'}}>
+                            houda debza a accepté votre invitation. Une nouvelle équipe a été créée.
+                        </p>
+                        <p className="text-xs" style={{color: '#999999'}}>
+                            {new Date().toLocaleString()}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Team & Teachers Messages */}
+                <div className="border-b border-gray-100 pb-3">
+                    <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-semibold text-sm" style={{color: '#1A2562'}}>Équipe & Enseignants</h4>
+                        <span className="text-xs font-medium px-2 py-1 rounded-full" style={{backgroundColor: '#F4FCFF', color: '#5375E2'}}>
+                            +25
+                        </span>
+                    </div>
+                    <div className="p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer">
+                        <p className="text-sm mb-1" style={{color: '#000000'}}>
+                            houda debza a accepté votre invitation. Une nouvelle équipe a été créée.
+                        </p>
+                        <p className="text-xs" style={{color: '#999999'}}>
+                            {new Date().toLocaleString()}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Footer */}
+           
         </div>
-
-        <div className="text-[#1A2562] text-[24px] font-[400] flex space-x-2 items-center mx-auto"><DotedMessageIcon className='w-[40px] text-[#1A2562]/20'/><span>Messages:</span></div>
-        {
-          <>
-                    <div className="ml-4 relative w-fit">
-                        Team:
-                        <div className="absolute right-0 top-[50%] translate-y-[-50%] translate-x-[120%] w-fit p-1 aspect-square rounded-full bg-[#CAEAFE] text-[12px] flex justify-center items-center font-medium">
-                            +<span className="">25</span>
-                      </div>
-
-                    </div>
-                    <div className="h-[60px] w-[90%] rounded-[5px] bg-[#E4F1F9] text-[14px] px-2 py-2  font-normal relative mx-auto">
-                    houda debza accepted your invitation . a new team was created.
-                    <div className="absolute bottom-[1px] right-2 text-[12px] text-[#1A2562]/60">at: {new Date().toLocaleString()}</div>
-                    </div>
-                    <div className="flex text-[13px] items-center space-x-1 group mx-auto">
-                        <DotsIcon 
-                            className='w-[28px] text-[#1A2562]/60 font-medium cursor-pointer group-hover:text-[#1A2562]/30 transition-all ease-in'
-
-                        />
-                    <span className="cursor-pointer group-hover:underline underline-offset-1 transition-all ease-in decoration-[#1A2562]/60">More  messages</span> 
-                   </div>
-                    <div className="ml-4 relative w-fit">
-                        Team {'&'} teachers:
-                        <div className="absolute right-0 top-[50%] translate-y-[-50%] translate-x-[120%] w-fit p-1 aspect-square rounded-full bg-[#CAEAFE] text-[12px] flex justify-center items-center font-medium">
-                            +<span className="">25</span>
-                      </div>
-                    </div>
-                    <div className="h-[60px] w-[90%] rounded-[5px] bg-[#E4F1F9] text-[14px] px-2 py-2  font-normal relative mx-auto">
-                        houda debza accepted your invitation . a new team was created.
-                        <div className="absolute bottom-[1px] right-2 text-[12px] text-[#1A2562]/60">at: {new Date().toLocaleString()}</div>
-                    </div>
-                        <div className="flex text-[13px] items-center space-x-1 group mx-auto">
-                        <DotsIcon 
-                            className='w-[28px] text-[#1A2562]/60 font-medium cursor-pointer group-hover:text-[#1A2562]/30 transition-all ease-in'
-
-                        />
-                    <span className="cursor-pointer group-hover:underline underline-offset-1 transition-all ease-in decoration-[#1A2562]/60">more  messages</span> 
-                   </div>
-          </>
-
-             
-        }
-      
-      
-       
-
-    </div>
     )
-}
-)
+})
 export default LastMessages;

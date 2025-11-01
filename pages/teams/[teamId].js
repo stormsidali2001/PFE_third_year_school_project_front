@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
-
+import { Users, BookOpen, CheckCircle, TrendingUp } from "lucide-react"
 
 import { useStoreActions, useStoreState } from "../../store/hooks"
 import { useRouter } from "next/router"
@@ -20,7 +20,7 @@ const Team = props => {
    const [teamLeader,setTeamLeader] = useState({})
    const [peutSoutenir,setPeutSoutenir] = useState(null)
    const [moyenne,setMoyenne] = useState(0)
- 
+
    
 
     
@@ -51,80 +51,123 @@ const Team = props => {
     
     return (
         <div>
-           
-            <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor justify-center">
-                <div className="flex flex-col items-center justify-center ">
-                    <img src="/themeStudent.png" className="mix-blend-darken absolute"/>
-                    <div className={`p-10 justify-center flex-col space-y-8 h-fit w-[650px] px-10 bg-white/70 backdrop-blur-sm shadow-lg rounded-xl text-[16px] `}>
-                    <div className="flex flex-row items-center space-x-4 text-[26px]">
-                            <div className={`text-center w-full`}>
-                               {promotion?.name}
+            <HorisontalNavbar />
+            <StudentVerticalNavbar />
+            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl mx-auto">
+                    {/* Header */}
+                    <div className="mb-8">
+                        <button
+                            onClick={() => router.back()}
+                            className="mb-4 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors flex items-center gap-2"
+                            style={{color: '#5375E2'}}
+                        >
+                            ← Retour
+                        </button>
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-3" style={{color: '#1A2562'}}>Équipe</h1>
+                        <div className="h-1 w-20 rounded-full" style={{backgroundColor: '#5375E2'}}></div>
+                    </div>
+
+                    {/* Team Card */}
+                    <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                        {/* Content */}
+                        <div className="px-6 sm:px-8 py-8 space-y-6">
+                            {/* Team Name and Promotion */}
+                            <div>
+                                <div className="flex flex-col gap-4 mb-6 pb-6 border-b border-gray-100">
+                                    <div>
+                                        <p className="text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Promotion</p>
+                                        <p className="text-2xl font-bold" style={{color: '#000000'}}>{promotion?.name || '-'}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Nom de l'équipe</p>
+                                        {modifier === false ? (
+                                            <p className="text-2xl font-bold" style={{color: '#000000'}}>{teamName}</p>
+                                        ) : (
+                                            <input 
+                                                value={teamName} 
+                                                onChange={(e) => {setTeamName(e.target.value)}}
+                                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-boutton"
+                                                style={{color: '#000000'}}
+                                            />
+                                        )}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex flex-row items-center space-x-4 text-[26px]">
-                            <div className={` ${modifier === false ? "flex" : "hidden"}`}>
-                               {teamName}
+
+                            {/* Theme */}
+                            <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <BookOpen className="w-5 h-5" style={{color: '#5375E2'}} />
+                                    <p className="font-semibold" style={{color: '#1A2562'}}>Thème</p>
+                                </div>
+                                {theme?.id ? (
+                                    <Link href={"/themes/"+theme?.id}>
+                                        <a className="inline-flex items-center px-4 py-2 rounded-lg font-medium text-white transition-all hover:shadow-md" style={{backgroundColor: '#5375E2'}}>
+                                            #{theme?.title}
+                                        </a>
+                                    </Link>
+                                ) : (
+                                    <p style={{color: '#999999'}}>Pas de thème</p>
+                                )}
                             </div>
-                            <input value={teamName} className={`${modifier === true ? "flex" : "hidden"}`} onChange={(e) => {setTeamName(e.target.value)}}/>
-                        </div>
-                        <div className="flex items-center flex-row space-x-4">
-                            <div className="text-[19px]">Theme :</div>
-                          
-                            {
-                                //   <Link href={"/themes/"+theme?.id} className='border-blue-300 border-2 text-white/80 text-slate-700  hover:border-blue-400 px-2 py-1 rounded-[10px] shadow-sm'>{'#'+theme?.title}</Link>
-                                theme?(
-                                    <Link href={"/themes/"+theme?.id} ><div className='w-fit px-2 py-1  backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center cursor-pointer'>{'#'+theme?.title}</div></Link>
-                                ):(
-                                   <div>{'__'}</div> 
-                                )
-                            }
-                     
-                        </div>
-                        <div className="flex items-center flex-row space-x-4">
-                            <div className="text-[19px]">complete :</div>
-                            <div className={``}>{complete?"oui":"non"}</div>
-                        </div>
-                        <div className="flex items-center flex-row space-x-4">
-                            <div className="text-[19px]">Peut soutenir :</div>
-                            <div className={``}>{peutSoutenir?"oui":"non"}</div>
-                        </div>
-                        <div className="flex items-center flex-row space-x-4">
-                            <div className="text-[19px]">moyenne :</div>
-                            <div className={``}>{moyenne}</div>
-                        </div>
-                        {/* <div className="flex flex-row items-center flex-wrap space-x-4">
-                            <div className="text-[19px]">Encadreur(s) :</div>
-                           
-                            <Link href="/admin/teacherlist">
-                                <button className={`items-center justify-center flex-col space-y-10 bg-blue-300/20 backdrop-blur-lg rounded-full px-3 hover:text-blue-500 `}>{encadreur}</button>
-                            </Link>
-                        </div> */}
-                      
-                            <div className="flex flex-col  flex-wrap space-x-4">
-                                <div className="text-[19px]">Membres:</div>
-                                <div className="flex flex-col  space-y-2 my-2">
+
+                            {/* Status Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <CheckCircle className="w-5 h-5" style={{color: '#5375E2'}} />
+                                        <p className="font-semibold text-sm" style={{color: '#1A2562'}}>Complète</p>
+                                    </div>
+                                    <p className="text-lg font-bold" style={{color: '#000000'}}>{complete ? "Oui" : "Non"}</p>
+                                </div>
+
+                                <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <CheckCircle className="w-5 h-5" style={{color: '#5375E2'}} />
+                                        <p className="font-semibold text-sm" style={{color: '#1A2562'}}>Peut soutenir</p>
+                                    </div>
+                                    <p className="text-lg font-bold" style={{color: '#000000'}}>{peutSoutenir ? "Oui" : "Non"}</p>
+                                </div>
+
+                                <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <TrendingUp className="w-5 h-5" style={{color: '#5375E2'}} />
+                                        <p className="font-semibold text-sm" style={{color: '#1A2562'}}>Moyenne</p>
+                                    </div>
+                                    <p className="text-lg font-bold" style={{color: '#000000'}}>{moyenne ? parseFloat(moyenne).toFixed(2) : '0.00'}</p>
+                                </div>
+                            </div>
+
+                            {/* Members */}
+                            <div className="pt-6 border-t border-gray-100">
+                                <div className="flex items-center gap-2 mb-4">
+                                    <Users className="w-5 h-5" style={{color: '#5375E2'}} />
+                                    <h3 className="text-lg font-semibold" style={{color: '#1A2562'}}>Membres ({membres?.length || 0})</h3>
+                                </div>
+                                <div className="space-y-2">
                                     {
-                                        membres?.map((el , index)=> {
+                                        membres?.map((el, index)=> {
                                             return(
-                                                <Link href={`/students/${el.id}`}>
-                                                <button key={index} className=' w-fit px-2   backdrop-blur-sm bg-white/20 border-2 border-slate-300 hover:border-slate-400  rounded-full shadow-lg flex items-center cursor-pointer space-x-4'>
-                                                    <div className=" w-4 h-4 rounded-full bg-blue-300 text-white text-[10px] flex items-center justify-center">{index+1}</div>
-                                                   <span>{` ${el?.firstName} ${el?.lastName} ${teamLeader?.id === el.id?'(CF)':''}`}</span>
-                                                    
-                                                    </button>
-                                                    </Link>
-                                                
-                                            
+                                                <Link key={index} href={`/students/${el.id}`}>
+                                                    <a className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 border border-gray-200 hover:border-boutton hover:bg-blue-50 transition-all cursor-pointer">
+                                                        <div className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{backgroundColor: '#5375E2'}}>
+                                                            {index+1}
+                                                        </div>
+                                                        <span style={{color: '#000000'}} className="font-medium">
+                                                            {el?.firstName} {el?.lastName}
+                                                            {teamLeader?.id === el.id && (
+                                                                <span className="ml-2 text-xs font-semibold px-2 py-1 rounded-full" style={{backgroundColor: '#F4FCFF', color: '#5375E2'}}>CF</span>
+                                                            )}
+                                                        </span>
+                                                    </a>
+                                                </Link>
                                             )
                                         })
                                     }
-
                                 </div>
-                               
-                                
-                                {/* <Link href="/"><button className={`h-[30px] w-[100px] text-[18px] flex items-center justify-center bg-blue-300 hover:bg-blue-400 rounded-full ${modifier === true ? "flex" : "hidden"}`}>Ajouter</button></Link> */}
                             </div>
-                     
+                        </div>
                     </div>
                 </div>
             </div>

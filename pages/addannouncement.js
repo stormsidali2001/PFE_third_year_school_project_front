@@ -8,8 +8,9 @@ const AddAnnouncemnt = ({toastsRef}) => {
 
     return (
         <>
-        <div className=" bg-background min-h-screen items-center flex flex-col justify-center relative">
-            <img src='/announcement-background.jpg' className="h-[500px] object-contain mix-blend-darken "/>
+        <HorisontalNavbar />
+        <StudentVerticalNavbar />
+        <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
             <AjouterAnnouncemnt toastsRef={toastsRef}/>
         </div>
         </>

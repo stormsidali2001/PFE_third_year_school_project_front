@@ -112,12 +112,12 @@ export const themesModel:ThemesModel = {
         
     }),
     assignTeamsToTeacher:thunk(async (actions,payload)=>{
-        await axios.post(`http://localhost:8080/assignTeamsToTeacher`,{...payload},{
+        const res = await axios.post(`http://localhost:8080/assignTeamsToTeacher`,{...payload},{
            
             withCredentials:true
         
         })
-       
+        return res.data;
     })
   
    

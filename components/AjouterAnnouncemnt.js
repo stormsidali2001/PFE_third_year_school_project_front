@@ -14,6 +14,7 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
     const {createAnnouncementThunk} = useStoreActions(store=>store.teamAnnouncementsModel)
     const router = useRouter();
     const [loading,setLoading] = useState(false);
+    const [isDragActive, setIsDragActive] = useState(false);
 
 
     function handleChange(event) {
@@ -22,6 +23,27 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
         console.log(fileLst, [...fileLst].map(({name}) => {return {name}}));
         setFiles(event.target.files)
       };
+    
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragActive(true);
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragActive(false);
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragActive(false);
+        const droppedFiles = e.dataTransfer.files;
+        setFiles(droppedFiles);
+    };
+
     const Empty = (elements)=>{
         return elements.some(el=>el === '')
     }
@@ -81,91 +103,113 @@ const AjouterAnnouncemnt = ({toastsRef}) => {
     return (
 
         <form 
-            className="h-[500px] w-[500px]  justify-center flex flex-col space-y-6  text-[#1A2562]  font-xyz mt-[100px] mx-auto rounded-2xl items-center bg-white/80 backdrop-blur-sm shadow-xl p-2  absolute"
+            className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-8 space-y-6"
             onSubmit={handleSubmit}
         >
-            <span className="text-[26px]">Annoncement</span>
+            {/* Header */}
+            <div>
+                <h1 className="text-3xl font-bold mb-2" style={{color: '#1A2562'}}>Créer une annonce</h1>
+                <div className="h-1 w-16 rounded-full" style={{backgroundColor: '#5375E2'}}></div>
+            </div>
         
-           <div className='space-y-3 flex flex-col w-[95%] items-center px-8'>
+           <div className='space-y-6'>
                
-                <div className='flex flex-wrap -mx-3 mb-6  '>
-                            <div className="flex flex-row items-center justify-center space-x-6">
-                                <div> Titre</div>
-                                <input 
-                                    placeholder='Titre...'
-                                    value={title}
-                                    className=" border border-slate-200 rounded-md shadow-lg  outline-none h-[30px] w-[300px] px-3 bg-white/20 backdrop-blur-sm text-black" 
-                                    onChange={(e)=>setTitle(e.target.value)}
-                                />
-                            </div>   
+                {/* Title Input */}
+                <div>
+                    <label className="block text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Titre *</label>
+                    <input 
+                        placeholder='Entrez le titre...'
+                        value={title}
+                        className="w-full border border-gray-300 rounded-lg outline-none px-4 py-2 text-sm focus:border-boutton focus:ring-1 focus:ring-blue-200 transition-all" 
+                        onChange={(e)=>setTitle(e.target.value)}
+                        style={{color: '#000000'}}
+                    />
                 </div> 
 
-                    <div className='flex flex-wrap -mx-3 mb-6 '>
-                        <div className="flex-1  space-x-6">
-                            <div> Description</div> 
-                                <textarea 
-                                    placeholder='Description...'
-                                    value={description}
-                                    maxLength="250" 
-                                    className=" resize-none border border-slate-200  outline-none rounded-md shadow-md h-[120px] w-[350px] px-3 bg-white/20 backdrop-blur-sm text-black" 
-                                    onChange={(e)=>setDescription(e.target.value)}
-                                />
-                        </div>   
-                    </div> 
+                {/* Description Input */}
+                <div>
+                    <label className="block text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Description *</label>
+                    <textarea 
+                        placeholder='Décrivez votre annonce...'
+                        value={description}
+                        maxLength="250" 
+                        className="w-full resize-none border border-gray-300 outline-none rounded-lg px-4 py-2 text-sm h-28 focus:border-boutton focus:ring-1 focus:ring-blue-200 transition-all" 
+                        onChange={(e)=>setDescription(e.target.value)}
+                        style={{color: '#000000'}}
+                    />
+                    <p className="text-xs mt-1 text-right" style={{color: '#999999'}}>{description.length}/250</p>
+                </div> 
             
-                    <div className='flex flex-wrap -mx-3 mb-6 '>
-                        <div className="flex-1  space-x-6">
-                            <label htmlFor='file'  className="flex space-x-2 group cursor-pointer">
-                                <AttachFileIcon className='w-6 text-[#5375E2]/80 group-hover:text-[#5375E2]/60'/>
-                                <div> Joindre des fichiers </div>
-                            </label>
-                           
-                            <input id="file" className="hidden" type="file" multiple onChange={handleChange} optional/>
-                        </div>   
-                    </div> 
-                    
-                   
-                  
-                    <div className="w-full grid lg:grid-cols-4  md:grid-cols-3 grid-cols-2 place-content-center content-center p-2 gap-4  rounded-[5px] ">
-                     
-                        {
-                    [...files].map((file,index)=>{
-                                return(
-                                    <label 
-                                    className=" w-fit flex flex-col hover:scale-105 cursor-pointer transition-transform ease-in"
+                {/* File Upload */}
+                <div>
+                    <label htmlFor='file' className="block text-sm font-semibold mb-3 cursor-pointer" style={{color: '#1A2562'}}>
+                        Joindre des fichiers (optionnel)
+                    </label>
+                    <label 
+                        htmlFor='file' 
+                        className={`flex items-center justify-center w-full border-2 border-dashed rounded-lg p-6 cursor-pointer transition-all ${
+                            isDragActive ? 'bg-blue-100 border-boutton' : 'bg-gray-50 border-gray-300 hover:border-boutton hover:bg-blue-50/50'
+                        }`}
+                        onDragOver={handleDragOver}
+                        onDragLeave={handleDragLeave}
+                        onDrop={handleDrop}
+                    >
+                        <div className="text-center">
+                            <div className="mb-2">
+                                <svg className="w-8 h-8 mx-auto" style={{color: '#5375E2'}} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                                </svg>
+                            </div>
+                            <p className="text-sm font-medium" style={{color: '#1A2562'}}>
+                                {isDragActive ? 'Déposez les fichiers ici' : 'Cliquez pour ajouter des fichiers'}
+                            </p>
+                            <p className="text-xs" style={{color: '#999999'}}>
+                                {isDragActive ? '' : 'ou glissez-déposez'}
+                            </p>
+                        </div>
+                    </label>
+                    <input id="file" className="hidden" type="file" multiple onChange={handleChange} optional/>
+                </div> 
+                
+                {/* Files Preview */}
+                {[...files].length > 0 && (
+                    <div>
+                        <p className="text-sm font-semibold mb-3" style={{color: '#1A2562'}}>Fichiers sélectionnés ({[...files].length}):</p>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                            {[...files].map((file,index)=>(
+                                <div 
                                     key={index}
-                                
+                                    className="flex flex-col items-center p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-boutton hover:bg-blue-50 transition-all"
                                 >
-                                <div className=" bg-gray-100 flex justify-center items-center p-4 w-fit">
-                                   
-                                   <DocumentIcon
-                                       className='w-8'
-                                   />
-                                   
-                               </div>
-                               <div className="w-full  text-center  break-words text-sm">{file.name}</div>
-                           </label>
-
-                               
-                                   
-                                )
-                            })
-                        }
+                                    <svg className="w-8 h-8 mb-2" style={{color: '#5375E2'}} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    <p className="w-full text-center text-xs break-words" style={{color: '#000000'}}>{file.name}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    {
-                         loading?(
-                            <svg role="status" className="h-[60px] lg:w-[360px] min-w-[250px] text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-<path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-</svg>
-                        ):(
-                            <button type="submit" className="bg-blue-200 hover:bg-blue-300 rounded-full shadow-md h-[35px] w-[120px]">Valider</button>
-
-                        )
-                    }
-                   
-                    
-                    
+                )}
+                
+                {/* Submit Button */}
+                <button 
+                    type="submit" 
+                    disabled={loading}
+                    className="w-full py-3 rounded-lg font-semibold text-white transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                    style={{backgroundColor: '#5375E2'}}
+                >
+                    {loading ? (
+                        <>
+                            <svg role="status" className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span>Création...</span>
+                        </>
+                    ) : (
+                        <span>Créer l'annonce</span>
+                    )}
+                </button>
             </div>
      </form>
     )

@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import HorisontalNavbar from "../components/HorisontalNavbar";
 import StudentVerticalNavbar from "../components/StudentVerticalNavbar";
-import ArrowIcon from "../icons/ArrowIcon";
-import Send from "../icons/Send";
 import { useStoreActions, useStoreState } from "../store/hooks";
+import { Send, ArrowLeft } from "lucide-react";
 
 const chat = props => {
 
@@ -34,7 +33,7 @@ const chat = props => {
     const [runOnce,setRunOnce] = useState(false)
     const messageBoxRef = useRef()
     
- 
+
     useEffect(async()=>{
         await getMessages();
        
@@ -89,70 +88,160 @@ const chat = props => {
     }
 
     return (
-        <div className="bg-background min-h-screen w-screen relative">
-         
-            <div className="flex flex-row md:space-x-10 font-xyz text-textcolor pr-4 pb-4 pt-[100px] md:pl-[100px] pl-4">
-                <div className={`md:h-fit min-h-[80vh] md:min-h-[400px] min-w-full  md:min-w-[250px] pt-6 rounded-xl bg-white flex flex-col space-y-4 text-center shadow-md ${discussionOuverte === true ? 'md:flex hidden'  : 'flex'}`}>
-                    <div className={`pb-4 text-[15px] md:text-[18px] px-4`}>Cliquez sur un groupe pour démarrer une discussion</div>
-                    {
-                        data.map((el , index) => {
-                            return (
-                                <div className="flex flex-row items-center space-x-1 md:space-x-4 px-8 cursor-pointer" onClick={()=>{setDiscussionOuverte(true) ; setIdDiscussion(el.id)}}>
-                                    <img src={el.url} className="md:h-[40px] w-[25px] h-[25px] md:w-[40px] object-contain rounded-full "/>
-                                    <div className="text-[12px] md:text-[16px]">{el.nomGroupe}</div>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-                <div className={`h-[450px] min-w-[90vw] md:min-w-[70vw] flex items-center justify-center relative ${discussionOuverte === true ? "" : "mix-blend-darken hidden md:flex"}`}
-                style={{
-                    backgroundImage:"url('./chat.jpg')",
-                    backgroundSize:'contain',
-                    backgroundRepeat:'no-repeat',
-                    backgroundAttachment:'fixed',
-                    backgroundPositionX:'50%',
-                    transform:'scale(1)',
-                }}
-                >
-                    <div className={`flex flex-col h-[450px] w-full space-y-10 items-center justify-center absolute top-0 z-40 ${discussionOuverte === true ? " p-2 md:p-12 bg-white/90 backdrop-blur-sm shadow-xl rounded-xl scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500 py-4 hover:scrollbar-track-blue-200 overflow-x-hidden" : ""}`}
-                   ref={messageBoxRef}
-                    >
+        <div>
+            <HorisontalNavbar />
+            <StudentVerticalNavbar />
+            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-5xl mx-auto h-[calc(100vh-120px)] flex gap-0">
                     
-                        <div className={`text-[25px] font-thin absolute bottom-4 ${discussionOuverte === true ? "hidden" : "md:flex hidden "}`}>Cliquer sur un groupe pour afficher les messages</div>
-                        <div className={`flex-col h-full w-full space-y-10`} >
-                            
-                                <div>
-                                {
-                                    discussion.map((element) => {
-                                    
-                                        return (
-                                            <div className={`flex-col  flex h-full w-full space-y-10 ${student?.id === element?.sender?.id ? "items-end" : "items-start"}`}
-                                           >
-                                                {idDiscussion === element.chatId ? 
-                                                    <div className={`z-40 rounded-2xl py-1 px-4 my-[2px] space-y-2 break-all max-w-[60vw] md:max-w-[300px] ${student?.id === element?.sender?.id ? "bg-[#36b5ff] text-white" : " bg-[#8FD4FB] "} flex flex-col`}>
-                                                         <div className="text-[12px] ">par: {element?.sender?.firstName+' '+element?.sender?.lastName}</div>
-                                                        <div>{element.message}</div>
-                                                       
-                                                </div> : ""}
-                                              
-                                            </div>
-                                        )
-                                    })
-                                } </div>         
+                    {/* Sidebar - Conversations List */}
+                    <div className={`w-full md:w-72 bg-white flex flex-col border-r border-gray-200 ${discussionOuverte ? 'hidden md:flex' : 'flex'}`}>
+                        {/* Header */}
+                        <div className="p-4 border-b border-gray-100">
+                            <h2 className="text-2xl font-bold" style={{color: '#1A2562'}}>Messages</h2>
                         </div>
-                       
+                        
+                        {/* Conversations */}
+                        <div className="flex-1 overflow-y-auto">
+                            {data.map((el, index) => (
+                                <div 
+                                    key={index}
+                                    className="p-3 border-b border-gray-100 cursor-pointer transition-colors hover:bg-gray-50"
+                                    style={{
+                                        backgroundColor: idDiscussion === el.id ? '#F4FCFF' : 'white'
+                                    }}
+                                    onClick={() => {
+                                        setDiscussionOuverte(true);
+                                        setIdDiscussion(el.id);
+                                    }}
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <img 
+                                            src={el.url} 
+                                            className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+                                            alt="group"
+                                        />
+                                        <div className="flex-1 min-w-0">
+                                            <h3 className="font-semibold text-sm truncate" style={{color: '#1A2562'}}>
+                                                {el.nomGroupe}
+                                            </h3>
+                                            <p className="text-xs text-gray-500 truncate">
+                                                {discussion.length > 0 ? discussion[discussion.length - 1].message : 'No messages yet'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                {discussionOuverte &&  <button 
-                        className={`absolute top-2 left-2 z-50 `}
-                        onClick={(e) => {setDiscussionOuverte(false)}}
-                    >
-                        <ArrowIcon/>
-                    </button>}
-                    <form onSubmit={(e) => {e.preventDefault();handleSubmitMessage();}} className= {`items-center justify-center  -bottom-16 absolute flex  h-fit w-full flex-row  ${discussionOuverte === true ? "flex" : "hidden"} z-40`}>
-                        <input value={newMessage}  className={`bg-zinc-100 h-[30px] md:h-[45px] w-2/3 md:w-10/12 rounded-2xl shadow-xl px-4`} onChange={(e)=> {setNewMessage(e.target.value)}} placeholder = "Ecrivez un message ..."/>
-                        <button><Send/></button>
-                    </form>
+
+                    {/* Chat Area */}
+                    <div className={`flex-1 flex flex-col bg-white ${discussionOuverte ? 'flex' : 'hidden md:flex'}`}>
+                        
+                        {/* Chat Header */}
+                        <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white">
+                            <div className="flex items-center gap-3">
+                                {discussionOuverte && (
+                                    <button
+                                        onClick={() => setDiscussionOuverte(false)}
+                                        className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
+                                    >
+                                        <ArrowLeft className="w-5 h-5" style={{color: '#1A2562'}} />
+                                    </button>
+                                )}
+                                <img 
+                                    src={data.find(d => d.id === idDiscussion)?.url} 
+                                    className="w-10 h-10 rounded-full object-cover"
+                                    alt="group"
+                                />
+                                <h2 className="text-base font-semibold" style={{color: '#1A2562'}}>
+                                    {data.find(d => d.id === idDiscussion)?.nomGroupe || 'Team Chat'}
+                                </h2>
+                            </div>
+                        </div>
+
+                        {/* Messages Area */}
+                        <div 
+                            ref={messageBoxRef}
+                            className="flex-1 overflow-y-auto p-4 space-y-3"
+                            style={{backgroundColor: '#ffffff'}}
+                        >
+                            {discussion.length === 0 ? (
+                                <div className="flex items-center justify-center h-full text-center">
+                                    <div>
+                                        <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3" style={{backgroundColor: '#F4FCFF'}}>
+                                            <svg className="w-8 h-8" style={{color: '#5375E2'}} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                            </svg>
+                                        </div>
+                                        <p className="text-gray-400 text-sm font-medium">No messages yet</p>
+                                        <p className="text-gray-300 text-xs mt-1">Start a conversation!</p>
+                                    </div>
+                                </div>
+                            ) : (
+                                discussion.map((element, index) => {
+                                    const isCurrentUser = student?.id === element?.sender?.id;
+                                    const prevMessage = index > 0 ? discussion[index - 1] : null;
+                                    const showAvatar = !prevMessage || prevMessage?.sender?.id !== element?.sender?.id;
+                                    
+                                    return (
+                                        idDiscussion === element.chatId ? (
+                                            <div key={index} className={`flex ${isCurrentUser ? 'justify-end' : 'justify-start'} gap-2`}>
+                                                {!isCurrentUser && showAvatar && (
+                                                    <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-white text-xs font-bold" style={{backgroundColor: '#5375E2'}}>
+                                                        {element?.sender?.firstName?.charAt(0)}{element?.sender?.lastName?.charAt(0)}
+                                                    </div>
+                                                )}
+                                                {!isCurrentUser && !showAvatar && (
+                                                    <div className="w-8 flex-shrink-0"></div>
+                                                )}
+                                                
+                                                <div className={`flex flex-col ${isCurrentUser ? 'items-end' : 'items-start'}`}>
+                                                    {!isCurrentUser && showAvatar && (
+                                                        <p className="text-xs font-semibold mb-1 px-3" style={{color: '#1A2562'}}>
+                                                            {element?.sender?.firstName}
+                                                        </p>
+                                                    )}
+                                                    <div 
+                                                        className="max-w-xs md:max-w-sm rounded-2xl px-4 py-2 break-words shadow-sm"
+                                                        style={{
+                                                            backgroundColor: isCurrentUser ? '#5375E2' : '#E5E7EB',
+                                                            color: isCurrentUser ? 'white' : '#000000'
+                                                        }}
+                                                    >
+                                                        <p className="text-sm">{element.message}</p>
+                                                    </div>
+                                                    <p className={`text-xs mt-1 px-3 ${isCurrentUser ? 'text-gray-500' : 'text-gray-400'}`}>
+                                                        {new Date(element.createdAt).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        ) : null
+                                    );
+                                })
+                            )}
+                        </div>
+
+                        {/* Message Input */}
+                        <div className="p-4 border-t border-gray-100 bg-white">
+                            <form onSubmit={(e) => {e.preventDefault(); handleSubmitMessage();}} className="flex gap-2 items-end">
+                                <input 
+                                    value={newMessage}
+                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    placeholder="Aa"
+                                    className="flex-1 px-4 py-3 border border-gray-300 rounded-full focus:border-boutton focus:ring-2 focus:ring-blue-100 outline-none transition-all text-sm resize-none"
+                                    style={{color: '#000000'}}
+                                />
+                                <button 
+                                    type="submit"
+                                    className="p-3 rounded-full transition-all hover:scale-110 flex-shrink-0"
+                                    style={{backgroundColor: '#5375E2'}}
+                                >
+                                    <Send className="w-5 h-5 text-white" />
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

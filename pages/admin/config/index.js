@@ -38,7 +38,7 @@ const Config = props => {
             icon: "📋",
             items: [
                 { name: "Documents Déposées", link: "/admin/teams-docs" },
-                { name: "Affecter Équipes à Enseignant", link: "/" },
+                { name: "Affecter Équipes à Enseignant", link: "/admin/assign-teams-to-teachers" },
                 { name: "Envoyer la Fiche de Vœux", link: "/admin/send-wish-list" },
             ]
         },
