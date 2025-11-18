@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
+import TeacherVerticalNavbar from "../../components/TeacherVerticalNavbar"
+import AdminVerticalNavbar from "../../components/AdminVerticalNavbar"
 import {useRouter} from 'next/router'
 import { useStoreActions, useStoreState } from "../../store/hooks"
 import AddIcon from "../../icons/AddIcon"
@@ -26,6 +28,16 @@ const Theme = ({toastsRef}) => {
     const [addTeamChosenTeam,setAddTeamChosenTeam] = useState(null)
     const user = useStoreState(store=>store.user)
     const isAdmin = user.userType === 'admin';
+    
+    const getSidebar = () => {
+        if (user.userType === 'admin') {
+            return <AdminVerticalNavbar />
+        } else if (user.userType === 'teacher') {
+            return <TeacherVerticalNavbar />
+        } else {
+            return <StudentVerticalNavbar />
+        }
+    }
 
     useEffect(async ()=>{
         if(!themeId) return;
@@ -115,7 +127,7 @@ const Theme = ({toastsRef}) => {
     return (
         <div>
             <HorisontalNavbar />
-            <StudentVerticalNavbar />
+            {getSidebar()}
             <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}

@@ -125,7 +125,7 @@ const CreateSoutenance = ({toastsRef}) => {
     }
     
     return (
-        <div className='min-h-screen h-fit py-12 min-w-screen bg-background font-roboto'>
+        <div className='min-h-screen h-fit py-20 min-w-screen bg-background font-roboto'>
             <div className='flex flex-col max-w-4xl mx-auto px-6 space-y-8'>
                 <div className='text-center space-y-3'>
                     <h1 className='text-4xl font-bold' style={{color: '#000000'}}>Créer une soutenance</h1>

@@ -2,6 +2,8 @@ import Link from "next/link"
 import { useEffect, useState,useRef, useLayoutEffect } from "react"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import AdminVerticalNavbar from "../../components/AdminVerticalNavbar"
+import TeacherVerticalNavbar from "../../components/TeacherVerticalNavbar"
+import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
 import { useStoreActions, useStoreState } from "../../store/hooks"
 import Select from 'react-select'
 import { useRouter } from "next/router";
@@ -24,6 +26,16 @@ const Suggestions = ({toastsRef}) => {
     const [chosenPromotion,setChoosenPromotion] = useState(null)
     const user = useStoreState(store=>store.user)
     const isAdmin = user?.userType === 'admin';
+    
+    const getSidebar = () => {
+        if (user.userType === 'admin') {
+            return <AdminVerticalNavbar />
+        } else if (user.userType === 'teacher') {
+            return <TeacherVerticalNavbar />
+        } else {
+            return <StudentVerticalNavbar />
+        }
+    }
        
      
    
@@ -108,7 +120,7 @@ const Suggestions = ({toastsRef}) => {
     return (
         <div>
             <HorisontalNavbar />
-            <AdminVerticalNavbar />
+            {getSidebar()}
             <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 max-w-[calc(100vw-5rem)]">
                 <div className="px-4 sm:px-6 lg:px-8">
                     {/* Header */}

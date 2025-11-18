@@ -58,6 +58,7 @@ export const soutenanceModel:SoutenanceModel = {
         const res = await  axios.get(`http://localhost:8080/getSoutenances/${payload?payload:'all'}`,{
               withCredentials:true
           })
+          console.log("test" ,res.data,'res.data')
           actions.setSoutenances(res.data)
       }),
     getSoutenance:thunk(async(actions,payload)=>{

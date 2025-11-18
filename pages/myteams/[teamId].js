@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useStoreActions, useStoreState } from "../../store/hooks";
 import {useRouter}  from 'next/router'
 import DocumentIcon from "../../icons/documentIcon";
+import HorisontalNavbar from "../../components/HorisontalNavbar";
+import TeacherVerticalNavbar from "../../components/TeacherVerticalNavbar";
+import { FileText, CheckCircle, ArrowLeft, Download } from 'lucide-react';
 
 const TeamId = ({toastsRef}) => {
     const router = useRouter()
@@ -64,94 +67,137 @@ const TeamId = ({toastsRef}) => {
         }
     }
 
-    // return JSON.stringify(documents.map(doc=>{return {id:doc.id,name:doc.name}}))
     return (
-        <div className="h-[200vh] bg-background min-h-screen      border-2  pl-[60px]">
-       
-        <div  className="h-[80vh]   flex lg:flex-row flex-col-reverse    text-[#1A2562]  font-xyz mt-[120px]    bg-white shadow-lg p-4 mx-[50px] ">
-            <div className="lg:w-[80%] w-full h-full flex flex-col ">
-                   <div 
-                   className="w-full h-full   grid  grid-cols-[repeat(auto-fit,minmax(100px,_1fr))] gap-[20px] px-4 py-4 justify-items-center  items-center overflow-y-auto"> {/*The team docs lays here */}
-                        { 
-                               documents?.map(doc=>{
-                                   return (
-                                    
-                                <div 
-                                    className="relative w-[100px] h-[100px] flex flex-col   cursor-pointer "
-                                    onClick={(e)=>handleSelectFiles(doc)}
-                                >
-                                          <div className={`absolute bottom-[40px] right-[40px] w-[15px] h-[15px] rounded-full ${selectedFiles[doc.id]?'bg-blue-400':'bg-blue-200'}  border-2`}></div>
-                                      <div 
-                                        className=" bg-gray-100 flex justify-center items-center p-4 w-fit"
-                                      >
-                                         
-                                         <DocumentIcon
-                                             className='w-8'
-                                         />
-                                         
-                                     </div>
-                                     <div className="w-full   break-words text-sm">{doc?.name}</div>
-                                 </div>
-                                   )
-                               
-                               })
-                         }
-                   </div>
-                   <div className="flex w-[95%] justify-between h-[60px] bg-white   shadow-lg mx-auto"> {/* options menu */}
-                             
-                              { showValidateButton()  &&<div 
-                                       className="h-full border-2 border-gray-200 w-1/4 justify-center flex items-center cursor-pointer"
-                                       onClick={handleValidateDocuments}
-                               >
-                                           Valider
-                               </div>}
-                           
-                          
-                   </div>
-             </div>
-             <div className=" lg:w-[20%]  w-full lg:h-full h-[20%] flex flex-col shadow-lg px-2 overflow-y-scroll space-y-4"> {/*document information */}
-                 {
-                       <>
-                           
-                          { Object.keys(selectedFiles).length > 0 &&(
-                              <>
-                                   <div className="w-full  text-center font-medium text-xl">Document Infos:</div>
-                              {
-                                  Object.keys(selectedFiles).map(
-                                      k =>{
-                                          const selectedFile = selectedFiles[k];
+        <div>
+            <HorisontalNavbar />
+            <TeacherVerticalNavbar />
+            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto">
+                    {/* Header */}
+                    <div className="mb-8 flex items-center gap-4">
+                        <button
+                            onClick={() => router.back()}
+                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            style={{ color: '#5375E2' }}
+                        >
+                            <ArrowLeft className="w-6 h-6" />
+                        </button>
+                        <div>
+                            <h1 className="text-4xl font-bold mb-2" style={{ color: '#000000' }}>Documents de l'équipe</h1>
+                            <div className="h-1 w-20 rounded-full" style={{ backgroundColor: '#5375E2' }}></div>
+                        </div>
+                    </div>
 
-                                          return (
-                                              <div className=" border-2 break-all flex flex-col px-2 ">
-                           
-                                            <div className="text-textcolor/90 "><span className="">Name: </span><span className="text-sm">{selectedFile.name}</span></div>
-                                            <div>Type: <span className="text-sm">{selectedFile.type.name}</span></div>
-                                            
-                                            <div  onClick={()=>router.push('http://localhost:8080/'+selectedFile.url?.slice(2))}  className="text-textcolor/90 cursor-pointer hover:underline">Url: <span className="text-sm">{selectedFile.url}</span> </div>
-                                            <div>Validé: <span className="text-sm">{ selectedFile.validated=== true?'oui':'non'}</span></div>
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        {/* Main Content - Documents Grid */}
+                        <div className="lg:col-span-3">
+                            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+                                <h2 className="text-xl font-bold mb-6" style={{ color: '#000000' }}>Documents</h2>
+                                
+                                {documents && documents.length > 0 ? (
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                        {documents.map((doc) => (
+                                            <div
+                                                key={doc.id}
+                                                onClick={() => handleSelectFiles(doc)}
+                                                className={`relative p-4 rounded-lg border-2 cursor-pointer transition-all hover:shadow-md ${
+                                                    selectedFiles[doc.id]
+                                                        ? 'border-blue-500 bg-blue-50'
+                                                        : 'border-gray-200 bg-gray-50 hover:border-gray-300'
+                                                }`}
+                                            >
+                                                {doc.validated && (
+                                                    <div className="absolute top-2 right-2 px-2 py-1 rounded text-xs font-semibold text-white" style={{ backgroundColor: '#5375E2' }}>
+                                                        Validé
+                                                    </div>
+                                                )}
+                                                <div className="flex flex-col items-center gap-2">
+                                                    <FileText className="w-8 h-8" style={{ color: '#5375E2' }} />
+                                                    <p className="text-xs text-center truncate w-full" style={{ color: '#000000' }} title={doc.name}>
+                                                        {doc.name}
+                                                    </p>
+                                                </div>
+                                                {selectedFiles[doc.id] && (
+                                                    <div className="absolute bottom-2 right-2 p-1 rounded-full" style={{ backgroundColor: '#5375E2' }}>
+                                                        <CheckCircle className="w-4 h-4 text-white" />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-12">
+                                        <FileText className="w-12 h-12 mx-auto mb-4 opacity-30" style={{ color: '#5375E2' }} />
+                                        <p style={{ color: '#000000' }}>Aucun document trouvé</p>
+                                    </div>
+                                )}
+                            </div>
 
-                                              </div>
-                                           
-                                          )
-                                      }
-                                  )
-                              }
-                             
-                           
-                              
-                              
-                              </>
-                           )}
-                       </>
-                   } 
-                   
-             </div>
-               
-           </div>
-  
-           
-   
-   </div>
+                            {/* Validate Button */}
+                            {showValidateButton() && (
+                                <div className="mt-6">
+                                    <button
+                                        onClick={handleValidateDocuments}
+                                        className="w-full py-3 rounded-lg font-semibold text-white transition-all hover:shadow-lg"
+                                        style={{ backgroundColor: '#5375E2' }}
+                                    >
+                                        Valider les documents sélectionnés
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Sidebar - Document Info */}
+                        <div className="lg:col-span-1">
+                            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sticky top-24 max-h-[calc(100vh-150px)] overflow-y-auto">
+                                <h3 className="text-lg font-bold mb-4" style={{ color: '#000000' }}>Infos Document</h3>
+                                
+                                {Object.keys(selectedFiles).length > 0 ? (
+                                    <div className="space-y-4">
+                                        {Object.keys(selectedFiles).map((k) => {
+                                            const selectedFile = selectedFiles[k];
+                                            return (
+                                                <div key={k} className="border border-gray-200 rounded-lg p-4 space-y-3">
+                                                    <div>
+                                                        <p className="text-xs font-semibold" style={{ color: '#5375E2' }}>NOM</p>
+                                                        <p className="text-sm truncate" style={{ color: '#000000' }}>{selectedFile.name}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-xs font-semibold" style={{ color: '#5375E2' }}>TYPE</p>
+                                                        <p className="text-sm" style={{ color: '#000000' }}>{selectedFile.type?.name || 'N/A'}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-xs font-semibold" style={{ color: '#5375E2' }}>STATUT</p>
+                                                        <div className="flex items-center gap-2 mt-1">
+                                                            <div className={`w-3 h-3 rounded-full ${selectedFile.validated ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+                                                            <p className="text-sm" style={{ color: '#000000' }}>
+                                                                {selectedFile.validated ? 'Validé' : 'Non validé'}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <button
+                                                        onClick={() => window.open('http://localhost:8080/' + selectedFile.url?.slice(2), '_blank')}
+                                                        className="w-full mt-3 py-2 rounded-lg font-semibold text-white text-sm transition-all hover:shadow-md flex items-center justify-center gap-2"
+                                                        style={{ backgroundColor: '#5375E2' }}
+                                                    >
+                                                        <Download className="w-4 h-4" />
+                                                        Télécharger
+                                                    </button>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-8">
+                                        <p style={{ color: '#000000' }} className="text-sm">Sélectionnez un document pour voir ses détails</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 export default TeamId;

@@ -1,72 +1,190 @@
 import { useEffect } from "react"
-import { useStoreActions,useStoreState } from "../../store/hooks"
+import { useStoreActions, useStoreState } from "../../store/hooks"
 import { useRouter } from "next/router"
+import HorisontalNavbar from "../../components/HorisontalNavbar"
+import AdminVerticalNavbar from "../../components/AdminVerticalNavbar"
+import { Calendar, Clock, BookOpen, Users, MapPin, User, ArrowLeft } from 'lucide-react'
 
-const soutenanceId = props => {
+const SoutenanceDetail = props => {
     const router = useRouter()
-    const {soutenanceId} = router.query;
+    const { soutenanceId } = router.query;
 
-    
-    const {getSoutenance} = useStoreActions(store=>store.soutenanceModel)
-    const {soutenance} = useStoreState(store=>store.soutenanceModel)
-    useEffect(async()=>{
-        if(!soutenanceId) return;
+    const { getSoutenance } = useStoreActions(store => store.soutenanceModel)
+    const { soutenance } = useStoreState(store => store.soutenanceModel)
+
+    useEffect(async () => {
+        if (!soutenanceId) return;
         await getSoutenance(soutenanceId)
-    },[soutenanceId])
+    }, [soutenanceId])
 
-    if(!soutenance) return "loading"
-  
+    const formatDate = (dateString) => {
+        if (!dateString) return 'N/A';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('fr-FR', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+    };
+
+    const formatDuration = (milliseconds) => {
+        if (!milliseconds) return 'N/A';
+        const totalSeconds = Math.floor(milliseconds / 1000);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        
+        if (hours > 0) {
+            return `${hours}h ${minutes}m ${seconds}s`;
+        } else if (minutes > 0) {
+            return `${minutes}m ${seconds}s`;
+        } else {
+            return `${seconds}s`;
+        }
+    };
+
+    if (!soutenance || Object.keys(soutenance).length === 0) {
+        return (
+            <div>
+                <HorisontalNavbar />
+                <AdminVerticalNavbar />
+                <div className="min-h-screen pt-24 pb-12 font-roboto pl-20 flex items-center justify-center" style={{ backgroundColor: '#F4FCFF' }}>
+                    <p style={{ color: '#000000' }}>Chargement...</p>
+                </div>
+            </div>
+        )
+    }
+
     return (
-        <div className="min-h-screen h-fit py-6 w-screen bg-background">
-            <div  className="pt-[100px] sm:pl-[100px] text-[16px] text-black font-xyz flex items-center justify-center flex-col space-y-12 lg:flex-row lg:space-y-0 lg:space-x-16">
-                <img src="/detailsoutenace.jpg" className="w-[90vw] md:w-[70vw] lg:w-[45vw] object-contain mix-blend-darken"/>
-                <div className="h-[75vh] w-[90vw] md:w-[70vw] lg:w-[40vw] bg-white p-6 shadow-lg rounded-lg flex space-y-4 flex-col">
-                    <div className="text-[24px] w-full text-center underline font-semibold italic">{soutenance?.title}</div>
-                    <div className="flex flex-row space-x-4">
-                        <div className="font-semibold">Equipe</div>
-                        <div>{soutenance?.team?.nickName}</div>
-                    </div>
-                    <div className="flex flex-row space-x-4">
-                        <div className="font-semibold">Theme</div>
-                        <div>{soutenance?.team?.givenTheme.title}</div>
-                    </div>
-                    <div className="flex flex-row space-x-4">
-                        <div className="font-semibold">Date et heure</div>
-                        <div>{soutenance.date}</div>
-                    </div>
-                    <div className="flex flex-row space-x-4">
-                        <div className="font-semibold">Duree</div>
-                        <div>{soutenance.duration}</div>
-                    </div>
-                    <div className="flex flex-row space-x-4">
-                        <div className="font-semibold">Salle</div>
-                        <div>{soutenance?.salle?.name}</div>
-                    </div>
-                    <div className="flex flex-row space-x-4">
-                        <div className="font-semibold">Détails</div>
-                        <div className="text-[15px] h-fit max-h-[150px] scrollbar-width-[2px] scrollbar scrollbar-thumb-blue-500  hover:scrollbar-track-blue-200">{soutenance.description}</div>
-                    </div>
-                    <div className="flex flex-col h-[80px] scrollbar scrollbar-thumb-blue-500  hover:scrollbar-track-blue-200 space-y-4">
-                        <div className="font-semibold">Jury</div>
-                        <div className="flex flex-wrap gap-4">
-                            {
-                                soutenance?.jurys?.map((jr , index) => {
-                                    const teacher = jr.teacher;
+        <div>
+            <HorisontalNavbar />
+            <AdminVerticalNavbar />
+            <div className="min-h-screen pt-24 pb-12 font-roboto pl-20" style={{ backgroundColor: '#F4FCFF' }}>
+                <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+                    {/* Back Button */}
+                    <button
+                        onClick={() => router.back()}
+                        className="mb-8 flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                        style={{ color: '#5375E2' }}
+                    >
+                        <ArrowLeft className="w-5 h-5" />
+                        <span className="font-medium">Retour</span>
+                    </button>
 
-                                    return(
-                                        <button className=" bg-blue-500 rounded-full hover:bg-blue-600 text-white shadow-xl h-fit w-fit px-3 p-1">
-                                            <div>#{teacher.firstName} {teacher.lastName}</div>
-                                            
-                                        </button>
-                                    )
-                                })
-                            }
+                    {/* Title */}
+                    <div className="mb-12">
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: '#000000' }}>
+                            {soutenance?.title}
+                        </h1>
+                        <div className="h-1 w-24 rounded-full" style={{ backgroundColor: '#5375E2' }}></div>
+                    </div>
+
+                    {/* Main Card */}
+                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                        {/* Header Section */}
+                        <div className="p-8 border-b border-gray-200" style={{ backgroundColor: '#FFFFFF' }}>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Team Info */}
+                                <div className="flex items-start gap-3">
+                                    <Users className="w-6 h-6 flex-shrink-0 mt-1" style={{ color: '#5375E2' }} />
+                                    <div>
+                                        <p className="text-xs font-semibold" style={{ color: '#000000' }}>ÉQUIPE</p>
+                                        <p className="text-lg font-semibold mt-1" style={{ color: '#000000' }}>
+                                            #{soutenance?.team?.nickName}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Theme Info */}
+                                <div className="flex items-start gap-3">
+                                    <BookOpen className="w-6 h-6 flex-shrink-0 mt-1" style={{ color: '#5375E2' }} />
+                                    <div>
+                                        <p className="text-xs font-semibold" style={{ color: '#000000' }}>THÈME</p>
+                                        <p className="text-lg font-semibold mt-1" style={{ color: '#000000' }}>
+                                            {soutenance?.team?.givenTheme?.title || 'N/A'}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Details Section */}
+                        <div className="p-8 space-y-6">
+                            {/* Date & Time */}
+                            <div className="flex items-start gap-3">
+                                <Calendar className="w-5 h-5 flex-shrink-0 mt-1" style={{ color: '#5375E2' }} />
+                                <div>
+                                    <p className="text-xs font-semibold" style={{ color: '#000000' }}>DATE ET HEURE</p>
+                                    <p className="text-sm mt-1" style={{ color: '#000000' }}>
+                                        {formatDate(soutenance?.date)}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Duration */}
+                            <div className="flex items-start gap-3">
+                                <Clock className="w-5 h-5 flex-shrink-0 mt-1" style={{ color: '#5375E2' }} />
+                                <div>
+                                    <p className="text-xs font-semibold" style={{ color: '#000000' }}>DURÉE</p>
+                                    <p className="text-sm mt-1" style={{ color: '#000000' }}>
+                                        {formatDuration(soutenance?.duration)}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Room */}
+                            <div className="flex items-start gap-3">
+                                <MapPin className="w-5 h-5 flex-shrink-0 mt-1" style={{ color: '#5375E2' }} />
+                                <div>
+                                    <p className="text-xs font-semibold" style={{ color: '#000000' }}>SALLE</p>
+                                    <p className="text-sm mt-1" style={{ color: '#000000' }}>
+                                        {soutenance?.salle?.name || 'N/A'}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Description */}
+                            <div className="p-4 rounded-lg border border-gray-200" style={{ backgroundColor: '#FAFAFA' }}>
+                                <p className="text-xs font-semibold mb-2" style={{ color: '#000000' }}>DESCRIPTION</p>
+                                <p className="text-sm leading-relaxed" style={{ color: '#000000' }}>
+                                    {soutenance?.description}
+                                </p>
+                            </div>
+
+                            {/* Jury Section */}
+                            <div>
+                                <h3 className="text-lg font-bold mb-4 flex items-center gap-2" style={{ color: '#000000' }}>
+                                    <User className="w-5 h-5" style={{ color: '#5375E2' }} />
+                                    Jury
+                                </h3>
+                                {soutenance?.jurys && soutenance.jurys.length > 0 ? (
+                                    <div className="flex flex-wrap gap-3">
+                                        {soutenance.jurys.map((jr, index) => {
+                                            const teacher = jr.teacher;
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className="px-4 py-2 rounded-lg text-white font-medium transition-all hover:shadow-md"
+                                                    style={{ backgroundColor: '#5375E2' }}
+                                                >
+                                                    {teacher?.firstName} {teacher?.lastName}
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                ) : (
+                                    <p style={{ color: '#999999' }}>Aucun jury assigné</p>
+                                )}
+                            </div>
                         </div>
                     </div>
-                    <div></div>
                 </div>
             </div>
         </div>
     )
 }
-export default soutenanceId;
+export default SoutenanceDetail;

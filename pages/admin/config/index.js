@@ -11,7 +11,6 @@ const Config = props => {
                 { name: "Ajouter Enseignants", link: "/admin/addteacher" },
                 { name: "Liste Enseignants", link: "/admin/teacherlist" },
                 { name: "Ajouter Entreprises", link: "/admin/addentreprise" },
-                { name: "Liste Entreprises", link: "/" },
             ]
         },
         {
@@ -38,7 +37,6 @@ const Config = props => {
             icon: "📋",
             items: [
                 { name: "Documents Déposées", link: "/admin/teams-docs" },
-                { name: "Affecter Équipes à Enseignant", link: "/admin/assign-teams-to-teachers" },
                 { name: "Envoyer la Fiche de Vœux", link: "/admin/send-wish-list" },
             ]
         },

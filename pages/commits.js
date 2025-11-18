@@ -1,142 +1,247 @@
 import { useEffect, useState } from "react"
 import { useStoreActions, useStoreState } from "../store/hooks"
-import {useRouter} from 'next/router'
-import Document from "../icons/Document"
+import { useRouter } from 'next/router'
+import HorisontalNavbar from "../components/HorisontalNavbar"
+import TeacherVerticalNavbar from "../components/TeacherVerticalNavbar"
+import { FileText, X } from 'lucide-react'
+
 const commitDocumentTeacher = props => {
-        const router = useRouter();
-        const [selectedTeam,setSelectedteam] = useState(null)
-        const [selectedDoc,setSelectedDoc] = useState(null)
-        const  {getTeamsTeacherResponsibleFor,getTeamCommits} = useStoreActions(store=>store.commitsModel)
-        const {teamsInResponsability,documents,commits} = useStoreState(store=>store.commitsModel)
-        useEffect(async()=>{
-            try{
+    const router = useRouter();
+    const [selectedTeam, setSelectedteam] = useState(null)
+    const [selectedDoc, setSelectedDoc] = useState(null)
+    const { getTeamsTeacherResponsibleFor, getTeamCommits } = useStoreActions(store => store.commitsModel)
+    const { teamsInResponsability, documents, commits } = useStoreState(store => store.commitsModel)
 
-                await getTeamsTeacherResponsibleFor()
-            }catch(err){
-                    console.log(err)
-            }
-        },[])
-
-        const handleGetCommits = async (team)=>{
-            try{
-
-                await getTeamCommits({teamId:team.id})
-                setSelectedteam(team);
-            }catch(err){
-                console.log(err)
-            }
+    useEffect(() => {
+        try {
+            getTeamsTeacherResponsibleFor()
+        } catch (err) {
+            console.log(err)
         }
+    }, [])
 
-        return (
-            <div>
-                <div className="bg-background space-x-10 h-screen w-screen relative flex flex-row pt-24 pl-24 font-xyz text-textcolor">
-                    <div className="flex flex-col space-y-6">
-                        <div className="text-[30px] font-semibold text-center">Vos équipes</div>
-                        <div className="h-fit w-[200px] flex-col text-[18px] flex items-center rounded-xl justify-center p-3 bg-white shadow-xl">
-                            {
-                                teamsInResponsability.map((team , index) => {
-                                    return (
-                                        <div
-                                            className="h-[40px] border-transparent border-y-2 p-3 hover:border-zinc-300 items-center justify-center w-full hover:shadow-inner"
-                                            key = {index}
-                                        >
+    const handleGetCommits = async (team) => {
+        try {
+            await getTeamCommits({ teamId: team.id })
+            setSelectedteam(team)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const getFileExtension = (filename) => {
+        return filename?.split('.').pop()?.toUpperCase() || 'DOC'
+    }
+
+    const getFileBadgeColor = (extension) => {
+        const ext = extension?.toUpperCase()
+        const colors = {
+            'PDF': { bg: '#FEE2E2', text: '#991B1B' },
+            'DOC': { bg: '#DBEAFE', text: '#1E40AF' },
+            'DOCX': { bg: '#DBEAFE', text: '#1E40AF' },
+            'XLS': { bg: '#DCFCE7', text: '#15803D' },
+            'XLSX': { bg: '#DCFCE7', text: '#15803D' },
+            'PPT': { bg: '#F3E8FF', text: '#6D28D9' },
+            'PPTX': { bg: '#F3E8FF', text: '#6D28D9' },
+            'JPG': { bg: '#FEF3C7', text: '#92400E' },
+            'PNG': { bg: '#FEF3C7', text: '#92400E' },
+        }
+        return colors[ext] || { bg: '#F3F4F6', text: '#374151' }
+    }
+
+    return (
+        <div>
+            <HorisontalNavbar />
+            <div className="flex min-h-screen" style={{ backgroundColor: '#F4FCFF' }}>
+                <TeacherVerticalNavbar />
+                
+                <div className="flex-1 mx-28 mt-24">
+                    {/* Header */}
+                    <div className="mb-12">
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-3" style={{ color: '#000000' }}>Commits de Projets</h1>
+                        <div className="h-1 w-20 rounded-full" style={{ backgroundColor: '#5375E2' }}></div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        {/* Team Selection Sidebar */}
+                        <div className="lg:col-span-1 sticky top-24">
+                            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 max-h-[calc(100vh-120px)] overflow-y-auto">
+                                <h2 className="text-lg font-bold mb-4" style={{ color: '#000000' }}>Vos équipes</h2>
+                                
+                                {teamsInResponsability && teamsInResponsability.length > 0 ? (
+                                    <div className="space-y-2">
+                                        {teamsInResponsability.map((team, index) => (
                                             <button
-                                                className="h-full w-full items-center justify-center flex"
-                                                onClick={async(e) => {handleGetCommits(team)}}
-                                            >
-                                                {team.nickName}
-                                            </button>
-                                        </div>
-                                    )
-                                }) 
-                            }
-                        </div>
-                    </div>
-                    <div className="h-full w-fit flex items-center justify-center relative">
-                        <img 
-                            src = "/commitDocument.webp"
-                            className = {`h-[600px] object-contain mix-blend-darken `}
-                        />
-                        <div className="absolute items-center flex flex-col space-y-8 justify-center top-0">
-                            <div className="text-center font-semibold text-[30px]">{commits?.length >0 ? `Commits de l'équipe : ${selectedTeam?.nickName}` : "Cliquez sur une équipe pour visualiser ses commits"}</div>
-                            <div className = {`text-[20px] h-[550px] w-[700px] flex-col items-center space-y-4 bg-white/70 shadow-xl rounded-xl backdrop-blur-sm scrollbar-width-[2px] scrollbar scrollbar-thumb-slate-500 flex py-4 hover:scrollbar-track-blue-200${commits?.length >0 ? "flex" : "hidden"} pt-5`}>
-                                {
-                                    commits.map (({title,description,documents} , index) => {
-                                        return (
-                                            <div
-                                                className="h-fit w-[600px] rounded-xl shadow-xl bg-white/50 backdrop-blur-sm flex p-8 flex-col"
                                                 key={index}
+                                                onClick={() => handleGetCommits(team)}
+                                                className={`w-full p-3 rounded-lg text-left font-medium transition-all truncate`}
+                                                style={{
+                                                    backgroundColor: selectedTeam?.id === team.id ? '#5375E2' : 'transparent',
+                                                    color: selectedTeam?.id === team.id ? '#FFFFFF' : '#000000'
+                                                }}
                                             >
-                                                <div className="text-[16px] flex flex-row space-x-1">
-                                                    <div className="font-semibold">Titre :</div>
-                                                    <div className="italic">{title}</div>
-                                                     
-                                                </div>  
-                                                <div className="text-[16px] flex flex-row space-x-1">
-                                                    <div className="font-semibold">Description :</div>
-                                                    <div className="italic">{description}</div>
-                                                </div>  
-                                                <div className="flex flex-col space-y-2">
-                                                    <div className="text-[16px] font-semibold ">Documents :</div>
-                                                    <div className="flex flex-row space-x-2">
-                                                        {
-                                                            documents.map((doc , i) => {
-                                                                return (
-                                                                    <button 
-                                                                        className="flex flex-col w-[80px] space-y-2"
-                                                                        onClick={()=>{setSelectedDoc(doc)}}
-                                                                        key={i}
-                                                                    >
-                                                                       <div className="p-3 bg-slate-200/50 shadow-md rounded-md backdrop-blur-sm">
-                                                                            <Document/> 
-                                                                       </div>
-                                                                        <div className="text-[13px] text-center max-w-[80px] break-all">{doc.name}</div>
-                                                                    </button>
-                                                                )
-                                                            })
-                                                        }
+                                                #{team.pseudo || team.nickName}
+                                            </button>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p style={{ color: '#999999' }}>Aucune équipe trouvée</p>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Commits List */}
+                        <div className="lg:col-span-3">
+                            {selectedTeam ? (
+                                <div>
+                                    <div className="mb-8">
+                                        <h2 className="text-2xl font-bold" style={{ color: '#000000' }}>
+                                            Commits - #{selectedTeam.pseudo || selectedTeam.nickName}
+                                        </h2>
+                                        <p className="text-sm mt-1" style={{ color: '#666666' }}>
+                                            {commits?.length || 0} commit(s) trouvé(s)
+                                        </p>
+                                    </div>
+
+                                    {commits && commits.length > 0 ? (
+                                        <div className="space-y-4">
+                                            {commits.map(({ title, description, documents }, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all"
+                                                >
+                                                    {/* Commit Header */}
+                                                    <div className="mb-4">
+                                                        <h3 className="text-lg font-bold" style={{ color: '#000000' }}>
+                                                            {title}
+                                                        </h3>
                                                     </div>
-                                                </div> 
-                                            </div>
-                                        )
-                                    })
-                                }
+
+                                                    {/* Commit Description */}
+                                                    <div className="mb-5">
+                                                        <p className="text-sm" style={{ color: '#000000' }}>
+                                                            {description}
+                                                        </p>
+                                                    </div>
+
+                                                    {/* Documents Section */}
+                                                    {documents && documents.length > 0 && (
+                                                        <div>
+                                                            <p className="text-xs font-semibold mb-3" style={{ color: '#000000' }}>
+                                                                DOCUMENTS ({documents.length})
+                                                            </p>
+                                                            <div className="flex flex-wrap gap-3">
+                                                                {documents.map((doc, i) => {
+                                                                    const colors = getFileBadgeColor(getFileExtension(doc.name))
+                                                                    return (
+                                                                        <button
+                                                                            key={i}
+                                                                            onClick={() => setSelectedDoc(doc)}
+                                                                            className="flex flex-col items-center gap-2 p-3 rounded-lg hover:shadow-md transition-all"
+                                                                            style={{ backgroundColor: colors.bg }}
+                                                                        >
+                                                                            <FileText className="w-5 h-5" style={{ color: colors.text }} />
+                                                                            <span
+                                                                                className="text-xs font-semibold text-center max-w-[80px] truncate"
+                                                                                style={{ color: colors.text }}
+                                                                            >
+                                                                                {getFileExtension(doc.name)}
+                                                                            </span>
+                                                                            <span
+                                                                                className="text-xs text-center max-w-[80px] line-clamp-2"
+                                                                                style={{ color: colors.text }}
+                                                                            >
+                                                                                {doc.name}
+                                                                            </span>
+                                                                        </button>
+                                                                    )
+                                                                })}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-12 text-center">
+                                            <FileText className="w-16 h-16 mx-auto mb-4" style={{ color: '#5375E2' }} />
+                                            <h3 className="text-xl font-bold mb-2" style={{ color: '#000000' }}>Aucun commit</h3>
+                                            <p style={{ color: '#000000' }}>Cette équipe n'a pas encore de commits enregistrés.</p>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-12 text-center">
+                                    <FileText className="w-16 h-16 mx-auto mb-4" style={{ color: '#5375E2' }} />
+                                    <h3 className="text-2xl font-bold mb-2" style={{ color: '#000000' }}>Sélectionnez une équipe</h3>
+                                    <p style={{ color: '#000000' }}>Choisissez une équipe à gauche pour visualiser ses commits.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Document Detail Modal */}
+                {selectedDoc && (
+                    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+                        <div className="relative bg-white rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto w-full max-w-md p-6">
+                            <button
+                                onClick={() => setSelectedDoc(null)}
+                                className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            >
+                                <X className="w-5 h-5" style={{ color: '#000000' }} />
+                            </button>
+
+                            <h2 className="text-2xl font-bold mb-6" style={{ color: '#000000' }}>
+                                Détails du document
+                            </h2>
+
+                            <div className="space-y-4">
+                                <div>
+                                    <p className="text-xs font-semibold mb-2" style={{ color: '#000000' }}>NOM</p>
+                                    <p className="text-sm break-all" style={{ color: '#000000' }}>
+                                        {selectedDoc.name}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p className="text-xs font-semibold mb-2" style={{ color: '#000000' }}>DESCRIPTION</p>
+                                    <p className="text-sm break-all" style={{ color: '#000000' }}>
+                                        {selectedDoc.description || 'Pas de description'}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p className="text-xs font-semibold mb-2" style={{ color: '#000000' }}>TYPE</p>
+                                    <p className="text-sm" style={{ color: '#000000' }}>
+                                        {selectedDoc.type?.name || 'N/A'}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p className="text-xs font-semibold mb-2" style={{ color: '#000000' }}>VALIDÉ</p>
+                                    <p className="text-sm" style={{ color: '#000000' }}>
+                                        {selectedDoc.type?.validated ? 'Oui' : 'Non'}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p className="text-xs font-semibold mb-2" style={{ color: '#000000' }}>LIEN</p>
+                                    <button
+                                        onClick={() => router.push('http://localhost:8080/' + selectedDoc.url?.slice(2))}
+                                        className="text-sm font-medium px-3 py-2 rounded-lg transition-all text-white w-full"
+                                        style={{ backgroundColor: '#5375E2' }}
+                                    >
+                                        Télécharger
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                 { selectedDoc&&  <div className={`h-[500px] break-all w-[300px] font-mono bg-white flex flex-col space-y-4 shadow-lg rounded-xl  `}>
-                        {            
-                            <div className="flex flex-col w-ful space-y-4 text-center p-4"
-                                onClick={()=>{}}
-                            >
-                                <div className="text-[25px]">Details :</div>
-                                <div className="flex flex-row justify-center space-x-2">
-                                    <div className="text-[18px] font-semibold">Titre :</div>
-                                    <div className="text-[16px]">{selectedDoc.name}</div>
-                                </div>
-                                <div className="flex flex-col space-y-2">
-                                    <div className="text-[18px] font-semibold">Description :</div>
-                                    <div className="text-[16px]">{selectedDoc.description}</div>
-                                </div>
-                                <div className="flex flex-col space-y-2">
-                                    <div className="text-[18px] font-semibold">Type :</div>
-                                    <div className="text-[16px]">{selectedDoc.type.name}</div>
-                                </div>
-                                <div className="flex flex-col space-y-2">
-                                    <div className="text-[18px] font-semibold">validé :</div>
-                                    <div className="text-[16px]">{selectedDoc.type.validated?'oui':'non'}</div>
-                                </div>
-                                <div className="flex flex-col space-y-2">
-                                    <div className="text-[18px] font-semibold">Lien :</div>
-                                    
-                                        <button onClick={()=>router.push('http://localhost:8080/'+selectedDoc.url?.slice(2))} className="hover:text-blue-500 text-[16px]" >{'http://localhost:8080/'+selectedDoc.url?.slice(2)}</button>
-                                    
-                                </div>
-                            </div>
-                        }
-                    </div>}
-                </div>
-           </div>
+                )}
+            </div>
+        </div>
     )
 }
 export default commitDocumentTeacher;

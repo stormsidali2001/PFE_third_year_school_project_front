@@ -83,9 +83,7 @@ export const teacherListModel:teacherListModel = {
     getTeacher:thunk(async(actions,payload,{getStoreState,getStoreActions})=>{
      
         try{
-            const res =  await axios.post(`http://localhost:8080/getTeacher/${payload}`,{
-                teacherId:payload
-            },{
+            const res =  await axios.get(`http://localhost:8080/getTeacher/${payload}`,{
                withCredentials:true
            })
            actions.setTeacher(res.data)
