@@ -35,7 +35,7 @@ const TeacherList = ({toastsRef}) => {
                <div className="px-4 sm:px-6 lg:px-8 ml-16 max-w-[calc(100vw-5rem)]">
                    {/* Header */}
                    <div className="mb-8 sm:mb-12 text-center">
-                       <h1 className="text-3xl sm:text-4xl font-bold mb-2" style={{color: '#1A2562'}}>
+                       <h1 className="text-3xl sm:text-4xl font-bold mb-2" style={{color: '#000000'}}>
                            Liste des Enseignants
                        </h1>
                        <div className="h-1 w-24 bg-boutton rounded-full mx-auto"></div>
@@ -44,7 +44,7 @@ const TeacherList = ({toastsRef}) => {
                    {/* Filters and Actions */}
                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 items-stretch sm:items-center justify-between">
                        <div className="flex items-center gap-2 flex-1 min-w-0 max-w-md">
-                           <Search className="w-5 h-5 flex-shrink-0" style={{color: '#1A2562'}} />
+                           <Search className="w-5 h-5 flex-shrink-0" style={{color: '#5375E2'}} />
                            <input 
                                className="h-11 w-full rounded-lg border border-gray-300 px-4 text-base focus:border-boutton focus:ring-1 focus:ring-boutton transition-colors" 
                                placeholder="Rechercher un enseignant..." 

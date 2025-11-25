@@ -139,7 +139,7 @@ const Theme = ({toastsRef}) => {
                         >
                             ← Retour
                         </button>
-                        <h1 className="text-4xl sm:text-5xl font-bold mb-3" style={{color: '#1A2562'}}>Thème</h1>
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-3" style={{color: '#000000'}}>Thème</h1>
                         <div className="h-1 w-20 rounded-full" style={{backgroundColor: '#5375E2'}}></div>
                     </div>
 
@@ -261,9 +261,9 @@ const Theme = ({toastsRef}) => {
                 open={open}
                 handleClose = {setOpen}
             >
-                <form className="flex flex-col w-[450px] h-fit py-4 px-2 text-textcolor space-y-3">
-                    <div className="text-center text-[20px]">Ajouter un Encadreur</div>
-                    <div className="px-4">choisir un encadreur parmis la liste des ensiegnant</div>
+                <form className="flex flex-col w-[450px] h-fit py-4 px-2 space-y-3">
+                    <div className="text-center text-[20px]" style={{color: '#000000'}}>Ajouter un Encadreur</div>
+                    <div className="px-4" style={{color: '#000000'}}>choisir un encadreur parmis la liste des ensiegnant</div>
                     <Select
                         placeholder="Enseignants..." 
                         onChange={(option)=>{setChoosenTeacher(option)}}
@@ -279,11 +279,11 @@ const Theme = ({toastsRef}) => {
                 open={openAddTeam}
                 handleClose = {setOpenAddTeam}
             >
-                <form className="flex flex-col w-[50vw] h-fit py-4 px-2 text-textcolor space-y-3">
-                    <div className="text-center text-[20px]">Encadrer equipe</div>
-                    <div className="px-4">choisir une Equipe a encadrer parmis les equipe de theme <stron className='font-semibold'>{theme?.title}</stron></div>
+                <form className="flex flex-col w-[50vw] h-fit py-4 px-2 space-y-3">
+                    <div className="text-center text-[20px]" style={{color: '#000000'}}>Encadrer equipe</div>
+                    <div className="px-4" style={{color: '#000000'}}>choisir une Equipe a encadrer parmis les equipe de theme <stron className='font-semibold'>{theme?.title}</stron></div>
                     <div className="flex space-x-2 items-center mx-auto">
-                        <div>Enseignant:</div>
+                        <div style={{color: '#000000'}}>Enseignant:</div>
                         <Select
                             placeholder="Enseignant..." 
                             onChange={(option)=>{setAddTeamChosenTeacher(option)}}
@@ -294,7 +294,7 @@ const Theme = ({toastsRef}) => {
                         />
                     </div>
                     <div className="flex space-x-2 items-center mx-auto">
-                        <div>Equipe:</div>
+                        <div style={{color: '#000000'}}>Equipe:</div>
                         <Select
                             placeholder="Equipes..." 
                             onChange={(option)=>{setAddTeamChosenTeam(option)}}
@@ -305,7 +305,7 @@ const Theme = ({toastsRef}) => {
                             styles = {{menuPortal:base=>({...base,zIndex:100,width:'100px',height:'30px',borderRadius:'5px',color:'black',outline:'none'})}}
                         />
                     </div>
-                    <button onClick={handleSubmitAssignTeamsToTeacher} className="bg-blue-300 w-fit px-2 py-1  mx-auto rounded-[10px]">Valider</button>
+                    <button onClick={handleSubmitAssignTeamsToTeacher} className="bg-blue-300 w-fit px-2 py-1  mx-auto rounded-[10px] text-white font-semibold">Valider</button>
                 </form>
             </ModalPortal>
         </div>

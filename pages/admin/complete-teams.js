@@ -86,7 +86,7 @@ const handleApplyTeamsCompletion = async e=>{
                 <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8 border border-gray-100">
                     {/* Header */}
                     <div className="text-center mb-8">
-                        <h1 className="text-4xl font-bold mb-4" style={{color: '#1A2562'}}>
+                        <h1 className="text-4xl font-bold mb-4" style={{color: '#000000'}}>
                             Compléter les Équipes
                         </h1>
                         <p className="text-base" style={{color: '#000000'}}>
@@ -121,7 +121,7 @@ const handleApplyTeamsCompletion = async e=>{
                                 {/* Step 0: Selection */}
                                 {step === 0 && (
                                     <div className="space-y-6">
-                                        <h2 className="text-2xl font-bold text-center" style={{color: '#1A2562'}}>Sélectionner une promotion</h2>
+                                        <h2 className="text-2xl font-bold text-center" style={{color: '#000000'}}>Sélectionner une promotion</h2>
                                         
                                         <Select
                                             placeholder="Sélectionner une promotion..." 
@@ -156,19 +156,19 @@ const handleApplyTeamsCompletion = async e=>{
                                         {teamsStats && (
                                             <div className="grid grid-cols-2 gap-4 bg-gray-50 rounded-lg p-4">
                                                 <div>
-                                                    <p className="text-sm font-semibold" style={{color: '#1A2562'}}>Étudiants sans équipe</p>
+                                                    <p className="text-sm font-semibold" style={{color: '#000000'}}>Étudiants sans équipe</p>
                                                     <p className="text-2xl font-bold" style={{color: '#5375E2'}}>{teamsStats.studentsWithoutATeam}</p>
                                                 </div>
                                                 <div>
-                                                    <p className="text-sm font-semibold" style={{color: '#1A2562'}}>Équipes incomplètes</p>
+                                                    <p className="text-sm font-semibold" style={{color: '#000000'}}>Équipes incomplètes</p>
                                                     <p className="text-2xl font-bold" style={{color: '#5375E2'}}>{teamsStats.notCompleteTeams}</p>
                                                 </div>
                                                 <div>
-                                                    <p className="text-sm font-semibold" style={{color: '#1A2562'}}>Min par équipe</p>
+                                                    <p className="text-sm font-semibold" style={{color: '#000000'}}>Min par équipe</p>
                                                     <p className="text-2xl font-bold" style={{color: '#5375E2'}}>{teamsStats.minMembersInTeam}</p>
                                                 </div>
                                                 <div>
-                                                    <p className="text-sm font-semibold" style={{color: '#1A2562'}}>Max par équipe</p>
+                                                    <p className="text-sm font-semibold" style={{color: '#000000'}}>Max par équipe</p>
                                                     <p className="text-2xl font-bold" style={{color: '#5375E2'}}>{teamsStats.maxMembersInTeam}</p>
                                                 </div>
                                             </div>
@@ -184,7 +184,7 @@ const handleApplyTeamsCompletion = async e=>{
                                                     type="button"
                                                     onClick={() => setOpen(false)}
                                                     className="flex-1 py-2 px-4 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-all"
-                                                    style={{color: '#1A2562'}}
+                                                    style={{color: '#000000'}}
                                                 >
                                                     Annuler
                                                 </button>
@@ -204,7 +204,7 @@ const handleApplyTeamsCompletion = async e=>{
                                 {/* Step 1: Results */}
                                 {step === 1 && (
                                     <div className="space-y-6 max-h-[600px] overflow-y-auto">
-                                        <h2 className="text-2xl font-bold text-center" style={{color: '#1A2562'}}>Résultats</h2>
+                                        <h2 className="text-2xl font-bold text-center" style={{color: '#000000'}}>Résultats</h2>
 
                                         {/* Deletions */}
                                         {results?.studentDeleted?.length > 0 && (
@@ -260,7 +260,7 @@ const handleApplyTeamsCompletion = async e=>{
                                                 type="button"
                                                 onClick={() => setStep(0)}
                                                 className="flex-1 py-2 px-4 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
-                                                style={{color: '#1A2562'}}
+                                                style={{color: '#000000'}}
                                             >
                                                 <ArrowLeft className="w-4 h-4" /> Retour
                                             </button>

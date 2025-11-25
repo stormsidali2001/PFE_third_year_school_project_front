@@ -71,7 +71,7 @@ const TeamList = props => {
                 <div className="px-4 sm:px-6 lg:px-8">
                     {/* Header */}
                     <div className="mb-12 text-center">
-                        <h1 className="text-4xl sm:text-5xl font-bold mb-4" style={{color: '#1A2562'}}>
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-4" style={{color: '#000000'}}>
                             Liste des Équipes
                         </h1>
                         <p className="text-lg mb-6" style={{color: '#000000'}}>
@@ -85,7 +85,7 @@ const TeamList = props => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {/* Validated Promotions */}
                             <div>
-                                <h3 className="font-semibold mb-3" style={{color: '#1A2562'}}>Promotions complètement validées:</h3>
+                                <h3 className="font-semibold mb-3" style={{color: '#000000'}}>Promotions complètement validées:</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {promotions.filter(p => p.allTeamsValidated).map(p => (
                                         <span key={p.id} className="px-3 py-1 bg-blue-50 rounded-full text-sm font-medium" style={{color: '#5375E2'}}>
@@ -97,10 +97,10 @@ const TeamList = props => {
 
                             {/* Non-Validated Promotions */}
                             <div>
-                                <h3 className="font-semibold mb-3" style={{color: '#1A2562'}}>Promotions en attente de validation:</h3>
+                                <h3 className="font-semibold mb-3" style={{color: '#000000'}}>Promotions en attente de validation:</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {promotions.filter(p => !p.allTeamsValidated).map(p => (
-                                        <span key={p.id} className="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium" style={{color: '#1A2562'}}>
+                                        <span key={p.id} className="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium" style={{color: '#000000'}}>
                                             {p.name}
                                         </span>
                                     ))}
@@ -112,7 +112,7 @@ const TeamList = props => {
                     {/* Filter */}
                     <div className="mb-12 flex justify-center">
                         <div className="w-full max-w-xs">
-                            <label className="block text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Promotion</label>
+                            <label className="block text-sm font-semibold mb-2" style={{color: '#000000'}}>Promotion</label>
                             <Select
                                 className="w-full"
                                 placeholder="Sélectionner une promotion..." 

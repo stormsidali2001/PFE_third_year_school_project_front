@@ -52,7 +52,7 @@ const suggestion = ({toastsRef}) => {
             <div className="min-h-screen bg-background flex items-center justify-center">
                 <div className="flex flex-col items-center gap-4">
                     <div className="w-12 h-12 border-4 border-boutton border-t-transparent rounded-full animate-spin"></div>
-                    <p style={{color: '#1A2562'}} className="font-semibold">Chargement...</p>
+                    <p style={{color: '#000000'}} className="font-semibold">Chargement...</p>
                 </div>
             </div>
         )
@@ -73,7 +73,7 @@ const suggestion = ({toastsRef}) => {
                         >
                             ← Retour
                         </button>
-                        <h1 className="text-4xl sm:text-5xl font-bold mb-3" style={{color: '#1A2562'}}>Suggestion de thème</h1>
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-3" style={{color: '#000000'}}>Suggestion de thème</h1>
                         <div className="h-1 w-20 rounded-full" style={{backgroundColor: '#5375E2'}}></div>
                     </div>
 

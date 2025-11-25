@@ -118,7 +118,7 @@ const Themes = ({toastsRef}) => {
                 <div className="px-4 sm:px-6 lg:px-8">
                     {/* Header */}
                     <div className="mb-12 text-center">
-                        <h1 className="text-4xl sm:text-5xl font-bold mb-4" style={{color: '#1A2562'}}>
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-4" style={{color: '#000000'}}>
                             Liste des Thèmes
                         </h1>
                         <p className="text-lg mb-6" style={{color: '#000000'}}>
@@ -130,7 +130,7 @@ const Themes = ({toastsRef}) => {
                     {/* Filter */}
                     <div className="mb-12 flex justify-center">
                         <div className="w-full max-w-xs">
-                            <label className="block text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Promotion</label>
+                            <label className="block text-sm font-semibold mb-2" style={{color: '#000000'}}>Promotion</label>
                             <Select
                                 className="w-full"
                                 placeholder="Sélectionner une promotion..." 

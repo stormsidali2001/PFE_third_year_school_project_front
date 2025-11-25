@@ -64,7 +64,7 @@ const Team = props => {
                         >
                             ← Retour
                         </button>
-                        <h1 className="text-4xl sm:text-5xl font-bold mb-3" style={{color: '#1A2562'}}>Équipe</h1>
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-3" style={{color: '#000000'}}>Équipe</h1>
                         <div className="h-1 w-20 rounded-full" style={{backgroundColor: '#5375E2'}}></div>
                     </div>
 
@@ -76,11 +76,11 @@ const Team = props => {
                             <div>
                                 <div className="flex flex-col gap-4 mb-6 pb-6 border-b border-gray-100">
                                     <div>
-                                        <p className="text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Promotion</p>
+                                        <p className="text-sm font-semibold mb-2" style={{color: '#000000'}}>Promotion</p>
                                         <p className="text-2xl font-bold" style={{color: '#000000'}}>{promotion?.name || '-'}</p>
                                     </div>
                                     <div>
-                                        <p className="text-sm font-semibold mb-2" style={{color: '#1A2562'}}>Nom de l'équipe</p>
+                                        <p className="text-sm font-semibold mb-2" style={{color: '#000000'}}>Nom de l'équipe</p>
                                         {modifier === false ? (
                                             <p className="text-2xl font-bold" style={{color: '#000000'}}>{teamName}</p>
                                         ) : (
@@ -99,7 +99,7 @@ const Team = props => {
                             <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
                                 <div className="flex items-center gap-2 mb-2">
                                     <BookOpen className="w-5 h-5" style={{color: '#5375E2'}} />
-                                    <p className="font-semibold" style={{color: '#1A2562'}}>Thème</p>
+                                    <p className="font-semibold" style={{color: '#000000'}}>Thème</p>
                                 </div>
                                 {theme?.id ? (
                                     <Link href={"/themes/"+theme?.id}>
@@ -117,7 +117,7 @@ const Team = props => {
                                 <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
                                     <div className="flex items-center gap-2 mb-2">
                                         <CheckCircle className="w-5 h-5" style={{color: '#5375E2'}} />
-                                        <p className="font-semibold text-sm" style={{color: '#1A2562'}}>Complète</p>
+                                        <p className="font-semibold text-sm" style={{color: '#000000'}}>Complète</p>
                                     </div>
                                     <p className="text-lg font-bold" style={{color: '#000000'}}>{complete ? "Oui" : "Non"}</p>
                                 </div>
@@ -125,7 +125,7 @@ const Team = props => {
                                 <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
                                     <div className="flex items-center gap-2 mb-2">
                                         <CheckCircle className="w-5 h-5" style={{color: '#5375E2'}} />
-                                        <p className="font-semibold text-sm" style={{color: '#1A2562'}}>Peut soutenir</p>
+                                        <p className="font-semibold text-sm" style={{color: '#000000'}}>Peut soutenir</p>
                                     </div>
                                     <p className="text-lg font-bold" style={{color: '#000000'}}>{peutSoutenir ? "Oui" : "Non"}</p>
                                 </div>
@@ -133,7 +133,7 @@ const Team = props => {
                                 <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
                                     <div className="flex items-center gap-2 mb-2">
                                         <TrendingUp className="w-5 h-5" style={{color: '#5375E2'}} />
-                                        <p className="font-semibold text-sm" style={{color: '#1A2562'}}>Moyenne</p>
+                                        <p className="font-semibold text-sm" style={{color: '#000000'}}>Moyenne</p>
                                     </div>
                                     <p className="text-lg font-bold" style={{color: '#000000'}}>{moyenne ? parseFloat(moyenne).toFixed(2) : '0.00'}</p>
                                 </div>
@@ -143,7 +143,7 @@ const Team = props => {
                             <div className="pt-6 border-t border-gray-100">
                                 <div className="flex items-center gap-2 mb-4">
                                     <Users className="w-5 h-5" style={{color: '#5375E2'}} />
-                                    <h3 className="text-lg font-semibold" style={{color: '#1A2562'}}>Membres ({membres?.length || 0})</h3>
+                                    <h3 className="text-lg font-semibold" style={{color: '#000000'}}>Membres ({membres?.length || 0})</h3>
                                 </div>
                                 <div className="space-y-2">
                                     {

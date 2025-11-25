@@ -48,10 +48,10 @@ const Config = props => {
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
                     <div className="mb-16 text-center">
-                        <h1 className="text-5xl font-bold mb-2" style={{color: '#1A2562'}}>
+                        <h1 className="text-5xl font-bold mb-2" style={{color: '#000000'}}>
                             Centre d'Administration
                         </h1>
-                        <p className="text-lg" style={{color: '#1A2562', opacity: 0.7}}>
+                        <p className="text-lg" style={{color: '#000000', opacity: 0.7}}>
                             Gérez tous les aspects du système de gestion de projet
                         </p>
                         <div className="h-1 w-32 bg-boutton rounded-full mx-auto mt-6"></div>
@@ -77,7 +77,7 @@ const Config = props => {
                                                 <div className="mb-3 text-4xl">
                                                     {section.icon}
                                                 </div>
-                                                <p className="text-sm font-semibold leading-tight transition-colors" style={{color: '#1A2562'}}>
+                                                <p className="text-sm font-semibold leading-tight transition-colors" style={{color: '#000000'}}>
                                                     {item.name}
                                                 </p>
                                                 <div className="mt-3 h-0.5 w-8 bg-boutton rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
