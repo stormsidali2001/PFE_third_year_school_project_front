@@ -81,7 +81,7 @@ const Login = ({toastsRef}) => {
 
                         {/* Email Field */}
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold" style={{ color: '#5375E2' }}>E-mail</label>
+                            <label className="block text-sm font-semibold">E-mail</label>
                             <input 
                                 placeholder="Entrez votre email..."  
                                 className="w-full h-12 px-4 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
@@ -93,7 +93,7 @@ const Login = ({toastsRef}) => {
 
                         {/* Password Field */}
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold" style={{ color: '#5375E2' }}>Mot de passe</label>
+                            <label className="block text-sm font-semibold">Mot de passe</label>
                             <input 
                                 placeholder="Entrez votre mot de passe..." 
                                 type='password' 

@@ -15,13 +15,13 @@ const WhatIs = props =>{
                 
                 <div className="flex-1 flex flex-col gap-6 max-w-xl">
                     <div className="space-y-2">
-                        <h2 className="text-2xl md:text-3xl font-bold text-textcolor">
+                        <h2 className="text-2xl md:text-3xl font-bold" style={{ color: '#000000' }}>
                             Quesque project101 ?
                         </h2>
                         <div className="h-0.5 w-16 bg-boutton rounded-full"></div>
                     </div>
                     
-                    <p className="text-base text-textcolor leading-relaxed">
+                    <p className="text-base leading-relaxed" style={{ color: '#000000' }}>
                         project 101 est une plateforme dévloppé par les étudiants de l'école supérieur en informatique de Sidi Bel Abbes qui à comme objectif de faciliter la communication et la gestion des projets pluidiciplinaire / fin d'étude.
                     </p>
                 </div>

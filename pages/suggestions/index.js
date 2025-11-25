@@ -121,7 +121,7 @@ const Suggestions = ({toastsRef}) => {
         <div>
             <HorisontalNavbar />
             {getSidebar()}
-            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 max-w-[calc(100vw-5rem)]">
+            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-20 max-w-[calc(100vw-5rem)]">
                 <div className="px-4 sm:px-6 lg:px-8">
                     {/* Header */}
                     <div className="mb-12 text-center">

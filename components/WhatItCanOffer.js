@@ -28,7 +28,7 @@ const Offer = props => {
     return(
         <div className="min-h-screen py-16 bg-background w-full flex flex-col space-y-12 items-center justify-center px-6 lg:px-16 font-roboto" id="service">
                 <div className="text-center space-y-3 max-w-3xl">
-                    <h2 className="text-2xl md:text-3xl font-bold text-textcolor leading-tight">
+                    <h2 className="text-2xl md:text-3xl font-bold leading-tight" style={{ color: '#000000' }}>
                         Quesque  project101  vous apporterait de plus dans vos projets ?
                     </h2>
                     <div className="h-0.5 w-16 bg-boutton rounded-full mx-auto"></div>

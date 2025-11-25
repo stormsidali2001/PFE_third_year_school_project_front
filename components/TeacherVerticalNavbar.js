@@ -51,14 +51,25 @@ const TeacherVerticalNavbar = props => {
                 open={open}
                 handleClose={setOpen}
             >
-                <div className="flex flex-col text-textcolor space-y-4">
-                    <div className="text-semibold text-[20px]">Suggestion de thème:</div>
-                    <div className="px-4">
+                <div className="flex flex-col text-textcolor space-y-6 p-8 w-full max-w-md">
+                    <div>
+                        <h2 className="text-2xl font-bold" style={{color: '#1A2562'}}>Suggestion de thème</h2>
+                        <div className="h-1 w-12 bg-boutton rounded-full mt-2"></div>
+                    </div>
+                    <div className="text-base leading-relaxed" style={{color: '#1A2562'}}>
                         Vous voulez consulter la liste des thèmes ou bien vous voulez créer une nouvelle suggestion?
                     </div>
-                    <div className="flex space-x-4 w-fit mx-auto">
-                        <div className="bg-blue-400 text-white px-2 py-1 rounded-[5px] cursor-pointer hover:bg-blue-300"><Link href='/createthemesuggestion'>Créer</Link></div>
-                        <div className="bg-blue-400 text-white px-2 py-1 rounded-[5px] cursor-pointer hover:bg-blue-300"><Link href='/suggestions'>Naviguer</Link></div>
+                    <div className="flex gap-3 pt-4">
+                        <Link href='/createthemesuggestion'>
+                            <button className="flex-1 py-3 px-6 bg-boutton text-white font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95" style={{backgroundColor: '#5375E2'}}>
+                                Créer
+                            </button>
+                        </Link>
+                        <Link href='/suggestions'>
+                            <button className="flex-1 py-3 px-6 border-2 font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95" style={{borderColor: '#5375E2', color: '#5375E2'}}>
+                                Naviguer
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </ModalPortal>

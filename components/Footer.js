@@ -13,12 +13,12 @@ const Footer = props => {
                     </div>
                     
                     <div className="text-center md:text-left">
-                        <Link href="https://it-experts.vercel.app/">
+                       
                             <button className="text-sm text-textcolor hover:opacity-80 transition-opacity duration-200 flex items-center space-x-1">
                                 <span>&copy; {new Date().getFullYear()} Tous les droits réservés à</span>
-                                <span className="font-medium underline hover:no-underline">IT-Expert</span>
+                                <span className="font-medium">IT-Expert</span>
                             </button>
-                        </Link>
+                       
                     </div>
                     
                     <div className="flex items-center text-sm text-textcolor">

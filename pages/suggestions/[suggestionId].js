@@ -2,18 +2,14 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import HorisontalNavbar from "../../components/HorisontalNavbar"
 import StudentVerticalNavbar from "../../components/StudentVerticalNavbar"
-import DownIcon from "../../icons/DownIcon"
-import UpIcon from "../../icons/UpIcon"
-import Trash from "../../icons/Trash"
+import TeacherVerticalNavbar from "../../components/TeacherVerticalNavbar"
+import AdminVerticalNavbar from "../../components/AdminVerticalNavbar"
 import { useRouter } from "next/router";
-import { useStoreActions } from "../../store/hooks"
+import { useStoreActions, useStoreState } from "../../store/hooks"
+import { FileText, User, Tag } from "lucide-react"
 
-const suggestion = props => {
-
-  
-   
+const suggestion = ({toastsRef}) => {
     const [modifier , setModifier] = useState(false)
-    const [idtheme , setIdtheme] = useState(1)
     const [title , setTilte] = useState('')
     const [description , setDescription] = useState('')
     const {getThemeSuggestionThunk} = useStoreActions(store=>store.themeSuggestionsModel)
@@ -21,55 +17,144 @@ const suggestion = props => {
     const {suggestionId} = router.query;
     const [suggestedBy,setSuggestedBy] = useState({})
     const [promotion,setPromotion] = useState({})
+    const [documents, setDocuments] = useState([])
+    const [loading, setLoading] = useState(true)
+    const user = useStoreState(store=>store.user)
+    
+    const getSidebar = () => {
+        if (user.userType === 'admin') {
+            return <AdminVerticalNavbar />
+        } else if (user.userType === 'teacher') {
+            return <TeacherVerticalNavbar />
+        } else {
+            return <StudentVerticalNavbar />
+        }
+    }
    
     useEffect(async()=>{
         if(!suggestionId) return;
+        setLoading(true)
         const data = await getThemeSuggestionThunk(suggestionId)
         setTilte(data?.title)
         setDescription(data?.description)
         setPromotion(data?.promotion)
+        setDocuments(data?.documents || [])
       
         if(data?.suggestedByTeacher){
             setSuggestedBy({type:'teacher',suggestedBy:data.suggestedByTeacher})
-         
-            
         }else if(data?.suggestedByEntreprise){
             setSuggestedBy({type:'entreprise',suggestedBy:data.suggestedByEntreprise})
-
         }
-
-
+        setLoading(false)
     },[suggestionId])
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-background flex items-center justify-center">
+                <div className="flex flex-col items-center gap-4">
+                    <div className="w-12 h-12 border-4 border-boutton border-t-transparent rounded-full animate-spin"></div>
+                    <p style={{color: '#1A2562'}} className="font-semibold">Chargement...</p>
+                </div>
+            </div>
+        )
+    }
  
     return (
         <div>
-           
-            <div className="bg-background h-screen w-screen relative flex flex-col items-center space-y-16 font-xyz text-textcolor justify-center">
-                <div className="flex flex-col items-center justify-center">
-                    <img src="/themeStudent.png" className="mix-blend-darken absolute"/>
-                    <div className={`p-10 justify-center flex-col space-y-8 h-[500px] w-[650px] px-10 bg-white/70 backdrop-blur-sm shadow-lg rounded-xl text-[16px] flex  `}>
-                        <div className="flex flex-row items-center space-x-4 text-[26px]">
-                            <div className="text-[28px]">Titre :</div>
-                            <div className={` ${modifier === false ? "flex" : "hidden"}`}>{title}</div>
-                            <input value={title} className={`${modifier === true ? "flex" : "hidden"}`} onChange={(e) => {setTilte(e.target.value)}}/>
+            <HorisontalNavbar />
+            {getSidebar()}
+            <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-4xl mx-auto">
+                    {/* Header */}
+                    <div className="mb-8">
+                        <button
+                            onClick={() => router.back()}
+                            className="mb-4 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors flex items-center gap-2"
+                            style={{color: '#5375E2'}}
+                        >
+                            ← Retour
+                        </button>
+                        <h1 className="text-4xl sm:text-5xl font-bold mb-3" style={{color: '#1A2562'}}>Suggestion de thème</h1>
+                        <div className="h-1 w-20 rounded-full" style={{backgroundColor: '#5375E2'}}></div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="space-y-8">
+                        
+                        {/* Title and Description Card */}
+                        <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 p-8">
+                            <h2 className="text-3xl sm:text-4xl font-bold mb-6" style={{color: '#000000'}}>{title || 'Chargement...'}</h2>
+                            <p style={{color: '#000000'}} className="text-base leading-relaxed">{description}</p>
                         </div>
-                        <div className="flex items-center flex-row space-x-4">
-                            <div className="text-[19px]">Description :</div>
-                            <div className={`${modifier === false ? "flex" : "hidden"} h-[80px] p-2 bg-gray-100/80 w-[80%] backdrop-blur-sm rounded-[10px]`}>{description}</div>
-                            <input value={description} className={`${modifier === true ? "flex" : "hidden"}`} onChange={(e) => {setDescription(e.target.value)}}/>
-                        </div>
-                        <div className="flex items-center flex-row space-x-4">
-                            <div className="text-[19px]">Promotion :</div>
-                            <div className={`${modifier === false ? "flex" : "hidden"}`}>{promotion?.name}</div>
-                            <input value={description} className={`${modifier === true ? "flex" : "hidden"}`} onChange={(e) => {setDescription(e.target.value)}}/>
-                        </div>
-                      
-                      
-                      
+
+                        {/* Two Column Layout */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             
-                        <div className="flex items-center justify-center">
-                        <button className="h-[40px] w-[120px] text-[18px] bg-blue-300 hover:bg-blue-400 rounded-full " onClick={(e)=>setModifier(true)}>Modifier</button>
+                            {/* Promotion Card */}
+                            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 p-8">
+                                <h3 className="text-2xl font-bold mb-6" style={{color: '#000000'}}>Promotion</h3>
+                                <div className="p-4 rounded-xl border border-gray-200">
+                                    <p className="text-lg font-semibold" style={{color: '#000000'}}>{promotion?.name || 'N/A'}</p>
+                                </div>
+                            </div>
+
+                            {/* Suggested By Card */}
+                            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 p-8">
+                                <h3 className="text-2xl font-bold mb-6" style={{color: '#000000'}}>Proposé par</h3>
+                                {suggestedBy?.suggestedBy ? (
+                                    <button 
+                                        onClick={() => {
+                                            if(suggestedBy?.type === 'teacher') {
+                                                router.push(`/teachers/${suggestedBy?.suggestedBy?.id}`)
+                                            }
+                                        }}
+                                        className="w-full p-4 rounded-xl border border-gray-200 hover:shadow-md hover:border-boutton transition-all text-left"
+                                        style={{
+                                            cursor: suggestedBy?.type === 'teacher' ? 'pointer' : 'default',
+                                            borderColor: suggestedBy?.type === 'teacher' ? 'inherit' : '#e5e7eb'
+                                        }}
+                                    >
+                                        <p className="text-lg font-semibold" style={{color: '#000000'}}>
+                                            {suggestedBy?.suggestedBy?.firstName} {suggestedBy?.suggestedBy?.lastName}
+                                        </p>
+                                        <p className="text-sm capitalize mt-2" style={{color: '#999999'}}>
+                                            {suggestedBy?.type === 'teacher' ? 'Enseignant' : 'Entreprise'}
+                                        </p>
+                                    </button>
+                                ) : (
+                                    <div className="text-center py-8">
+                                        <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{backgroundColor: '#F4FCFF'}}>
+                                            <User className="w-8 h-8" style={{color: '#5375E2'}} />
+                                        </div>
+                                        <p className="font-medium" style={{color: '#000000'}}>Aucune information</p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
+
+                        {/* Documents Section */}
+                        {documents.length > 0 && (
+                            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 p-8">
+                                <h3 className="text-2xl font-bold mb-6" style={{color: '#000000'}}>Fichiers joints ({documents.length})</h3>
+                                <div className="space-y-3">
+                                    {documents.map((doc, index) => (
+                                        <a
+                                            key={index}
+                                            href={doc.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="w-full p-4 rounded-xl border border-gray-200 hover:shadow-md hover:border-boutton transition-all text-left font-medium flex items-center gap-3 group"
+                                            style={{color: '#000000'}}
+                                        >
+                                            <div className="p-2 rounded-lg group-hover:bg-blue-100 transition-colors flex-shrink-0" style={{backgroundColor: '#F4FCFF'}}>
+                                                <FileText className="w-5 h-5" style={{color: '#5375E2'}} />
+                                            </div>
+                                            <span className="truncate">{doc.name}</span>
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
                     </div>
                 </div>
             </div>

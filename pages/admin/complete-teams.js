@@ -81,7 +81,7 @@ const handleApplyTeamsCompletion = async e=>{
       <div>
         <HorisontalNavbar />
         <AdminVerticalNavbar />
-        <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-16 max-w-[calc(100vw-5rem)]">
+        <div className="min-h-screen bg-gradient-to-br from-background via-background to-blue-50 pt-24 pb-12 font-roboto ml-20 max-w-[calc(100vw-5rem)]">
             <div className="px-4 sm:px-6 lg:px-8 flex items-center justify-center min-h-[calc(100vh-150px)]">
                 <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8 border border-gray-100">
                     {/* Header */}

@@ -53,9 +53,8 @@ const HorisontalNavbar = ({toastsRef}) => {
                             openProfileDropdown ? 'scale-100 opacity-100 visible' : 'scale-95 opacity-0 invisible'
                         }`}
                             ref={profilRef}
-                            style={{borderColor: '#5375E2', borderWidth: '1px'}}
                         >
-                            <div className="px-4 py-3" style={{borderBottomColor: '#5375E2', borderBottomWidth: '1px'}}>
+                            <div className="px-4 py-3">
                                 <p className="text-sm font-semibold" style={{color: '#1A2562'}}>Mon compte</p>
                             </div>
                             <div 
@@ -66,7 +65,7 @@ const HorisontalNavbar = ({toastsRef}) => {
                                 <FileText className='w-4 h-4' strokeWidth={1.5} />
                                 Profil
                             </div>
-                            <hr style={{borderColor: '#5375E2', margin: '0', borderWidth: '1px'}}/>
+                            <hr />
                             <div
                                 className="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors text-sm flex items-center gap-2"
                                 style={{color: '#1A2562'}}

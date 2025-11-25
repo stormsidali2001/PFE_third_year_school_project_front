@@ -4,13 +4,13 @@ const WhyUse = props =>{
             <div className="max-w-6xl w-full flex lg:flex-row flex-col items-center justify-center gap-10 lg:gap-16">
                 <div className="flex-1 flex flex-col gap-6 max-w-xl">
                     <div className="space-y-2">
-                        <h2 className="text-2xl md:text-3xl font-bold text-textcolor">
+                        <h2 className="text-2xl md:text-3xl font-bold" style={{ color: '#000000' }}>
                             Quesque project101 ?
                         </h2>
                         <div className="h-0.5 w-16 bg-boutton rounded-full"></div>
                     </div>
                     
-                    <p className="text-base text-textcolor leading-relaxed">
+                    <p className="text-base leading-relaxed" style={{ color: '#000000' }}>
                         Project101 est le premier de son genre qui assure au étudiants , enseignants et administration de collaborer dans des projet scolaire avec une tel efficacité car il a été  proposé par l'administration d'ESI-SBA fait grâce à des étudiants ambicieux encadré par des enseignants expérimentés dans le but de facilité la gestion au future étudiants et enseignants.
                     </p>
                 </div>
